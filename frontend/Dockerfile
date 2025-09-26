@@ -2,7 +2,7 @@ FROM node:20-alpine AS base
 
 # 開発環境の構築
 FROM base AS development
-WORKDIR /web
+WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
@@ -16,7 +16,7 @@ FROM base AS dependencies
 RUN apk add --nocache libc6-compat
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm cl
+RUN npm ci
 
 # ビルドステップ
 FROM base AS builder

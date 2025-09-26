@@ -1,0 +1,101 @@
+## 課題
+
+ブロスタのガチバトルのレジェンド〜マスターあたりで発生する利敵や献上のせいでマッチに敗北してプロランクになることが困難になっている
+
+
+## 想定利用ユーザー
+
+利敵や献上に悩まされている(イラついている)プレイヤー
+
+## 解決策
+
+- ガチバトルのピック画面で味方の名前を検索することで利敵や献上をしたことがあるかが分かる。利敵や献上をしたことがあるプレイヤーが味方に来た場合はマッチを切断する。
+- ガチバトルで利敵や献上が来たら、このサイトにプレイ動画を送ってもらって、利敵や献上をしたプレイヤーを記録に残す
+
+## 環境構築
+
+- このレポジトリのをローカル環境にgit cloneする
+```bash
+git clone https://github.com/neco3coffee/exit_cheat_bs.git
+```
+- cloneしたexit_cheat_bsディレクトリに移動する
+```bash
+cd exit_cheat_bs
+```
+- exit_cheat_bs/.envを作成して、.env.exampleのkeyに対応する値を入力(ローカル環境で使用される環境変数なのでMYSQL関連の値は自由に決めてください、ENVはdevelopmentです)
+```bash
+touch .env
+```
+- docker-compose.ymlの内容をもとにコンテナ群を起動する
+
+```bash
+docker compose up
+```
+
+- Next.js(web)が起動していることを確認する http://localhost:3001/
+- Rails(app)が起動していることを確認する http://localhost:3000/
+- rails db:migrateをコンテナ内で実施してデータベースにmigrationファイルの内容を反映する
+```bash
+docker compose exec app rails db:migrate
+```
+
+- 再度Rails(app) http://localhost:3000/ にアクセスしてエラーが消えていることを確認する
+
+- railsのORMからMySQLにアクセスできているか確認する
+```bash
+docker compose exec -it app rails console
+```
+- rails consoleでデータを作成できるか確認
+```ruby
+app(dev)> Test.create(name: "test_name")
+```
+- rails consoleでデータを取得できるか確認
+```ruby
+app(dev)> Test.all
+```
+
+これでNext(web), Rails(app), MySQL(db)の動作確認ができました。
+
+以上で環境構築終了になります。お疲れ様でした！
+
+
+## 施策の流れ
+
+以下のスプリントカンバンボードの流れに沿って
+https://github.com/users/neco3coffee/projects/11
+
+
+## 開発の流れ
+
+リモートブランチの最新の変更をローカルブランチに取り込む
+```
+git pull origin main
+```
+作業ブランチを作成する
+```
+git checkout -b feature/xxx
+```
+機能追加やバグの修正などを行う
+
+作業内容をリモートレポジトリに反映する
+```
+git add .
+git commit -m "xxxの機能を追加"
+git push origin feature/xxx
+```
+githubサイトのfeature/xxxからmainブランチに向けてプルリクエストを作成する
+
+コードレビューに対応したら、修正内容をリモートレポジトリに反映する
+```
+git add .
+git commit - "xxxのaaaを修正"
+git push origin feature/xxx
+```
+
+LGTMをもらったらgithubサイトでプルリクエストをmainにマージ(自動で本番環境に反映されます)
+
+本番環境にリリースされたら動作確認を行う
+
+動作に問題がなければスプリントカンバンボードの定量検証を随時実施してください
+
+## 関連資料
