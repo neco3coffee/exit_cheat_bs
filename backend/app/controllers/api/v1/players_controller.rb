@@ -68,9 +68,7 @@ module Api
 
 
       private
-      def fetch_player_data(tag)
-        url = "https://api.brawlstars.com/v1/players/#{URI.encode_www_form_component(tag)}"
-      end
+      #TODO: api tokenが制限に達した場合に備える
 
       def latest_solo_ranked_trophies(data, player_tag)
         # items を battleTime 降順でソート

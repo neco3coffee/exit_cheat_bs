@@ -68,7 +68,7 @@ export default async function Page({
         </div>
         <div className={styles.recordsContainer}>
           <Record label='シーズン記録' imagePath='/icon_trophy1.png' value={data.trophies} />
-          <Record label='最多トロフィー数' imagePath='/icon_trophy1.png' value={data.trophies} />
+          <Record label='最多トロフィー数' imagePath='/icon_trophy1.png' value={data.highestTrophies} />
           <Record label='3対3勝利数' imagePath='/3vs3.png' value={data.vs3Victories} />
           <Record label='勝利数' imagePath='https://cdn.brawlify.com/game-modes/regular/48000006.png' value={data.soloVictories} />
         </div>
