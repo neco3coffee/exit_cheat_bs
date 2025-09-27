@@ -7,7 +7,8 @@ services:
     ports:
       - '3001:3000'
     volumes:
-      - ./frontend:/web
+      - ./frontend:/app
+      - /app/node_modules
   app:
     build:
       context: ./backend
