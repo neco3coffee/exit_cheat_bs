@@ -62,7 +62,7 @@ body {
 }
 
 main {
-  padding: 16px;
+  padding: 23px;
   width: 100%;
   height: calc(100dvh - 106px); /* header + footerの高さを引く */
   display: flex;

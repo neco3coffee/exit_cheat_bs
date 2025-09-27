@@ -1,7 +1,7 @@
 import styles from "./index.module.scss"
 
 const Header = () => {
-  return <header className={styles.header}>ExitCheatBS</header>;
+  return <header className={styles.header}>SafeBrawl</header>;
 }
 
 export default Header;

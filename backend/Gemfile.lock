@@ -96,6 +96,12 @@ GEM
     erubi (1.13.1)
     et-orbi (1.3.0)
       tzinfo
+    faraday (2.13.4)
+      faraday-net_http (>= 2.0, < 3.5)
+      json
+      logger
+    faraday-net_http (3.4.1)
+      net-http (>= 0.5.0)
     fugit (1.11.2)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -133,10 +139,13 @@ GEM
       net-smtp
     marcel (1.1.0)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.9)
     minitest (5.25.5)
     msgpack (1.8.0)
     mysql2 (0.5.7)
       bigdecimal
+    net-http (0.6.0)
+      uri
     net-imap (0.5.10)
       date
       net-protocol
@@ -152,6 +161,9 @@ GEM
       net-protocol
     net-ssh (7.3.0)
     nio4r (2.7.4)
+    nokogiri (1.18.10)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
     nokogiri (1.18.10-x86_64-linux-gnu)
       racc (~> 1.4)
     ostruct (0.6.3)
@@ -271,6 +283,7 @@ GEM
       ostruct
     stringio (3.1.7)
     thor (1.4.0)
+    thruster (0.1.15)
     thruster (0.1.15-x86_64-linux)
     timeout (0.4.3)
     tsort (0.2.0)
@@ -288,12 +301,14 @@ GEM
     zeitwerk (2.7.3)
 
 PLATFORMS
+  ruby
   x86_64-linux
 
 DEPENDENCIES
   bootsnap
   brakeman
   debug
+  faraday (~> 2.13, >= 2.13.4)
   kamal
   mysql2 (~> 0.5)
   puma (>= 5.0)

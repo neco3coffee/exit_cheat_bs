@@ -12,7 +12,7 @@ export default function Home() {
       <Input
         placeholder="#Y2YPGCGC"
         className={styles.input}
-        maxLength={9}
+        maxLength={10}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             let inputTag = e.currentTarget.value.trim().toUpperCase();
@@ -32,8 +32,8 @@ export default function Home() {
             }
 
             // tagの長さが6~8文字であるかチェック
-            if (inputTag.length < 6 || inputTag.length > 8) {
-              alert("タグの長さは6〜8文字である必要があります");
+            if (inputTag.length < 6 || inputTag.length > 10) {
+              alert("タグの長さは6〜10文字である必要があります");
               return;
             }
 
