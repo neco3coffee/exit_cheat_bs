@@ -7,7 +7,8 @@ services:
     ports:
       - '3001:3000'
     volumes:
-      - ./frontend:/web
+      - ./frontend:/app
+      - /app/node_modules
   app:
     build:
       context: ./backend
@@ -24,6 +25,11 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      BRAWL_STARS_API_TOKEN1: ${BRAWL_STARS_API_TOKEN1}
+      BRAWL_STARS_API_TOKEN2: ${BRAWL_STARS_API_TOKEN2}
+      BRAWL_STARS_API_TOKEN3: ${BRAWL_STARS_API_TOKEN3}
+      RAILS_LOG_TO_STDOUT: true
+      # RAILS_DEVELOPMENT_HOSTS: app,app:3000
   db:
     image: mysql:8.4
     ports:

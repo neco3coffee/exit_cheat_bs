@@ -67,9 +67,19 @@ https://github.com/users/neco3coffee/projects/11
 
 ## 開発の流れ
 
+コンテナ群を起動する
+```
+docker compose up
+```
+
 リモートブランチの最新の変更をローカルブランチに取り込む
 ```
 git pull origin main
+```
+依存関係のあるパケージのインストール
+```
+cd frontend && nvm use && npm install
+cd backend && bundle install
 ```
 作業ブランチを作成する
 ```
@@ -97,5 +107,12 @@ LGTMをもらったらgithubサイトでプルリクエストをmainにマージ
 本番環境にリリースされたら動作確認を行う
 
 動作に問題がなければスプリントカンバンボードの定量検証を随時実施してください
+
+
+- コンテナに入って作業する時〜
+```
+docker compose exec web /bin/bash   # bash があるとき
+docker compose exec web sh          # bash がないとき
+```
 
 ## 関連資料

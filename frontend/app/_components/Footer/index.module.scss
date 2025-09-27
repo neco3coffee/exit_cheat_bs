@@ -1,0 +1,26 @@
+.footer {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  height: 53px;
+  background-color: var(--black);
+  border-top: 1px solid var(--black-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 18px;
+  font-weight: normal;
+  text-align: center;
+
+  .container {
+    width: 260px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+
+    @media (min-width: 768px) {
+      width: 344px;
+    }
+  }
+}
