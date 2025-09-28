@@ -54,7 +54,7 @@ export default async function Page({
             <h3>{data.tag}</h3>
           </div>
           <div className={styles.nameAndRankContainer}>
-            <h1>{data.name}</h1>
+            <h1 style={{ color: `#${data.nameColor.replace(/^0x/,"").slice(2)}`}}>{data.name}</h1>
             {data.currentRank &&
               <Image
                 src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, data.currentRank)}.png`}
