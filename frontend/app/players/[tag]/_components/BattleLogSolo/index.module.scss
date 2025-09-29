@@ -1,0 +1,108 @@
+.container {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+
+.topContainer {
+  width: 100%;
+  height: 12px;
+  background-color: var(--battlelog-bg-top);
+  font-size: 8px;
+  color: var(--white);
+  font-weight: bold;
+  padding: 0 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .left {
+    width: 40%;
+  }
+  h5 {
+    font-size: 8px;
+    font-weight: bold;
+    color: var(--white);
+  }
+  .right {
+    width: 40%;
+    text-align: right;
+    color: var(--white);
+    font-size: 8px;
+    font-weight: bold;
+  }
+}
+
+.middleContainer {
+  width: 100%;
+  height: 24px;
+  background-color: var(--battlelog-bg-middle);
+  padding: 0 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .left {
+    display: flex;
+    width: 40%;
+
+    .modeAndMapContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-left: 5px;
+      padding: 2px 0;
+
+      h5 {
+        font-size: 10px;
+        font-weight: bold;
+        color: var(--white);
+      }
+      h6 {
+        font-size: 8px;
+        font-weight: bold;
+        color: var(--white);
+      }
+    }
+  }
+
+  .victory {
+    color: var(--victory-green);
+    font-size: 12px;
+    font-weight: bold;
+  }
+  .defeat {
+    color: var(--defeat-red);
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .right {
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: var(--trophy-yellow);
+    font-size: 11px;
+    font-weight: bold;
+  }
+}
+
+
+.bottomContainer {
+  width: 100%;
+  background-color: var(--battlelog-bg-bottom);
+  padding: 6px 40px 4px 40px;
+
+  .bottomContainerInner {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .playerWrapper {
+      margin-bottom: 5px;
+    }
+  }
+}

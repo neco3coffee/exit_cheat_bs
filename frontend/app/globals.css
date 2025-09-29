@@ -9,6 +9,22 @@
   --white: #E7E9EA;
   --black-border: #2F3336;
   --blue-black: #262626;
+  --trophy-yellow: #FFC800;
+  --defeat-red: #DF0000;
+  --victory-green: #00FF00;
+  --showdown-green: #83DC3B;
+  --arena-orange: #FF573B;
+  --hotzone-red: #FF2E3B;
+  --report-gray: #343B54;
+  --battlelog-bg-top: #8574A3;
+  --battlelog-bg-middle: #7D6C9B;
+  --battlelog-bg-bottom: #8574A3;
+  --mvp-text: #FFE16F;
+  --mvp-background: #FFA200;
+  --duration-purple: #D0BAFA;
+  --same-team-gray: #8D849B;
+  --soloRanked-bg-round: #7E719D;
+
 
   /* 自動で追加されたバリアブル */
   --radius: 0.625rem;
@@ -69,6 +85,7 @@ main {
   flex-direction: column;
   align-items: center;
   background-color: var(--black);
+  overflow-y: auto;
 }
 
 * {
