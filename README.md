@@ -119,4 +119,10 @@ docker compose exec web /bin/bash   # bash があるとき
 docker compose exec web sh          # bash がないとき
 ```
 
-## 関連資料
+## おすすめ配信者　
+
+- [ないぴしゅ、こんばんゎ〜](https://www.tiktok.com/@naipishu3000)
+- [アイシー、ガチバトル王](https://www.youtube.com/channel/UCmZnnVj4QEBekl-jrxkjRog)
+- [わほっち、ベリーつかい](https://www.youtube.com/@-Wahochi)
+- [ジェネ、ジェネアバずれは偽物](https://www.youtube.com/@Jene_Azure)
+- [やぴまる、ジェヨン](https://www.youtube.com/@YAPIMARU)
