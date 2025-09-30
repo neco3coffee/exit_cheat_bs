@@ -52,13 +52,13 @@ const PlayerComponent = (
             />
           </div>
         )}
-        {battleType === "ranked" ||
-          (battleType === "soloRanked" && (
+        {(battleType === "ranked" ||
+          battleType === "soloRanked") && (
             <div className={styles.levelContainer}>
               <strong>LVL</strong>
               <h6>{player?.brawler?.power}</h6>
             </div>
-          ))}
+          )}
       </div>
       {shortenedName}
     </Link>

@@ -18,12 +18,6 @@ const BattleLog3vs3 = ({ battleLog, ownTag }: any) => {
       ? battleLog?.event.mode
       : classifyModeByMapName(battleLog?.event?.map);
 
-  // console.log("battleLog: ",JSON.stringify(battleLog, null, 2));
-  // console.log("battleLog.battle.teams:", battleLog?.battle?.teams);
-  // console.log("ownTag:", ownTag);
-  // console.log("ownTeam:", ownTeam);
-  // console.log("event.mode: ", battleLog?.event?.mode)
-
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>

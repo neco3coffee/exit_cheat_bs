@@ -12,9 +12,6 @@ const BattleLogTrio = ({ battleLog, ownTag }: any) => {
       ? battleLog?.event.mode
       : classifyModeByMapName(battleLog?.event?.map);
 
-  console.log("battleLog: ", JSON.stringify(battleLog, null, 2));
-  // console.log("battleLog.battle.teams:", battleLog?.battle?.teams);
-
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>
@@ -55,7 +52,7 @@ const BattleLogTrio = ({ battleLog, ownTag }: any) => {
         >{`RANK ${battleLog?.battle?.rank}`}</h5>
         <div className={styles.right}>
           {battleLog?.battle.type === "ranked" &&
-          battleLog?.battle?.trophyChange ? (
+            battleLog?.battle?.trophyChange ? (
             <>
               {battleLog?.battle?.trophyChange > 0
                 ? `+${battleLog?.battle?.trophyChange}`

@@ -7,8 +7,6 @@ import { Fragment } from "react";
 import styles from "./index.module.scss";
 
 const BattleLog5vs5 = ({ battleLog, ownTag }: any) => {
-  // console.log("battleLog: ", JSON.stringify(battleLog, null, 2));
-
   const ownTeam = battleLog?.battle?.teams.find((team: any) => {
     return team.some((player: any) => player.tag === `#${ownTag}`);
   });

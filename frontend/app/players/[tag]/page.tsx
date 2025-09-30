@@ -34,17 +34,11 @@ export default async function Page({
   params: Promise<{ tag: string }>;
 }) {
   const { tag } = await params;
-  console.log("tag: ", tag);
-
   const res = await fetch(
     `http://app:3000/api/v1/players/${encodeURIComponent(tag)}`,
   );
-  // console.log(`res: ${res.status} - ${res.body}`)
   const player: Player = await res.json();
-  // console.log("player data: ", JSON.stringify(player, null, 2));
-
   const battleLogs = formatBattleLog(player.battlelog?.items || []);
-  // console.log("battleLogs: ", JSON.stringify(battleLogs, null, 2));
 
   return (
     <>
@@ -123,7 +117,6 @@ export default async function Page({
           <h2>バトル履歴</h2>
           {battleLogs.map((battleLog, index) => {
             if (battleLog.rounds) {
-              console.log("battleLogsss: ", JSON.stringify(battleLog, null, 2));
               return (
                 <BattleLogSoloRanked
                   key={index}
@@ -224,6 +217,5 @@ const formatBattleLog = (battleLogs: any[]) => {
       formattedBattleLogs.push(battleLog);
     }
   });
-  // console.log("formattedBattleLogs: ", JSON.stringify(formattedBattleLogs, null, 2));
   return formattedBattleLogs;
 };
