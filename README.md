@@ -119,6 +119,14 @@ docker compose exec web /bin/bash   # bash があるとき
 docker compose exec web sh          # bash がないとき
 ```
 
+- キャッシュ関連削除〜
+```
+Dockerビルドキャッシュ: docker compose build --no-cache
+Docker全体キャッシュ: docker system prune -af
+Nex.js: rm -rf .next
+npmキャッシュ: npm cache clean --force
+```
+
 ## おすすめ配信者　
 
 - [ないぴしゅ、こんばんゎ〜](https://www.tiktok.com/@naipishu3000)
