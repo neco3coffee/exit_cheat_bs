@@ -24,6 +24,9 @@ module Api
           req.headers['Accept'] = 'application/json'
         end
 
+        Rails.logger.info("Response status: #{response.status}")
+        Rails.logger.info("Response body: #{response.body}")
+
         if response.status == 200
           player_data = JSON.parse(response.body)
 
@@ -51,14 +54,17 @@ module Api
 
           if battle_response.status == 200
             battlelog_data =JSON.parse(battle_response.body)
-            rank = latest_solo_ranked_trophies(battlelog_data, tag)
           else
             Rails.logger.error("Error fetching battle data: #{battle_response.status} - #{battle_response.body}")
           end
 
         end
 
-        player = construct_response(player_data,rank,badgeId)
+        if player_data.nil?
+          render json: {error: "Player data is nil"}, status: 500 and return
+        end
+
+        player = construct_response(player_data,battlelog_data,badgeId)
         render json: player
 
         rescue StandardError => e
@@ -90,13 +96,13 @@ module Api
         nil # 見つからなかった場合
       end
 
-      def construct_response(player_data, rank, badgeId)
+      def construct_response(player_data, battlelog_data, badgeId)
+        rank = latest_solo_ranked_trophies(battlelog_data, player_data['tag']) unless battlelog_data.nil?
         {
           tag: player_data['tag'],
           name: player_data['name'],
           nameColor: player_data['nameColor'],
           iconId: player_data.dig('icon', 'id'),
-          # rankがnilでなければrank -1,
           currentRank: rank.nil? ? nil : rank - 1,
           trophies: player_data['trophies'],
           highestTrophies: player_data['highestTrophies'],
@@ -106,7 +112,8 @@ module Api
             tag: player_data.dig('club', 'tag'),
             name: player_data.dig('club', 'name'),
             badgeId: badgeId,
-          }
+          },
+          battlelog: battlelog_data
         }
       end
 

@@ -1,14 +1,27 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 :root {
   /* 手動で追加したバリアブル */
   --black: #181818;
-  --white: #E7E9EA;
-  --black-border: #2F3336;
+  --white: #e7e9ea;
+  --black-border: #2f3336;
   --blue-black: #262626;
+  --trophy-yellow: #ffc800;
+  --defeat-red: #df0000;
+  --victory-green: #00ff00;
+  --showdown-green: #83dc3b;
+  --arena-orange: #ff573b;
+  --hotzone-red: #ff2e3b;
+  --report-gray: #343b54;
+  --battlelog-bg-top: #8574a3;
+  --battlelog-bg-middle: #7d6c9b;
+  --battlelog-bg-bottom: #8574a3;
+  --mvp-text: #ffe16f;
+  --mvp-background: #ffa200;
+  --duration-purple: #d0bafa;
+  --same-team-gray: #8d849b;
+  --soloRanked-bg-round: #7e719d;
 
   /* 自動で追加されたバリアブル */
   --radius: 0.625rem;
@@ -43,7 +56,6 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-
 }
 
 html,
@@ -69,6 +81,7 @@ main {
   flex-direction: column;
   align-items: center;
   background-color: var(--black);
+  overflow-y: auto;
 }
 
 * {
@@ -118,7 +131,6 @@ a {
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-
 }
 
 .dark {
@@ -153,9 +165,4 @@ a {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-
-}
-
-@layer base {
-
 }
