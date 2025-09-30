@@ -52,7 +52,7 @@ const BattleLogTrio = ({ battleLog, ownTag }: any) => {
         >{`RANK ${battleLog?.battle?.rank}`}</h5>
         <div className={styles.right}>
           {battleLog?.battle.type === "ranked" &&
-            battleLog?.battle?.trophyChange ? (
+          battleLog?.battle?.trophyChange ? (
             <>
               {battleLog?.battle?.trophyChange > 0
                 ? `+${battleLog?.battle?.trophyChange}`

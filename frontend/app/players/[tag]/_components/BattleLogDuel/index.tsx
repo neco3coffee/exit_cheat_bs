@@ -11,11 +11,12 @@ const BattleLogDuel = ({ battleLog, ownTag }: any) => {
       ? battleLog?.event.mode
       : classifyModeByMapName(battleLog?.event?.map);
   const starPlayerTag = battleLog?.battle?.starPlayer?.tag;
+  const tag = ownTag.trim().toUpperCase().replace(/O/g, "0");
   const me = battleLog?.battle?.players.find(
-    (player: any) => player?.tag === `#${ownTag}`,
+    (player: any) => player?.tag === `#${tag}`,
   );
   const enemy = battleLog?.battle?.players.find(
-    (player: any) => player?.tag !== `#${ownTag}`,
+    (player: any) => player?.tag !== `#${tag}`,
   );
   const isDuel = true;
 

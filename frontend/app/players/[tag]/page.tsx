@@ -1,14 +1,15 @@
-import styles from "./page.module.scss";
-import Image from "next/image";
 import Record from "@/app/_components/Record";
-import BattleLogSoloRanked from "@/app/players/[tag]/_components/BattleLogSoloRanked";
 import BattleLog3vs3 from "@/app/players/[tag]/_components/BattleLog3vs3";
 import BattleLog5vs5 from "@/app/players/[tag]/_components/BattleLog5vs5";
-import BattleLogTrio from "@/app/players/[tag]/_components/BattleLogTrio";
+import BattleLogDuel from "@/app/players/[tag]/_components/BattleLogDuel";
 import BattleLogDuo from "@/app/players/[tag]/_components/BattleLogDuo";
 import BattleLogSolo from "@/app/players/[tag]/_components/BattleLogSolo";
-import BattleLogDuel from "@/app/players/[tag]/_components/BattleLogDuel";
+import BattleLogSoloRanked from "@/app/players/[tag]/_components/BattleLogSoloRanked";
+import BattleLogTrio from "@/app/players/[tag]/_components/BattleLogTrio";
 import { appendToEightDigits } from "@/app/players/[tag]/_lib/common";
+import Image from "next/image";
+import styles from "./page.module.scss";
+import { Rocket } from "lucide-react";
 
 type Player = {
   tag: string;
@@ -39,6 +40,7 @@ export default async function Page({
   );
   const player: Player = await res.json();
   const battleLogs = formatBattleLog(player.battlelog?.items || []);
+  console.log("club: ", JSON.stringify(player?.club, null, 2));
 
   return (
     <>
@@ -63,34 +65,44 @@ export default async function Page({
               {player.name}
             </h1>
             {player.currentRank && (
-              <Image
-                src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player.currentRank)}.png`}
-                alt="rank"
-                height={60}
-                width={60}
-                style={{ height: "60px", width: "auto" }}
-              />
+              <div className={styles.rankContainer}>
+                <Image
+                  src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player.currentRank - 1)}.png`}
+                  alt="rank"
+                  height={60}
+                  width={60}
+                  style={{ height: "60px", width: "auto" }}
+                />
+                <Rocket className={styles.icon} />
+                <Image
+                  src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player.currentRank)}.png`}
+                  alt="rank"
+                  height={60}
+                  width={60}
+                  style={{ height: "60px", width: "auto" }}
+                />
+              </div>
             )}
           </div>
         </div>
         <div className={styles.recordsContainer}>
           <Record
-            label="シーズン記録"
+            label="SEASON HIGH"
             imagePath="/icon_trophy1.png"
             value={player.trophies}
           />
           <Record
-            label="最多トロフィー数"
+            label="ALL TIME HIGH"
             imagePath="/icon_trophy1.png"
             value={player.highestTrophies}
           />
           <Record
-            label="3対3勝利数"
+            label="3VS3 VICTORIES"
             imagePath="/3vs3.png"
             value={player.vs3Victories}
           />
           <Record
-            label="勝利数"
+            label="VICTORIES"
             imagePath="https://cdn.brawlify.com/game-modes/regular/48000006.png"
             value={player.soloVictories}
           />
@@ -104,17 +116,17 @@ export default async function Page({
               height={36}
             />
           ) : (
-            <div>?</div>
+            <div></div>
           )}
           <div className={styles.clubNameContainer}>
             {/* TODO: <c*> <c/> で*に0,2,3,4,5,6,7,8,9 が来る場合にゲーム内で色が変わる、クラブ検索から色は調べられる */}
-            {player?.club?.name}
+            {player?.club?.name ? player?.club?.name : "Not in a Club"}
           </div>
         </div>
 
         {/* バトル履歴 */}
         <div className={styles.battlelogContainer}>
-          <h2>バトル履歴</h2>
+          <h2>BATTLE LOG</h2>
           {battleLogs.map((battleLog, index) => {
             if (battleLog.rounds) {
               return (

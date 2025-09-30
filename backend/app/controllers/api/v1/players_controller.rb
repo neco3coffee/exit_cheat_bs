@@ -24,11 +24,12 @@ module Api
           req.headers['Accept'] = 'application/json'
         end
 
-        Rails.logger.info("Response status: #{response.status}")
-        Rails.logger.info("Response body: #{response.body}")
+        # Rails.logger.info("Response status: #{response.status}")
+        # Rails.logger.info("Response body: #{response.body}")
 
         if response.status == 200
           player_data = JSON.parse(response.body)
+          Rails.logger.info("player_data:\n #{JSON.pretty_generate(player_data)}")
 
           # clubデータの取得
           if player_data.dig('club', 'tag')
@@ -42,7 +43,7 @@ module Api
               club_data = JSON.parse(club_response.body)
               badgeId = club_data['badgeId']
             else
-              Rails.logger.error("Error fetching club data: #{club_response.status} - #{club_response.body}")
+              # Rails.logger.error("Error fetching club data: #{club_response.status} - #{club_response.body}")
             end
           end
 
@@ -55,7 +56,7 @@ module Api
           if battle_response.status == 200
             battlelog_data =JSON.parse(battle_response.body)
           else
-            Rails.logger.error("Error fetching battle data: #{battle_response.status} - #{battle_response.body}")
+            # Rails.logger.error("Error fetching battle data: #{battle_response.status} - #{battle_response.body}")
           end
 
         end
@@ -77,8 +78,9 @@ module Api
       #TODO: api tokenが制限に達した場合に備える
 
       def latest_solo_ranked_trophies(data, player_tag)
-        # items を battleTime 降順でソート
-        # sorted_items = data['items'].sort_by { |item| Time.parse(item['battleTime']) }.reverse
+        Rails.logger.info("playerTag: #{player_tag}")
+        ownTag = player_tag.tr("O", "0")
+        Rails.logger.info("ownTag: #{ownTag}")
 
         data['items'].each do |item|
           battle = item['battle']
@@ -86,7 +88,8 @@ module Api
 
           battle['teams'].each do |team|
             team.each do |player|
-              if player['tag'] == "#{player_tag}"
+              Rails.logger.info("Checking player tag: #{player['tag']}")
+              if player['tag'] == "#{ownTag}"
                 return player['brawler']['trophies']
               end
             end
@@ -98,6 +101,7 @@ module Api
 
       def construct_response(player_data, battlelog_data, badgeId)
         rank = latest_solo_ranked_trophies(battlelog_data, player_data['tag']) unless battlelog_data.nil?
+        Rails.logger.info("Latest solo ranked trophies: #{rank == nil ? 'nil' : rank}")
         {
           tag: player_data['tag'],
           name: player_data['name'],

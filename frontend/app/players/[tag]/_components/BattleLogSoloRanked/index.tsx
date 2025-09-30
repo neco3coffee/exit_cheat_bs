@@ -7,11 +7,12 @@ import PlayerComponent from "@/app/players/[tag]/_components/PlayerComponent";
 import { TriangleAlert } from "lucide-react";
 
 const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
+  const tag = ownTag.trim().toUpperCase().replace(/O/g, "0");
   const ownTeam = battleLog?.battle?.teams.find((team: any) => {
-    return team.some((player: any) => player.tag === `#${ownTag}`);
+    return team.some((player: any) => player.tag === `#${tag}`);
   });
   const enemyTeam = battleLog?.battle?.teams.find((team: any) => {
-    return team.every((player: any) => player.tag !== `#${ownTag}`);
+    return team.every((player: any) => player.tag !== `#${tag}`);
   });
   const starPlayerTag = battleLog?.battle?.starPlayer?.tag;
   const mode =

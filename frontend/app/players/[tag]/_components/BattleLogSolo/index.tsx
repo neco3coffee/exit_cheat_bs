@@ -48,7 +48,11 @@ const BattleLogSolo = ({ battleLog, ownTag }: any) => {
           className={
             battleLog?.battle?.rank < 4 ? styles.victory : styles.defeat
           }
-        >{`RANK ${battleLog?.battle?.rank}`}</h5>
+        >
+          {battleLog?.battle?.rank !== undefined
+            ? `RANK ${battleLog?.battle?.rank}`
+            : ""}
+        </h5>
         <div className={styles.right}>
           {battleLog?.battle.type === "ranked" &&
           battleLog?.battle?.trophyChange ? (

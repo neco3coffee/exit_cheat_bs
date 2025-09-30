@@ -7,11 +7,12 @@ import { Fragment } from "react";
 import styles from "./index.module.scss";
 
 const BattleLog5vs5 = ({ battleLog, ownTag }: any) => {
+  const tag = ownTag.trim().toUpperCase().replace(/O/g, "0");
   const ownTeam = battleLog?.battle?.teams.find((team: any) => {
-    return team.some((player: any) => player.tag === `#${ownTag}`);
+    return team.some((player: any) => player.tag === `#${tag}`);
   });
   const enemyTeam = battleLog?.battle?.teams.find((team: any) => {
-    return team.every((player: any) => player.tag !== `#${ownTag}`);
+    return team.every((player: any) => player.tag !== `#${tag}`);
   });
   const starPlayerTag = battleLog?.battle?.starPlayer?.tag;
   const mode =
@@ -63,7 +64,7 @@ const BattleLog5vs5 = ({ battleLog, ownTag }: any) => {
         </h5>
         <div className={styles.right}>
           {battleLog?.battle.type === "ranked" &&
-            battleLog?.battle?.trophyChange ? (
+          battleLog?.battle?.trophyChange ? (
             <>
               {battleLog?.battle?.trophyChange > 0
                 ? `+${battleLog?.battle?.trophyChange}`
