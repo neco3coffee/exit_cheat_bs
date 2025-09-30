@@ -1,7 +1,8 @@
-import styles from "./index.module.scss";
+import { CircleUserRound, House } from "lucide-react";
 import Image from "next/image";
-import { House, CircleUserRound } from "lucide-react";
 import Link from "next/link";
+import styles from "./index.module.scss";
+
 
 const Footer = () => {
   return (

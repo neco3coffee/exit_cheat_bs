@@ -1,10 +1,10 @@
-import styles from "./index.module.scss";
-import { RelativeTime, Duration } from "@/app/players/[tag]/_lib/time";
-import Image from "next/image";
-import Link from "next/link";
-import { classifyModeByMapName } from "@/app/players/[tag]/_lib/unknownMode";
-import { shortenMapName } from "@/app/players/[tag]/_lib/common";
 import PlayerComponent from "@/app/players/[tag]/_components/PlayerComponent";
+import { shortenMapName } from "@/app/players/[tag]/_lib/common";
+import { Duration, RelativeTime } from "@/app/players/[tag]/_lib/time";
+import { classifyModeByMapName } from "@/app/players/[tag]/_lib/unknownMode";
+import Image from "next/image";
+import { Fragment } from "react";
+import styles from "./index.module.scss";
 
 const BattleLog5vs5 = ({ battleLog, ownTag }: any) => {
   // console.log("battleLog: ", JSON.stringify(battleLog, null, 2));
@@ -65,7 +65,7 @@ const BattleLog5vs5 = ({ battleLog, ownTag }: any) => {
         </h5>
         <div className={styles.right}>
           {battleLog?.battle.type === "ranked" &&
-          battleLog?.battle?.trophyChange ? (
+            battleLog?.battle?.trophyChange ? (
             <>
               {battleLog?.battle?.trophyChange > 0
                 ? `+${battleLog?.battle?.trophyChange}`
@@ -78,7 +78,7 @@ const BattleLog5vs5 = ({ battleLog, ownTag }: any) => {
               />
             </>
           ) : (
-            <></>
+            <Fragment></Fragment>
           )}
         </div>
       </div>
