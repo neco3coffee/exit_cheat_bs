@@ -33,7 +33,6 @@ const BattleLogDuel = ({
             alt={battleLog?.event?.mode}
             width={30}
             height={30}
-            style={{ maxHeight: '30px', width: 'auto' }}
           />
           <div className={styles.modeAndMapContainer}>
             {/* TODO:DADGEBALLじゃなくてDOGDEBRAWLって表示できるようにする */}
@@ -53,7 +52,6 @@ const BattleLogDuel = ({
                     alt='trophy icon'
                     width={15}
                     height={15}
-                    style={{ transform: `rotate(-7deg)` }}
                   />
                 </>
               ) : (<></>)

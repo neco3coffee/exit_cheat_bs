@@ -33,7 +33,6 @@ const BattleLogTrio = ({
             alt={battleLog?.event?.mode}
             width={30}
             height={30}
-            style={{ maxHeight: '30px', width: 'auto'}}
           />
           <div className={styles.modeAndMapContainer}>
             {/* TODO:DADGEBALLじゃなくてDOGDEBRAWLって表示できるようにする */}
@@ -50,10 +49,9 @@ const BattleLogTrio = ({
                 {battleLog?.battle?.trophyChange > 0 ? `+${battleLog?.battle?.trophyChange}` : battleLog?.battle?.trophyChange}
                 < Image
                   src='/icon_trophy1.png'
-                alt='trophy icon'
-                width={15}
-                height={15}
-                style={{ transform: `rotate(-7deg)` }}
+                  alt='trophy icon'
+                  width={15}
+                  height={15}
                 />
               </>
             ) : (<></>)
