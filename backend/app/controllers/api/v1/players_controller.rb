@@ -103,7 +103,7 @@ module Api
           name: player_data['name'],
           nameColor: player_data['nameColor'],
           iconId: player_data.dig('icon', 'id'),
-          currentRank: rank.nil? ? nil : rank - 1,
+          currentRank: rank,
           trophies: player_data['trophies'],
           highestTrophies: player_data['highestTrophies'],
           vs3Victories: player_data['3vs3Victories'],
