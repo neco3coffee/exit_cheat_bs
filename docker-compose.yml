@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
       target: ${ENV:-development}
     ports:
-      - '3001:3000'
+      - "3001:3000"
     volumes:
       - ./frontend:/app
       - /app/node_modules
@@ -16,16 +16,18 @@ services:
     depends_on:
       - db
     ports:
-      - '3000:3000'
+      - "3000:3000"
     volumes:
       - ./backend:/app
     environment:
       DB_HOST: db
+      RAILS_ENV: ${ENV:-development}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       BRAWL_STARS_API_TOKEN1: ${BRAWL_STARS_API_TOKEN1}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
       # BRAWL_STARS_API_TOKEN2: ${BRAWL_STARS_API_TOKEN2}
       # BRAWL_STARS_API_TOKEN3: ${BRAWL_STARS_API_TOKEN3}
       RAILS_LOG_TO_STDOUT: true
@@ -33,7 +35,7 @@ services:
   db:
     image: mysql:8.4
     ports:
-      - '3306:3306'
+      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     environment:

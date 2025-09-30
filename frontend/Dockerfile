@@ -14,7 +14,7 @@ CMD ["npm", "run", "dev"]
 
 # アプリ本体の変更と依存関係の分離
 FROM base AS dependencies
-RUN apk add --nocache libc6-compat
+RUN apk update && apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
@@ -30,8 +30,16 @@ RUN npm run build
 # 本番用イメージ
 FROM base AS production
 WORKDIR /app
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
 COPY --from=builder /app/public ./public
+
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
+
+USER nextjs
+
 EXPOSE 3000
 CMD ["node", "server.js"]
