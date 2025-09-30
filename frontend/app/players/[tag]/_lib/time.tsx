@@ -1,4 +1,4 @@
-"use client"
+"use client";
 // RelativeTime.tsx
 import React, { useEffect, useState } from "react";
 
@@ -10,7 +10,7 @@ type Props = {
 function formatRelativeTime(targetIsoString: string, now: Date): string {
   const iso = targetIsoString.replace(
     /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})\.000Z$/,
-    "$1-$2-$3T$4:$5:$6.000Z"
+    "$1-$2-$3T$4:$5:$6.000Z",
   );
   const targetDate = new Date(iso);
 
@@ -51,7 +51,7 @@ export const RelativeTime: React.FC<Props> = ({
     return () => clearInterval(timer);
   }, [updateInterval]);
 
-  if (!now) return <span>just now</span>
+  if (!now) return <span>just now</span>;
 
   return <span>{formatRelativeTime(target, now)}</span>;
 };
@@ -64,4 +64,4 @@ const formatDuration = (seconds: number): string => {
 
 export const Duration: React.FC<{ seconds: number }> = ({ seconds }) => {
   return <time dateTime={`PT${seconds}S`}>{formatDuration(seconds)}</time>;
-}
+};

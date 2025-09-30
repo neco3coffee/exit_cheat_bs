@@ -6,10 +6,10 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         hostname: "cdn.brawlify.com",
-        pathname: "/**/**/**"
-      }
-    ]
-  }
+        pathname: "/**/**/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

@@ -1,21 +1,25 @@
-import styles from './index.module.scss';
-import { RelativeTime, Duration } from "@/app/players/[tag]/_lib/time"
-import Image from 'next/image';
+import styles from "./index.module.scss";
+import { RelativeTime, Duration } from "@/app/players/[tag]/_lib/time";
+import Image from "next/image";
 import { classifyModeByMapName } from "@/app/players/[tag]/_lib/unknownMode";
-import { shortenMapName } from "@/app/players/[tag]/_lib/common"
-import PlayerComponent from '@/app/players/[tag]/_components/PlayerComponent'
+import { shortenMapName } from "@/app/players/[tag]/_lib/common";
+import PlayerComponent from "@/app/players/[tag]/_components/PlayerComponent";
 
-const BattleLogSolo = ({
-  battleLog,
-  ownTag
-}: any) => {
+const BattleLogSolo = ({ battleLog, ownTag }: any) => {
   const starPlayerTag = battleLog?.battle?.starPlayer?.tag;
-  const mode = battleLog?.event?.mode !== 'unknown' ? battleLog?.event.mode : classifyModeByMapName(battleLog?.event?.map);
+  const mode =
+    battleLog?.event?.mode !== "unknown"
+      ? battleLog?.event.mode
+      : classifyModeByMapName(battleLog?.event?.map);
   return (
     <div className={styles.container}>
       <div className={styles.topContainer}>
         <div className={styles.left}></div>
-        <h5>{battleLog.battle.type === "friendly" ? battleLog.battle.type.toUpperCase() : ''}</h5>
+        <h5>
+          {battleLog.battle.type === "friendly"
+            ? battleLog.battle.type.toUpperCase()
+            : ""}
+        </h5>
         {battleLog?.battleTime && (
           <div className={styles.right}>
             <RelativeTime target={battleLog?.battleTime} />
@@ -32,26 +36,36 @@ const BattleLogSolo = ({
           />
           <div className={styles.modeAndMapContainer}>
             {/* TODO:DADGEBALLじゃなくてDOGDEBRAWLって表示できるようにする */}
-            <h5>{battleLog?.event?.mode === "unknown" ? mode.toUpperCase() : battleLog?.event.mode.toUpperCase()}</h5>
+            <h5>
+              {battleLog?.event?.mode === "unknown"
+                ? mode.toUpperCase()
+                : battleLog?.event.mode.toUpperCase()}
+            </h5>
             <h6>{shortenMapName(battleLog?.event?.map)}</h6>
           </div>
         </div>
-        <h5 className={battleLog?.battle?.rank < 4 ? styles.victory : styles.defeat}>{`RANK ${battleLog?.battle?.rank}`}</h5>
-        <div className={styles.right}>
-          {
-            battleLog?.battle.type === 'ranked' && battleLog?.battle?.trophyChange ?
-              (
-                <>
-                  {battleLog?.battle?.trophyChange > 0 ? `+${battleLog?.battle?.trophyChange}` : battleLog?.battle?.trophyChange}
-                  < Image
-                    src='/icon_trophy1.png'
-                    alt='trophy icon'
-                    width={15}
-                    height={15}
-                  />
-                </>
-              ) : (<></>)
+        <h5
+          className={
+            battleLog?.battle?.rank < 4 ? styles.victory : styles.defeat
           }
+        >{`RANK ${battleLog?.battle?.rank}`}</h5>
+        <div className={styles.right}>
+          {battleLog?.battle.type === "ranked" &&
+          battleLog?.battle?.trophyChange ? (
+            <>
+              {battleLog?.battle?.trophyChange > 0
+                ? `+${battleLog?.battle?.trophyChange}`
+                : battleLog?.battle?.trophyChange}
+              <Image
+                src="/icon_trophy1.png"
+                alt="trophy icon"
+                width={15}
+                height={15}
+              />
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       <div className={styles.bottomContainer}>
@@ -59,14 +73,18 @@ const BattleLogSolo = ({
           {battleLog?.battle.players.map((player: any, index: number) => {
             return (
               <div className={styles.playerWrapper} key={index}>
-                {PlayerComponent(player, starPlayerTag, battleLog?.battle?.type)}
+                {PlayerComponent(
+                  player,
+                  starPlayerTag,
+                  battleLog?.battle?.type,
+                )}
               </div>
-            )
+            );
           })}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default BattleLogSolo;

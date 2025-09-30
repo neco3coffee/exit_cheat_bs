@@ -1,11 +1,9 @@
-
-
 const arenaMapNameList = [
   "Arena og Glory",
   "knockout Grounds",
   "Mirage Arena",
-  "The Smackdome"
-]
+  "The Smackdome",
+];
 
 const hockeyMapNameList = [
   "Super Center",
@@ -18,7 +16,7 @@ const hockeyMapNameList = [
   "Massive Meltdown",
   "Frostbite Rink",
   "Cold Snap",
-]
+];
 
 const dodgeBrawlMapNameList = [
   "Moonbark Meadow",
@@ -28,16 +26,16 @@ const dodgeBrawlMapNameList = [
   "Squish Court",
   "Whispwillow Ward",
   "Dodge or Die",
-]
+];
 
 export function classifyModeByMapName(mapName: string) {
   if (arenaMapNameList.includes(mapName)) {
-    return "arena"
+    return "arena";
   } else if (hockeyMapNameList.includes(mapName)) {
-    return "hockey"
+    return "hockey";
   } else if (dodgeBrawlMapNameList.includes(mapName)) {
-    return "dodgeball"
+    return "dodgeball";
   } else {
-    return "unknown"
+    return "unknown";
   }
 }

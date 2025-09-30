@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
 import styles from "./page.module.scss";
-import { Input } from "@/components/ui/input"
-import { useRouter } from "next/navigation"
+import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const router = useRouter();
