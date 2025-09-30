@@ -1,8 +1,10 @@
-import styles from "./index.module.scss";
-import { shortenPlayerName } from "@/app/players/[tag]/_lib/common";
-import Link from "next/link";
 import Image from "next/image";
-import { appendToEightDigits } from "@/app/players/[tag]/_lib/common";
+import Link from "next/link";
+import {
+  appendToEightDigits,
+  shortenPlayerName,
+} from "@/app/players/[tag]/_lib/common";
+import styles from "./index.module.scss";
 
 const PlayerComponent = (
   player: any,
@@ -16,12 +18,12 @@ const PlayerComponent = (
     ? player?.tag.slice(1)
     : player?.tag;
 
+  // Tags with less than 4 characters are bots, so link to home
+  const isBot = hashRemovedPlayerTag && hashRemovedPlayerTag.length < 4;
+  const href = isBot ? "/" : `/players/${hashRemovedPlayerTag}`;
+
   return (
-    <Link
-      key={player?.tag}
-      href={`/players/${hashRemovedPlayerTag}`}
-      className={styles.playerContainer}
-    >
+    <Link key={player?.tag} href={href} className={styles.playerContainer}>
       {isStarPlayer && <div className={styles.mvpContainer}>MVP</div>}
       <div className={styles.brawlerContainer}>
         <Image
@@ -52,13 +54,12 @@ const PlayerComponent = (
             />
           </div>
         )}
-        {(battleType === "ranked" ||
-          battleType === "soloRanked") && (
-            <div className={styles.levelContainer}>
-              <strong>LVL</strong>
-              <h6>{player?.brawler?.power}</h6>
-            </div>
-          )}
+        {(battleType === "ranked" || battleType === "soloRanked") && (
+          <div className={styles.levelContainer}>
+            <strong>LVL</strong>
+            <h6>{player?.brawler?.power}</h6>
+          </div>
+        )}
       </div>
       {shortenedName}
     </Link>
