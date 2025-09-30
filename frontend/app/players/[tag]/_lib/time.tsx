@@ -59,7 +59,7 @@ export const RelativeTime: React.FC<Props> = ({
 const formatDuration = (seconds: number): string => {
   const m = Math.floor(seconds / 60);
   const s = seconds % 60;
-  return m == 0 ? `${s}s` : `${m}m${s}s`;
+  return m === 0 ? `${s}s` : `${m}m${s}s`;
 };
 
 export const Duration: React.FC<{ seconds: number }> = ({ seconds }) => {
