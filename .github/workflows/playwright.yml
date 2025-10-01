@@ -34,7 +34,7 @@ jobs:
           echo "Web did not start in time."
           exit 1
         fi
-    - name: Show docker-compose logs
+    - name: Show docker compose logs
       run: docker-compose logs
     - name: Install dependencies
       run: npm ci
