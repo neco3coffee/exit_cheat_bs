@@ -1,8 +1,5 @@
-"use client";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import Searching from "@/app/_components/Searching";
+import Link from "next/link";
 import {
   appendToEightDigits,
   shortenPlayerName,
@@ -15,8 +12,6 @@ const PlayerComponent = (
   battleType: string,
   isDuel?: boolean,
 ) => {
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
   const shortenedName = shortenPlayerName(player?.name);
   const isStarPlayer = player?.tag === starPlayerTag;
   const hashRemovedPlayerTag = player?.tag?.startsWith("#")
@@ -27,42 +22,15 @@ const PlayerComponent = (
   const isBot = hashRemovedPlayerTag && hashRemovedPlayerTag.length < 4;
   const href = isBot ? "/" : `/players/${hashRemovedPlayerTag}`;
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    router.push(href);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      setLoading(true);
-      router.push(href);
-    }
-  };
-
   return (
-    <div
-      key={player?.tag}
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      role="button"
-      tabIndex={0}
-      className={styles.playerContainer}
-    >
+    <Link key={player?.tag} href={href} className={styles.playerContainer}>
       {isStarPlayer && <div className={styles.mvpContainer}>MVP</div>}
       <div className={styles.brawlerContainer}>
-        {loading ? (
-          <div className={styles.searchingContainer}>
-            <Searching loading={loading} compact={true} />
-          </div>
-        ) : (
-          <Image
-            src={`https://cdn.brawlify.com/brawlers/borderless/${isDuel ? player?.brawlers[0].id : player?.brawler?.id}.png`}
-            alt={isDuel ? player?.brawlers[0].name : player?.brawler?.name}
-            fill={true}
-          />
-        )}
+        <Image
+          src={`https://cdn.brawlify.com/brawlers/borderless/${isDuel ? player?.brawlers[0].id : player?.brawler?.id}.png`}
+          alt={isDuel ? player?.brawlers[0].name : player?.brawler?.name}
+          fill={true}
+        />
         {battleType === "ranked" && (
           <div className={styles.trophiesContainer}>
             <Image
@@ -94,7 +62,7 @@ const PlayerComponent = (
         )}
       </div>
       {shortenedName}
-    </div>
+    </Link>
   );
 };
 export default PlayerComponent;

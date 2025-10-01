@@ -1,15 +1,11 @@
+import React from "react";
 import styles from "./index.module.scss";
 
 interface SearchingProps {
   loading: boolean;
-  compact?: boolean;
 }
 
-const Searching = ({ loading, compact = false }: SearchingProps) => {
-  if (compact) {
-    return <span className={loading ? styles.search : ""}>🔍</span>;
-  }
-
+const Searching = ({ loading }: SearchingProps) => {
   return (
     <div className={loading ? styles.visible : styles.container}>
       <span className={loading ? styles.search : ""}>🔍</span>
