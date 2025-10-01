@@ -20,7 +20,7 @@ const BattleLog5vs5 = ({ battleLog, ownTag }: any) => {
       : classifyModeByMapName(battleLog?.event?.map);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="battleLog">
       <div className={styles.topContainer}>
         <div className={styles.left}></div>
         <h5>

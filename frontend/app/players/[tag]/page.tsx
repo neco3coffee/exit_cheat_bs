@@ -48,7 +48,7 @@ export default async function Page({
   if (player?.error) {
     return (
       <>
-        No Player for: #{tag}
+        <p>No Player for: #{tag}</p>
         <Link
           href={`/`}
           style={{
