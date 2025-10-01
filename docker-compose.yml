@@ -6,9 +6,6 @@ services:
       target: ${ENV:-development}
     ports:
       - "3001:3000"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
   app:
     build:
       context: ./backend

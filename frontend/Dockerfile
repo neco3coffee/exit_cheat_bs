@@ -24,24 +24,21 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY . .
-RUN npm run build
+RUN npm run build && ls -la /app && ls -la /app/.next
+
 
 
 # 本番用イメージ
 FROM base AS production
+ENV NODE_ENV production
+
 WORKDIR /app
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
 COPY --from=builder /app/public ./public
-
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-RUN mv ./.next/standalone/server.js ./
-
-USER nextjs
+COPY --from=builder  /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+RUN ls -la /app && ls -la /app/.next
+RUN chmod +x server.js
 
 EXPOSE 3000
 CMD ["node", "server.js"]
