@@ -17,7 +17,7 @@ jobs:
       - name: Install SSH client
         run: sudo apt-get update && sudo apt-get install -y openssh-client
 
-      - name: Deploy via SSH to Lightsail
+      - name: Deploy to Lightsail
         env:
           LIGHTSAIL_SSH_KEY: ${{ secrets.LIGHTSAIL_SSH_KEY }}
           LIGHTSAIL_HOST: ${{ secrets.LIGHTSAIL_HOST }}
@@ -27,11 +27,10 @@ jobs:
           echo "${LIGHTSAIL_SSH_KEY}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H "${LIGHTSAIL_HOST}" >> ~/.ssh/known_hosts
-          ssh ${LIGHTSAIL_USER}@${LIGHTSAIL_HOST} << 'EOF'
-            # ここに Lightsail で実行したいデプロイコマンドを記述してください
+          ssh -o StrictHostKeyChecking=no ${LIGHTSAIL_USER}@${LIGHTSAIL_HOST} << 'EOF'
+            set -e  # エラーが出たら即終了
             cd /home/ec2-user/exit_cheat_bs
             git pull origin main
             docker-compose down
-            export ENV=production
-            docker-compose -f docker-compose.yml up -d --build
+            ENV=production docker-compose -f docker-compose.yml up -d --build
           EOF
