@@ -1,5 +1,6 @@
 import { Rocket } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import Record from "@/app/_components/Record";
 import BattleLog3vs3 from "@/app/players/[tag]/_components/BattleLog3vs3";
 import BattleLog5vs5 from "@/app/players/[tag]/_components/BattleLog5vs5";
@@ -27,6 +28,7 @@ type Player = {
     badgeId: number;
   };
   battlelog: any;
+  error?: any;
 };
 
 export default async function Page({
@@ -41,6 +43,25 @@ export default async function Page({
   const player: Player = await res.json();
   const battleLogs = formatBattleLog(player.battlelog?.items || []);
   console.log("club: ", JSON.stringify(player?.club, null, 2));
+  console.log("player: ", JSON.stringify(player, null, 2));
+
+  if (player?.error) {
+    return (
+      <>
+        No Player for: #{tag}
+        <Link
+          href={`/`}
+          style={{
+            fontSize: "20px",
+            textDecoration: "underline",
+            marginTop: "10px",
+          }}
+        >
+          back to Home
+        </Link>
+      </>
+    );
+  }
 
   return (
     <div className={styles.container}>
@@ -141,7 +162,11 @@ export default async function Page({
             battleLog.battle.teams[0].length === 3
           ) {
             return (
-              <BattleLog3vs3 key={battleLog?.battleTime} battleLog={battleLog} ownTag={tag} />
+              <BattleLog3vs3
+                key={battleLog?.battleTime}
+                battleLog={battleLog}
+                ownTag={tag}
+              />
             );
           } else if (
             battleLog.battle.teams &&
@@ -149,31 +174,49 @@ export default async function Page({
             battleLog.battle.teams[0].length === 5
           ) {
             return (
-              <BattleLog5vs5 key={battleLog?.battleTime} battleLog={battleLog} ownTag={tag} />
+              <BattleLog5vs5
+                key={battleLog?.battleTime}
+                battleLog={battleLog}
+                ownTag={tag}
+              />
             );
           } else if (
             battleLog.battle.teams &&
             battleLog.battle.teams.length === 4
           ) {
             return (
-              <BattleLogTrio key={battleLog?.battleTime} battleLog={battleLog} />
+              <BattleLogTrio
+                key={battleLog?.battleTime}
+                battleLog={battleLog}
+              />
             );
           } else if (
             battleLog.battle.teams &&
             battleLog.battle.teams.length === 5
           ) {
-            return <BattleLogDuo key={battleLog?.battleTime} battleLog={battleLog} />;
+            return (
+              <BattleLogDuo key={battleLog?.battleTime} battleLog={battleLog} />
+            );
           } else if (
             battleLog.battle.players &&
             battleLog.battle.players.length > 2
           ) {
-            return <BattleLogSolo key={battleLog?.battleTime} battleLog={battleLog} />;
+            return (
+              <BattleLogSolo
+                key={battleLog?.battleTime}
+                battleLog={battleLog}
+              />
+            );
           } else if (
             battleLog.battle.players &&
             battleLog.battle.players.length === 2
           ) {
             return (
-              <BattleLogDuel key={battleLog?.battleTime} battleLog={battleLog} ownTag={tag} />
+              <BattleLogDuel
+                key={battleLog?.battleTime}
+                battleLog={battleLog}
+                ownTag={tag}
+              />
             );
           } else {
             return <div key={battleLog?.battleTime}>不明なバトル形式</div>;

@@ -1,13 +1,9 @@
 .input {
-  margin-top: 67px;
+  margin-top: 30px;
   background-color: #262626;
   max-width: 260px;
   border: 1px solid var(--black-border);
   border-radius: 27px;
   color: var(--white);
   padding: 9px 28px;
-
-  @media (min-width: 768px) {
-    margin-top: 147px;
-  }
 }

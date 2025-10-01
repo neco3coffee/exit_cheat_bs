@@ -73,7 +73,10 @@ const BattleLogTrio = ({ battleLog }: any) => {
         <div className={styles.bottomContainerInner}>
           {battleLog?.battle.teams.map((team: any) => {
             return (
-              <div className={styles.teamContainer} key={team.map((p: any) => p.tag).join("-")}>
+              <div
+                className={styles.teamContainer}
+                key={team.map((p: any) => p.tag).join("-")}
+              >
                 {team.map((player: any) => {
                   return PlayerComponent(
                     player,

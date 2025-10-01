@@ -109,7 +109,10 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
         <div className={styles.roundsContainer}>
           {battleLog?.rounds?.map((round: any, index: number) => {
             return (
-              <div key={`${index}-${round.duration}`} className={styles.roundContainer}>
+              <div
+                key={`${index}-${round.duration}`}
+                className={styles.roundContainer}
+              >
                 <div className={styles.left}>
                   <h6>ROUND {index + 1}</h6>
                   <Duration seconds={round?.duration} />

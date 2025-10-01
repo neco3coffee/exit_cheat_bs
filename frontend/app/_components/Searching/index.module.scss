@@ -1,0 +1,38 @@
+.container {
+  margin-top: 67px;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+
+  @media (min-width: 768px) {
+    margin-top: 147px;
+  }
+}
+
+.visible {
+  margin-top: 67px;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  opacity: 1;
+
+  @media (min-width: 768px) {
+    margin-top: 147px;
+  }
+}
+
+/* 検索中のアイコンアニメーション */
+.search {
+  display: inline-block;
+  animation: moveAround 1.6s ease-in-out infinite;
+}
+
+/* 左→右→左下→右下 をスムーズに動く */
+@keyframes moveAround {
+  0%   { transform: translate(-5px, 0); }
+  25%  { transform: translate(5px, 0); }
+  50%  { transform: translate(-5px, 5px); }
+  75%  { transform: translate(5px, 5px); }
+  100% { transform: translate(-5px, 0); }
+}
