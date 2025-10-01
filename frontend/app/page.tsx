@@ -28,7 +28,7 @@ export default function Home() {
             if (inputRef.current) {
               inputRef.current.blur();
             }
-            let inputTag = (e.target as HTMLInputElement).value.trim();
+            let inputTag = e.currentTarget.value.trim();
 
             if (!inputTag) {
               setTimeout(() => {
