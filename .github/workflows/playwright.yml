@@ -14,7 +14,7 @@ jobs:
       with:
         node-version: 20
     - name: Build and Start services
-      run: ENV=production docker-compose up -d --build
+      run: ENV=production docker compose up -d --build
     # 必要ならサービスの起動待ち
     - name: Wait for web service
       run: |
