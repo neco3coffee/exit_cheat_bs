@@ -1,6 +1,7 @@
 "use client";
 // RelativeTime.tsx
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
 
 type Props = {
   target: string; // e.g. "20250927T154245.000Z"

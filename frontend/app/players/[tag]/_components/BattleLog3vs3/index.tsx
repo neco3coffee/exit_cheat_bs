@@ -1,8 +1,8 @@
+import Image from "next/image";
 import PlayerComponent from "@/app/players/[tag]/_components/PlayerComponent";
 import { shortenMapName } from "@/app/players/[tag]/_lib/common";
 import { Duration, RelativeTime } from "@/app/players/[tag]/_lib/time";
 import { classifyModeByMapName } from "@/app/players/[tag]/_lib/unknownMode";
-import Image from "next/image";
 import styles from "./index.module.scss";
 
 const BattleLog3vs3 = ({ battleLog, ownTag }: any) => {

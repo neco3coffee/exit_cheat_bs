@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "lint": "biome check",
-    "format": "biome format --write"
+    "lint": "biome check --write",
+    "ci": "biome ci",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.13",

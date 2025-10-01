@@ -1,10 +1,10 @@
-import styles from "./index.module.scss";
-import { RelativeTime, Duration } from "@/app/players/[tag]/_lib/time";
-import Image from "next/image";
-import { classifyModeByMapName } from "@/app/players/[tag]/_lib/unknownMode";
-import { shortenMapName } from "@/app/players/[tag]/_lib/common";
-import PlayerComponent from "@/app/players/[tag]/_components/PlayerComponent";
 import { TriangleAlert } from "lucide-react";
+import Image from "next/image";
+import PlayerComponent from "@/app/players/[tag]/_components/PlayerComponent";
+import { shortenMapName } from "@/app/players/[tag]/_lib/common";
+import { Duration, RelativeTime } from "@/app/players/[tag]/_lib/time";
+import { classifyModeByMapName } from "@/app/players/[tag]/_lib/unknownMode";
+import styles from "./index.module.scss";
 
 const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
   const tag = ownTag.trim().toUpperCase().replace(/O/g, "0");
@@ -77,7 +77,7 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
               />
             </>
           ) : (
-            <></>
+            <div></div>
           )}
         </div>
       </div>
@@ -109,7 +109,7 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
         <div className={styles.roundsContainer}>
           {battleLog?.rounds?.map((round: any, index: number) => {
             return (
-              <div key={index} className={styles.roundContainer}>
+              <div key={`${index}-${round.duration}`} className={styles.roundContainer}>
                 <div className={styles.left}>
                   <h6>ROUND {index + 1}</h6>
                   <Duration seconds={round?.duration} />
@@ -122,7 +122,7 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
                   {round.result.toUpperCase()}
                 </h5>
                 <div className={styles.right}>
-                  <button className={styles.reportButton}>
+                  <button type="button" className={styles.reportButton}>
                     REPORT <TriangleAlert className={styles.icon} />
                   </button>
                 </div>

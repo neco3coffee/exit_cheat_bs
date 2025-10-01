@@ -1,11 +1,11 @@
-import styles from "./index.module.scss";
-import { RelativeTime, Duration } from "@/app/players/[tag]/_lib/time";
 import Image from "next/image";
-import { classifyModeByMapName } from "@/app/players/[tag]/_lib/unknownMode";
-import { shortenMapName } from "@/app/players/[tag]/_lib/common";
 import PlayerComponent from "@/app/players/[tag]/_components/PlayerComponent";
+import { shortenMapName } from "@/app/players/[tag]/_lib/common";
+import { RelativeTime } from "@/app/players/[tag]/_lib/time";
+import { classifyModeByMapName } from "@/app/players/[tag]/_lib/unknownMode";
+import styles from "./index.module.scss";
 
-const BattleLogSolo = ({ battleLog, ownTag }: any) => {
+const BattleLogSolo = ({ battleLog }: any) => {
   const starPlayerTag = battleLog?.battle?.starPlayer?.tag;
   const mode =
     battleLog?.event?.mode !== "unknown"
@@ -68,15 +68,15 @@ const BattleLogSolo = ({ battleLog, ownTag }: any) => {
               />
             </>
           ) : (
-            <></>
+            <div></div>
           )}
         </div>
       </div>
       <div className={styles.bottomContainer}>
         <div className={styles.bottomContainerInner}>
-          {battleLog?.battle.players.map((player: any, index: number) => {
+          {battleLog?.battle.players.map((player: any) => {
             return (
-              <div className={styles.playerWrapper} key={index}>
+              <div className={styles.playerWrapper} key={player?.tag}>
                 {PlayerComponent(
                   player,
                   starPlayerTag,

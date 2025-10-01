@@ -1,6 +1,6 @@
 "use client";
-import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import { Input } from "@/components/ui/input";
 import styles from "./page.module.scss";
 
 export default function Home() {

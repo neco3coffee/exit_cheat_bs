@@ -1,13 +1,13 @@
 export const shortenMapName = (mapName: string) => {
   const shortenMapName =
-    mapName.length > 18 ? mapName.slice(0, 18) + "..." : mapName;
+    mapName.length > 18 ? `${mapName.slice(0, 18)}...` : mapName;
   return shortenMapName;
 };
 
 export const shortenPlayerName = (name: string) => {
   const shortenName =
     name && Array.from(name).length > 4
-      ? Array.from(name).slice(0, 4).join("") + "..."
+      ? `${Array.from(name).slice(0, 4).join("")}...`
       : name;
   return shortenName;
 };

@@ -1,9 +1,9 @@
-import styles from "./index.module.scss";
-import { RelativeTime, Duration } from "@/app/players/[tag]/_lib/time";
 import Image from "next/image";
-import { classifyModeByMapName } from "@/app/players/[tag]/_lib/unknownMode";
-import { shortenMapName } from "@/app/players/[tag]/_lib/common";
 import PlayerComponent from "@/app/players/[tag]/_components/PlayerComponent";
+import { shortenMapName } from "@/app/players/[tag]/_lib/common";
+import { Duration, RelativeTime } from "@/app/players/[tag]/_lib/time";
+import { classifyModeByMapName } from "@/app/players/[tag]/_lib/unknownMode";
+import styles from "./index.module.scss";
 
 const BattleLogDuel = ({ battleLog, ownTag }: any) => {
   const mode =
@@ -77,7 +77,7 @@ const BattleLogDuel = ({ battleLog, ownTag }: any) => {
               />
             </>
           ) : (
-            <></>
+            <div></div>
           )}
         </div>
       </div>

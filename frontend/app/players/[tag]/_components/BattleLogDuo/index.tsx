@@ -1,11 +1,11 @@
-import styles from "./index.module.scss";
-import { RelativeTime, Duration } from "@/app/players/[tag]/_lib/time";
 import Image from "next/image";
-import { classifyModeByMapName } from "@/app/players/[tag]/_lib/unknownMode";
-import { shortenMapName } from "@/app/players/[tag]/_lib/common";
 import PlayerComponent from "@/app/players/[tag]/_components/PlayerComponent";
+import { shortenMapName } from "@/app/players/[tag]/_lib/common";
+import { RelativeTime } from "@/app/players/[tag]/_lib/time";
+import { classifyModeByMapName } from "@/app/players/[tag]/_lib/unknownMode";
+import styles from "./index.module.scss";
 
-const BattleLogDuo = ({ battleLog, ownTag }: any) => {
+const BattleLogDuo = ({ battleLog }: any) => {
   const starPlayerTag = battleLog?.battle?.starPlayer?.tag;
   const mode =
     battleLog?.event?.mode !== "unknown"
@@ -65,19 +65,22 @@ const BattleLogDuo = ({ battleLog, ownTag }: any) => {
               />
             </>
           ) : (
-            <></>
+            <div></div>
           )}
         </div>
       </div>
       <div className={styles.bottomContainer}>
         <div className={styles.bottomContainerInner}>
-          {battleLog?.battle.teams.map((team: any, index: number) => {
+          {battleLog?.battle.teams.map((team: any, _index: number) => {
             return (
-              <div className={styles.teamContainer} key={index}>
+              <div
+                className={styles.teamContainer}
+                key={team.map((p: any) => p?.tag).join("-")}
+              >
                 {team.map((player: any, index: number) => {
                   if (index === 0) {
                     return (
-                      <div key={index} className={styles.firstPlayer}>
+                      <div key={player?.tag} className={styles.firstPlayer}>
                         {PlayerComponent(
                           player,
                           starPlayerTag,
@@ -87,7 +90,7 @@ const BattleLogDuo = ({ battleLog, ownTag }: any) => {
                     );
                   } else {
                     return (
-                      <div key={index}>
+                      <div key={player?.tag}>
                         {PlayerComponent(
                           player,
                           starPlayerTag,
