@@ -13,12 +13,14 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: 20
+    - name: Check curl
+      run: curl --version
     - name: Build and Start services
-      run: ENV=production docker compose up -d --build
+      run: ENV=production docker compose -f docker-compose.yml up -d --build
     # 必要ならサービスの起動待ち
     - name: Wait for web service
       run: |
-        for i in {1..50}; do
+        for i in {1..100}; do
           if curl -s http://localhost:3001 > /dev/null; then
             echo "Web is up!"
             break
@@ -26,6 +28,14 @@ jobs:
           echo "Waiting for web service..."
           sleep 6
         done
+
+        # サービスが起動しなかった場合はエラーで終了
+        if ! curl -s http://localhost:3001 > /dev/null; then
+          echo "Web did not start in time."
+          exit 1
+        fi
+    - name: Show docker-compose logs
+      run: docker-compose logs
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
