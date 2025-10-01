@@ -17,12 +17,15 @@ jobs:
       - name: Install SSH client
         run: sudo apt-get update && sudo apt-get install -y openssh-client
 
-      - name: Show env
+      - name: Check Lightsail env presence
         env:
           LIGHTSAIL_SSH_KEY: ${{ secrets.LIGHTSAIL_SSH_KEY }}
           LIGHTSAIL_HOST: ${{ secrets.LIGHTSAIL_HOST }}
           LIGHTSAIL_USER: ${{ secrets.LIGHTSAIL_USER }}
-        run: env | grep LIGHTSAIL
+        run: |
+          [ -n "$LIGHTSAIL_SSH_KEY" ] && echo "LIGHTSAIL_SSH_KEY is set" || echo "LIGHTSAIL_SSH_KEY is NOT set"
+          [ -n "$LIGHTSAIL_HOST" ] && echo "LIGHTSAIL_HOST is set" || echo "LIGHTSAIL_HOST is NOT set"
+          [ -n "$LIGHTSAIL_USER" ] && echo "LIGHTSAIL_USER is set" || echo "LIGHTSAIL_USER is NOT set"
 
       - name: Deploy to Lightsail
         env:
