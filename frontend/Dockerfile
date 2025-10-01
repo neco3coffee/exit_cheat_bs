@@ -1,4 +1,4 @@
-FROM node:20.19.5-alpine
+FROM node:20.19.5-alpine AS base
 
 # 開発環境の構築
 FROM base AS development
