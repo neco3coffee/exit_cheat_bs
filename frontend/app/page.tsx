@@ -1,9 +1,9 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { Input } from "@/components/ui/input";
-import styles from "./page.module.scss";
 import { useRef, useState } from "react";
 import Searching from "@/app/_components/Searching";
+import { Input } from "@/components/ui/input";
+import styles from "./page.module.scss";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,7 @@ export default function Home() {
       <Input
         ref={inputRef}
         placeholder="#Y2YPGCGC"
-        style={{ textTransform: 'uppercase' }}
+        style={{ textTransform: "uppercase" }}
         type="search"
         enterKeyHint="search"
         className={styles.input}
@@ -63,7 +63,6 @@ export default function Home() {
             router.push(`/players/${inputTag.toUpperCase()}`);
           }
         }}
-
       />
     </>
   );
