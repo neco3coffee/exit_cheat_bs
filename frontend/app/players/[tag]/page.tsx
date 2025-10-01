@@ -10,6 +10,7 @@ import BattleLogSoloRanked from "@/app/players/[tag]/_components/BattleLogSoloRa
 import BattleLogTrio from "@/app/players/[tag]/_components/BattleLogTrio";
 import { appendToEightDigits } from "@/app/players/[tag]/_lib/common";
 import styles from "./page.module.scss";
+import Link from "next/link"
 
 type Player = {
   tag: string;
@@ -27,6 +28,7 @@ type Player = {
     badgeId: number;
   };
   battlelog: any;
+  error?: any;
 };
 
 export default async function Page({
@@ -41,6 +43,14 @@ export default async function Page({
   const player: Player = await res.json();
   const battleLogs = formatBattleLog(player.battlelog?.items || []);
   console.log("club: ", JSON.stringify(player?.club, null, 2));
+  console.log("player: ", JSON.stringify(player, null, 2))
+
+  if (player?.error) {
+    return (<>
+        No Player for: #{tag}
+        <Link href={`/`} style={{ fontSize: '20px', textDecoration: 'underline', marginTop: '10px'}}>back to Home</Link>
+      </>)
+  }
 
   return (
     <div className={styles.container}>
