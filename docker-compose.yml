@@ -6,6 +6,8 @@ services:
       target: ${ENV:-development}
     ports:
       - "3001:3000"
+    depends_on:
+      - app
   app:
     build:
       context: ./backend
