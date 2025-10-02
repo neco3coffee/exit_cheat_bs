@@ -139,7 +139,6 @@ GEM
       net-smtp
     marcel (1.1.0)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.9)
     minitest (5.25.5)
     msgpack (1.8.0)
     mysql2 (0.5.7)
@@ -161,9 +160,6 @@ GEM
       net-protocol
     net-ssh (7.3.0)
     nio4r (2.7.4)
-    nokogiri (1.18.10)
-      mini_portile2 (~> 2.8.2)
-      racc (~> 1.4)
     nokogiri (1.18.10-x86_64-linux-gnu)
       racc (~> 1.4)
     ostruct (0.6.3)
@@ -258,6 +254,11 @@ GEM
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
+    solid_cable (3.0.12)
+      actioncable (>= 7.2)
+      activejob (>= 7.2)
+      activerecord (>= 7.2)
+      railties (>= 7.2)
     solid_cache (1.0.7)
       activejob (>= 7.2)
       activerecord (>= 7.2)
@@ -296,7 +297,6 @@ GEM
     zeitwerk (2.7.3)
 
 PLATFORMS
-  ruby
   x86_64-linux
 
 DEPENDENCIES
@@ -309,8 +309,9 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 8.0.3)
   rubocop-rails-omakase
+  solid_cable
   solid_cache
-  solid_queue (~> 1.2, >= 1.2.1)
+  solid_queue
   thruster
   tzinfo-data
 
