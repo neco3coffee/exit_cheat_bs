@@ -12,7 +12,7 @@ const BattleLogSolo = ({ battleLog }: any) => {
       ? battleLog?.event.mode
       : classifyModeByMapName(battleLog?.event?.map);
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="battleLog">
       <div className={styles.topContainer}>
         <div className={styles.left}></div>
         <h5>

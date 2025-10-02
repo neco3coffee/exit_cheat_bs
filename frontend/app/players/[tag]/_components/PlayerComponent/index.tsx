@@ -23,7 +23,12 @@ const PlayerComponent = (
   const href = isBot ? "/" : `/players/${hashRemovedPlayerTag}`;
 
   return (
-    <Link key={player?.tag} href={href} className={styles.playerContainer}>
+    <Link
+      key={player?.tag}
+      href={href}
+      className={styles.playerContainer}
+      data-testid="playerComponent"
+    >
       {isStarPlayer && <div className={styles.mvpContainer}>MVP</div>}
       <div className={styles.brawlerContainer}>
         <Image
