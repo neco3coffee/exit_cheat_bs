@@ -51,7 +51,7 @@ const PlayerComponent = (
         {battleType === "soloRanked" && (
           <div className={styles.rank}>
             <Image
-              src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player?.brawler?.trophies)}.png`}
+              src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player?.brawler?.trophies > 0 ? player?.brawler?.trophies - 1 : 0)}.png`}
               alt="rank"
               height={20}
               width={20}
