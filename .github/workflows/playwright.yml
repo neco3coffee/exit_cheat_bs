@@ -44,6 +44,8 @@ jobs:
           echo "Web did not start in time."
           exit 1
         fi
+    - name: output app logs
+      run: docker compose logs app
     - name: Run Rails DB Migrate
       run: docker compose exec -T app rails db:migrate
     - name: Install dependencies
