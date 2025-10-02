@@ -12,7 +12,9 @@ export default function Home() {
 
   return (
     <>
-      <Searching loading={loading} />
+      <div className={styles.searchWrapper}>
+        <Searching loading={loading} />
+      </div>
       <Input
         ref={inputRef}
         placeholder="#Y2YPGCGC"

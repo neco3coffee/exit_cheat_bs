@@ -83,19 +83,27 @@ const BattleLogDuel = ({ battleLog, ownTag }: any) => {
       </div>
       <div className={styles.bottomContainer}>
         <div className={styles.bottomContainerInner}>
-          {me &&
-            PlayerComponent(me, starPlayerTag, battleLog?.battle?.type, isDuel)}
+          {me && (
+            <PlayerComponent
+              player={me}
+              starPlayerTag={starPlayerTag}
+              battleType={battleLog?.battle?.type}
+              isDuel={isDuel}
+              isMe={true}
+            />
+          )}
           <div className={styles.vsContainer}>
             <strong>VS</strong>
             <Duration seconds={battleLog?.battle.duration} />
           </div>
-          {enemy &&
-            PlayerComponent(
-              enemy,
-              starPlayerTag,
-              battleLog?.battle?.type,
-              isDuel,
-            )}
+          {enemy && (
+            <PlayerComponent
+              player={enemy}
+              starPlayerTag={starPlayerTag}
+              battleType={battleLog?.battle?.type}
+              isDuel={isDuel}
+            />
+          )}
         </div>
       </div>
     </div>

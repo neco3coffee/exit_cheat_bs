@@ -188,6 +188,7 @@ export default async function Page({
               <BattleLogTrio
                 key={battleLog?.battleTime}
                 battleLog={battleLog}
+                ownTag={tag}
               />
             );
           } else if (
@@ -195,7 +196,11 @@ export default async function Page({
             battleLog.battle.teams.length === 5
           ) {
             return (
-              <BattleLogDuo key={battleLog?.battleTime} battleLog={battleLog} />
+              <BattleLogDuo
+                key={battleLog?.battleTime}
+                battleLog={battleLog}
+                ownTag={tag}
+              />
             );
           } else if (
             battleLog.battle.players &&
@@ -205,6 +210,7 @@ export default async function Page({
               <BattleLogSolo
                 key={battleLog?.battleTime}
                 battleLog={battleLog}
+                ownTag={tag}
               />
             );
           } else if (
