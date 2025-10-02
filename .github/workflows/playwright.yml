@@ -16,6 +16,16 @@ jobs:
     - name: Check curl
       run: curl --version
     - name: Build and Start services
+      env:
+        ENV: ${{ secrets.ENV }}
+        DB_HOST: db
+        RAILS_ENV: ${{ secrets.ENV }}
+        MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+        MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+        MYSQL_USER: ${{ secrets.MYSQL_USER }}
+        MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+        BRAWL_STARS_API_TOKEN1: ${{ secrets.BRAWL_STARS_API_TOKEN1 }}
+        SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
       run: ENV=production docker compose -f docker-compose.yml up -d --build
     # 必要ならサービスの起動待ち
     - name: Wait for web service
@@ -34,11 +44,18 @@ jobs:
           echo "Web did not start in time."
           exit 1
         fi
+    - name: Run Rails DB Migrate
+      run: docker compose exec app rails db:migrate
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
+      env:
+        PROXY_ENABLED: true
+        PROXY_SERVER: ${{ secrets.PROXY_SERVER }}
+        PROXY_USER: ${{ secrets.PROXY_USER }}
+        PROXY_PASS: ${{ secrets.PROXY_PASS }}
       run: npx playwright test
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}

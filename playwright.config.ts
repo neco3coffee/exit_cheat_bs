@@ -30,6 +30,14 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    proxy: process.env.PROXY_ENABLED && process.env.PROXY_SERVER
+      ? {
+          server: process.env.PROXY_SERVER,
+          username: process.env.PROXY_USER,
+          password: process.env.PROXY_PASS,
+        }
+      : undefined,
+
   },
 
   timeout: 60000,
