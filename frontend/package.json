@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "lint": "biome check --write",
+    "lint": "biome check --write --max-diagnostics 100",
     "ci": "biome ci",
     "typecheck": "tsc --noEmit"
   },

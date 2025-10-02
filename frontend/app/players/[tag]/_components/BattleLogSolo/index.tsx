@@ -5,7 +5,8 @@ import { RelativeTime } from "@/app/players/[tag]/_lib/time";
 import { classifyModeByMapName } from "@/app/players/[tag]/_lib/unknownMode";
 import styles from "./index.module.scss";
 
-const BattleLogSolo = ({ battleLog }: any) => {
+const BattleLogSolo = ({ battleLog, ownTag }: any) => {
+  const tag = ownTag.trim().toUpperCase().replace(/O/g, "0");
   const starPlayerTag = battleLog?.battle?.starPlayer?.tag;
   const mode =
     battleLog?.event?.mode !== "unknown"
@@ -77,11 +78,15 @@ const BattleLogSolo = ({ battleLog }: any) => {
           {battleLog?.battle.players.map((player: any) => {
             return (
               <div className={styles.playerWrapper} key={player?.tag}>
-                {PlayerComponent(
-                  player,
-                  starPlayerTag,
-                  battleLog?.battle?.type,
-                )}
+                {
+                  <PlayerComponent
+                    key={player?.tag}
+                    player={player}
+                    starPlayerTag={starPlayerTag}
+                    battleType={battleLog?.battle?.type}
+                    isMe={player?.tag === `#${tag}`}
+                  />
+                }
               </div>
             );
           })}

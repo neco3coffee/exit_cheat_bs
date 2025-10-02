@@ -85,10 +85,14 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
         <div className={styles.bottomContainerInner}>
           <div className={styles.teamContainer}>
             {ownTeam?.map((player: any) => {
-              return PlayerComponent(
-                player,
-                starPlayerTag,
-                battleLog?.battle?.type,
+              return (
+                <PlayerComponent
+                  key={player?.tag}
+                  player={player}
+                  starPlayerTag={starPlayerTag}
+                  battleType={battleLog?.battle?.type}
+                  isMe={player?.tag === `#${tag}`}
+                />
               );
             })}
           </div>
@@ -98,10 +102,13 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
           </div>
           <div className={styles.teamContainer}>
             {enemyTeam?.map((player: any) => {
-              return PlayerComponent(
-                player,
-                starPlayerTag,
-                battleLog?.battle?.type,
+              return (
+                <PlayerComponent
+                  key={player?.tag}
+                  player={player}
+                  starPlayerTag={starPlayerTag}
+                  battleType={battleLog?.battle?.type}
+                />
               );
             })}
           </div>

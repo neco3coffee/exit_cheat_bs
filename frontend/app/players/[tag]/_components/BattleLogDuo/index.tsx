@@ -5,7 +5,8 @@ import { RelativeTime } from "@/app/players/[tag]/_lib/time";
 import { classifyModeByMapName } from "@/app/players/[tag]/_lib/unknownMode";
 import styles from "./index.module.scss";
 
-const BattleLogDuo = ({ battleLog }: any) => {
+const BattleLogDuo = ({ battleLog, ownTag }: any) => {
+  const tag = ownTag.trim().toUpperCase().replace(/O/g, "0");
   const starPlayerTag = battleLog?.battle?.starPlayer?.tag;
   const mode =
     battleLog?.event?.mode !== "unknown"
@@ -81,21 +82,27 @@ const BattleLogDuo = ({ battleLog }: any) => {
                   if (index === 0) {
                     return (
                       <div key={player?.tag} className={styles.firstPlayer}>
-                        {PlayerComponent(
-                          player,
-                          starPlayerTag,
-                          battleLog?.battle?.type,
-                        )}
+                        {
+                          <PlayerComponent
+                            player={player}
+                            starPlayerTag={starPlayerTag}
+                            battleType={battleLog?.battle?.type}
+                            isMe={player.tag === `#${tag}`}
+                          />
+                        }
                       </div>
                     );
                   } else {
                     return (
                       <div key={player?.tag}>
-                        {PlayerComponent(
-                          player,
-                          starPlayerTag,
-                          battleLog?.battle?.type,
-                        )}
+                        {
+                          <PlayerComponent
+                            player={player}
+                            starPlayerTag={starPlayerTag}
+                            battleType={battleLog?.battle?.type}
+                            isMe={player.tag === `#${tag}`}
+                          />
+                        }
                       </div>
                     );
                   }
