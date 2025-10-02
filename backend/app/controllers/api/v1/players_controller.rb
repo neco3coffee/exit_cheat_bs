@@ -22,6 +22,7 @@ module Api
         response = Faraday.get(url) do |req|
           req.headers['Authorization'] = "Bearer #{ENV['BRAWL_STARS_API_TOKEN1']}"
           req.headers['Accept'] = 'application/json'
+          req.options.proxy = ENV['API_PROXY_URL'] if ENV['PROXY_ENABLED'] == 'true' && ENV['API_PROXY_URL'].present?
         end
 
         # Rails.logger.info("Response status: #{response.status}")
@@ -37,6 +38,7 @@ module Api
             club_response = Faraday.get("https://api.brawlstars.com/v1/clubs/#{URI.encode_www_form_component(club_tag)}") do |req|
               req.headers['Authorization'] = "Bearer #{ENV['BRAWL_STARS_API_TOKEN1']}"
               req.headers['Accept'] = 'application/json'
+              req.options.proxy = ENV['API_PROXY_URL'] if ENV['PROXY_ENABLED'] == 'true' && ENV['API_PROXY_URL'].present?
             end
 
             if club_response.status == 200
@@ -51,6 +53,7 @@ module Api
           battle_response = Faraday.get("#{url}/battlelog") do |req|
             req.headers['Authorization'] = "Bearer #{ENV['BRAWL_STARS_API_TOKEN1']}"
             req.headers['Accept'] = 'application/json'
+            req.options.proxy = ENV['API_PROXY_URL'] if ENV['PROXY_ENABLED'] == 'true' && ENV['API_PROXY_URL'].present?
           end
 
           if battle_response.status == 200

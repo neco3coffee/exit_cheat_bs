@@ -30,20 +30,6 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    proxy: (() => {
-      if (process.env.PROXY_ENABLED && process.env.PROXY_SERVER) {
-        if (!process.env.PROXY_USER || !process.env.PROXY_PASS) {
-          throw new Error('Proxy is enabled but PROXY_USER or PROXY_PASS is missing in environment variables.');
-        }
-        return {
-          server: process.env.PROXY_SERVER,
-          username: process.env.PROXY_USER,
-          password: process.env.PROXY_PASS,
-        };
-      }
-      return undefined;
-    })(),
-
   },
 
   timeout: 60000,
