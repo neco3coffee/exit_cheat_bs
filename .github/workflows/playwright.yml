@@ -18,8 +18,7 @@ jobs:
       MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
       BRAWL_STARS_API_TOKEN1: ${{ secrets.BRAWL_STARS_API_TOKEN1 }}
       SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
-      PROXY_ENABLED: true
-      API_PROXY_URL: https://${{ secrets.PROXY_AUTH_USER }}:${{ secrets.PROXY_AUTH_PASSWORD }}@${{ secrets.PROXY_SERVER }}
+      API_PROXY_URL: http://${{ secrets.PROXY_SERVER }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
