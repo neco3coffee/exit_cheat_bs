@@ -8,6 +8,16 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      ENV: ${{ secrets.ENV }}
+      DB_HOST: db
+      RAILS_ENV: ${{ secrets.ENV }}
+      MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+      MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+      MYSQL_USER: ${{ secrets.MYSQL_USER }}
+      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+      BRAWL_STARS_API_TOKEN1: ${{ secrets.BRAWL_STARS_API_TOKEN1 }}
+      SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -16,16 +26,6 @@ jobs:
     - name: Check curl
       run: curl --version
     - name: Build and Start services
-      env:
-        ENV: ${{ secrets.ENV }}
-        DB_HOST: db
-        RAILS_ENV: ${{ secrets.ENV }}
-        MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
-        MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-        MYSQL_USER: ${{ secrets.MYSQL_USER }}
-        MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-        BRAWL_STARS_API_TOKEN1: ${{ secrets.BRAWL_STARS_API_TOKEN1 }}
-        SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
       run: ENV=production docker compose -f docker-compose.yml up -d --build
     # 必要ならサービスの起動待ち
     - name: Wait for web service
