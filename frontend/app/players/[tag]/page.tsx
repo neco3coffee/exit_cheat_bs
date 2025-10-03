@@ -9,9 +9,9 @@ import BattleLogDuo from "@/app/players/[tag]/_components/BattleLogDuo";
 import BattleLogSolo from "@/app/players/[tag]/_components/BattleLogSolo";
 import BattleLogSoloRanked from "@/app/players/[tag]/_components/BattleLogSoloRanked";
 import BattleLogTrio from "@/app/players/[tag]/_components/BattleLogTrio";
+import { Telemetry } from "@/app/players/[tag]/_components/Telemetry.tsx";
 import { appendToEightDigits } from "@/app/players/[tag]/_lib/common";
 import styles from "./page.module.scss";
-import { Telemetry } from "@/app/players/[tag]/_components/Telemetry.tsx"
 
 type Player = {
   tag: string;

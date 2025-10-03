@@ -4,8 +4,7 @@ import Footer from "@/app/_components/Footer";
 import Header from "@/app/_components/Header";
 import "./globals.css";
 import Script from "next/script";
-import { Analytics } from "./analytics"
-
+import { Analytics } from "./analytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

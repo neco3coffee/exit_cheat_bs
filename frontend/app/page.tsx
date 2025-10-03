@@ -2,9 +2,9 @@
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import Searching from "@/app/_components/Searching";
+import { event } from "@/app/_utils/gtag";
 import { Input } from "@/components/ui/input";
 import styles from "./page.module.scss";
-import { event } from "@/app/_utils/gtag"
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -65,7 +65,7 @@ export default function Home() {
 
             event("tag_lookup_start", { source: "home_screen" });
             if (typeof window !== "undefined") {
-              sessionStorage.setItem("last_source", "home_screen")
+              sessionStorage.setItem("last_source", "home_screen");
             }
             router.push(`/players/${inputTag.toUpperCase()}`);
           }

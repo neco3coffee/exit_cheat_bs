@@ -34,9 +34,9 @@ const PlayerComponent = ({
       className={styles.playerContainer}
       data-testid="playerComponent"
       onClick={() => {
-        setLoading(true)
+        setLoading(true);
         if (typeof window !== "undefined") {
-          sessionStorage.setItem("last_source", "battle_history")
+          sessionStorage.setItem("last_source", "battle_history");
         }
       }}
     >
