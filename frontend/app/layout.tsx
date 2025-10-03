@@ -36,7 +36,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
         <Suspense fallback={null}>
           <Analytics />
         </Suspense>
