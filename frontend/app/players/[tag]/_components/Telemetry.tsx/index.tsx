@@ -21,8 +21,8 @@ export function Telemetry() {
     }
 
     sendGAEvent("event", "player_detail_view", {
-      "from-where": source,
-      who: tag,
+      source,
+      tag,
     });
   }, [tag]);
 

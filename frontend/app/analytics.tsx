@@ -12,7 +12,7 @@ export function Analytics() {
     const qs = searchParams.toString();
     const page_path = qs ? `${pathname}?${qs}` : pathname;
 
-    sendGAEvent("event", "page_view", { page_path: page_path });
+    sendGAEvent("event", "page_view", { page_path });
   }, [pathname, searchParams]);
 
   return null;
