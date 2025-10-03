@@ -1,9 +1,9 @@
 // app/player/[tag]/Telemetry.tsx
 "use client";
 
+import { sendGAEvent } from "@next/third-parties/google";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
-import { event } from "@/app/_utils/gtag";
 
 export function Telemetry() {
   const params = useParams();
@@ -20,7 +20,7 @@ export function Telemetry() {
       sessionStorage.removeItem("last_source"); // 使い捨て
     }
 
-    event("player_detail_view", { source, tag });
+    sendGAEvent("player_detail_view", { source, tag });
   }, [tag]);
 
   return null;
