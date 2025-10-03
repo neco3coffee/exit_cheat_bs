@@ -33,7 +33,12 @@ const PlayerComponent = ({
       href={href}
       className={styles.playerContainer}
       data-testid="playerComponent"
-      onClick={() => setLoading(true)}
+      onClick={() => {
+        setLoading(true)
+        if (typeof window !== "undefined") {
+          sessionStorage.setItem("last_source", "battle_history")
+        }
+      }}
     >
       {isStarPlayer && <div className={styles.mvpContainer}>MVP</div>}
       <div className={styles.brawlerContainer}>

@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Footer from "@/app/_components/Footer";
 import Header from "@/app/_components/Header";
 import "./globals.css";
+import Script from "next/script";
+import { Analytics } from "./analytics"
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,9 +30,31 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const enabled = process.env.ENABLE_GA
+  const gaId = process.env.GA_ID
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        {enabled && gaId && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                // 初期page_viewは自動送信しない（ルーティングで送る）
+                gtag('config', '${gaId}', { send_page_view: false });
+              `}
+            </Script>
+          </>
+        )}
+
+        {enabled && gaId && <Analytics />}
         <Header />
         <main>{children}</main>
         <Footer />
