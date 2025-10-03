@@ -39,6 +39,7 @@ export default async function Page({
   const { tag } = await params;
   const res = await fetch(
     `http://app:3000/api/v1/players/${encodeURIComponent(tag)}`,
+    { next: { revalidate: 60 }}
   );
   const player: Player = await res.json();
   const battleLogs = formatBattleLog(player.battlelog?.items || []);

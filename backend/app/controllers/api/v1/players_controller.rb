@@ -19,16 +19,16 @@ module Api
         rank = nil
         badgeId = nil
 
-        response = Faraday.get(url) do |req|
+        res = Faraday.get(url) do |req|
           req.headers['Authorization'] = "Bearer #{ENV['BRAWL_STARS_API_TOKEN1']}"
           req.headers['Accept'] = 'application/json'
         end
 
-        # Rails.logger.info("Response status: #{response.status}")
-        # Rails.logger.info("Response body: #{response.body}")
+        # Rails.logger.info("Response status: #{res.status}")
+        # Rails.logger.info("Response body: #{res.body}")
 
-        if response.status == 200
-          player_data = JSON.parse(response.body)
+        if res.status == 200
+          player_data = JSON.parse(res.body)
           Rails.logger.info("player_data:\n #{JSON.pretty_generate(player_data)}")
 
           # clubデータの取得
@@ -65,7 +65,9 @@ module Api
           render json: {error: "Player data is nil"}, status: 500 and return
         end
 
+
         player = construct_response(player_data,battlelog_data,badgeId)
+        response.headers['Cache-Control'] = 'public, max-age=60'
         render json: player
 
         rescue StandardError => e
