@@ -21,7 +21,7 @@ export function Telemetry() {
     }
 
     event("player_detail_view", { source, tag })
-  }, [])
+  }, [tag])
 
   return null
 }
