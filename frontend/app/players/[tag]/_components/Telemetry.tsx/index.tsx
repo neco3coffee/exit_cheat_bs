@@ -2,9 +2,13 @@
 "use client"
 
 import { useEffect } from "react"
+import { useParams } from "next/navigation"
 import { event } from "@/app/_utils/gtag"
 
 export function Telemetry() {
+  const params = useParams()
+  const tag = params?.tag as string
+
   useEffect(() => {
     let source: "home_screen" | "battle_history" | "direct" = "direct"
 
@@ -16,7 +20,7 @@ export function Telemetry() {
       sessionStorage.removeItem("last_source") // 使い捨て
     }
 
-    event("player_detail_view", { source })
+    event("player_detail_view", { source, tag })
   }, [])
 
   return null
