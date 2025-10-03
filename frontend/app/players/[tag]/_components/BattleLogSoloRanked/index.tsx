@@ -50,7 +50,9 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
                 ? mode.toUpperCase()
                 : battleLog?.event.mode.toUpperCase()}
             </h5>
-            <h6>{shortenMapName(battleLog?.event?.map)}</h6>
+            <h6 style={{ WebkitTouchCallout: "none" } as React.CSSProperties}>
+              {shortenMapName(battleLog?.event?.map)}
+            </h6>
           </div>
         </div>
         <h5
