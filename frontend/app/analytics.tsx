@@ -12,8 +12,7 @@ export function Analytics() {
     const qs = searchParams.toString();
     const page_path = qs ? `${pathname}?${qs}` : pathname;
 
-    // gtag の代わりに sendGAEvent を呼ぶ
-    sendGAEvent("page_view", { page_path });
+    sendGAEvent("event", "page_view", { 'page_path': page_path });
   }, [pathname, searchParams]);
 
   return null;

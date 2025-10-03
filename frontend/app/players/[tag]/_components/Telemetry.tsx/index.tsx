@@ -20,7 +20,7 @@ export function Telemetry() {
       sessionStorage.removeItem("last_source"); // 使い捨て
     }
 
-    sendGAEvent("player_detail_view", { source, tag });
+    sendGAEvent("event", "player_detail_view", { 'from-where': source, 'who': tag });
   }, [tag]);
 
   return null;

@@ -63,7 +63,7 @@ export default function Home() {
               return;
             }
 
-            sendGAEvent("tag_lookup_start", { source: "home_screen" });
+            sendGAEvent("event", "tag_lookup_start", { 'source': "home_screen" });
             if (typeof window !== "undefined") {
               sessionStorage.setItem("last_source", "home_screen");
             }
