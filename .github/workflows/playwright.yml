@@ -5,9 +5,20 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  test:
+  e2e-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      ENV: ${{ secrets.ENV }}
+      DB_HOST: db
+      RAILS_ENV: ${{ secrets.ENV }}
+      MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+      MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+      MYSQL_USER: ${{ secrets.MYSQL_USER }}
+      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+      BRAWL_STARS_API_TOKEN1: ${{ secrets.BRAWL_STARS_API_TOKEN1 }}
+      SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
+      API_PROXY_URL: http://${{ secrets.PROXY_AUTH_USER }}:${{ secrets.PROXY_AUTH_PASSWORD }}@${{ secrets.PROXY_SERVER }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -34,6 +45,11 @@ jobs:
           echo "Web did not start in time."
           exit 1
         fi
+    - name: Run Rails DB Migrate
+      run: docker compose exec -T app rails db:migrate
+    - name: Show app logs if migrate fails
+      if: failure()  # ひとつ前が失敗した場合のみ実行
+      run: docker compose logs app
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers

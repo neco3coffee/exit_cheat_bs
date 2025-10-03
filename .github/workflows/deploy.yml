@@ -43,4 +43,6 @@ jobs:
             git pull origin main
             docker-compose down
             ENV=production docker-compose -f docker-compose.yml up -d --build
+            docker-compose exec -T app rails db:migrate
+            docker image prune -f
           EOF
