@@ -1,31 +1,26 @@
 .container {
-  margin-top: 67px;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 40px;
   height: 40px;
   opacity: 0;
-
-  @media (min-width: 768px) {
-    margin-top: 147px;
-  }
 }
 
 .visible {
-  margin-top: 67px;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 40px;
   height: 40px;
   opacity: 1;
-
-  @media (min-width: 768px) {
-    margin-top: 147px;
-  }
 }
 
 /* 検索中のアイコンアニメーション */
 .search {
   display: inline-block;
   animation: moveAround 1.6s ease-in-out infinite;
+  font-size: 18px;
 }
 
 /* 左→右→左下→右下 をスムーズに動く */

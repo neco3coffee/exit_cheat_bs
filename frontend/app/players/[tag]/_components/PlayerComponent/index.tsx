@@ -1,22 +1,27 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import Searching from "@/app/_components/Searching";
 import {
   appendToEightDigits,
   shortenPlayerName,
 } from "@/app/players/[tag]/_lib/common";
 import styles from "./index.module.scss";
 
-const PlayerComponent = (
-  player: any,
-  starPlayerTag: string | null,
-  battleType: string,
-  isDuel?: boolean,
-) => {
+const PlayerComponent = ({
+  player,
+  starPlayerTag,
+  battleType,
+  isDuel,
+  isMe,
+}: any) => {
   const shortenedName = shortenPlayerName(player?.name);
   const isStarPlayer = player?.tag === starPlayerTag;
   const hashRemovedPlayerTag = player?.tag?.startsWith("#")
     ? player?.tag.slice(1)
     : player?.tag;
+  const [loading, setLoading] = useState(false);
 
   // Tags with less than 4 characters are bots, so link to home
   const isBot = hashRemovedPlayerTag && hashRemovedPlayerTag.length < 4;
@@ -28,9 +33,15 @@ const PlayerComponent = (
       href={href}
       className={styles.playerContainer}
       data-testid="playerComponent"
+      onClick={() => setLoading(true)}
     >
       {isStarPlayer && <div className={styles.mvpContainer}>MVP</div>}
       <div className={styles.brawlerContainer}>
+        {!isMe && loading && (
+          <div className={styles.searchContainer}>
+            <Searching loading={loading} />
+          </div>
+        )}
         <Image
           src={`https://cdn.brawlify.com/brawlers/borderless/${isDuel ? player?.brawlers[0].id : player?.brawler?.id}.png`}
           alt={isDuel ? player?.brawlers[0].name : player?.brawler?.name}
@@ -51,7 +62,7 @@ const PlayerComponent = (
         {battleType === "soloRanked" && (
           <div className={styles.rank}>
             <Image
-              src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player?.brawler?.trophies)}.png`}
+              src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player?.brawler?.trophies > 0 ? player?.brawler?.trophies - 1 : 0)}.png`}
               alt="rank"
               height={20}
               width={20}
