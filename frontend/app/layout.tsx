@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Footer from "@/app/_components/Footer";
 import Header from "@/app/_components/Header";
 import "./globals.css";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Suspense } from "react";
 import { Analytics } from "./analytics";
 
@@ -35,6 +36,13 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        {process.env.NEXT_PUBLIC_ENABLE_GA ? (
+          <GoogleAnalytics
+            gaId={
+              process.env.NEXT_PUBLIC_GA_ID ? process.env.NEXT_PUBLIC_GA_ID : ""
+            }
+          />
+        ) : null}
         <Suspense fallback={null}>
           <Analytics />
         </Suspense>

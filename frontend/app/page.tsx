@@ -1,8 +1,8 @@
 "use client";
+import { sendGAEvent } from "@next/third-parties/google";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import Searching from "@/app/_components/Searching";
-import { event } from "@/app/_utils/gtag";
 import { Input } from "@/components/ui/input";
 import styles from "./page.module.scss";
 
@@ -63,7 +63,7 @@ export default function Home() {
               return;
             }
 
-            event("tag_lookup_start", { source: "home_screen" });
+            sendGAEvent("tag_lookup_start", { source: "home_screen" });
             if (typeof window !== "undefined") {
               sessionStorage.setItem("last_source", "home_screen");
             }
