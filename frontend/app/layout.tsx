@@ -4,6 +4,7 @@ import Footer from "@/app/_components/Footer";
 import Header from "@/app/_components/Header";
 import "./globals.css";
 import { Analytics } from "./analytics";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +35,9 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
-        <Analytics />
+        <Suspense fallback={null}>
+          <Analytics />
+        </Suspense>
       </body>
     </html>
   );
