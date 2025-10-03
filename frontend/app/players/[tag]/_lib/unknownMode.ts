@@ -28,6 +28,10 @@ const dodgeBrawlMapNameList = [
   "Dodge or Die",
 ];
 
+const bossMapNameList = [
+  "Plague Doctor Crow"
+];
+
 export function classifyModeByMapName(mapName: string) {
   if (arenaMapNameList.includes(mapName)) {
     return "arena";
@@ -35,6 +39,8 @@ export function classifyModeByMapName(mapName: string) {
     return "hockey";
   } else if (dodgeBrawlMapNameList.includes(mapName)) {
     return "dodgeball";
+  } else if (bossMapNameList.includes(mapName)) {
+    return "boss"
   } else {
     return "unknown";
   }
