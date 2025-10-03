@@ -20,8 +20,8 @@ export function Telemetry() {
       sessionStorage.removeItem("last_source"); // 使い捨て
     }
 
-    event("player_detail_view", { source, tag })
-  }, [tag])
+    event("player_detail_view", { source, tag });
+  }, [tag]);
 
   return null;
 }

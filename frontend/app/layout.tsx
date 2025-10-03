@@ -29,8 +29,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const enabled = process.env.NEXT_PUBLIC_ENABLE_GA
-  const gaId = process.env.NEXT_PUBLIC_GA_ID
+  const enabled = process.env.NEXT_PUBLIC_ENABLE_GA;
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
     <html lang="en">
