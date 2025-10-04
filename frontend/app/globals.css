@@ -7,6 +7,8 @@
   --white: #e7e9ea;
   --black-border: #2f3336;
   --blue-black: #262626;
+  --placeholder-gray: #9CA3AF;
+  --hover-gray: #374151;
   --trophy-yellow: #ffc800;
   --defeat-red: #df0000;
   --victory-green: #00ff00;
@@ -34,27 +36,28 @@
   --club-color-c7: #ffd156;
   --club-color-c8: #d16eff;
   --club-color-c9: #fe6a71;
+  --on-blue: #3B82F6;
 
   /* 自動で追加されたバリアブル */
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: red;
+  --foreground: red;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
+  --primary: red;
+  --primary-foreground: red;
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --muted: red;
+  --muted-foreground: var(--placeholder-gray);
+  --accent: transparent;
+  --accent-foreground: transparent;
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --input: var(--blue-black);
+  --ring: var(--black-border);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -107,7 +110,7 @@ a {
   text-decoration: none;
 }
 
-/* @theme inline {
+@theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -143,9 +146,9 @@ a {
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-} */
+}
 
-.dark {
+/* .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -177,4 +180,4 @@ a {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-}
+} */

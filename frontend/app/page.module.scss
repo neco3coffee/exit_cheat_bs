@@ -6,12 +6,66 @@
   }
 }
 
-.input {
+.inputGroup {
   margin-top: 30px;
   background-color: #262626;
   max-width: 260px;
   border: 1px solid var(--black-border);
   border-radius: 27px;
+  color: white;
+  // padding: 9px 28px;
+
+  &:focus-within {
+    border-color: var(--blue-black);
+    box-shadow: 0 0 0 1.5px var(--blue-black);
+  }
+}
+
+.inputGroupInput {
+  text-transform: uppercase;
+  margin-left: 25px;
+  padding-bottom: 1.5px;
   color: var(--white);
-  padding: 9px 28px;
+}
+
+.inputGroupText {
+  margin-left: 15px;
+  font-size: large;
+}
+
+.DropdownMenuTrigger {
+  background-color: none;
+
+  &:hover {
+    // hover時にpointerにする
+    cursor: pointer;
+  }
+}
+
+.inputGroupNameInput {
+  // text-align: center;
+  margin-left: 20px;
+  padding-bottom: 2px;
+}
+
+.inputGroupHistoryButton {
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.inputGroupHistoryButtonActive {
+  cursor: pointer;
+  margin-left: 10px;
+  color: var(--on-blue);
+}
+
+.dropdownMenuContent {
+  background-color: var(--blue-black);
+}
+
+.dropDownMenuItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
 }
