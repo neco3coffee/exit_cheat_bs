@@ -19,9 +19,11 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
     battleLog?.event?.mode !== "unknown"
       ? battleLog?.event.mode
       : classifyModeByMapName(battleLog?.event?.map);
-  const existAtLeastMythic = battleLog?.battle?.teams.flat().some((player: any) => {
-    return player?.brawler?.trophies >= 13;
-  })
+  const existAtLeastMythic = battleLog?.battle?.teams
+    .flat()
+    .some((player: any) => {
+      return player?.brawler?.trophies >= 13;
+    });
   let result = null;
   if (existAtLeastMythic) {
     result = getResult(battleLog?.rounds);
@@ -68,9 +70,11 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
           className={
             result === "victory"
               ? styles.victory
-              : result === "defeat" ? styles.defeat
-              : result === "ongoing" ? styles.ongoing
-              : styles.draw
+              : result === "defeat"
+                ? styles.defeat
+                : result === "ongoing"
+                  ? styles.ongoing
+                  : styles.draw
           }
         >
           {result.toUpperCase()}
@@ -139,9 +143,11 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
                 </div>
                 <h5
                   className={
-                    round.result === "victory" ? styles.victory
-                  : round.result === "defeat" ? styles.defeat
-                  : styles.draw
+                    round.result === "victory"
+                      ? styles.victory
+                      : round.result === "defeat"
+                        ? styles.defeat
+                        : styles.draw
                   }
                 >
                   {round.result.toUpperCase()}
@@ -162,13 +168,16 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
 
 export default BattleLogSoloRanked;
 
-
 const getResult = (rounds: any[]) => {
-  const victoryCount = rounds.filter((round) => round.result === "victory").length;
-  const defeatCount = rounds.filter((round) => round.result === "defeat").length;
+  const victoryCount = rounds.filter(
+    (round) => round.result === "victory",
+  ).length;
+  const defeatCount = rounds.filter(
+    (round) => round.result === "defeat",
+  ).length;
 
   if (victoryCount >= 2) return "victory";
   if (defeatCount >= 2) return "defeat";
   if (rounds.length < 3) return "ongoing";
   return "draw";
-}
+};

@@ -59,8 +59,8 @@ const BattleLog5vs5 = ({ battleLog, ownTag }: any) => {
             battleLog?.battle?.result === "victory"
               ? styles.victory
               : battleLog?.battle?.result === "defeat"
-              ? styles.defeat
-              : styles.draw
+                ? styles.defeat
+                : styles.draw
           }
         >
           {battleLog?.battle?.result.toUpperCase()}
