@@ -19,10 +19,11 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
     battleLog?.event?.mode !== "unknown"
       ? battleLog?.event.mode
       : classifyModeByMapName(battleLog?.event?.map);
+  const mythic1 = 13; // diamond3 = 12, legendary1 = 16, master1 = 19
   const existAtLeastMythic = battleLog?.battle?.teams
     .flat()
     .some((player: any) => {
-      return player?.brawler?.trophies >= 13;
+      return player?.brawler?.trophies >= mythic1;
     });
   let result = null;
   if (existAtLeastMythic) {
