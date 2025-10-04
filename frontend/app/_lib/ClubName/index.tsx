@@ -1,10 +1,11 @@
+const clubNameRegex = /<c([0-9])>(.*?)<\/c>/;
+
 const ClubName = ({ clubName }: { clubName?: string }) => {
   if (!clubName) {
     return <span>Not in a Club</span>;
   }
 
   // クラブに <c0>B • W</c> みたいな色コードが含まれている場合に除去しつつ、0-9の色コードに応じて色を変える
-  const clubNameRegex = /<c([0-9])>(.*?)<\/c>/;
   const match = clubName.match(clubNameRegex);
 
   if (match) {
