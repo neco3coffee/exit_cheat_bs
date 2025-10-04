@@ -116,6 +116,15 @@
       font-size: 16px;
     }
   }
+  .draw {
+    color: var(--draw-gray);
+    font-size: 12px;
+    font-weight: bold;
+
+    @media (min-width: 768px) {
+      font-size: 16px;
+    }
+  }
 
   .right {
     width: 40%;
