@@ -13,7 +13,9 @@
       "!node_modules",
       "!.next",
       "!dist",
-      "!build"
+      "!build",
+      "!frontend/components/**/*",
+      "!frontend/app/globals.css"
     ]
   },
   "formatter": {
