@@ -3,10 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import Searching from "@/app/_components/Searching";
-import {
-  appendToEightDigits,
-  shortenPlayerName,
-} from "@/app/players/[tag]/_lib/common";
+import { appendToEightDigits, shortenPlayerName } from "@/app/_lib/common";
 import styles from "./index.module.scss";
 
 const PlayerComponent = ({

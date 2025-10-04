@@ -28,7 +28,7 @@ const dodgeBrawlMapNameList = [
   "Dodge or Die",
 ];
 
-const bossMapNameList = ["Plague Doctor Crow"];
+const bossMapNameList = ["Plague Doctor Crow", "Ghost Diver Rico"];
 
 export function classifyModeByMapName(mapName: string) {
   if (arenaMapNameList.includes(mapName)) {

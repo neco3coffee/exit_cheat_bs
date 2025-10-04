@@ -2,6 +2,8 @@ import { Rocket } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import Record from "@/app/_components/Record";
+import ClubName from "@/app/_lib/ClubName";
+import { appendToEightDigits } from "@/app/_lib/common";
 import BattleLog3vs3 from "@/app/players/[tag]/_components/BattleLog3vs3";
 import BattleLog5vs5 from "@/app/players/[tag]/_components/BattleLog5vs5";
 import BattleLogDuel from "@/app/players/[tag]/_components/BattleLogDuel";
@@ -10,7 +12,6 @@ import BattleLogSolo from "@/app/players/[tag]/_components/BattleLogSolo";
 import BattleLogSoloRanked from "@/app/players/[tag]/_components/BattleLogSoloRanked";
 import BattleLogTrio from "@/app/players/[tag]/_components/BattleLogTrio";
 import { Telemetry } from "@/app/players/[tag]/_components/Telemetry.tsx";
-import { appendToEightDigits } from "@/app/players/[tag]/_lib/common";
 import styles from "./page.module.scss";
 
 type Player = {
@@ -144,8 +145,7 @@ export default async function Page({
             <div></div>
           )}
           <div className={styles.clubNameContainer}>
-            {/* TODO: <c*> <c/> で*に0,2,3,4,5,6,7,8,9 が来る場合にゲーム内で色が変わる、クラブ検索から色は調べられる */}
-            {player?.club?.name ? player?.club?.name : "Not in a Club"}
+            <ClubName clubName={player?.club?.name} />
           </div>
         </div>
 
