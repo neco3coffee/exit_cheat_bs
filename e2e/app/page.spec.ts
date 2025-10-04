@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('ユーザーがタグでプレイヤーを検索できる#1', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:3001/', { timeout: 60000 } );
+    await page.goto('http://localhost:3001/', { timeout: 10000 } );
   })
 
 
@@ -15,7 +15,7 @@ test.describe('ユーザーがタグでプレイヤーを検索できる#1', () 
     await page.getByPlaceholder('#Y2YPGCGC').press('Enter');
 
     // neco3という名前のプレイヤーが表示されることを確認
-    await expect(page.getByText('neco3')).toBeVisible({timeout: 60000});
+    await expect(page.getByText('neco3')).toBeVisible({timeout: 10000});
   });
 
   // 存在しないタグを入力して検索して、該当するプレイヤーが表示されないことを確認する

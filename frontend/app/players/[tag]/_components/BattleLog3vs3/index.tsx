@@ -59,7 +59,9 @@ const BattleLog3vs3 = ({ battleLog, ownTag }: any) => {
           className={
             battleLog?.battle?.result === "victory"
               ? styles.victory
-              : styles.defeat
+              : battleLog?.battle?.result === "defeat"
+                ? styles.defeat
+                : styles.draw
           }
         >
           {battleLog?.battle?.result.toUpperCase()}

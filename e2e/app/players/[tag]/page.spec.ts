@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('ユーザーがバトル履歴を見れるようにする#3', () => {
   test.beforeEach(async ({page}) => {
-    await page.goto('http://localhost:3001/players/Y2YPGCGC');
+    await page.goto('http://localhost:3001/players/Y2YPGCGC', { timeout: 10000  });
   })
 
   // バトル履歴のタイトルが表示される
@@ -37,7 +37,7 @@ test.describe('ユーザーがバトル履歴を見れるようにする#3', () 
     }
 
     await link.click();
-    await expect(page).toHaveURL(`http://localhost:3001/players/${tag}`, { timeout: 45000 });
+    await expect(page).toHaveURL(`http://localhost:3001/players/${tag}`, { timeout: 10000 });
     await expect(page.getByText(`#${tag}`)).toBeVisible({ timeout: 10000 });
   });
 
