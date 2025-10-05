@@ -49,12 +49,15 @@ module Api
               SavePlayerJob.perform_later(other_tag)
             end
           end
+
+          # 7. soloRankedバトルに参加したプレイヤーのランクを非同期で更新
+          UpdateSoloRankedRanksJob.perform_later(battlelog_data)
         end
 
-        # 7. レスポンスを構築（改名履歴を含める）
+        # 8. レスポンスを構築（改名履歴を含める）
         response_data = construct_response(player_data, battlelog_data, badgeId)
 
-        # 8. 改名履歴を追加
+        # 9. 改名履歴を追加
         db_player = Player.find_by(tag: tag)
         if db_player
           name_histories = db_player.player_name_histories
