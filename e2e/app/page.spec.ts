@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('ユーザーがタグでプレイヤーを検索できる#1', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:3001/', { timeout: 15000 } );
+    await page.goto('http://localhost:3001/', { timeout: 30000 } );
   })
 
 

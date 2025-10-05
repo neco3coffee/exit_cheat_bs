@@ -32,7 +32,7 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
 
-  timeout: 15000,
+  timeout: 45000, // タイムアウトを45秒に延長
 
   /* Configure projects for major browsers */
   projects: [

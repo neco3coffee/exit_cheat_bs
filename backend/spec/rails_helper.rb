@@ -20,6 +20,12 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
 
   config.include FactoryBot::Syntax::Methods
+  config.include ActiveJob::TestHelper
+
+  # ActiveJobのテストアダプターを設定
+  config.before(:suite) do
+    ActiveJob::Base.queue_adapter = :test
+  end
 
   # Docker環境でのホスト設定
   config.before(:each, type: :request) do

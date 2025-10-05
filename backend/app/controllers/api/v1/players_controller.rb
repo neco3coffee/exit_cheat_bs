@@ -51,8 +51,27 @@ module Api
           end
         end
 
-        # 7. レスポンスを構築（既存の形式を維持）
+        # 7. レスポンスを構築（改名履歴を含める）
         response_data = construct_response(player_data, battlelog_data, badgeId)
+
+        # 8. 改名履歴を追加
+        db_player = Player.find_by(tag: tag)
+        if db_player
+          name_histories = db_player.player_name_histories
+                                   .order(changed_at: :desc)
+                                   .map do |history|
+            {
+              id: history.id,
+              name: history.name,
+              icon_id: history.icon_id,
+              changed_at: history.changed_at.iso8601
+            }
+          end
+          response_data[:nameHistories] = name_histories
+        else
+          response_data[:nameHistories] = []
+        end
+
         response.headers['Cache-Control'] = 'public, max-age=60'
         render json: response_data
 

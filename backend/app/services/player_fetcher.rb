@@ -95,6 +95,14 @@ class PlayerFetcher
 
     if player
       Rails.logger.info("Updating existing player: #{tag}")
+
+      # 名前が変更されているかチェック
+      if player.name != player_attrs[:name]
+        # 履歴を保存
+        save_name_history(player, player.name, player.icon_id)
+        Rails.logger.info("Name or icon changed for player #{tag}: #{player.name} -> #{player_attrs[:name]}")
+      end
+
       player.update!(player_attrs)
     else
       Rails.logger.info("Creating new player: #{tag}")
@@ -172,5 +180,16 @@ class PlayerFetcher
 
     Rails.logger.info("No soloRanked battle found for player: #{normalized_player_tag}")
     nil # 見つからなかった場合
+  end
+
+  private
+
+  # 名前変更履歴を保存
+  def save_name_history(player, old_name, old_icon_id)
+    player.player_name_histories.create!(
+      name: old_name,
+      icon_id: old_icon_id,
+      changed_at: Time.current
+    )
   end
 end
