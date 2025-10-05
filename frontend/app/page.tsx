@@ -150,7 +150,7 @@ export default function Home() {
               //   sessionStorage.setItem("last_source", "home_screen");
               // }
               router.push(
-                `/players/search?name=${encodeURIComponent(inputName)}`,
+                `/players/search?name=${encodeURIComponent(inputName)}&history=${searchWitHistory}&rank=${searchWithRank}`,
               );
             }
           }}
