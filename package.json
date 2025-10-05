@@ -4,7 +4,7 @@
   "description": "ブロスタのガチバトルのレジェンド〜マスターあたりで発生する利敵や献上のせいでマッチに敗北してプロランクになることが困難になっている。 献上・利敵に８回も当たらなければ全シーズンはプロ行けてたはず、、、",
   "main": "index.js",
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky",
     "test": "playwright test --workers=1",
     "test:dev": "playwright test --workers=1 --project='Mobile Safari'"
   },
