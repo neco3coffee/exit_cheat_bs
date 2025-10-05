@@ -62,6 +62,75 @@ module Api
         render json: { error: "An error occurred while processing your request" }, status: 500
       end
 
+      def search
+        # nameパラメータのバリデーション
+        name = params[:name].to_s.strip
+        if name.blank?
+          render json: { error: "Name parameter is required and cannot be empty" }, status: 400
+          return
+        end
+
+        # historyパラメータ（デフォルト: false）
+        include_history = ActiveModel::Type::Boolean.new.cast(params[:history])
+
+        # rankパラメータ（デフォルト: 0）
+        target_rank = params[:rank].to_i
+
+        # rankの範囲を計算
+        if target_rank == 0
+          min_rank = 0
+          max_rank = 3
+        elsif target_rank == 21
+          min_rank = 18
+          max_rank = 21
+        else
+          min_rank = [target_rank - 3, 0].max
+          max_rank = [target_rank + 3, 21].min
+        end
+
+        # 基本のプレイヤー検索クエリを構築
+        base_query = Player.where("name ILIKE ?", "%#{Player.sanitize_sql_like(name)}%")
+                          .where(rank: min_rank..max_rank)
+
+        # historyが有効な場合、PlayerNameHistoryからも検索
+        if include_history
+          history_player_ids = PlayerNameHistory.joins(:player)
+                                              .where("player_name_histories.name ILIKE ?", "%#{Player.sanitize_sql_like(name)}%")
+                                              .where(players: { rank: min_rank..max_rank })
+                                              .select(:player_id)
+                                              .distinct
+                                              .pluck(:player_id)
+
+          # 重複を除去して結合
+          player_ids = (base_query.pluck(:id) + history_player_ids).uniq
+          players = Player.where(id: player_ids)
+        else
+          players = base_query
+        end
+
+        # approved_reports_countで降順ソート
+        players = players.order(approved_reports_count: :desc)
+
+        # レスポンス形式に変換
+        result = players.map do |player|
+          {
+            name: player.name,
+            icon_id: player.icon_id,
+            tag: player.tag,
+            club_name: player.club_name,
+            trophies: player.trophies,
+            rank: player.rank,
+            approved_reports_count: 0  # MVPのため常に0
+          }
+        end
+
+        render json: result
+      rescue StandardError => e
+        Rails.logger.error("Search exception occurred: #{e.message}")
+        Rails.logger.error(e.backtrace.join("\n"))
+        render json: { error: "An error occurred while processing your request" }, status: 500
+      end
+
 
       private
       #TODO: api tokenが制限に達した場合に備える
