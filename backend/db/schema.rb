@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_25_104407) do
-  create_table "tests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
+ActiveRecord::Schema[8.0].define(version: 2025_10_05_080309) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "btree_gin"
+  enable_extension "pg_catalog.plpgsql"
+  enable_extension "pg_trgm"
+  enable_extension "unaccent"
+
+  create_table "tests", force: :cascade do |t|
+    t.string "name", limit: 255, null: false
+    t.string "normalized_name", limit: 255
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index "lower((name)::text)", name: "index_tests_name_lower"
+    t.index ["name"], name: "index_tests_on_name"
+    t.index ["normalized_name"], name: "index_tests_on_normalized_name"
+    t.check_constraint "char_length(name::text) <= 15", name: "check_name_length"
   end
 end
