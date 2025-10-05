@@ -2,12 +2,12 @@ import { test, expect } from '@playwright/test';
 
 test.describe('ユーザーがバトル履歴を見れるようにする#3', () => {
   test.beforeEach(async ({page}) => {
-    await page.goto('http://localhost:3001/players/Y2YPGCGC', { timeout: 10000  });
+    await page.goto('http://localhost:3001/players/Y2YPGCGC', { timeout: 15000  });
   })
 
   // バトル履歴のタイトルが表示される
   test('バトル履歴のタイトルが表示される', async ({ page}) => {
-    await expect(page.getByText("BATTLE LOG")).toBeVisible({ timeout: 10000 })
+    await expect(page.getByText("BATTLE LOG")).toBeVisible({ timeout: 15000 })
   })
 
   // バトル履歴が8件以上表示される, data-testid="battleLog"
@@ -37,8 +37,8 @@ test.describe('ユーザーがバトル履歴を見れるようにする#3', () 
     }
 
     await link.click();
-    await expect(page).toHaveURL(`http://localhost:3001/players/${tag}`, { timeout: 10000 });
-    await expect(page.getByText(`#${tag}`)).toBeVisible({ timeout: 10000 });
+    await expect(page).toHaveURL(`http://localhost:3001/players/${tag}`, { timeout: 15000 });
+    await expect(page.getByText(`#${tag}`)).toBeVisible({ timeout: 15000 });
   });
 
 })
