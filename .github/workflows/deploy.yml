@@ -45,7 +45,8 @@ jobs:
             ENV=production docker-compose -f docker-compose.yml up -d --build
             # PostgreSQLでデータベースを作成 (既に存在する場合はスキップ)
             docker-compose exec -T app rails db:create || true
-            docker-compose exec -T app rails solid_queue:install:migrations || true
+            docker-compose exec -T app rails solid_queue:install || true
             docker-compose exec -T app rails db:migrate
+            docker-compose exec -d app rails solid_queue:start || true
             docker image prune -f
           EOF
