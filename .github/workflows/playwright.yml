@@ -27,9 +27,10 @@ jobs:
       run: curl --version
     - name: show IP
       run: curl ipinfo.io/ip
-    - name: Test API access
+    - name: Test API access with proxy
       run: |
-         curl -H "Authorization: Bearer ${{ secrets.BRAWL_STARS_API_TOKEN1 }}" \
+         curl --proxy "${{ secrets.PROXY_AUTH_USER }}:${{ secrets.PROXY_AUTH_PASSWORD }}@${{ secrets.PROXY_SERVER }}" \
+         -H "Authorization: Bearer ${{ secrets.BRAWL_STARS_API_TOKEN1 }}" \
          https://api.brawlstars.com/v1/brawlers
     - name: Build and Start services
       run: ENV=production docker compose -f docker-compose.yml up -d --build
@@ -59,6 +60,38 @@ jobs:
       run: docker compose logs app
     - name: Install dependencies
       run: npm ci
+    - name: Debug services
+      run: |
+        echo "=== Docker services ==="
+        docker compose ps
+        echo "=== Port check ==="
+        curl -I http://localhost:3001 || echo "Web service not accessible"
+        curl -I http://localhost:3000 || echo "API service not accessible"
+        echo "=== Logs ==="
+        docker compose logs web
+        docker compose logs app
+    - name: Test Rails proxy connection
+      run: |
+        docker compose exec -T app rails runner "
+          puts 'Environment proxy settings:'
+          puts 'http_proxy: ' + ENV['http_proxy'].to_s
+          puts 'https_proxy: ' + ENV['https_proxy'].to_s
+          puts 'no_proxy: ' + ENV['no_proxy'].to_s
+
+          # プロキシ経由でAPI接続テスト
+          require 'faraday'
+          conn = Faraday.new(url: 'https://api.brawlstars.com') do |f|
+            f.headers['Authorization'] = \"Bearer #{ENV['BRAWL_STARS_API_TOKEN1']}\"
+          end
+
+          begin
+            response = conn.get('/v1/brawlers')
+            puts \"API Response: #{response.status}\"
+            puts \"Response body length: #{response.body.length}\"
+          rescue => e
+            puts \"API Error: #{e.message}\"
+          end
+        "
     - name: Cache Playwright browsers
       uses: actions/cache@v4
       with:

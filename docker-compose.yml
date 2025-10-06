@@ -32,6 +32,7 @@ services:
       # RAILS_DEVELOPMENT_HOSTS: app,app:3000
       http_proxy: ${API_PROXY_URL}
       https_proxy: ${API_PROXY_URL}
+      no_proxy: "localhost,127.0.0.1,db,app,web"
   solid_queue:
     build:
       context: ./backend
@@ -52,6 +53,7 @@ services:
       RAILS_LOG_TO_STDOUT: true
       http_proxy: ${API_PROXY_URL}
       https_proxy: ${API_PROXY_URL}
+      no_proxy: "localhost,127.0.0.1,db,app,web" # プロキシを経由しないホスト
     command: bundle exec rails solid_queue:start
     restart: unless-stopped  # 異常終了時の自動再起動
     # profiles:
