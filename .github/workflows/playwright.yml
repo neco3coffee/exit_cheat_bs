@@ -92,6 +92,21 @@ jobs:
             puts \"API Error: #{e.message}\"
           end
         "
+    - name: Debug Environment Variables
+      run: |
+        echo "=== Environment Variables ==="
+        echo "NODE_ENV: $NODE_ENV"
+        echo "CI: $CI"
+        echo "ENV: $ENV"
+        echo "RAILS_ENV: $RAILS_ENV"
+        echo "API_PROXY_URL: $API_PROXY_URL"
+
+        echo "=== Container Environment Variables ==="
+        echo "--- Next.js Container ---"
+        docker compose exec -T web env | sort
+
+        echo "--- Rails Container ---"
+        docker compose exec -T app env | sort
     - name: Cache Playwright browsers
       uses: actions/cache@v4
       with:
