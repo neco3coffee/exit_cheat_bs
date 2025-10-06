@@ -86,4 +86,8 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
   config.hosts << "app"
   config.hosts << "app:3000"
+  config.hosts << "localhost"        # 追加
+  config.hosts << "localhost:3000"
+  config.hosts << "safebrawl.com"
+  config.hosts << "www.safebrawl.com"
 end
