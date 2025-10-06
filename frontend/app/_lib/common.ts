@@ -1,6 +1,6 @@
 export const shortenMapName = (mapName: string) => {
   const shortenMapName =
-    mapName.length > 18 ? `${mapName.slice(0, 18)}...` : mapName;
+    mapName?.length > 18 ? `${mapName?.slice(0, 18)}...` : mapName;
   return shortenMapName;
 };
 

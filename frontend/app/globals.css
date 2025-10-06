@@ -37,6 +37,7 @@
   --club-color-c8: #d16eff;
   --club-color-c9: #fe6a71;
   --on-blue: #3B82F6;
+  --bottom-container-bg-blue: #003378;
 
   /* 自動で追加されたバリアブル */
   --radius: 0.625rem;
@@ -89,7 +90,6 @@ body {
 }
 
 main {
-  padding: 23px;
   width: 100%;
   height: calc(100dvh - 106px); /* header + footerの高さを引く */
   display: flex;

@@ -26,7 +26,7 @@ const BattleLog3vs3 = ({ battleLog, ownTag }: any) => {
         <div className={styles.left}></div>
         <h5>
           {battleLog.battle.type === "friendly"
-            ? battleLog.battle.type.toUpperCase()
+            ? battleLog?.battle?.type?.toUpperCase()
             : ""}
         </h5>
         {battleLog?.battleTime && (
@@ -39,7 +39,7 @@ const BattleLog3vs3 = ({ battleLog, ownTag }: any) => {
         <div className={styles.left}>
           <Image
             src={`/modes/${mode}.png`}
-            alt={battleLog?.event?.mode}
+            alt={battleLog?.event?.mode || "mode"}
             width={30}
             height={30}
           />
@@ -47,8 +47,8 @@ const BattleLog3vs3 = ({ battleLog, ownTag }: any) => {
             {/* TODO:DADGEBALLじゃなくてDOGDEBRAWLって表示できるようにする */}
             <h5>
               {battleLog?.event?.mode === "unknown"
-                ? mode.toUpperCase()
-                : battleLog?.event.mode.toUpperCase()}
+                ? mode?.toUpperCase()
+                : battleLog?.event?.mode?.toUpperCase()}
             </h5>
             <h6 style={{ WebkitTouchCallout: "none" } as React.CSSProperties}>
               {shortenMapName(battleLog?.event?.map)}
@@ -64,7 +64,7 @@ const BattleLog3vs3 = ({ battleLog, ownTag }: any) => {
                 : styles.draw
           }
         >
-          {battleLog?.battle?.result.toUpperCase()}
+          {battleLog?.battle?.result?.toUpperCase()}
         </h5>
         <div className={styles.right}>
           {battleLog?.battle.type === "ranked" &&

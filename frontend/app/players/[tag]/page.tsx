@@ -239,7 +239,7 @@ export default async function Page({
   );
 }
 
-const formatBattleLog = (battleLogs: any[]) => {
+export const formatBattleLog = (battleLogs: any[]) => {
   const formattedBattleLogs: any[] = [];
   battleLogs.forEach((battleLog: any) => {
     if (battleLog.battle.type === "soloRanked") {
