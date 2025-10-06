@@ -25,6 +25,12 @@ jobs:
         node-version: 20
     - name: Check curl
       run: curl --version
+    - name: show IP
+      run: curl ipinfo.io/ip
+    - name: Test API access
+      run: |
+         curl -H "Authorization: Bearer ${{ secrets.BRAWL_STARS_API_TOKEN1 }}" \
+         https://api.brawlstars.com/v1/brawlers
     - name: Build and Start services
       run: ENV=production docker compose -f docker-compose.yml up -d --build
     # 必要ならサービスの起動待ち
@@ -64,6 +70,11 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: npm run test
+    - name: Show logs on failure
+      if: failure()
+      run: |
+        docker compose logs app
+        docker compose logs solid_queue
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
