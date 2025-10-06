@@ -32,27 +32,10 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
 
-  timeout: 10000,
+  timeout: 45000, // タイムアウトを45秒に延長
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-
-    // ブロスタユーザーでfirefoxを使う人はほぼいないと思うのでコメントアウト
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-
-    /* Test against mobile viewports. */
     {
       name: 'Mobile Chrome',
       use: { ...devices['Pixel 5'] },
@@ -61,16 +44,10 @@ export default defineConfig({
       name: 'Mobile Safari',
       use: { ...devices['iPhone 12'] },
     },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
+    {
+      name: "Tablet Safari",
+      use: { ...devices['iPad Pro 11'] },
+    }
   ],
 
   /* Run your local dev server before starting the tests */

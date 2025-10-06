@@ -12,10 +12,9 @@ jobs:
       ENV: ${{ secrets.ENV }}
       DB_HOST: db
       RAILS_ENV: ${{ secrets.ENV }}
-      MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
-      MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-      MYSQL_USER: ${{ secrets.MYSQL_USER }}
-      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+      POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
       BRAWL_STARS_API_TOKEN1: ${{ secrets.BRAWL_STARS_API_TOKEN1 }}
       SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
       API_PROXY_URL: http://${{ secrets.PROXY_AUTH_USER }}:${{ secrets.PROXY_AUTH_PASSWORD }}@${{ secrets.PROXY_SERVER }}
@@ -26,6 +25,13 @@ jobs:
         node-version: 20
     - name: Check curl
       run: curl --version
+    - name: show IP
+      run: curl ipinfo.io/ip
+    - name: Test API access with proxy
+      run: |
+         curl --proxy "${{ secrets.PROXY_AUTH_USER }}:${{ secrets.PROXY_AUTH_PASSWORD }}@${{ secrets.PROXY_SERVER }}" \
+         -H "Authorization: Bearer ${{ secrets.BRAWL_STARS_API_TOKEN1 }}" \
+         https://api.brawlstars.com/v1/brawlers
     - name: Build and Start services
       run: ENV=production docker compose -f docker-compose.yml up -d --build
     # 必要ならサービスの起動待ち
@@ -45,13 +51,76 @@ jobs:
           echo "Web did not start in time."
           exit 1
         fi
-    - name: Run Rails DB Migrate
-      run: docker compose exec -T app rails db:migrate
+    - name: Create and Migrate Rails DB
+      run: |
+        docker compose exec -T app rails db:create || true
+        docker compose exec -T app sh -c 'yes | rails solid_queue:install' || true
+        docker compose exec -T app rails db:migrate
+        # テーブルが存在しない場合は手動でスキーマを読み込み
+        docker compose exec -T app rails runner "
+          unless ActiveRecord::Base.connection.table_exists?('solid_queue_jobs')
+            puts 'Loading Solid Queue schema...'
+            load Rails.root.join('db', 'queue_schema.rb') if File.exist?(Rails.root.join('db', 'queue_schema.rb'))
+          end
+        " || true
     - name: Show app logs if migrate fails
       if: failure()  # ひとつ前が失敗した場合のみ実行
       run: docker compose logs app
+    - name: Verify Solid Queue tables
+      run: |
+        docker compose exec -T app rails runner "
+          puts 'Solid Queue tables:'
+          puts ActiveRecord::Base.connection.tables.select { |t| t.include?('solid_queue') }
+        "
     - name: Install dependencies
       run: npm ci
+    - name: Debug services
+      run: |
+        echo "=== Docker services ==="
+        docker compose ps
+        echo "=== Port check ==="
+        curl -I http://localhost:3001 || echo "Web service not accessible"
+        curl -I http://localhost:3000/api/v1/players/Y2YPGCGC || echo "API service not accessible"
+        echo "=== Logs ==="
+        docker compose logs web
+        docker compose logs app
+    - name: Test Rails proxy connection
+      run: |
+        docker compose exec -T app rails runner "
+          puts 'Environment proxy settings:'
+          puts 'http_proxy: ' + ENV['http_proxy'].to_s
+          puts 'https_proxy: ' + ENV['https_proxy'].to_s
+          puts 'no_proxy: ' + ENV['no_proxy'].to_s
+
+          # プロキシ経由でAPI接続テスト
+          require 'faraday'
+          conn = Faraday.new(url: 'https://api.brawlstars.com') do |f|
+            f.headers['Authorization'] = \"Bearer #{ENV['BRAWL_STARS_API_TOKEN1']}\"
+          end
+
+          begin
+            response = conn.get('/v1/brawlers')
+            puts \"API Response: #{response.status}\"
+            puts \"Response body length: #{response.body.length}\"
+          rescue => e
+            puts \"API Error: #{e.message}\"
+          end
+        "
+    - name: Debug Environment Variables
+      run: |
+        echo "=== Environment Variables ==="
+        echo "NODE_ENV: $NODE_ENV"
+        echo "CI: $CI"
+        echo "ENV: $ENV"
+        echo "RAILS_ENV: $RAILS_ENV"
+        echo "API_PROXY_URL: $API_PROXY_URL"
+
+        echo "=== Container Environment Variables ==="
+        echo "--- Next.js Container ---"
+        docker compose exec -T web env | sort
+
+        echo "--- Rails Container ---"
+        docker compose exec -T app env | sort
     - name: Cache Playwright browsers
       uses: actions/cache@v4
       with:
@@ -62,7 +131,12 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npx playwright test
+      run: npm run test
+    - name: Show logs on failure
+      if: failure()
+      run: |
+        docker compose logs app
+        docker compose logs solid_queue
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:

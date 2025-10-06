@@ -52,7 +52,7 @@ export default async function Page({
     return (
       <>
         <Telemetry />
-        <p>No Player for: #{tag}</p>
+        <p>{`No Player for: #${tag}`}</p>
         <Link
           href={`/`}
           style={{

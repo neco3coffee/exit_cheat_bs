@@ -11,68 +11,146 @@ module Api
         # tagの先頭に#を追加
         tag = "##{tag}" unless tag.start_with?("#")
         Rails.logger.info("tag: #{tag}")
-        url = "https://api.brawlstars.com/v1/players/#{URI.encode_www_form_component(tag)}"
-        Rails.logger.info("url: #{url}")
-        Rails.logger.info("BRAWL_STARS_API_TOKEN1: #{ENV['BRAWL_STARS_API_TOKEN1']}")
 
-        player_data = nil
-        rank = nil
-        badgeId = nil
+        # PlayerFetcherを使用してプレイヤー情報を取得・保存
+        fetcher = PlayerFetcher.new
 
-        res = Faraday.get(url) do |req|
-          req.headers['Authorization'] = "Bearer #{ENV['BRAWL_STARS_API_TOKEN1']}"
-          req.headers['Accept'] = 'application/json'
-        end
-
-        # Rails.logger.info("Response status: #{res.status}")
-        # Rails.logger.info("Response body: #{res.body}")
-
-        if res.status == 200
-          player_data = JSON.parse(res.body)
-          Rails.logger.info("player_data:\n #{JSON.pretty_generate(player_data)}")
-
-          # clubデータの取得
-          if player_data.dig('club', 'tag')
-            club_tag = player_data.dig('club','tag')
-            club_response = Faraday.get("https://api.brawlstars.com/v1/clubs/#{URI.encode_www_form_component(club_tag)}") do |req|
-              req.headers['Authorization'] = "Bearer #{ENV['BRAWL_STARS_API_TOKEN1']}"
-              req.headers['Accept'] = 'application/json'
-            end
-
-            if club_response.status == 200
-              club_data = JSON.parse(club_response.body)
-              badgeId = club_data['badgeId']
-            else
-              # Rails.logger.error("Error fetching club data: #{club_response.status} - #{club_response.body}")
-            end
-          end
-
-          # バトル履歴データの取得
-          battle_response = Faraday.get("#{url}/battlelog") do |req|
-            req.headers['Authorization'] = "Bearer #{ENV['BRAWL_STARS_API_TOKEN1']}"
-            req.headers['Accept'] = 'application/json'
-          end
-
-          if battle_response.status == 200
-            battlelog_data =JSON.parse(battle_response.body)
-          else
-            # Rails.logger.error("Error fetching battle data: #{battle_response.status} - #{battle_response.body}")
-          end
-
-        end
-
+        # 1. 外部APIからプレイヤー情報を取得
+        player_data = fetcher.fetch_player(tag)
         if player_data.nil?
-          render json: {error: "Player data is nil"}, status: 500 and return
+          render json: {error: "Player not found"}, status: 404 and return
         end
 
+        # 2. プレイヤー情報をDBに保存または更新
+        # 3. バトルログを取得
+        battlelog_data = fetcher.fetch_battlelog(tag)
 
-        player = construct_response(player_data,battlelog_data,badgeId)
+        # プレイヤー情報をDBに保存（バトルログも渡してランクを計算）
+        player = fetcher.save_or_update_player(player_data, battlelog_data)
+
+        # 4. クラブ情報を取得（badgeId用）
+        badgeId = nil
+        if player_data.dig('club', 'tag')
+          club_tag = player_data.dig('club','tag')
+          club_data = fetcher.fetch_club(club_tag)
+          badgeId = club_data['badgeId'] if club_data
+        end
+
+        # 5. 直近3件のバトルから他のプレイヤーのタグを抽出
+        if battlelog_data
+          recent_player_tags = fetcher.extract_player_tags_from_recent_battles(battlelog_data, 3)
+
+          # 6. 検索対象のプレイヤー自身を除外し、まだDBに存在しないプレイヤーを非同期で保存
+          recent_player_tags.each do |other_tag|
+            next if other_tag == tag # 自分自身は除外
+
+            unless Player.exists?(tag: other_tag)
+              Rails.logger.info("Enqueueing SavePlayerJob for tag: #{other_tag}")
+              SavePlayerJob.perform_later(other_tag)
+            end
+          end
+
+          # 7. soloRankedバトルに参加したプレイヤーのランクを非同期で更新
+          UpdateSoloRankedRanksJob.perform_later(battlelog_data)
+        end
+
+        # 8. レスポンスを構築（改名履歴を含める）
+        response_data = construct_response(player_data, battlelog_data, badgeId)
+
+        # 9. 改名履歴を追加
+        db_player = Player.find_by(tag: tag)
+        if db_player
+          name_histories = db_player.player_name_histories
+                                   .order(changed_at: :desc)
+                                   .map do |history|
+            {
+              id: history.id,
+              name: history.name,
+              icon_id: history.icon_id,
+              changed_at: history.changed_at.iso8601
+            }
+          end
+          response_data[:nameHistories] = name_histories
+        else
+          response_data[:nameHistories] = []
+        end
+
         response.headers['Cache-Control'] = 'public, max-age=60'
-        render json: player
+        render json: response_data
 
-        rescue StandardError => e
-          Rails.logger.error("Exception occurred: #{e.message}")
-          render json: { error: "An error occurred while processing your request" }, status: 500
+      rescue StandardError => e
+        Rails.logger.error("Exception occurred: #{e.message}")
+        Rails.logger.error(e.backtrace.join("\n"))
+        render json: { error: "An error occurred while processing your request" }, status: 500
+      end
+
+      def search
+        # nameパラメータのバリデーション
+        name = params[:name].to_s.strip
+        if name.blank?
+          render json: { error: "Name parameter is required and cannot be empty" }, status: 400
+          return
+        end
+
+        # historyパラメータ（デフォルト: false）
+        include_history = ActiveModel::Type::Boolean.new.cast(params[:history])
+
+        # rankパラメータ（デフォルト: 0）
+        target_rank = params[:rank].to_i
+
+        # rankの範囲を計算
+        if target_rank == 0
+          min_rank = 0
+          max_rank = 3
+        elsif target_rank == 21
+          min_rank = 18
+          max_rank = 21
+        else
+          min_rank = [target_rank - 3, 0].max
+          max_rank = [target_rank + 3, 21].min
+        end
+
+        # 基本のプレイヤー検索クエリを構築
+        base_query = Player.where("name ILIKE ?", "%#{Player.sanitize_sql_like(name)}%")
+                          .where(rank: min_rank..max_rank)
+
+        # historyが有効な場合、PlayerNameHistoryからも検索
+        if include_history
+          history_player_ids = PlayerNameHistory.joins(:player)
+                                              .where("player_name_histories.name ILIKE ?", "%#{Player.sanitize_sql_like(name)}%")
+                                              .where(players: { rank: min_rank..max_rank })
+                                              .select(:player_id)
+                                              .distinct
+                                              .pluck(:player_id)
+
+          # 重複を除去して結合
+          player_ids = (base_query.pluck(:id) + history_player_ids).uniq
+          players = Player.where(id: player_ids)
+        else
+          players = base_query
+        end
+
+        # approved_reports_countで降順ソート
+        players = players.order(approved_reports_count: :desc)
+
+        # レスポンス形式に変換
+        result = players.map do |player|
+          {
+            name: player.name,
+            icon_id: player.icon_id,
+            tag: player.tag,
+            club_name: player.club_name,
+            trophies: player.trophies,
+            rank: player.rank,
+            approved_reports_count: 0  # MVPのため常に0
+          }
+        end
+
+        render json: result
+      rescue StandardError => e
+        Rails.logger.error("Search exception occurred: #{e.message}")
+        Rails.logger.error(e.backtrace.join("\n"))
+        render json: { error: "An error occurred while processing your request" }, status: 500
       end
 
 

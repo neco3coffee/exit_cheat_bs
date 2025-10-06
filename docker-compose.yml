@@ -9,7 +9,6 @@ services:
     depends_on:
       - app
     environment:
-      NEXT_PUBLIC_ENABLE_GA: ${NEXT_PUBLIC_ENABLE_GA}
       NEXT_PUBLIC_GA_ID: ${NEXT_PUBLIC_GA_ID}
   app:
     build:
@@ -24,27 +23,51 @@ services:
     environment:
       DB_HOST: db
       RAILS_ENV: ${ENV:-development}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       BRAWL_STARS_API_TOKEN1: ${BRAWL_STARS_API_TOKEN1}
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
       RAILS_LOG_TO_STDOUT: true
       # RAILS_DEVELOPMENT_HOSTS: app,app:3000
       http_proxy: ${API_PROXY_URL}
       https_proxy: ${API_PROXY_URL}
-  db:
-    image: mysql:8.4
-    ports:
-      - "3306:3306"
+      no_proxy: "localhost,127.0.0.1,db,app,web"
+  solid_queue:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+      - app  # appコンテナが起動してからsolid_queueを起動
     volumes:
-      - mysql_data:/var/lib/mysql
+      - ./backend:/app
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      DB_HOST: db
+      RAILS_ENV: ${ENV:-development}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      BRAWL_STARS_API_TOKEN1: ${BRAWL_STARS_API_TOKEN1}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      RAILS_LOG_TO_STDOUT: true
+      http_proxy: ${API_PROXY_URL}
+      https_proxy: ${API_PROXY_URL}
+      no_proxy: "localhost,127.0.0.1,db,app,web" # プロキシを経由しないホスト
+    command: bundle exec rails solid_queue:start
+    restart: unless-stopped  # 異常終了時の自動再起動
+    # profiles:
+    #   - production  # 開発環境でも使用するためコメントアウト
+  db:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
 volumes:
-  mysql_data:
+  postgres_data:

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      get 'players/search', to: 'players#search'
       get 'players/:tag', to: 'players#show'
     end
   end
