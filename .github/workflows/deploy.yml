@@ -47,6 +47,13 @@ jobs:
             docker-compose exec -T app rails db:create || true
             docker compose exec -T app sh -c 'yes | rails solid_queue:install' || true
             docker-compose exec -T app rails db:migrate
+            # テーブルが存在しない場合は手動でスキーマを読み込み
+            docker-compose exec -T app rails runner "
+              unless ActiveRecord::Base.connection.table_exists?('solid_queue_jobs')
+                puts 'Loading Solid Queue schema...'
+                load Rails.root.join('db', 'queue_schema.rb') if File.exist?(Rails.root.join('db', 'queue_schema.rb'))
+              end
+            " || true
             docker-compose exec -d app rails solid_queue:start || true
             docker image prune -f
           EOF
