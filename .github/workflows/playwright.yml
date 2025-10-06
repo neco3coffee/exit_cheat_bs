@@ -54,7 +54,7 @@ jobs:
     - name: Create and Migrate Rails DB
       run: |
         docker compose exec -T app rails db:create || true
-        docker compose exec -T app rails solid_queue:install || true
+        docker compose exec -T app sh -c 'yes | rails solid_queue:install' || true
         docker compose exec -T app rails db:migrate
     - name: Show app logs if migrate fails
       if: failure()  # ひとつ前が失敗した場合のみ実行
