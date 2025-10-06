@@ -80,7 +80,7 @@ jobs:
         docker compose ps
         echo "=== Port check ==="
         curl -I http://localhost:3001 || echo "Web service not accessible"
-        curl -I http://localhost:3000 || echo "API service not accessible"
+        curl -I http://localhost:3000/api/v1/players/Y2YPGCGC || echo "API service not accessible"
         echo "=== Logs ==="
         docker compose logs web
         docker compose logs app
