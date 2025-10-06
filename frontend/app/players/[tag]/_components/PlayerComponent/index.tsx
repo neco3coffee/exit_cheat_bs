@@ -46,7 +46,11 @@ const PlayerComponent = ({
         )}
         <Image
           src={`https://cdn.brawlify.com/brawlers/borderless/${isDuel ? player?.brawlers[0].id : player?.brawler?.id}.png`}
-          alt={isDuel ? player?.brawlers[0].name : player?.brawler?.name || "brawler"}
+          alt={
+            isDuel
+              ? player?.brawlers[0].name
+              : player?.brawler?.name || "brawler"
+          }
           fill={true}
         />
         {battleType === "ranked" && (
