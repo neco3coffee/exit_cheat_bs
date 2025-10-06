@@ -59,6 +59,12 @@ jobs:
     - name: Show app logs if migrate fails
       if: failure()  # ひとつ前が失敗した場合のみ実行
       run: docker compose logs app
+    - name: Verify Solid Queue tables
+      run: |
+        docker compose exec -T app rails runner "
+          puts 'Solid Queue tables:'
+          puts ActiveRecord::Base.connection.tables.select { |t| t.include?('solid_queue') }
+        "
     - name: Install dependencies
       run: npm ci
     - name: Debug services
