@@ -80,6 +80,12 @@ class PlayerFetcher
     rank = 0
     if battlelog_data
       rank = calculate_latest_solo_ranked_trophies(battlelog_data, player_data['tag']) || 0
+    else
+      # battlelog_dataが渡されていない場合は新たに取得
+      battlelog_data = fetch_battlelog(tag)
+      if battlelog_data
+        rank = calculate_latest_solo_ranked_trophies(battlelog_data, player_data['tag']) || 0
+      end
     end
 
     player_attrs = {

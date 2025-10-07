@@ -90,18 +90,22 @@ export default async function Page({
             >
               {player.name}
             </h1>
-            {player.currentRank && (
+            {(player.currentRank >= 0) && (
               <div className={styles.rankContainer}>
+                {player.currentRank! > 0 && (
+                  <>
+                    <Image
+                      src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player.currentRank! - 1)}.png`}
+                      alt="rank"
+                      height={60}
+                      width={60}
+                      style={{ height: "60px", width: "auto" }}
+                    />
+                    <Rocket className={styles.icon} />
+                  </>
+                )}
                 <Image
-                  src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player.currentRank - 1)}.png`}
-                  alt="rank"
-                  height={60}
-                  width={60}
-                  style={{ height: "60px", width: "auto" }}
-                />
-                <Rocket className={styles.icon} />
-                <Image
-                  src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player.currentRank)}.png`}
+                  src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player.currentRank!)}.png`}
                   alt="rank"
                   height={60}
                   width={60}
