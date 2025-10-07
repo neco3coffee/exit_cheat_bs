@@ -4,6 +4,7 @@ import Link from "next/link";
 import Record from "@/app/_components/Record";
 import ClubName from "@/app/_lib/ClubName";
 import { appendToEightDigits } from "@/app/_lib/common";
+import { formatBattleLog } from "@/app/_lib/formatBattleLog";
 import BattleLog3vs3 from "@/app/players/[tag]/_components/BattleLog3vs3";
 import BattleLog5vs5 from "@/app/players/[tag]/_components/BattleLog5vs5";
 import BattleLogDuel from "@/app/players/[tag]/_components/BattleLogDuel";
@@ -13,7 +14,6 @@ import BattleLogSoloRanked from "@/app/players/[tag]/_components/BattleLogSoloRa
 import BattleLogTrio from "@/app/players/[tag]/_components/BattleLogTrio";
 import { Telemetry } from "@/app/players/[tag]/_components/Telemetry.tsx";
 import styles from "./page.module.scss";
-import { formatBattleLog } from "@/app/_lib/formatBattleLog";
 
 type Player = {
   tag: string;

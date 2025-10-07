@@ -3,11 +3,12 @@ import { ChevronDownIcon, History, Rocket } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState, Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Record from "@/app/_components/Record";
 import Searching from "@/app/_components/Searching";
 import ClubName from "@/app/_lib/ClubName";
 import { appendToEightDigits } from "@/app/_lib/common";
+import { formatBattleLog } from "@/app/_lib/formatBattleLog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,7 +31,6 @@ import BattleLogSolo from "../[tag]/_components/BattleLogSolo";
 import BattleLogSoloRanked from "../[tag]/_components/BattleLogSoloRanked";
 import BattleLogTrio from "../[tag]/_components/BattleLogTrio";
 import styles from "./page.module.scss";
-import { formatBattleLog } from "@/app/_lib/formatBattleLog";
 
 type Player = {
   tag: string;
