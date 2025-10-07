@@ -55,7 +55,7 @@ module Api
         end
 
         # 8. レスポンスを構築（改名履歴を含める）
-        response_data = construct_response(player_data, battlelog_data, badgeId)
+        response_data = construct_response(player, player_data, battlelog_data, badgeId)
 
         # 9. 改名履歴を追加
         db_player = Player.find_by(tag: tag)
@@ -142,7 +142,7 @@ module Api
             club_name: player.club_name,
             trophies: player.trophies,
             rank: player.rank,
-            approved_reports_count: 0  # MVPのため常に0
+            approved_reports_count: player.approved_reports_count
           }
         end
 
@@ -179,15 +179,13 @@ module Api
         nil # 見つからなかった場合
       end
 
-      def construct_response(player_data, battlelog_data, badgeId)
-        rank = latest_solo_ranked_trophies(battlelog_data, player_data['tag']) unless battlelog_data.nil?
-        Rails.logger.info("Latest solo ranked trophies: #{rank == nil ? 'nil' : rank}")
+      def construct_response(player ,player_data, battlelog_data, badgeId)
         {
           tag: player_data['tag'],
           name: player_data['name'],
           nameColor: player_data['nameColor'],
           iconId: player_data.dig('icon', 'id'),
-          currentRank: rank,
+          currentRank: player.rank,
           trophies: player_data['trophies'],
           highestTrophies: player_data['highestTrophies'],
           vs3Victories: player_data['3vs3Victories'],

@@ -78,8 +78,10 @@ class PlayerFetcher
 
     # バトルログからランクを計算
     rank = 0
+    Rails.logger.info("battlelog_data: #{battlelog_data.nil? ? 'nil' : 'present'}")
     if battlelog_data
       rank = calculate_latest_solo_ranked_trophies(battlelog_data, player_data['tag']) || 0
+      Rails.logger.info("Calculated rank from provided battlelog_data: #{rank}")
     end
 
     player_attrs = {
@@ -143,6 +145,7 @@ class PlayerFetcher
     return '' unless tag.present?
 
     tag = tag.to_s.upcase.strip
+    tag = tag.gsub('O', '0')
     tag = "##{tag}" unless tag.start_with?('#')
     tag
   end
@@ -167,6 +170,7 @@ class PlayerFetcher
         team.each do |player|
           player_tag_in_battle = normalize_tag(player['tag'])
           Rails.logger.info("Checking player in battle: #{player_tag_in_battle} vs target: #{normalized_player_tag}")
+
 
           # タグが一致した場合、そのプレイヤーのブローラーのトロフィー数を返す
           if player_tag_in_battle == normalized_player_tag

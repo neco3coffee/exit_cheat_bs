@@ -13,11 +13,10 @@ class UpdateSoloRankedRanksJob < ApplicationJob
 
       battle['teams'].each do |team|
         team.each do |player|
-          tag = player['tag']
+          tag = normalize_tag(player['tag'])
           trophies = player['brawler']['trophies']
 
-          # より新しい情報（高いtrophies）で更新
-          if !player_rank_updates[tag] || player_rank_updates[tag] < trophies
+          unless player_rank_updates.key?(tag)
             player_rank_updates[tag] = trophies
           end
         end
@@ -28,8 +27,9 @@ class UpdateSoloRankedRanksJob < ApplicationJob
     player_rank_updates.each do |tag, rank|
       player = Player.find_by(tag: tag)
       if player
+        old_rank = player.rank
         player.update(rank: rank)
-        Rails.logger.info("Updated rank for player #{tag}: #{rank}")
+        Rails.logger.info("Updated rank for player #{tag}: #{old_rank} -> #{rank}")
       end
     end
 
@@ -38,5 +38,15 @@ class UpdateSoloRankedRanksJob < ApplicationJob
     Rails.logger.error("UpdateSoloRankedRanksJob failed: #{e.message}")
     Rails.logger.error(e.backtrace.join("\n"))
     raise e
+  end
+
+  private
+
+  def normalize_tag(tag)
+    return '' unless tag.present?
+
+    tag = tag.to_s.upcase.strip
+    tag = tag.gsub('O', '0')
+    tag = "##{tag}" unless tag.start_with?('#')
   end
 end

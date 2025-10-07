@@ -4,6 +4,7 @@ import Link from "next/link";
 import Record from "@/app/_components/Record";
 import ClubName from "@/app/_lib/ClubName";
 import { appendToEightDigits } from "@/app/_lib/common";
+import { formatBattleLog } from "@/app/_lib/formatBattleLog";
 import BattleLog3vs3 from "@/app/players/[tag]/_components/BattleLog3vs3";
 import BattleLog5vs5 from "@/app/players/[tag]/_components/BattleLog5vs5";
 import BattleLogDuel from "@/app/players/[tag]/_components/BattleLogDuel";
@@ -90,18 +91,22 @@ export default async function Page({
             >
               {player.name}
             </h1>
-            {player.currentRank && (
+            {player.currentRank >= 0 && (
               <div className={styles.rankContainer}>
+                {player.currentRank! > 0 && (
+                  <>
+                    <Image
+                      src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player.currentRank! - 1)}.png`}
+                      alt="rank"
+                      height={60}
+                      width={60}
+                      style={{ height: "60px", width: "auto" }}
+                    />
+                    <Rocket className={styles.icon} />
+                  </>
+                )}
                 <Image
-                  src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player.currentRank - 1)}.png`}
-                  alt="rank"
-                  height={60}
-                  width={60}
-                  style={{ height: "60px", width: "auto" }}
-                />
-                <Rocket className={styles.icon} />
-                <Image
-                  src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player.currentRank)}.png`}
+                  src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player.currentRank!)}.png`}
                   alt="rank"
                   height={60}
                   width={60}
@@ -238,45 +243,3 @@ export default async function Page({
     </>
   );
 }
-
-const formatBattleLog = (battleLogs: any[]) => {
-  const formattedBattleLogs: any[] = [];
-  battleLogs.forEach((battleLog: any) => {
-    if (battleLog.battle.type === "soloRanked") {
-      const existingBattle = formattedBattleLogs.find((b) => {
-        if (!b?.battle?.teams) {
-          return false;
-        }
-
-        const beforeBattleLogId = b.battle.teams
-          .flat()
-          .map((player: any) => player.tag)
-          .sort()
-          .join("-");
-        const currentBattleLogId = battleLog.battle.teams
-          .flat()
-          .map((player: any) => player.tag)
-          .sort()
-          .join("-");
-        return beforeBattleLogId === currentBattleLogId;
-      });
-      const roundData = {
-        battleTime: battleLog.battleTime,
-        result: battleLog.battle.result,
-        duration: battleLog.battle.duration,
-      };
-      if (existingBattle) {
-        existingBattle.rounds.push(roundData);
-        existingBattle.rounds.sort((a: any, b: any) =>
-          a.battleTime.localeCompare(b.battleTime),
-        );
-      } else {
-        battleLog.rounds = [roundData];
-        formattedBattleLogs.push(battleLog);
-      }
-    } else {
-      formattedBattleLogs.push(battleLog);
-    }
-  });
-  return formattedBattleLogs;
-};
