@@ -22,5 +22,6 @@ class Player < ApplicationRecord
       self.tag = "##{tag}"
     end
     self.tag = tag&.upcase&.strip
+    self.tag = tag.gsub('O', '0') if tag  # Oを0に置換
   end
 end

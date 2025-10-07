@@ -46,7 +46,7 @@ class UpdateSoloRankedRanksJob < ApplicationJob
     return '' unless tag.present?
 
     tag = tag.to_s.upcase.strip
-    tag = tag.gsub('0', '0')
+    tag = tag.gsub('O', '0')
     tag = "##{tag}" unless tag.start_with?('#')
   end
 end
