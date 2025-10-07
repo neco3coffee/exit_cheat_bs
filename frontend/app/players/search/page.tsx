@@ -3,7 +3,7 @@ import { ChevronDownIcon, History, Rocket } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import Record from "@/app/_components/Record";
 import Searching from "@/app/_components/Searching";
 import ClubName from "@/app/_lib/ClubName";
@@ -29,8 +29,8 @@ import BattleLogDuo from "../[tag]/_components/BattleLogDuo";
 import BattleLogSolo from "../[tag]/_components/BattleLogSolo";
 import BattleLogSoloRanked from "../[tag]/_components/BattleLogSoloRanked";
 import BattleLogTrio from "../[tag]/_components/BattleLogTrio";
-import { formatBattleLog } from "../[tag]/page";
 import styles from "./page.module.scss";
+import { formatBattleLog } from "@/app/_lib/formatBattleLog";
 
 type Player = {
   tag: string;
@@ -49,7 +49,7 @@ type Player = {
   // Add other properties as needed
 };
 
-export default function Page() {
+function SearchPage() {
   const searchParams = useSearchParams();
   const name = searchParams.get("name");
   const history = searchParams.get("history");
@@ -450,5 +450,13 @@ export default function Page() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SearchPage />
+    </Suspense>
   );
 }
