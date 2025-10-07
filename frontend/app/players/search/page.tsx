@@ -320,7 +320,7 @@ export default function Page() {
                     <div className={styles.leftBox}>
                       {player.approved_reports_count > 0 && (
                         <Image
-                          src={'/reported_player.png'}
+                          src={"/reported_player.png"}
                           alt="icon"
                           width={29}
                           height={29}
@@ -333,16 +333,16 @@ export default function Page() {
                       )}
                       {player.approved_reports_count === 0 && (
                         <Image
-                        src={'/clean_player.png'}
-                        alt="icon"
-                        width={29}
-                        height={29}
-                        style={{
-                          width: "auto",
-                          height: "29px",
-                          marginLeft: "3px",
-                        }}
-                      />
+                          src={"/clean_player.png"}
+                          alt="icon"
+                          width={29}
+                          height={29}
+                          style={{
+                            width: "auto",
+                            height: "29px",
+                            marginLeft: "3px",
+                          }}
+                        />
                       )}
                       <div className={styles.nameAndClubContainer}>
                         <h4>{player.name}</h4>
