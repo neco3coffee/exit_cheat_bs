@@ -134,3 +134,9 @@ npmキャッシュ: npm cache clean --force
 - [わほっち、ベリーつかい](https://www.youtube.com/@-Wahochi)
 - [ジェネ、ジェネアバずれは偽物](https://www.youtube.com/@Jene_Azure)
 - [やぴまる、ジェヨン](https://www.youtube.com/@YAPIMARU)
+
+
+## 権利
+© 2025 neco3coffee. All rights reserved.
+This repository is provided for personal reference and learning purposes only.
+Copying, redistribution, or commercial use is prohibited without explicit permission.
