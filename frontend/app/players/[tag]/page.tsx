@@ -90,7 +90,7 @@ export default async function Page({
             >
               {player.name}
             </h1>
-            {(player.currentRank >= 0) && (
+            {player.currentRank >= 0 && (
               <div className={styles.rankContainer}>
                 {player.currentRank! > 0 && (
                   <>
