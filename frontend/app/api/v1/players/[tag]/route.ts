@@ -2,10 +2,10 @@ import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { tag: string } },
+  { params }: { params: Promise<{ tag: string }> },
 ) {
   try {
-    const { tag } = params;
+    const { tag } = await params;
 
     // バックエンドサービスにリクエスト
     const response = await fetch(
