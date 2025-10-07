@@ -318,19 +318,22 @@ export default function Page() {
                     onKeyUp={() => {}}
                   >
                     <div className={styles.leftBox}>
-                      <Image
-                        src={"/clean_player.png"}
-                        alt="player"
-                        width={29}
-                        height={29}
-                        style={{
-                          width: "auto",
-                          height: "29px",
-                          marginLeft: "3px",
-                        }}
-                      />
-                      <Image
-                        src={`https://cdn.brawlify.com/profile-icons/regular/${player.icon_id}.png`}
+                      {player.approved_reports_count > 0 && (
+                        <Image
+                          src={'/reported_player.png'}
+                          alt="icon"
+                          width={29}
+                          height={29}
+                          style={{
+                            width: "auto",
+                            height: "29px",
+                            marginLeft: "3px",
+                          }}
+                        />
+                      )}
+                      {player.approved_reports_count === 0 && (
+                        <Image
+                        src={'/clean_player.png'}
                         alt="icon"
                         width={29}
                         height={29}
@@ -340,6 +343,7 @@ export default function Page() {
                           marginLeft: "3px",
                         }}
                       />
+                      )}
                       <div className={styles.nameAndClubContainer}>
                         <h4>{player.name}</h4>
                         <h5>{player.club_name}</h5>

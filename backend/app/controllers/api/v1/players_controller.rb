@@ -142,7 +142,7 @@ module Api
             club_name: player.club_name,
             trophies: player.trophies,
             rank: player.rank,
-            approved_reports_count: 0  # MVPのため常に0
+            approved_reports_count: player.approved_reports_count
           }
         end
 
