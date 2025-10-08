@@ -111,11 +111,11 @@ const legendary = [
 const ultraLegendary = ["KAZE"];
 
 export const brawlerBgColor = (name: string) => {
-  if (normal.includes(name)) return "var(--brawler-normal) !important";
-  if (rare.includes(name)) return "var(--brawler-rare) !important";
-  if (superRare.includes(name)) return "var(--brawler-super-rare) !important";
-  if (hyperRare.includes(name)) return "var(--brawler-hyper-rare) !important";
-  if (ultraRare.includes(name)) return "var(--brawler-ultra-rare) !important";
-  if (legendary.includes(name)) return "var(--brawler-legendary) !important";
-  return "var(--blue-black)";
+  if (normal.includes(name)) return "#94D7F4";
+  if (rare.includes(name)) return "#2EDD1B";
+  if (superRare.includes(name)) return "#0087FA";
+  if (hyperRare.includes(name)) return "#B116EC";
+  if (ultraRare.includes(name)) return "#FF0021";
+  if (legendary.includes(name)) return "#FFF11E";
+  return "#262626";
 };
