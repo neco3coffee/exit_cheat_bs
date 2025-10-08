@@ -90,7 +90,11 @@
   text-align: center;
   gap: 6px;
   border: 2px solid var(--black-border);
-  padding-bottom: 350px
+  padding-bottom: 350px;
+
+  @media (min-width: 768px) {
+    min-width: 700px;
+  }
 }
 
 .brawlSheetInner {
@@ -121,7 +125,8 @@
   column-gap: 6px;
 
   @media (min-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    padding-left: 15px;
   }
 
 }
