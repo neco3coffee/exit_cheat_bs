@@ -196,7 +196,9 @@ module Api
             name: player_data.dig('club', 'name'),
             badgeId: badgeId,
           },
-          battlelog: battlelog_data
+          battlelog: battlelog_data,
+          approved_reports_count: player.approved_reports_count,
+          brawlers: player_data['brawlers'],
         }
       end
 
