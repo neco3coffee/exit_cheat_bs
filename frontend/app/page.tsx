@@ -145,7 +145,11 @@ export default function Home() {
                 return;
               }
 
-              sendGAEvent("event", "name_lookup_start", { name: inputName, searchWithHistroy: searchWitHistory, rank: searchWithRank });
+              sendGAEvent("event", "name_lookup_start", {
+                name: inputName,
+                searchWithHistroy: searchWitHistory,
+                rank: searchWithRank,
+              });
               router.push(
                 `/players/search?name=${encodeURIComponent(inputName)}&history=${searchWitHistory}&rank=${searchWithRank}`,
               );
