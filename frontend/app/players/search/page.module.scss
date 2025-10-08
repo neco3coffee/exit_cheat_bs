@@ -123,6 +123,7 @@
   grid-template-rows: auto;
   row-gap: 9px;
   column-gap: 6px;
+  padding-bottom: 60px;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(4, 1fr);
@@ -364,7 +365,7 @@
 .bottomContainer {
   border-top: 1px solid var(--black-border);
   width: 100%;
-  height: 280px;
+  height: 220px;
   position: fixed;
   bottom: 53px;
   left: 0;
@@ -381,7 +382,7 @@
 .playerListContainer {
   width: 100%;
   max-width: 536px;
-  height: 180px;
+  height: 170px;
   background-color: var(--black);
 
   @media (min-width: 768px) {
