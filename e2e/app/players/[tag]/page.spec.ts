@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('ユーザーがバトル履歴を見れるようにする#3', () => {
   test.beforeEach(async ({page}) => {
-    await page.goto('http://localhost:3001/players/Y2YPGCGC', { timeout: 15000  });
+    await page.goto('http://localhost:3001/players/YVRJJYYRR', { timeout: 15000  });
   })
 
   // バトル履歴のタイトルが表示される
@@ -25,7 +25,7 @@ test.describe('ユーザーがバトル履歴を見れるようにする#3', () 
     let tag;
     for (let i = 0; i < linkCount; i++) {
       const href = await links.nth(i).getAttribute('href');
-      if (href && !href.includes('Y2YPGCGC')) {
+      if (href && !href.includes('YVRJJYYRR')) {
         link = links.nth(i);
         tag = href.split('/').pop()?.toUpperCase();
         break;

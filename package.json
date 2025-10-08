@@ -6,7 +6,8 @@
   "scripts": {
     "prepare": "husky",
     "test": "playwright test --workers=1 --project='Mobile Chrome'",
-    "test:dev": "playwright test --workers=1 --project='Mobile Safari'"
+    "test:dev": "playwright test --workers=1 --project='Mobile Safari'",
+    "test:ui": "playwright test --ui"
   },
   "repository": {
     "type": "git",
