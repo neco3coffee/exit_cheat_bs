@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import Record from "@/app/_components/Record";
 import Searching from "@/app/_components/Searching";
-import { brawlerBgColor } from "@/app/_lib/brawlerRarelity";
+import { brawlerBgColor } from "@/app/_lib/brawlerRarity";
 import ClubName from "@/app/_lib/ClubName";
 import { appendToEightDigits } from "@/app/_lib/common";
 import { formatBattleLog } from "@/app/_lib/formatBattleLog";
@@ -95,7 +95,6 @@ function SearchPage() {
         }
 
         const data = await res.json();
-        console.log("Fetched player data:", data); // デバッグ用ログ
         setPlayer(data);
         setBattleLogs(formatBattleLog(data.battlelog?.items || []));
       } catch (error) {
@@ -275,7 +274,7 @@ function SearchPage() {
                       </SheetHeader>
                       <div className={styles.brawlerListContainer}>
                         {player?.brawlers
-                          ?.filter((brawler) => brawler.power >= 11)
+                          ?.filter((brawler) => brawler.power === 11)
                           .map((brawler) => {
                             return (
                               <div
