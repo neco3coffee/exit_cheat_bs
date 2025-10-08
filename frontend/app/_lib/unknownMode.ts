@@ -1,8 +1,9 @@
 const arenaMapNameList = [
-  "Arena og Glory",
+  "Arena of Glory",
   "knockout Grounds",
   "Mirage Arena",
   "The Smackdome",
+  "Knockout Grounds",
 ];
 
 const hockeyMapNameList = [
@@ -28,7 +29,11 @@ const dodgeBrawlMapNameList = [
   "Dodge or Die",
 ];
 
-const bossMapNameList = ["Plague Doctor Crow", "Ghost Diver Rico"];
+const bossMapNameList = [
+  "Plague Doctor Crow",
+  "Ghost Diver Rico",
+  "Gargoyle RT",
+];
 
 export function classifyModeByMapName(mapName: string) {
   if (arenaMapNameList.includes(mapName)) {

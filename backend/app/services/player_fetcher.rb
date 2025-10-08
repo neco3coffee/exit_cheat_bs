@@ -80,7 +80,7 @@ class PlayerFetcher
     rank = 0
     Rails.logger.info("battlelog_data: #{battlelog_data.nil? ? 'nil' : 'present'}")
     if battlelog_data
-      rank = calculate_latest_solo_ranked_trophies(battlelog_data, player_data['tag']) || 0
+      rank = calculate_latest_solo_ranked_trophies(battlelog_data, player_data['tag'])
       Rails.logger.info("Calculated rank from provided battlelog_data: #{rank}")
     end
 
@@ -89,9 +89,11 @@ class PlayerFetcher
       name: player_data['name'],
       icon_id: player_data.dig('icon', 'id'),
       club_name: player_data.dig('club', 'name'),
-      rank: rank,
       trophies: player_data['trophies'] || 0
     }
+
+    # rankがnilでない場合のみ更新対象に含める
+    player_attrs[:rank] = rank unless rank.nil?
 
     player = Player.find_by(tag: tag)
 
