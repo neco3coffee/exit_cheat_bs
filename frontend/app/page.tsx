@@ -1,9 +1,15 @@
 "use client";
 import { sendGAEvent } from "@next/third-parties/google";
-import { ChevronDownIcon, History, MoreHorizontal } from "lucide-react";
+import {
+  ChevronDownIcon,
+  History,
+  Plus,
+  Share,
+  SquarePlus,
+} from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Searching from "@/app/_components/Searching";
 import {
   DropdownMenu,
@@ -11,7 +17,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
 import {
   InputGroup,
   InputGroupAddon,
@@ -20,8 +25,106 @@ import {
   InputGroupText,
 } from "@/components/ui/input-group";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { appendToEightDigits } from "./_lib/common";
 import styles from "./page.module.scss";
+
+function InstallPrompt() {
+  const [isIOS, setIsIOS] = useState(false);
+  const [isAndroid, setIsAndroid] = useState(false);
+  const [isStandalone, setIsStandalone] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+
+  useEffect(() => {
+    setIsIOS(
+      /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream,
+    );
+
+    setIsAndroid(/Android/.test(navigator.userAgent));
+
+    setIsStandalone(window.matchMedia("(display-mode: standalone)").matches);
+
+    // Android PWA install prompt
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPrompt,
+      );
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+
+    if (outcome === "accepted") {
+      console.log("User accepted the install prompt");
+    } else {
+      console.log("User dismissed the install prompt");
+    }
+
+    setDeferredPrompt(null);
+  };
+
+  if (isStandalone) {
+    return null; // Don't show install button if already installed
+  }
+
+  return (
+    <div className="w-full h-full relative">
+      {isIOS && (
+        <Sheet>
+          <SheetTrigger>
+            <SquarePlus
+              size={50}
+              aria-label="plus icon"
+              className="absolute bottom-[10px] right-[10px]"
+            />
+          </SheetTrigger>
+          <SheetContent
+            side="top"
+            className="h-[80%] w-full border-none flex justify-center items-center"
+            style={{ paddingTop: "100px" }}
+          >
+            <SheetTitle className="text-2xl mb-4">Install SafeBrawl</SheetTitle>
+            <video
+              src="/add_to_home.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              style={{ width: "auto", height: "100%", borderRadius: "16px" }}
+            />
+          </SheetContent>
+        </Sheet>
+      )}
+      {isAndroid && deferredPrompt && (
+        <button
+          onClick={handleInstallClick}
+          className="absolute bottom-[10px] right-[10px] bg-blue-600 hover:bg-blue-700 text-white rounded-full p-3 shadow-lg transition-colors"
+          aria-label="Install app"
+          type="button"
+        >
+          <SquarePlus size={50} />
+        </button>
+      )}
+    </div>
+  );
+}
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -197,6 +300,8 @@ export default function Home() {
           </DropdownMenu>
         </InputGroupAddon>
       </InputGroup>
+
+      <InstallPrompt />
     </>
   );
 }
