@@ -145,10 +145,12 @@ export default function Home() {
                 return;
               }
 
-              // sendGAEvent("event", "tag_lookup_start", { source: "home_screen" });
-              // if (typeof window !== "undefined") {
-              //   sessionStorage.setItem("last_source", "home_screen");
-              // }
+              sendGAEvent("event", "name_lookup_start", {
+                source: "home_screen",
+              });
+              if (typeof window !== "undefined") {
+                sessionStorage.setItem("last_source", "home_screen");
+              }
               router.push(
                 `/players/search?name=${encodeURIComponent(inputName)}&history=${searchWitHistory}&rank=${searchWithRank}`,
               );
