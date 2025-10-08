@@ -17,6 +17,7 @@ module Api
 
         # 1. 外部APIからプレイヤー情報を取得
         player_data = fetcher.fetch_player(tag)
+        Rails.logger.info("Fetched player data: #{player_data} for tag: #{tag}")
         if player_data.nil?
           render json: {error: "Player not found"}, status: 404 and return
         end

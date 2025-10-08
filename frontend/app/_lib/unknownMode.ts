@@ -1,5 +1,5 @@
 const arenaMapNameList = [
-  "Arena og Glory",
+  "Arena of Glory",
   "knockout Grounds",
   "Mirage Arena",
   "The Smackdome",
