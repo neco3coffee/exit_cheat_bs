@@ -6,9 +6,11 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import Record from "@/app/_components/Record";
 import Searching from "@/app/_components/Searching";
+import { brawlerBgColor } from "@/app/_lib/brawlerRarelity";
 import ClubName from "@/app/_lib/ClubName";
 import { appendToEightDigits } from "@/app/_lib/common";
 import { formatBattleLog } from "@/app/_lib/formatBattleLog";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,6 +25,14 @@ import {
   InputGroupText,
 } from "@/components/ui/input-group";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import BattleLog3vs3 from "../[tag]/_components/BattleLog3vs3";
 import BattleLog5vs5 from "../[tag]/_components/BattleLog5vs5";
 import BattleLogDuel from "../[tag]/_components/BattleLogDuel";
@@ -46,7 +56,11 @@ type Player = {
     badgeId?: number;
     name?: string;
   };
-  // Add other properties as needed
+  brawlers: any[];
+  battlelog?: {
+    items: any[];
+  };
+  approved_reports_count: number;
 };
 
 function SearchPage() {
@@ -58,13 +72,22 @@ function SearchPage() {
   const [player, setPlayer] = useState<Player | null>(null);
   const [battleLogs, setBattleLogs] = useState<any[]>([]);
   const [players, setPlayers] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loadingPlayer, setLoadingPlayer] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loadingPlayers, setLoadingPlayers] = useState(false);
+
+  const [initialized, setInitialized] = useState(false);
+
+  useEffect(() => {
+    if (!initialized) {
+      setInitialized(true);
+    }
+  }, [initialized]);
 
   useEffect(() => {
     const fetchPlayer = async () => {
       try {
+        setLoadingPlayer(true);
         const res = await fetch(`/api/v1/players/${encodeURIComponent(tag)}`);
 
         if (!res.ok) {
@@ -72,6 +95,7 @@ function SearchPage() {
         }
 
         const data = await res.json();
+        console.log("Fetched player data:", data); // デバッグ用ログ
         setPlayer(data);
         setBattleLogs(formatBattleLog(data.battlelog?.items || []));
       } catch (error) {
@@ -80,7 +104,7 @@ function SearchPage() {
         setPlayer(null);
         setBattleLogs([]);
       } finally {
-        setLoadingPlayers(false);
+        setLoadingPlayer(false);
       }
     };
 
@@ -95,8 +119,7 @@ function SearchPage() {
       if (!name || name.trim() === "") {
         return;
       }
-
-      setLoading(true);
+      setLoadingPlayers(true);
       setError(null);
 
       try {
@@ -117,7 +140,7 @@ function SearchPage() {
         setError(error instanceof Error ? error.message : "不明なエラー");
         setPlayers([]);
       } finally {
-        setLoading(false);
+        setLoadingPlayers(false);
       }
     };
 
@@ -145,9 +168,9 @@ function SearchPage() {
   return (
     <div className={styles.container}>
       {/* プレイヤー基本情報 */}
-      {loadingPlayers ? (
+      {!loadingPlayers && loadingPlayer ? (
         <div className={styles.searchContainer}>
-          <Searching loading={loadingPlayers} />
+          <Searching loading={loadingPlayer} />
         </div>
       ) : player ? (
         <>
@@ -192,6 +215,196 @@ function SearchPage() {
                   />
                 </div>
               )}
+            </div>
+            <div className={styles.reportsAndBrawlersContainer}>
+              <div className={styles.reportsContainer}>
+                {player.approved_reports_count > 0 && (
+                  <Image
+                    src={"/reported_player.png"}
+                    alt="icon"
+                    width={55}
+                    height={55}
+                    style={{
+                      width: "55px",
+                      height: "auto",
+                      marginLeft: "3px",
+                    }}
+                  />
+                )}
+                {player.approved_reports_count === 0 && (
+                  <Image
+                    src={"/clean_player.png"}
+                    alt="icon"
+                    width={55}
+                    height={55}
+                    style={{
+                      width: "55px",
+                      height: "auto",
+                      marginLeft: "3px",
+                    }}
+                  />
+                )}
+              </div>
+              <div className={styles.brawlersContainer}>
+                <Sheet>
+                  <SheetTrigger asChild>
+                    <Button variant="outline">
+                      <Image
+                        src={"/brawler.png"}
+                        alt="icon"
+                        width={55}
+                        height={55}
+                        style={{
+                          width: "55px",
+                          height: "auto",
+                          marginLeft: "3px",
+                        }}
+                      />
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent
+                    side="left"
+                    className={styles.brawlerSheetContent}
+                  >
+                    <div className={styles.brawlSheetInner}>
+                      <SheetHeader className={styles.brawlerSheetHeader}>
+                        <SheetTitle>{`${player?.brawlers?.filter((brawler) => brawler.power === 11).length} brawlers`}</SheetTitle>
+                        <SheetDescription>
+                          Brawlers with Power 11
+                        </SheetDescription>
+                      </SheetHeader>
+                      <div className={styles.brawlerListContainer}>
+                        {player?.brawlers
+                          ?.filter((brawler) => brawler.power >= 11)
+                          .map((brawler) => {
+                            return (
+                              <div
+                                key={brawler.id}
+                                className={
+                                  brawler.name === "KAZE"
+                                    ? styles.kaze
+                                    : styles.brawlerItemContainer
+                                }
+                                style={{
+                                  backgroundColor: brawlerBgColor(brawler.name),
+                                }}
+                              >
+                                <Image
+                                  src={`https://cdn.brawlify.com/brawlers/portraits/${brawler.id}.png`}
+                                  alt={brawler.name}
+                                  width={137}
+                                  height={114}
+                                  style={{
+                                    height: "100%",
+                                    width: "auto",
+                                    paddingBottom: "30px",
+                                  }}
+                                />
+                                <div className={styles.gadgetContainer}>
+                                  {brawler.gadgets &&
+                                    brawler.gadgets.length > 0 &&
+                                    brawler.gadgets.map(
+                                      (gadget: any, index: number) => (
+                                        <div
+                                          className={
+                                            styles.gadgetImageContainer
+                                          }
+                                          key={gadget.id}
+                                        >
+                                          <Image
+                                            src={`https://cdn.brawlify.com/gadgets/borderless/${gadget.id}.png`}
+                                            alt={gadget.name}
+                                            width={18}
+                                            height={18}
+                                            style={{
+                                              width: "18px",
+                                              height: "18px",
+                                              position: "absolute",
+                                              top: "11px",
+                                              left: "11px",
+                                            }}
+                                          />
+                                          <Image
+                                            src={`/gadgetBg.png`}
+                                            alt={gadget.name}
+                                            width={40}
+                                            height={40}
+                                            style={{
+                                              width: "40px",
+                                              height: "40px",
+                                            }}
+                                          />
+                                        </div>
+                                      ),
+                                    )}
+                                </div>
+                                <div className={styles.starPowerContainer}>
+                                  {brawler.starPowers &&
+                                    brawler.starPowers.length > 0 &&
+                                    brawler.starPowers.map(
+                                      (starPower: any, index: number) => (
+                                        <div
+                                          className={
+                                            styles.starPowerImageContainer
+                                          }
+                                          key={starPower.id}
+                                        >
+                                          <Image
+                                            src={`https://cdn.brawlify.com/star-powers/borderless/${starPower.id}.png`}
+                                            alt={starPower.name}
+                                            width={18}
+                                            height={18}
+                                            style={{
+                                              width: "18px",
+                                              height: "18px",
+                                            }}
+                                            className={styles.starPower}
+                                          />
+                                          <Image
+                                            src={`/starPowerBadge.png`}
+                                            alt={starPower.name}
+                                            width={40}
+                                            height={40}
+                                            style={{
+                                              width: "40px",
+                                              height: "40px",
+                                            }}
+                                          />
+                                        </div>
+                                      ),
+                                    )}
+                                </div>
+                                <div className={styles.gearContainer}>
+                                  {brawler.gears &&
+                                    brawler.gears.length > 0 &&
+                                    brawler.gears.map(
+                                      (gear: any, index: number) => (
+                                        <Image
+                                          key={gear.id}
+                                          src={`https://cdn.brawlify.com/gears/regular/${gear.id}.png`}
+                                          alt={gear.name}
+                                          width={24}
+                                          height={24}
+                                          style={{
+                                            width: "24px",
+                                            height: "24px",
+                                            marginLeft:
+                                              index === 0
+                                                ? "0"
+                                                : `-${index * 16}px`,
+                                          }}
+                                        />
+                                      ),
+                                    )}
+                                </div>
+                              </div>
+                            );
+                          })}
+                      </div>
+                    </div>
+                  </SheetContent>
+                </Sheet>
+              </div>
             </div>
           </div>
 
@@ -291,13 +504,13 @@ function SearchPage() {
       <div className={styles.bottomContainer}>
         <div className={styles.playerListContainer}>
           <div className={styles.playerListInner}>
-            {loading && (
+            {error && <p className="text-red-500">Error: {error}</p>}
+            {loadingPlayers && (
               <div className={styles.searchContainer}>
-                <Searching loading={loading} />
+                <Searching loading={loadingPlayers} />
               </div>
             )}
-            {error && <p className="text-red-500">Error: {error}</p>}
-            {players && players.length === 0 && !loading && !error && (
+            {initialized && !loadingPlayers && players?.length < 1 && (
               <div className={styles.notFoundContainer}>No players found.</div>
             )}
             {players &&
@@ -312,7 +525,7 @@ function SearchPage() {
                         : styles.playerItemContainer
                     }
                     onClick={() => {
-                      setLoadingPlayers(true);
+                      setLoadingPlayer(true);
                       setTag(player.tag.replace(/^#/, ""));
                     }}
                     onKeyUp={() => {}}

@@ -38,6 +38,13 @@
   --club-color-c9: #fe6a71;
   --on-blue: #3B82F6;
   --bottom-container-bg-blue: #003378;
+  --brawler-normal: #94D7F4;
+  --brawler-rare: #2EDD1B;
+  --brawler-super-rare: #0087FA;
+  --brawler-hyper-rare: #B116EC;
+  --brawler-ultra-rare: #FF0021;
+  --brawler-legendary: #FFF11E;
+  /* --brawler-ultra-legendary: #FF9500; 虹色をscssで表現 */
 
   /* 自動で追加されたバリアブル */
   --radius: 0.625rem;
