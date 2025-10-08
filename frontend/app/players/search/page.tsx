@@ -247,19 +247,17 @@ function SearchPage() {
               <div className={styles.brawlersContainer}>
                 <Sheet>
                   <SheetTrigger asChild>
-                    <Button variant="outline">
-                      <Image
-                        src={"/brawler.png"}
-                        alt="icon"
-                        width={55}
-                        height={55}
-                        style={{
-                          width: "55px",
-                          height: "auto",
-                          marginLeft: "3px",
-                        }}
-                      />
-                    </Button>
+                    <Image
+                      src={"/brawler.png"}
+                      alt="icon"
+                      width={55}
+                      height={55}
+                      style={{
+                        width: "55px",
+                        height: "auto",
+                        marginLeft: "3px",
+                      }}
+                    />
                   </SheetTrigger>
                   <SheetContent
                     side="left"
@@ -524,6 +522,8 @@ function SearchPage() {
                         : styles.playerItemContainer
                     }
                     onClick={() => {
+                      // 現在見ているプレイヤーのタグじゃなかったら実行
+                      if (player.tag.replace(/^#/, "") === tag) return;
                       setLoadingPlayer(true);
                       setTag(player.tag.replace(/^#/, ""));
                     }}
