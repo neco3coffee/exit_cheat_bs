@@ -63,6 +63,16 @@ type Player = {
   approved_reports_count: number;
 };
 
+type SearchResultPlayer = {
+  tag: string;
+  icon_id: number;
+  name: string;
+  club_name: string;
+  trophies: number;
+  rank: number;
+  approved_reports_count: number;
+};
+
 function SearchPage() {
   const searchParams = useSearchParams();
   const name = searchParams.get("name");
@@ -71,7 +81,7 @@ function SearchPage() {
   const [tag, setTag] = useState("");
   const [player, setPlayer] = useState<Player | null>(null);
   const [battleLogs, setBattleLogs] = useState<any[]>([]);
-  const [players, setPlayers] = useState<any[]>([]);
+  const [players, setPlayers] = useState<SearchResultPlayer[]>([]);
   const [loadingPlayer, setLoadingPlayer] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loadingPlayers, setLoadingPlayers] = useState(false);
