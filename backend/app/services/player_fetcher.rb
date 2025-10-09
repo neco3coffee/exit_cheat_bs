@@ -192,6 +192,15 @@ class PlayerFetcher
   end
 
   # Convert trophy count to rank tier (0-21)
+  # Brawl Stars ranked system uses trophy count to determine rank tier.
+  # This method maps trophy counts to rank tiers for display purposes.
+  # 
+  # Rank Tiers:
+  #   0-99: Tier 0
+  #   100-199: Tier 1
+  #   ...
+  #   2000-2099: Tier 20
+  #   2100+: Tier 21 (highest)
   def trophies_to_rank_tier(trophies)
     return 0 if trophies.nil? || trophies < 0
 
