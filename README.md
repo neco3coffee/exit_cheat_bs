@@ -62,6 +62,22 @@ app(dev)> Test.all
 
 以上で環境構築終了になります。お疲れ様でした！
 
+## ランクシステム
+
+このアプリケーションはブロスタのソロランクバトルのトロフィー数を0-21のランクティアに変換して保存しています。
+詳細は [RANK_SYSTEM.md](RANK_SYSTEM.md) を参照してください。
+
+### 既存データの移行
+
+既存のデータベースに不正なランク値（トロフィー数がそのまま保存されている場合）がある場合、以下のコマンドで修正できます：
+
+```bash
+# 現在のランク分布を確認
+docker compose exec app rake data:rank_stats
+
+# 不正なランク値を修正（rank > 21 の場合）
+docker compose exec app rake data:fix_player_ranks
+```
 
 ## 施策の流れ
 
