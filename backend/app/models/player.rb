@@ -18,10 +18,10 @@ class Player < ApplicationRecord
   private
 
   def normalize_tag
-    if tag.present? && !tag.start_with?('#')
-      self.tag = "##{tag}"
-    end
-    self.tag = tag&.upcase&.strip
-    self.tag = tag.gsub('O', '0') if tag  # Oを0に置換
+    return unless tag.present?
+
+    self.tag = tag.to_s.upcase.strip
+    self.tag = tag.gsub('O', '0')
+    self.tag = "##{tag}" unless tag.start_with?('#')
   end
 end
