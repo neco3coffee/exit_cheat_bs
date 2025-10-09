@@ -178,7 +178,10 @@ class PlayerFetcher
           if player_tag_in_battle == normalized_player_tag
             brawler_trophies = player.dig('brawler', 'trophies')
             Rails.logger.info("Found matching player! Brawler trophies: #{brawler_trophies}")
-            return brawler_trophies
+            # Convert trophies to rank tier (0-21)
+            rank_tier = trophies_to_rank_tier(brawler_trophies)
+            Rails.logger.info("Converted trophies #{brawler_trophies} to rank tier: #{rank_tier}")
+            return rank_tier
           end
         end
       end
@@ -186,6 +189,36 @@ class PlayerFetcher
 
     Rails.logger.info("No soloRanked battle found for player: #{normalized_player_tag}")
     nil # 見つからなかった場合
+  end
+
+  # Convert trophy count to rank tier (0-21)
+  def trophies_to_rank_tier(trophies)
+    return 0 if trophies.nil? || trophies < 0
+
+    case trophies
+    when 0...100 then 0
+    when 100...200 then 1
+    when 200...300 then 2
+    when 300...400 then 3
+    when 400...500 then 4
+    when 500...600 then 5
+    when 600...700 then 6
+    when 700...800 then 7
+    when 800...900 then 8
+    when 900...1000 then 9
+    when 1000...1100 then 10
+    when 1100...1200 then 11
+    when 1200...1300 then 12
+    when 1300...1400 then 13
+    when 1400...1500 then 14
+    when 1500...1600 then 15
+    when 1600...1700 then 16
+    when 1700...1800 then 17
+    when 1800...1900 then 18
+    when 1900...2000 then 19
+    when 2000...2100 then 20
+    else 21
+    end
   end
 
   private
