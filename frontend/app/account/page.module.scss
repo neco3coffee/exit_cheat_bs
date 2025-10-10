@@ -29,10 +29,10 @@
   text-align: center;
 
   h3 {
-      font-size: 18px;
+      font-size: 24px;
       font-weight: bold;
       margin-bottom: 16px;
-      color: var(--on-blue);
+      color: var(--success-green);
     }
 
     p {
@@ -201,7 +201,7 @@
   h3 {
     color: var(--success-green);
     font-weight: bold;
-    font-size: 20px;
+    font-size: 24px;
     margin-bottom: 16px;
   }
 
@@ -235,7 +235,7 @@
   h3 {
     color: var(--danger-red);
     font-weight: bold;
-    font-size: 20px;
+    font-size: 24px;
     margin-bottom: 16px;
   }
 
