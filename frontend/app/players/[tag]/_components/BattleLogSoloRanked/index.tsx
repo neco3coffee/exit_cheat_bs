@@ -19,14 +19,15 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
     battleLog?.event?.mode !== "unknown"
       ? battleLog?.event.mode
       : classifyModeByMapName(battleLog?.event?.map);
-  const mythic1 = 13; // diamond3 = 12, legendary1 = 16, master1 = 19
-  const existAtLeastMythic = battleLog?.battle?.teams
+  const diamond1= 9; // diamond1 = 9,mythic1 = 12, legendary1 = 15, master1 = 18, pro = 21
+  console.log("battleLog", JSON.stringify(battleLog, null, 2));
+  const existAtLeastDiamond = battleLog?.battle?.teams
     .flat()
     .some((player: any) => {
-      return player?.brawler?.trophies >= mythic1;
+      return player?.brawler?.trophies >= diamond1 && player?.brawler?.trophies <= 21; // pro = 21
     });
   let result = null;
-  if (existAtLeastMythic) {
+  if (existAtLeastDiamond) {
     result = getResult(battleLog?.rounds);
   } else {
     result = battleLog?.battle?.result;
