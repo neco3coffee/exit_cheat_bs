@@ -17,16 +17,16 @@ module Api
         # POST /api/v1/auth/login
         def login
           tag = params[:tag]
-          
+
           begin
             fetcher = PlayerFetcher.new
             player_data = fetcher.fetch_player(tag)
-            
+
             if player_data.nil?
               render json: { error: "Player not found" }, status: :not_found
               return
             end
-            
+
 
 
             current_icon = player_data["icon"]["id"].to_s
@@ -55,21 +55,21 @@ module Api
 
           success = false
           max_attempts = 6  # 90秒間 (15秒 × 6回)
-          
+
           max_attempts.times do |attempt|
             begin
               fetcher = PlayerFetcher.new
               player_data = fetcher.fetch_player(tag)
-              
+
               if player_data.nil?
                 Rails.logger.error("Verification API error on attempt #{attempt + 1}: Player not found")
                 next
               end
-              
+
               current_icon = player_data["icon"]["id"].to_s
-              
+
               Rails.logger.info("Verification attempt #{attempt + 1}: current_icon=#{current_icon}, requested_icon=#{requested_icon}")
-              
+
               if current_icon == requested_icon
                 success = true
                 break
@@ -77,7 +77,7 @@ module Api
             rescue => e
               Rails.logger.error("Verification API error on attempt #{attempt + 1}: #{e.message}")
             end
-            
+
             # 最後の試行でない場合のみ15秒待機
             sleep 15 if attempt < max_attempts - 1
           end
@@ -89,7 +89,7 @@ module Api
             if player_data.nil?
               render json: {
                 status: "error",
-                message: "プレイヤー情報の取得に失敗しました。"
+                message: "Unable to retrieve player information."
               }, status: :internal_server_error
               return
             end
@@ -115,14 +115,15 @@ module Api
               player: {
                 id: player.id,
                 tag: player.tag,
-                name: player.name
+                name: player.name,
+                current_icon: player.icon_id&.to_s
               },
               session_token: session_token
             }
           else
-            render json: { 
-              status: "error", 
-              message: "アイコン変更が確認できませんでした。再度お試しください。" 
+            render json: {
+              status: "error",
+              message: "We couldn’t confirm your icon change. Please try again."
             }, status: :unauthorized
           end
         end
@@ -130,14 +131,14 @@ module Api
         # GET /api/v1/auth/me
         def me
           session_token = request.headers['Authorization']&.sub(/^Bearer /, '')
-          
+
           if session_token.blank?
             render json: { error: "Authorization header required" }, status: :unauthorized
             return
           end
 
           session = Session.includes(:player).find_by(session_token: session_token)
-          
+
           if session.nil? || session.expired?
             render json: { error: "Invalid or expired session" }, status: :unauthorized
             return

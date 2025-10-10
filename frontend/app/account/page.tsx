@@ -1,6 +1,16 @@
 "use client";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupText,
+} from "@/components/ui/input-group";
+import { Spinner } from "@/components/ui/spinner";
+import styles from "./page.module.scss";
 
 // ログイン成功時のアイコン表示と5秒後自動遷移
 function SuccessSection(props: { player: Player; onReset: () => void }) {
@@ -13,59 +23,29 @@ function SuccessSection(props: { player: Player; onReset: () => void }) {
     return () => clearTimeout(timer);
   }, []);
   return (
-    <div className="text-center space-y-4">
-      <div className="text-green-600">
-        <svg
-          className="w-16 h-16 mx-auto mb-4"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          role="img"
-          aria-label="ログイン成功アイコン"
-        >
-          <title>ログイン成功アイコン</title>
-          <path
-            fillRule="evenodd"
-            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </div>
-      <p className="text-green-600 font-bold text-lg">ログイン成功！</p>
-      {player.current_icon && (
-        <div className="flex flex-col items-center">
-          <img
-            src={`https://cdn.brawlify.com/profile-icons/regular/${player.current_icon}.png`}
-            alt="現在のアイコン"
-            width={64}
-            height={64}
-            className="mx-auto my-2 border rounded-lg"
-          />
-          <span className="text-xs text-gray-500">現在のアイコン</span>
-        </div>
-      )}
-      <div className="bg-gray-50 p-4 rounded-md">
-        <h3 className="font-semibold text-gray-800 mb-2">
-          ログイン中のプレイヤー
-        </h3>
-        <div className="text-left space-y-1 text-sm">
-          <p>
-            <span className="font-medium">名前:</span> {player.name}
-          </p>
-          <p>
-            <span className="font-medium">タグ:</span> #{player.tag}
-          </p>
-          {player.club_name && (
-            <p>
-              <span className="font-medium">クラブ:</span> {player.club_name}
-            </p>
-          )}
-          <p>
-            <span className="font-medium">トロフィー:</span>{" "}
-            {player.trophies.toLocaleString()}
-          </p>
-        </div>
-      </div>
-      <p className="text-sm text-gray-500">5秒後に自動でリロードします</p>
+    <div className={styles.successContainer}>
+      <h3>You’re logged in!</h3>
+      <Image
+        src={`https://cdn.brawlify.com/profile-icons/regular/${player.current_icon}.png`}
+        alt="login icon"
+        width={96}
+        height={96}
+      />
+      <p>{player.name}</p>
+      <p>{player.tag}</p>
+      <p>
+        <Image
+          src="/icon_trophy1.png"
+          alt="trophy icon"
+          width={20}
+          height={20}
+          className="inline-block mr-1"
+        />
+        {player.trophies.toLocaleString()}
+      </p>
+      <p className={styles.info}>
+        This page will automatically refresh in 5 seconds.
+      </p>
     </div>
   );
 }
@@ -149,6 +129,7 @@ export default function AccountPage() {
           name: data.player.name,
           trophies: player?.trophies || 0,
           club_name: player?.club_name,
+          current_icon: player?.current_icon,
         });
         setStatus("success");
         // セッショントークンをローカルストレージに保存
@@ -167,6 +148,7 @@ export default function AccountPage() {
     }
   };
   const [tag, setTag] = useState("");
+  const tagInputRef = useRef<HTMLInputElement>(null);
   const [player, setPlayer] = useState<Player | null>(null);
   const [requestedIcon, setRequestedIcon] = useState<string | null>(null);
   const [status, setStatus] = useState<Status>("loading");
@@ -280,213 +262,148 @@ export default function AccountPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
-        <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
-          SafeBrawl ログイン
-        </h1>
+    <div className={styles.container}>
+      {status === "loading" && (
+        <div className={styles.loadingContainer}>
+          <Spinner className="size-12 text-blue-500" />
+          <p>Confirming your login...</p>
+        </div>
+      )}
 
-        {status === "loading" && (
-          <div className="text-center space-y-4">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
-            <p className="text-gray-700">セッションを確認中...</p>
-          </div>
-        )}
+      {status === "logged_in" && player && (
+        <div className={styles.loggedInContainer}>
+          <h3>Currently logged in as</h3>
+          <Image
+            src={`https://cdn.brawlify.com/profile-icons/regular/${player.current_icon}.png`}
+            alt="login icon"
+            width={96}
+            height={96}
+          />
+          <p>{player.name}</p>
+          <p>{player.tag}</p>
+          <p>
+            <Image
+              src="/icon_trophy1.png"
+              alt="trophy icon"
+              width={20}
+              height={20}
+              className="inline-block mr-1"
+            />
+            {player.trophies.toLocaleString()}
+          </p>
 
-        {status === "logged_in" && player && (
-          <div className="text-center space-y-4">
-            <div className="text-green-600">
-              <svg
-                className="w-16 h-16 mx-auto mb-2"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                role="img"
-                aria-label="ログイン中アイコン"
+          <button type="button" onClick={handleLogout}>
+            logout
+          </button>
+        </div>
+      )}
+
+      {status === "idle" && (
+        <div className={styles.idleContainer}>
+          <InputGroup className={styles.inputGroup}>
+            <InputGroupAddon>
+              <InputGroupText className={styles.inputGroupText}>
+                #
+              </InputGroupText>
+            </InputGroupAddon>
+            <InputGroupInput
+              ref={tagInputRef}
+              placeholder="Y2YPGCGC"
+              type="search"
+              value={tag}
+              onChange={(e) => setTag(e.target.value)}
+              enterKeyHint="search"
+              className={styles.inputGroupInput}
+              maxLength={10}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  handleLoginStart();
+                }
+              }}
+            />
+            {!isLoading ? (
+              <InputGroupAddon
+                align="inline-end"
+                className={styles.loginButton}
               >
-                <title>ログイン中アイコン</title>
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-            <p className="text-green-600 font-bold text-lg">ログイン中</p>
-            {player.current_icon && (
-              <div className="flex flex-col items-center">
-                <img
-                  src={`https://cdn.brawlify.com/profile-icons/regular/${player.current_icon}.png`}
-                  alt="現在のアイコン"
-                  width={64}
-                  height={64}
-                  className="mx-auto my-2 border rounded-lg"
-                />
-                <span className="text-xs text-gray-500">現在のアイコン</span>
-              </div>
+                <InputGroupButton onClick={handleLoginStart}>
+                  login
+                </InputGroupButton>
+              </InputGroupAddon>
+            ) : (
+              <InputGroupAddon align="inline-end">
+                <Spinner className={styles.spinner} />
+              </InputGroupAddon>
             )}
-            <div className="bg-gray-50 p-4 rounded-md">
-              <h3 className="font-semibold text-gray-800 mb-2">
-                現在のプレイヤー
-              </h3>
-              <div className="text-left space-y-1 text-sm">
-                <p>
-                  <span className="font-medium">名前:</span> {player.name}
-                </p>
-                <p>
-                  <span className="font-medium">タグ:</span> {player.tag}
-                </p>
-                {player.club_name && (
-                  <p>
-                    <span className="font-medium">クラブ:</span>{" "}
-                    {player.club_name}
-                  </p>
-                )}
-                <p>
-                  <span className="font-medium">トロフィー:</span>{" "}
-                  {player.trophies.toLocaleString()}
-                </p>
-              </div>
-            </div>
-            <button
-              type="button"
-              onClick={handleLogout}
-              className="w-full px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
-            >
-              ログアウト
-            </button>
-          </div>
-        )}
+          </InputGroup>
 
-        {status === "idle" && (
-          <div className="space-y-4">
-            <div>
-              <label
-                htmlFor="tag"
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
-                プレイヤータグ
-              </label>
-              <input
-                id="tag"
-                type="text"
-                placeholder="#プレイヤータグを入力"
-                value={tag}
-                onChange={(e) => setTag(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                onKeyPress={(e) => e.key === "Enter" && handleLoginStart()}
-              />
+          {errorMessage && (
+            <div className={styles.errorMessage}>
+              <p>{errorMessage}</p>
             </div>
-            <button
-              type="button"
-              onClick={handleLoginStart}
-              disabled={isLoading}
-              className={`w-full px-4 py-2 rounded-md transition-colors ${
-                isLoading
-                  ? "bg-gray-400 text-gray-200 cursor-not-allowed"
-                  : "bg-blue-500 text-white hover:bg-blue-600"
-              }`}
-            >
-              {isLoading ? "ログイン中..." : "ログイン開始"}
-            </button>
-            {errorMessage && (
-              <p className="text-red-600 text-sm text-center">{errorMessage}</p>
-            )}
-          </div>
-        )}
+          )}
+        </div>
+      )}
 
-        {status === "waiting" && player && requestedIcon && (
-          <div className="space-y-4">
-            <div className="text-center">
-              <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                {player.name}
-              </h2>
-              <p className="text-gray-600 text-sm">#{player.tag}</p>
-              {player.club_name && (
-                <p className="text-gray-600 text-sm">
-                  クラブ: {player.club_name}
-                </p>
-              )}
-              <p className="text-gray-600 text-sm">
-                トロフィー: {player.trophies.toLocaleString()}
-              </p>
-            </div>
+      {status === "waiting" && player && requestedIcon && (
+        <div className={styles.waitingContainer}>
+          <h3>Please switch your profile icon to this one</h3>
 
-            <div className="text-center space-y-2">
-              <p className="text-gray-700">このアイコンに変更してください:</p>
-              <img
-                src={`https://cdn.brawlify.com/profile-icons/regular/${requestedIcon}.png`}
-                alt="ログイン用アイコン"
-                width={96}
-                height={96}
-                className="mx-auto border-2 border-gray-300 rounded-lg"
-              />
-            </div>
+          <Image
+            src={`https://cdn.brawlify.com/profile-icons/regular/${requestedIcon}.png`}
+            alt="login icon"
+            width={96}
+            height={96}
+          />
 
-            <div className="space-y-2">
-              <button
-                type="button"
-                onClick={handleVerify}
-                className="w-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
-              >
-                アイコン変更完了
-              </button>
-              <button
-                type="button"
-                onClick={handleReset}
-                className="w-full px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors"
-              >
-                キャンセル
-              </button>
-            </div>
-          </div>
-        )}
+          <p>{player.name}</p>
+          <p>{player.tag}</p>
 
-        {status === "verifying" && (
-          <div className="text-center space-y-4">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
-            <p className="text-gray-700">アイコン変更を確認中です...</p>
-            <div className="text-2xl font-bold text-blue-600">
-              {Math.floor(countdown / 60)}:
-              {(countdown % 60).toString().padStart(2, "0")}
-            </div>
-            <p className="text-sm text-gray-500">最大90秒間確認を行います</p>
-          </div>
-        )}
+          <p>
+            <Image
+              src="/icon_trophy1.png"
+              alt="trophy icon"
+              width={20}
+              height={20}
+              className="inline-block mr-1"
+            />
+            {player.trophies.toLocaleString()}
+          </p>
 
-        {status === "success" && player && (
-          <SuccessSection player={player} onReset={handleReset} />
-        )}
+          <button type="button" onClick={handleVerify}>
+            I’ve Changed My Icon
+          </button>
+        </div>
+      )}
 
-        {status === "error" && (
-          <div className="text-center space-y-4">
-            <div className="text-red-600">
-              <svg
-                className="w-16 h-16 mx-auto mb-4"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                role="img"
-                aria-label="エラーアイコン"
-              >
-                <title>エラーアイコン</title>
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-            <p className="text-red-600 font-bold">認証に失敗しました</p>
-            <p className="text-red-600 text-sm">{errorMessage}</p>
-            <button
-              type="button"
-              onClick={handleReset}
-              className="w-full px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
-            >
-              再試行
-            </button>
-          </div>
-        )}
-      </div>
+      {status === "verifying" && (
+        <div className={styles.verifyingContainer}>
+          <Spinner className="size-12 text-blue-500" />
+          <h3>Confirming your icon change...</h3>
+          <h4>
+            {Math.floor(countdown / 60)}:
+            {(countdown % 60).toString().padStart(2, "0")}
+          </h4>
+          <p className="text-sm text-gray-500">
+            This may take up to 90 seconds.
+          </p>
+        </div>
+      )}
+
+      {status === "success" && player && (
+        <SuccessSection player={player} onReset={handleReset} />
+      )}
+
+      {status === "error" && (
+        <div className={styles.errorContainer}>
+          <h3>Login failed.</h3>
+          <p>{errorMessage}</p>
+          <button type="button" onClick={handleReset}>
+            Retry
+          </button>
+        </div>
+      )}
     </div>
   );
 }

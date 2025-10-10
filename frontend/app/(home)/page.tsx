@@ -1,16 +1,11 @@
 "use client";
 import { sendGAEvent } from "@next/third-parties/google";
-import {
-  ChevronDownIcon,
-  History,
-  Plus,
-  Share,
-  SquarePlus,
-} from "lucide-react";
+import { ChevronDownIcon, History, SquarePlus } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Searching from "@/app/_components/Searching";
+import { appendToEightDigits } from "@/app/_lib/common";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,7 +26,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { appendToEightDigits } from "./_lib/common";
 import styles from "./page.module.scss";
 
 function InstallPrompt() {
