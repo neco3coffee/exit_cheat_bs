@@ -12,6 +12,12 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'players/search', to: 'players#search'
       get 'players/:tag', to: 'players#show'
+      
+      namespace :auth do
+        post "login",  to: "sessions#login"
+        post "verify", to: "sessions#verify"
+        get "me", to: "sessions#me"
+      end
     end
   end
 

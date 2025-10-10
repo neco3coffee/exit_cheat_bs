@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_09_114524) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_10_025550) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pg_catalog.plpgsql"
@@ -69,6 +69,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_114524) do
     t.datetime "updated_at", null: false
     t.index ["reported_id"], name: "index_reports_on_reported_id"
     t.index ["reporter_id"], name: "index_reports_on_reporter_id"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.bigint "player_id", null: false
+    t.string "session_token", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["expires_at"], name: "index_sessions_on_expires_at"
+    t.index ["player_id"], name: "index_sessions_on_player_id"
+    t.index ["session_token"], name: "index_sessions_on_session_token", unique: true
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
@@ -206,6 +217,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_09_114524) do
   add_foreign_key "player_name_histories", "players"
   add_foreign_key "reports", "players", column: "reported_id"
   add_foreign_key "reports", "players", column: "reporter_id"
+  add_foreign_key "sessions", "players"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

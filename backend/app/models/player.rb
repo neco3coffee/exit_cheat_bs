@@ -1,5 +1,6 @@
 class Player < ApplicationRecord
   has_many :player_name_histories, dependent: :destroy
+  has_many :sessions, dependent: :destroy
 
   validates :tag, presence: true, uniqueness: true
   validates :name, presence: true
