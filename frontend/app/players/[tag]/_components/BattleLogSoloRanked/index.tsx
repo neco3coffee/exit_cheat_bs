@@ -159,9 +159,9 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
                   {round?.result?.toUpperCase()}
                 </h5>
                 <div className={styles.right}>
-                  <button type="button" className={styles.reportButton}>
+                  {/* <button type="button" className={styles.reportButton}>
                     REPORT <TriangleAlert className={styles.icon} />
-                  </button>
+                  </button> */}
                 </div>
               </div>
             );
