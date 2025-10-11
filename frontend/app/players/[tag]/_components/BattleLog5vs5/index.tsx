@@ -44,12 +44,15 @@ const BattleLog5vs5 = ({ battleLog, ownTag }: any) => {
           />
           <div className={styles.modeAndMapContainer}>
             {/* TODO:DADGEBALLじゃなくてDOGDEBRAWLって表示できるようにする */}
-            <h5>
+            <h5 className="notranslate">
               {battleLog?.event?.mode === "unknown"
                 ? mode?.toUpperCase()
                 : battleLog?.event?.mode?.toUpperCase()}
             </h5>
-            <h6 style={{ WebkitTouchCallout: "none" } as React.CSSProperties}>
+            <h6
+              className="notranslate"
+              style={{ WebkitTouchCallout: "none" } as React.CSSProperties}
+            >
               {shortenMapName(battleLog?.event?.map)}
             </h6>
           </div>
@@ -101,7 +104,7 @@ const BattleLog5vs5 = ({ battleLog, ownTag }: any) => {
           </div>
           <div className={styles.vsContainer}>
             <div className={styles.dummyLeft}></div>
-            <strong>VS</strong>
+            <strong className="notranslate">VS</strong>
             <Duration seconds={battleLog?.battle.duration} />
           </div>
           <div className={styles.teamContainer}>

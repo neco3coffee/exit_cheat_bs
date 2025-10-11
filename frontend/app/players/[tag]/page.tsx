@@ -81,13 +81,14 @@ export default async function Page({
               width={80}
               height={80}
             />
-            <h3>{player.tag}</h3>
+            <h3 className="notranslate">{player.tag}</h3>
           </div>
           <div className={styles.nameAndRankContainer}>
             <h1
               style={{
                 color: `#${player?.nameColor?.replace(/^0x/, "").slice(2)}`,
               }}
+              className="notranslate"
             >
               {player.name}
             </h1>
