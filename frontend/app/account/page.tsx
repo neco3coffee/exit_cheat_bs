@@ -31,7 +31,7 @@ function SuccessSection(props: { player: Player; onReset: () => void }) {
         width={96}
         height={96}
       />
-      <p>{player.name}</p>
+      <p className="notranslate">{player.name}</p>
       <p>{player.tag}</p>
       <p>
         <Image
@@ -279,7 +279,7 @@ export default function AccountPage() {
             width={96}
             height={96}
           />
-          <p>{player.name}</p>
+          <p className="notranslate">{player.name}</p>
           <p>{player.tag}</p>
           <p>
             <Image
@@ -357,7 +357,7 @@ export default function AccountPage() {
             height={96}
           />
 
-          <p>{player.name}</p>
+          <p className="notranslate">{player.name}</p>
           <p>{player.tag}</p>
 
           <p>

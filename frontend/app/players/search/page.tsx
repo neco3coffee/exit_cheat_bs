@@ -181,13 +181,14 @@ function SearchPage() {
                 width={80}
                 height={80}
               />
-              <h3>{player.tag}</h3>
+              <h3 className="notranslate">{player.tag}</h3>
             </div>
             <div className={styles.nameAndRankContainer}>
               <h1
                 style={{
                   color: `#${player?.nameColor?.replace(/^0x/, "").slice(2)}`,
                 }}
+                className="notranslate"
               >
                 {player.name}
               </h1>
@@ -557,8 +558,8 @@ function SearchPage() {
                         />
                       )}
                       <div className={styles.nameAndClubContainer}>
-                        <h4>{player.name}</h4>
-                        <h5>{player.club_name}</h5>
+                        <h4 className="notranslate">{player.name}</h4>
+                        <h5 className="notranslate">{player.club_name}</h5>
                       </div>
                     </div>
                     <div className={styles.rightBox}>
@@ -608,7 +609,7 @@ function SearchPage() {
             </InputGroupAddon>
             <InputGroupInput
               placeholder="Player Name"
-              className={styles.inputGroupNameInput}
+              className={`${styles.inputGroupNameInput} notranslate`}
               value={name || ""}
               type="search"
               enterKeyHint="search"

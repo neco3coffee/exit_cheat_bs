@@ -83,7 +83,7 @@ const PlayerComponent = ({
           </div>
         )}
       </div>
-      {shortenedName}
+      <span className="notranslate">{shortenedName}</span>
     </Link>
   );
 };
