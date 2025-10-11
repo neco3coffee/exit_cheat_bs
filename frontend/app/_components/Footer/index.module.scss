@@ -19,6 +19,7 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    padding-bottom: 12px;
 
     @media (min-width: 768px) {
       width: 344px;
