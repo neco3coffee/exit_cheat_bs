@@ -159,7 +159,7 @@ export default function Home() {
   // biome-ignore-start lint/correctness/useExhaustiveDependencies: レンダーのたびに実行されてほしくないため
   useEffect(() => {
     setDefaultRank();
-  },[]);
+  }, []);
   // biome-ignore-end lint/correctness/useExhaustiveDependencies: レンダーのたびに実行されてほしくないため
 
   return (

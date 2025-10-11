@@ -558,8 +558,10 @@ function SearchPage() {
                         />
                       )}
                       <div className={styles.nameAndClubContainer}>
-                        <h4 className="notranslate">{player.name}</h4>
-                        <h5 className="notranslate">{player.club_name}</h5>
+                        <h4 className="notranslate">{player?.name}</h4>
+                        <h5 className="notranslate">
+                          <ClubName clubName={player?.club_name} />
+                        </h5>
                       </div>
                     </div>
                     <div className={styles.rightBox}>
