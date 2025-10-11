@@ -23,7 +23,7 @@ const BattleLogTrio = ({ battleLog, ownTag }: any) => {
             : ""}
         </h5>
         {battleLog?.battleTime && (
-          <div className={styles.right}>
+          <div className={`${styles.right} notranslate`}>
             <RelativeTime target={battleLog?.battleTime} />
           </div>
         )}

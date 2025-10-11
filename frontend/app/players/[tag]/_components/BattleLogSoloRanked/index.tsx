@@ -44,7 +44,7 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
             : ""}
         </h5>
         {battleLog?.battleTime && (
-          <div className={styles.right}>
+          <div className={`${styles.right} notranslate`}>
             <RelativeTime target={battleLog?.battleTime} />
           </div>
         )}
@@ -121,7 +121,6 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
           </div>
           <div className={styles.vsContainer}>
             <strong className="notranslate">VS</strong>
-            <Duration seconds={battleLog?.battle.duration} />
           </div>
           <div className={styles.teamContainer}>
             {enemyTeam?.map((player: any) => {
