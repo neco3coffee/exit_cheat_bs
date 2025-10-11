@@ -37,6 +37,7 @@ import BattleLog3vs3 from "../[tag]/_components/BattleLog3vs3";
 import BattleLog5vs5 from "../[tag]/_components/BattleLog5vs5";
 import BattleLogDuel from "../[tag]/_components/BattleLogDuel";
 import BattleLogDuo from "../[tag]/_components/BattleLogDuo";
+import BattleLogLastStand from "../[tag]/_components/BattleLogLastStand";
 import BattleLogSolo from "../[tag]/_components/BattleLogSolo";
 import BattleLogSoloRanked from "../[tag]/_components/BattleLogSoloRanked";
 import BattleLogTrio from "../[tag]/_components/BattleLogTrio";
@@ -466,7 +467,7 @@ function SearchPage() {
                 );
               } else if (
                 battleLog.battle.players &&
-                battleLog.battle.players.length > 2
+                battleLog.battle.players.length === 10
               ) {
                 return (
                   <BattleLogSolo
@@ -481,6 +482,18 @@ function SearchPage() {
               ) {
                 return (
                   <BattleLogDuel
+                    key={`${battleLog?.battleTime}-${index}`}
+                    battleLog={battleLog}
+                    ownTag={tag}
+                  />
+                );
+              } else if (
+                battleLog.battle.players &&
+                battleLog.battle.players.length === 3 &&
+                battleLog.battle.level
+              ) {
+                return (
+                  <BattleLogLastStand
                     key={`${battleLog?.battleTime}-${index}`}
                     battleLog={battleLog}
                     ownTag={tag}
@@ -558,8 +571,10 @@ function SearchPage() {
                         />
                       )}
                       <div className={styles.nameAndClubContainer}>
-                        <h4 className="notranslate">{player.name}</h4>
-                        <h5 className="notranslate">{player.club_name}</h5>
+                        <h4 className="notranslate">{player?.name}</h4>
+                        <h5 className="notranslate">
+                          <ClubName clubName={player?.club_name} />
+                        </h5>
                       </div>
                     </div>
                     <div className={styles.rightBox}>

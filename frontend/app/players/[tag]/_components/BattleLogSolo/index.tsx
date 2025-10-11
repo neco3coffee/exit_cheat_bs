@@ -12,6 +12,7 @@ const BattleLogSolo = ({ battleLog, ownTag }: any) => {
     battleLog?.event?.mode !== "unknown"
       ? battleLog?.event.mode
       : classifyModeByMapName(battleLog?.event?.map);
+
   return (
     <div className={styles.container} data-testid="battleLog">
       <div className={styles.topContainer}>
@@ -22,7 +23,7 @@ const BattleLogSolo = ({ battleLog, ownTag }: any) => {
             : ""}
         </h5>
         {battleLog?.battleTime && (
-          <div className={styles.right}>
+          <div className={`${styles.right} notranslate`}>
             <RelativeTime target={battleLog?.battleTime} />
           </div>
         )}

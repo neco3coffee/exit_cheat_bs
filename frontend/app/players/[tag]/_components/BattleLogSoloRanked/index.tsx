@@ -19,16 +19,16 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
     battleLog?.event?.mode !== "unknown"
       ? battleLog?.event.mode
       : classifyModeByMapName(battleLog?.event?.map);
-  const diamond1 = 9; // diamond1 = 9,mythic1 = 12, legendary1 = 15, master1 = 18, pro = 21
-  const existAtLeastDiamond = battleLog?.battle?.teams
+  const mythic1 = 12; // diamond1 = 9,mythic1 = 12, legendary1 = 15, master1 = 18, pro = 21
+  const existAtLeastMythic1 = battleLog?.battle?.teams
     .flat()
     .some((player: any) => {
       return (
-        player?.brawler?.trophies >= diamond1 && player?.brawler?.trophies <= 21
+        player?.brawler?.trophies >= mythic1 && player?.brawler?.trophies <= 21
       ); // pro = 21
     });
   let result = null;
-  if (existAtLeastDiamond) {
+  if (existAtLeastMythic1) {
     result = getResult(battleLog?.rounds);
   } else {
     result = battleLog?.battle?.result;
@@ -44,7 +44,7 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
             : ""}
         </h5>
         {battleLog?.battleTime && (
-          <div className={styles.right}>
+          <div className={`${styles.right} notranslate`}>
             <RelativeTime target={battleLog?.battleTime} />
           </div>
         )}
@@ -121,7 +121,6 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
           </div>
           <div className={styles.vsContainer}>
             <strong className="notranslate">VS</strong>
-            <Duration seconds={battleLog?.battle.duration} />
           </div>
           <div className={styles.teamContainer}>
             {enemyTeam?.map((player: any) => {

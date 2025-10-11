@@ -1,24 +1,21 @@
 import Image from "next/image";
 import { shortenMapName } from "@/app/_lib/common";
-import { Duration, RelativeTime } from "@/app/_lib/time";
+import { RelativeTime } from "@/app/_lib/time";
 import { classifyModeByMapName } from "@/app/_lib/unknownMode";
 import PlayerComponent from "@/app/players/[tag]/_components/PlayerComponent";
 import styles from "./index.module.scss";
 
-const BattleLog5vs5 = ({ battleLog, ownTag }: any) => {
+const BattleLogLastStand = ({ battleLog, ownTag }: any) => {
   const tag = ownTag.trim().toUpperCase().replace(/O/g, "0");
-  const ownTeam = battleLog?.battle?.teams.find((team: any) => {
-    return team.some((player: any) => player.tag === `#${tag}`);
-  });
-  const enemyTeam = battleLog?.battle?.teams.find((team: any) => {
-    return team.every((player: any) => player.tag !== `#${tag}`);
-  });
   const starPlayerTag = battleLog?.battle?.starPlayer?.tag;
   const mode =
     battleLog?.event?.mode !== "unknown"
       ? battleLog?.event.mode
       : classifyModeByMapName(battleLog?.event?.map);
+  const level = battleLog?.battle?.level?.name;
+  const result = battleLog?.battle?.result;
 
+  console.log("battleLog: ", JSON.stringify(battleLog, null, 2));
   return (
     <div className={styles.container} data-testid="battleLog">
       <div className={styles.topContainer}>
@@ -57,16 +54,8 @@ const BattleLog5vs5 = ({ battleLog, ownTag }: any) => {
             </h6>
           </div>
         </div>
-        <h5
-          className={
-            battleLog?.battle?.result === "victory"
-              ? styles.victory
-              : battleLog?.battle?.result === "defeat"
-                ? styles.defeat
-                : styles.draw
-          }
-        >
-          {battleLog?.battle?.result?.toUpperCase()}
+        <h5 className={result === "victory" ? styles.victory : styles.defeat}>
+          {result === "victory" ? `CHALLENGE: ${level} CLEARED!` : `DEFEAT`}
         </h5>
         <div className={styles.right}>
           {battleLog?.battle.type === "ranked" &&
@@ -89,40 +78,25 @@ const BattleLog5vs5 = ({ battleLog, ownTag }: any) => {
       </div>
       <div className={styles.bottomContainer}>
         <div className={styles.bottomContainerInner}>
-          <div className={styles.teamContainer}>
-            {ownTeam?.map((player: any) => {
-              return (
-                <PlayerComponent
-                  key={player?.tag}
-                  player={player}
-                  starPlayerTag={starPlayerTag}
-                  battleType={battleLog?.battle?.type}
-                  isMe={player.tag === `#${tag}`}
-                />
-              );
-            })}
-          </div>
-          <div className={styles.vsContainer}>
-            <div className={styles.dummyLeft}></div>
-            <strong className="notranslate">VS</strong>
-            <Duration seconds={battleLog?.battle.duration} />
-          </div>
-          <div className={styles.teamContainer}>
-            {enemyTeam?.map((player: any) => {
-              return (
-                <PlayerComponent
-                  key={player?.tag}
-                  player={player}
-                  starPlayerTag={starPlayerTag}
-                  battleType={battleLog?.battle?.type}
-                />
-              );
-            })}
-          </div>
+          {battleLog?.battle.players.map((player: any) => {
+            return (
+              <div className={styles.playerWrapper} key={player?.tag}>
+                {
+                  <PlayerComponent
+                    key={player?.tag}
+                    player={player}
+                    starPlayerTag={starPlayerTag}
+                    battleType={battleLog?.battle?.type}
+                    isMe={player?.tag === `#${tag}`}
+                  />
+                }
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
   );
 };
 
-export default BattleLog5vs5;
+export default BattleLogLastStand;

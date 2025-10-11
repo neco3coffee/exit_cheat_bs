@@ -37,7 +37,9 @@ const PlayerComponent = ({
         }
       }}
     >
-      {isStarPlayer && <div className={styles.mvpContainer}>STAR PLAYER</div>}
+      {isStarPlayer && (
+        <div className={`${styles.mvpContainer} notranslate`}>STAR PLAYER</div>
+      )}
       <div className={styles.brawlerContainer}>
         {!isMe && loading && (
           <div className={styles.searchContainer}>

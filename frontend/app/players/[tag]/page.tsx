@@ -13,6 +13,7 @@ import BattleLogSolo from "@/app/players/[tag]/_components/BattleLogSolo";
 import BattleLogSoloRanked from "@/app/players/[tag]/_components/BattleLogSoloRanked";
 import BattleLogTrio from "@/app/players/[tag]/_components/BattleLogTrio";
 import { Telemetry } from "@/app/players/[tag]/_components/Telemetry.tsx";
+import BattleLogLastStand from "./_components/BattleLogLastStand";
 import styles from "./page.module.scss";
 
 type Player = {
@@ -158,11 +159,11 @@ export default async function Page({
         {/* バトル履歴 */}
         <div className={styles.battlelogContainer}>
           <h2>BATTLE LOG</h2>
-          {battleLogs.map((battleLog) => {
+          {battleLogs.map((battleLog, index) => {
             if (battleLog.rounds) {
               return (
                 <BattleLogSoloRanked
-                  key={battleLog?.battleTime}
+                  key={`${battleLog?.battleTime}-${index}`}
                   battleLog={battleLog}
                   ownTag={tag}
                 />
@@ -174,7 +175,7 @@ export default async function Page({
             ) {
               return (
                 <BattleLog3vs3
-                  key={battleLog?.battleTime}
+                  key={`${battleLog?.battleTime}-${index}`}
                   battleLog={battleLog}
                   ownTag={tag}
                 />
@@ -186,7 +187,7 @@ export default async function Page({
             ) {
               return (
                 <BattleLog5vs5
-                  key={battleLog?.battleTime}
+                  key={`${battleLog?.battleTime}-${index}`}
                   battleLog={battleLog}
                   ownTag={tag}
                 />
@@ -197,7 +198,7 @@ export default async function Page({
             ) {
               return (
                 <BattleLogTrio
-                  key={battleLog?.battleTime}
+                  key={`${battleLog?.battleTime}-${index}`}
                   battleLog={battleLog}
                   ownTag={tag}
                 />
@@ -208,18 +209,18 @@ export default async function Page({
             ) {
               return (
                 <BattleLogDuo
-                  key={battleLog?.battleTime}
+                  key={`${battleLog?.battleTime}-${index}`}
                   battleLog={battleLog}
                   ownTag={tag}
                 />
               );
             } else if (
               battleLog.battle.players &&
-              battleLog.battle.players.length > 2
+              battleLog.battle.players.length === 10
             ) {
               return (
                 <BattleLogSolo
-                  key={battleLog?.battleTime}
+                  key={`${battleLog?.battleTime}-${index}`}
                   battleLog={battleLog}
                   ownTag={tag}
                 />
@@ -230,13 +231,29 @@ export default async function Page({
             ) {
               return (
                 <BattleLogDuel
-                  key={battleLog?.battleTime}
+                  key={`${battleLog?.battleTime}-${index}`}
+                  battleLog={battleLog}
+                  ownTag={tag}
+                />
+              );
+            } else if (
+              battleLog.battle.players &&
+              battleLog.battle.players.length === 3 &&
+              battleLog.battle.level
+            ) {
+              return (
+                <BattleLogLastStand
+                  key={`${battleLog?.battleTime}-${index}`}
                   battleLog={battleLog}
                   ownTag={tag}
                 />
               );
             } else {
-              return <div key={battleLog?.battleTime}>不明なバトル形式</div>;
+              return (
+                <div key={`${battleLog?.battleTime}-${index}`}>
+                  不明なバトル形式
+                </div>
+              );
             }
           })}
         </div>
