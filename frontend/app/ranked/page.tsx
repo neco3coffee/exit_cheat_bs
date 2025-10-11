@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { formatBattleLog } from "@/app/_lib/formatBattleLog";
 import BattleLogSoloRanked from "@/app/ranked/_components/BattleLogSoloRanked";
+import { Spinner } from "@/components/ui/spinner";
 import styles from "./page.module.scss";
 
 const Status = {
@@ -99,6 +100,14 @@ export default function RankedPage() {
     }
   }, [status, player]);
 
+  if (status === Status.Idle || status === Status.Loading) {
+    return (
+      <div className={`${styles.container} justify-center`}>
+        <Spinner className="size-12 text-blue-500" />
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
       {status === Status.Error && (
@@ -137,8 +146,6 @@ export default function RankedPage() {
           </div>
         </>
       )}
-      {status === Status.Loading && <p>Loading...</p>}
-      {status === Status.Idle && <p>Checking authentication...</p>}
     </div>
   );
 }
