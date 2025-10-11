@@ -92,8 +92,19 @@ export default function RankedPage() {
         const formattedBattleLogs = formatBattleLog(data.battle_logs);
         setBattleLogs(formattedBattleLogs);
       } else {
-        const data = await res.json();
-        console.error(data.error || "Failed to fetch battle log data");
+        let errorMsg = "Failed to fetch battle log data";
+        try {
+          const data = await res.json();
+          errorMsg = data.error || errorMsg;
+        } catch (jsonErr) {
+          try {
+            const text = await res.text();
+            errorMsg = text || errorMsg;
+          } catch (textErr) {
+            // 何もしない
+          }
+        }
+        console.error(errorMsg);
       }
     })();
   }, [status, player]);
