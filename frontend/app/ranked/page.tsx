@@ -74,39 +74,30 @@ export default function RankedPage() {
   useEffect(() => {
     if (status !== Status.Authenticated || !player) return;
     // Fetch player data
-    (async () => {
-      const tag = player.tag.startsWith("#")
-        ? player.tag.substring(1)
-        : player.tag;
-      const res = await fetch(
-        `/api/v1/players/${encodeURIComponent(tag)}/ranked`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
+    try {
+      (async () => {
+        const tag = player.tag.startsWith("#")
+          ? player.tag.substring(1)
+          : player.tag;
+        const res = await fetch(
+          `/api/v1/players/${encodeURIComponent(tag)}/ranked`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
           },
-        },
-      );
-      if (res.ok) {
-        const data = await res.json();
-        const formattedBattleLogs = formatBattleLog(data.battle_logs);
-        setBattleLogs(formattedBattleLogs);
-      } else {
-        let errorMsg = "Failed to fetch battle log data";
-        try {
+        );
+        if (res.ok) {
           const data = await res.json();
-          errorMsg = data.error || errorMsg;
-        } catch (jsonErr) {
-          try {
-            const text = await res.text();
-            errorMsg = text || errorMsg;
-          } catch (textErr) {
-            // 何もしない
-          }
+          const formattedBattleLogs = formatBattleLog(data.battle_logs);
+          setBattleLogs(formattedBattleLogs);
         }
-        console.error(errorMsg);
-      }
-    })();
+      })();
+
+    } catch (error) {
+      console.error("Error fetching player data:", error);
+    }
   }, [status, player]);
 
   return (
