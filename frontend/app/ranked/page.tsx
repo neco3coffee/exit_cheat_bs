@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { formatBattleLog } from "@/app/_lib/formatBattleLog";
 import BattleLogSoloRanked from "@/app/ranked/_components/BattleLogSoloRanked";
+import { Spinner } from "@/components/ui/spinner";
 import styles from "./page.module.scss";
 
 const Status = {
@@ -74,40 +75,38 @@ export default function RankedPage() {
   useEffect(() => {
     if (status !== Status.Authenticated || !player) return;
     // Fetch player data
-    (async () => {
-      const tag = player.tag.startsWith("#")
-        ? player.tag.substring(1)
-        : player.tag;
-      const res = await fetch(
-        `/api/v1/players/${encodeURIComponent(tag)}/ranked`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
+    try {
+      (async () => {
+        const tag = player.tag.startsWith("#")
+          ? player.tag.substring(1)
+          : player.tag;
+        const res = await fetch(
+          `/api/v1/players/${encodeURIComponent(tag)}/ranked`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
           },
-        },
-      );
-      if (res.ok) {
-        const data = await res.json();
-        const formattedBattleLogs = formatBattleLog(data.battle_logs);
-        setBattleLogs(formattedBattleLogs);
-      } else {
-        let errorMsg = "Failed to fetch battle log data";
-        try {
+        );
+        if (res.ok) {
           const data = await res.json();
-          errorMsg = data.error || errorMsg;
-        } catch (jsonErr) {
-          try {
-            const text = await res.text();
-            errorMsg = text || errorMsg;
-          } catch (textErr) {
-            // 何もしない
-          }
+          const formattedBattleLogs = formatBattleLog(data.battle_logs);
+          setBattleLogs(formattedBattleLogs);
         }
-        console.error(errorMsg);
-      }
-    })();
+      })();
+    } catch (error) {
+      console.error("Error fetching player data:", error);
+    }
   }, [status, player]);
+
+  if (status === Status.Idle || status === Status.Loading) {
+    return (
+      <div className={`${styles.container} justify-center`}>
+        <Spinner className="size-12 text-blue-500" />
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
@@ -147,8 +146,6 @@ export default function RankedPage() {
           </div>
         </>
       )}
-      {status === Status.Loading && <p>Loading...</p>}
-      {status === Status.Idle && <p>Checking authentication...</p>}
     </div>
   );
 }
