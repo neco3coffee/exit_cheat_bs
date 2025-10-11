@@ -5,14 +5,17 @@ import { classifyModeByMapName } from "@/app/_lib/unknownMode";
 import PlayerComponent from "@/app/players/[tag]/_components/PlayerComponent";
 import styles from "./index.module.scss";
 
-const BattleLogSolo = ({ battleLog, ownTag }: any) => {
+const BattleLogLastStand = ({ battleLog, ownTag }: any) => {
   const tag = ownTag.trim().toUpperCase().replace(/O/g, "0");
   const starPlayerTag = battleLog?.battle?.starPlayer?.tag;
   const mode =
     battleLog?.event?.mode !== "unknown"
       ? battleLog?.event.mode
       : classifyModeByMapName(battleLog?.event?.map);
+  const level = battleLog?.battle?.level?.name;
+  const result = battleLog?.battle?.result;
 
+  console.log("battleLog: ", JSON.stringify(battleLog, null, 2));
   return (
     <div className={styles.container} data-testid="battleLog">
       <div className={styles.topContainer}>
@@ -51,14 +54,8 @@ const BattleLogSolo = ({ battleLog, ownTag }: any) => {
             </h6>
           </div>
         </div>
-        <h5
-          className={
-            battleLog?.battle?.rank < 4 ? styles.victory : styles.defeat
-          }
-        >
-          {battleLog?.battle?.rank !== undefined
-            ? `RANK ${battleLog?.battle?.rank}`
-            : ""}
+        <h5 className={result === "victory" ? styles.victory : styles.defeat}>
+          {result === "victory" ? `CHALLENGE: ${level} CLEARED!` : `DEFEAT`}
         </h5>
         <div className={styles.right}>
           {battleLog?.battle.type === "ranked" &&
@@ -102,4 +99,4 @@ const BattleLogSolo = ({ battleLog, ownTag }: any) => {
   );
 };
 
-export default BattleLogSolo;
+export default BattleLogLastStand;
