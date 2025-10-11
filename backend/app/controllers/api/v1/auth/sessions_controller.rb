@@ -152,7 +152,8 @@ module Api
               name: player.name,
               club_name: player.club_name,
               trophies: player.trophies,
-              current_icon: player.icon_id&.to_s
+              current_icon: player.icon_id&.to_s,
+              rank: player.rank
             },
             session_expires_at: session.expires_at
           }

@@ -10,7 +10,7 @@ const Footer = () => {
         <Link href="/">
           <House />
         </Link>
-        <Link href="/battle">
+        <Link href="/ranked">
           <Image
             src="/icon_ranked_front 1.png"
             alt="Logo"
