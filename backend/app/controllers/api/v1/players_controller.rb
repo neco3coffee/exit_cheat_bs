@@ -155,6 +155,34 @@ module Api
       end
 
 
+      def ranked
+        tag = params[:tag].to_s.upcase.strip
+        tag = "##{tag}" unless tag.start_with?("#")
+        Rails.logger.info("fetching ranked data for tag: #{tag}")
+
+        fetcher = PlayerFetcher.new
+        battlelog_data = fetcher.fetch_battlelog(tag)
+        if battlelog_data.nil?
+          render json: { error: "Battlelog not found" }, status: 404 and return
+        end
+
+        solo_ranked_battle_logs = battlelog_data['items'].select { |item| item['battle']['type'] == 'soloRanked' }
+        if solo_ranked_battle_logs.empty?
+          render json: { error: "No solo ranked battles found" }, status: 404 and return
+        end
+
+        render json: {
+          battle_logs: solo_ranked_battle_logs
+        }
+
+        rescue StandardError => e
+          Rails.logger.error("Ranked exception occured: #{e.message}")
+          Rails.logger.error(e.backtrace.join("\n"))
+          render json: { error: "An error occurred while processing your request" }, status: 500 and return
+      end
+
+
+
       private
       #TODO: api tokenが制限に達した場合に備える
 
