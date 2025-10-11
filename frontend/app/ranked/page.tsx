@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { formatBattleLog } from "@/app/_lib/formatBattleLog";
+import BattleLogSoloRanked from "@/app/ranked/_components/BattleLogSoloRanked";
 import styles from "./page.module.scss";
 
 const Status = {
@@ -12,8 +14,20 @@ const Status = {
   Error: "Error",
 };
 
+interface Player {
+  id: number;
+  tag: string;
+  name: string;
+  club_name?: string | null;
+  trophies: number;
+  current_icon: string;
+  rank: number;
+}
+
 export default function RankedPage() {
   const [status, setStatus] = useState(Status.Idle);
+  const [player, setPlayer] = useState<Player | null>(null);
+  const [battleLogs, setBattleLogs] = useState<any[] | null>(null);
 
   const checkAuth = async () => {
     setStatus(Status.Loading);
@@ -39,8 +53,8 @@ export default function RankedPage() {
       }
 
       const data = await res.json();
-      console.log(`Auth check data: ${JSON.stringify(data, null, 2)}`);
       if (data && data.player) {
+        setPlayer(data.player);
         setStatus(Status.Authenticated);
       } else {
         setStatus(Status.Unauthenticated);
@@ -56,6 +70,33 @@ export default function RankedPage() {
     checkAuth();
   }, []);
   // biome-ignore-end lint/correctness/useExhaustiveDependencies: レンダーのたびに実行されてほしくないため
+
+  useEffect(() => {
+    if (status !== Status.Authenticated || !player) return;
+    // Fetch player data
+    (async () => {
+      const tag = player.tag.startsWith("#")
+        ? player.tag.substring(1)
+        : player.tag;
+      const res = await fetch(
+        `/api/v1/players/${encodeURIComponent(tag)}/ranked`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+      if (res.ok) {
+        const data = await res.json();
+        const formattedBattleLogs = formatBattleLog(data.battle_logs);
+        setBattleLogs(formattedBattleLogs);
+      } else {
+        const data = await res.json();
+        console.error(data.error || "Failed to fetch battle log data");
+      }
+    })();
+  }, [status, player]);
 
   return (
     <div className={styles.container}>
@@ -73,8 +114,26 @@ export default function RankedPage() {
       )}
       {status === Status.Authenticated && (
         <>
-          <h1>Ranked Page</h1>
-          <p>Welcome to the ranked page! You are successfully authenticated.</p>
+          <div className={styles.reportsContainer}></div>
+          <div className={styles.battlelogContainer}>
+            {battleLogs &&
+              battleLogs.map((battlelog, index) => {
+                const tag = player?.tag.startsWith("#")
+                  ? player?.tag.substring(1)
+                  : player?.tag;
+                return (
+                  <BattleLogSoloRanked
+                    key={`${battlelog.battleTime}-${index}`}
+                    battleLog={battlelog}
+                    ownTag={tag}
+                  />
+                );
+              })}
+            {!battleLogs ||
+              (battleLogs?.length === 0 && (
+                <h5>No ranked battle logs available.</h5>
+              ))}
+          </div>
         </>
       )}
       {status === Status.Loading && <p>Loading...</p>}
