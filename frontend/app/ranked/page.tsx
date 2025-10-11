@@ -94,7 +94,6 @@ export default function RankedPage() {
           setBattleLogs(formattedBattleLogs);
         }
       })();
-
     } catch (error) {
       console.error("Error fetching player data:", error);
     }
