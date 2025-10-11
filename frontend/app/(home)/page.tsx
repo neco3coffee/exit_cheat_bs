@@ -128,6 +128,40 @@ export default function Home() {
   const [searchWitHistory, setSearchWithHistory] = useState(false);
   const [searchWithRank, setSearchWithRank] = useState(0);
 
+  const setDefaultRank = async () => {
+    const sessionToken = localStorage.getItem("session_token");
+    if (!sessionToken) {
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/v1/auth/me", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${sessionToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (!res.ok) {
+        console.error("Failed to fetch user data");
+        return;
+      }
+      const data = await res.json();
+      if (data && data.player?.rank !== undefined) {
+        setSearchWithRank(data.player.rank);
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      return;
+    }
+  };
+
+  // biome-ignore-start lint/correctness/useExhaustiveDependencies: レンダーのたびに実行されてほしくないため
+  useEffect(() => {
+    setDefaultRank();
+  });
+  // biome-ignore-end lint/correctness/useExhaustiveDependencies: レンダーのたびに実行されてほしくないため
+
   return (
     <>
       <div className={styles.searchWrapper}>
