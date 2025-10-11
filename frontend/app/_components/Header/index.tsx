@@ -16,7 +16,9 @@ const Header = () => {
       );
       // 自動でユーザーの言語を適用
       setTimeout(() => {
-        const userLang = navigator.language.split("-")[0]; // 例: "ja"
+        let userLang = navigator.language; // 例: "ja", "en-US"
+        userLang = userLang.replace(/-([a-z]{2})$/i, (_, p1) => '-' + p1.toUpperCase()); // "en-US" のように変換
+        if (userLang.startsWith("en")) userLang= "en"; // "en-US" などを "en" に変換
         const select = document.querySelector(
           "select.goog-te-combo",
         ) as HTMLSelectElement | null;
