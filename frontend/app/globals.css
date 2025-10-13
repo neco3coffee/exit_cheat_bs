@@ -46,6 +46,12 @@
   --brawler-hyper-rare: #B116EC;
   --brawler-ultra-rare: #FF0021;
   --brawler-legendary: #FFF11E;
+  --report-bg-light: #248EF6;
+  --report-bg: #105DE5;
+  --report-bg-dark: #0A4BBE;
+  --cancel-red: #DF362E;
+  --submit-blue: #2373FF;
+
 
   /* --brawler-ultra-legendary: #FF9500; 虹色をscssで表現 */
 
