@@ -420,6 +420,19 @@
         cursor: pointer;
         box-shadow: 0 2px 8px var(--black);
       }
+      .reportButtonDisabled {
+        opacity: 0.5;
+        background-color: var(--submit-blue);
+        min-width: 100px;
+        padding: 8px 16px;
+        color: var(--white);
+        font-size: 14px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px var(--black);
+      }
     }
   }
 }

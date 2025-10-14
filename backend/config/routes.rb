@@ -19,6 +19,8 @@ Rails.application.routes.draw do
         post "verify", to: "sessions#verify"
         get "me", to: "sessions#me"
       end
+
+      resources :reports, only: [:create, :update], param: :id
     end
   end
 

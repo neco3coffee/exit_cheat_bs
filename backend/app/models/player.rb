@@ -2,6 +2,10 @@ class Player < ApplicationRecord
   has_many :player_name_histories, dependent: :destroy
   has_many :sessions, dependent: :destroy
 
+  # reporter/reportedとしてのreports関連
+  has_many :reported_reports, class_name: 'Report', foreign_key: :reported_tag, primary_key: :tag
+  has_many :reports, class_name: 'Report', foreign_key: :reporter_tag, primary_key: :tag
+
   validates :tag, presence: true, uniqueness: true
   validates :name, presence: true
   validates :rank, presence: true, numericality: { greater_than_or_equal_to: 0 }

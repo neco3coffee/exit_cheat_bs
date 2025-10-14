@@ -4,6 +4,7 @@ import axios from "axios";
 import { TriangleAlert } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { shortenMapName } from "@/app/_lib/common";
 import { Duration, RelativeTime } from "@/app/_lib/time";
 import { classifyModeByMapName } from "@/app/_lib/unknownMode";
@@ -17,7 +18,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
@@ -115,11 +115,12 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
   useEffect(() => {
     if (!videoFile) return;
     setStatus(ReportStatus.videoSelected);
-    async () => {
+    (async () => {
       try {
         const res = await fetch("/api/v1/reports", {
           method: "POST",
           body: JSON.stringify({
+            reporterTag: `#${tag}`,
             battleLog: reportedBattleLog,
             reportedPlayerTag: reportedPlayerTag,
             reportType: reportType,
@@ -141,7 +142,7 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
         console.error("Error generating signed URL:", error);
         setStatus(ReportStatus.error);
       }
-    };
+    })();
   }, [videoFile]);
   // biome-ignore-end lint/correctness/useExhaustiveDependencies: 意図的にvideoFileだけで実行したい
 
@@ -170,6 +171,23 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
       setStatus(ReportStatus.videoUploaded);
     })();
   }, [signedUrl, videoFile]);
+
+  useEffect(() => {
+    if (!dialogOpen) {
+      setTimeout(() => {
+        setStatus(ReportStatus.reportNotClicked);
+        setReportedBattleLog(null);
+        setReportedPlayerTag(null);
+        setReportType(null);
+        setReportReason("");
+        setVideoFile(null);
+        setSignedUrl(null);
+        setCdnUrl(null);
+        setReportId(null);
+        setUploadProgress(0);
+      }, 1000);
+    }
+  }, [dialogOpen]);
 
   return (
     <>
@@ -308,6 +326,7 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
                           setStatus(ReportStatus.reportClicked);
                           setReportedBattleLog(battleLog);
                         }}
+                        disabled={status !== ReportStatus.reportNotClicked}
                       >
                         REPORT <TriangleAlert className={styles.icon} />
                       </button>
@@ -319,7 +338,7 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
           </div>
         </div>
       </div>
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+      <Dialog open={dialogOpen}>
         <DialogContent className={styles.dialogContent}>
           <DialogHeader className={styles.dialogHeader}>
             <DialogTitle>
@@ -439,27 +458,13 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
                   <track kind="captions" src="#" label="No captions" />
                 </video>
               )}
-              {(uploadProgress > 0 && status === ReportStatus.videoUploading) ||
-                (uploadProgress !== 100 && (
-                  <Progress
-                    value={uploadProgress}
-                    max={100}
-                    className={styles.progress}
-                  />
-                ))}
-              {status === ReportStatus.videoUploaded &&
-                uploadProgress === 100 && (
-                  <p
-                    style={{
-                      color: "var(--white)",
-                      fontSize: "12px",
-                      fontWeight: "bold",
-                      marginTop: "8px",
-                    }}
-                  >
-                    Video uploaded successfully!
-                  </p>
-                )}
+              {status === ReportStatus.videoUploading && (
+                <Progress
+                  value={uploadProgress}
+                  max={100}
+                  className={styles.progress}
+                />
+              )}
               <Label
                 htmlFor="video"
                 style={{
@@ -519,38 +524,44 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
                   className={styles.cancelButton}
                   onClick={() => {
                     setDialogOpen(false);
-                    setReportedBattleLog(null);
-                    setReportedPlayerTag(null);
-                    setReportType(null);
-                    setStatus(ReportStatus.reportNotClicked);
                   }}
                   type="button"
                 >
                   CANCEL
                 </button>
                 <button
-                  className={styles.reportButton}
+                  className={
+                    status !== ReportStatus.videoUploaded
+                      ? styles.reportButtonDisabled
+                      : styles.reportButton
+                  }
                   disabled={status !== ReportStatus.videoUploaded}
                   onClick={async () => {
-                    await fetch(`/api/v1/reports/${reportId}`, {
-                      method: "PUT",
-                      body: JSON.stringify({
-                        cdnUrl: cdnUrl,
-                        reportReason: reportReason,
-                      }),
-                      headers: { "Content-Type": "application/json" },
-                    });
-                    setDialogOpen(false);
-                    setCdnUrl(null);
-                    setSignedUrl(null);
-                    setVideoFile(null);
-                    setUploadProgress(0);
-                    setReportReason("");
-                    setReportId(null);
-                    setReportedBattleLog(null);
-                    setReportedPlayerTag(null);
-                    setReportType(null);
-                    setStatus(ReportStatus.reportSubmitted);
+                    try {
+                      const res = await fetch(`/api/v1/reports/${reportId}`, {
+                        method: "PUT",
+                        body: JSON.stringify({
+                          cdnUrl: cdnUrl,
+                          reportReason: reportReason,
+                        }),
+                        headers: { "Content-Type": "application/json" },
+                      });
+                      if (!res.ok) {
+                        setDialogOpen(false);
+                        toast.error("Failed to report the player");
+                        return;
+                      }
+
+                      if (res.ok) {
+                        setDialogOpen(false);
+                        toast.success("Player reported, thanks!");
+                      }
+                    } catch (error) {
+                      console.error("Error submitting report:", error);
+                      setDialogOpen(false);
+                      toast.error("Failed to report the player");
+                      return;
+                    }
                   }}
                   type="button"
                 >
