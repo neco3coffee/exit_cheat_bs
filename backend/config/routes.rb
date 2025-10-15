@@ -21,7 +21,8 @@ Rails.application.routes.draw do
         get "me", to: "sessions#me"
       end
 
-      resources :reports, only: [:create, :update], param: :id
+      resources :reports, only: [:create, :update, :index], param: :id
+      get 'reports/latest', to: 'reports#latest'
     end
   end
 

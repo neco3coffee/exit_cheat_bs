@@ -46,6 +46,16 @@ module Api
         end
       end
 
+      def index
+        reports = Report.where(status: 'waiting_review').order(created_at: :asc)
+        render json: reports, status: :ok
+      end
+
+      def latest
+        reports = Report.where(status: 'approved').order(updated_at: :desc).limit(10)
+        render json: reports, status: :ok
+      end
+
 
     end
   end

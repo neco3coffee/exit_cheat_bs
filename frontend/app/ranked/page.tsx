@@ -142,8 +142,8 @@ export default function RankedPage() {
     if (status !== Status.Authenticated || !player) return;
 
     try {
-      (async() => {
-        const res = await fetch('/api/v1/reports/latest', {
+      (async () => {
+        const res = await fetch("/api/v1/reports/latest", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -157,7 +157,7 @@ export default function RankedPage() {
     } catch (error) {
       console.error("Error fetching latest approved reports:", error);
     }
-  },[status, player]);
+  }, [status, player]);
 
   useEffect(() => {
     if (approvedReports.length === 0) return;
