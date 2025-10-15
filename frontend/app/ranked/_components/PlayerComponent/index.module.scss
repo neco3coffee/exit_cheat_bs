@@ -11,6 +11,13 @@
   letter-spacing: -0.3px;
   position: relative;
 
+  .reportedIcon {
+    position: absolute;
+    top: -8px;
+    right: -4px;
+    z-index: 100;
+  }
+
   @media (min-width: 768px) {
     width: 64px;
     font-size: 10px;

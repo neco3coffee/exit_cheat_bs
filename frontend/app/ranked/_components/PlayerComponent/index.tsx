@@ -17,6 +17,7 @@ const PlayerComponent = ({
   setStatus,
   setReportedPlayerTag,
   setDialogOpen,
+  reportedPlayerTag,
 }: any) => {
   const shortenedName = shortenPlayerName(player?.name);
   const isStarPlayer = player?.tag === starPlayerTag;
@@ -46,6 +47,15 @@ const PlayerComponent = ({
         }
       }}
     >
+      {reportedPlayerTag === player?.tag && (
+        <Image
+          src="/reported_player.png"
+          alt="reported player"
+          width={24}
+          height={24}
+          className={styles.reportedIcon}
+        />
+      )}
       {isStarPlayer && (
         <div className={`${styles.mvpContainer} notranslate`}>STAR PLAYER</div>
       )}

@@ -181,7 +181,14 @@ module Api
           render json: { error: "An error occurred while processing your request" }, status: 500 and return
       end
 
+      def reports
+        tag = params[:tag].to_s.upcase.strip
+        tag = "##{tag}" unless tag.start_with?("#")
+        Rails.logger.info("fetching reports for tag: #{tag}")
 
+        reports = Report.where(reporter_tag: tag).order(created_at: :desc)
+        render json: reports.as_json(only: [:id, :reporter_tag, :reported_tag, :report_type, :status, :reason, :battle_data, :video_url, :result_url, :created_at, :updated_at])
+      end
 
       private
       #TODO: api tokenが制限に達した場合に備える

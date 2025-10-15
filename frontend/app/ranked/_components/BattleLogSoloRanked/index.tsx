@@ -44,7 +44,7 @@ const ReportType = {
   cheating: "cheating",
 };
 
-const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
+const BattleLogSoloRanked = ({ battleLog, ownTag, isReported }: any) => {
   // console.log("battleLog!: ", JSON.stringify(battleLog, null, 2));
   const tag = ownTag.trim().toUpperCase().replace(/O/g, "0");
   const ownTeam = battleLog?.battle?.teams.find((team: any) => {
@@ -321,14 +321,22 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
                     {index === 0 && (
                       <button
                         type="button"
-                        className={`${styles.reportButton} ${status !== ReportStatus.reportNotClicked ? styles.reportButtonClicked : ""}`}
+                        className={`${styles.reportButton} ${status !== ReportStatus.reportNotClicked || isReported ? styles.reportButtonClicked : ""}`}
                         onClick={() => {
                           setStatus(ReportStatus.reportClicked);
                           setReportedBattleLog(battleLog);
                         }}
-                        disabled={status !== ReportStatus.reportNotClicked}
+                        disabled={
+                          status !== ReportStatus.reportNotClicked || isReported
+                        }
                       >
-                        REPORT <TriangleAlert className={styles.icon} />
+                        {isReported ? (
+                          <>REPORTED</>
+                        ) : (
+                          <>
+                            REPORT <TriangleAlert className={styles.icon} />
+                          </>
+                        )}
                       </button>
                     )}
                   </div>

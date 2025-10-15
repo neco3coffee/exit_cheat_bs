@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       get 'players/search', to: 'players#search'
       get 'players/:tag', to: 'players#show'
       get 'players/:tag/ranked', to: 'players#ranked'
+      get 'players/:tag/reports', to: 'players#reports'
 
       namespace :auth do
         post "login",  to: "sessions#login"

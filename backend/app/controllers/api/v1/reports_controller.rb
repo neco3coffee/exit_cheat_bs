@@ -36,9 +36,9 @@ module Api
       def update
         report = Report.find(params[:id])
         if report.update(
-          result_url: params[:cdnUrl],
+          video_url: params[:cdnUrl],
           reason: params[:reportReason],
-          status: 'submitted'
+          status: 'waiting_review'
         )
           render json: { message: 'Report updated' }, status: :ok
         else
