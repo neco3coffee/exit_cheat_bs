@@ -92,7 +92,7 @@ export default function RankedPage() {
         console.error("Error attempting to play", error);
       });
     }
-  }, [videoUrl, status, player, activeTab]);
+  }, [videoUrl, status, player]);
   // biome-ignore-end lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
 
   // biome-ignore-start lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
@@ -122,7 +122,7 @@ export default function RankedPage() {
     } catch (error) {
       console.error("Error fetching player data:", error);
     }
-  }, [status, player, activeTab]);
+  }, [status, player]);
   // biome-ignore-end lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
 
   // biome-ignore-start lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
@@ -151,7 +151,7 @@ export default function RankedPage() {
     } catch (error) {
       console.error("Error fetching player reports:", error);
     }
-  }, [status, player, activeTab]);
+  }, [status, player]);
   // biome-ignore-end lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
 
   const setVideo = (url: string | null) => {
@@ -213,7 +213,7 @@ export default function RankedPage() {
     } catch (error) {
       console.error("Error fetching reports waiting for review:", error);
     }
-  }, [status, player, activeTab]);
+  }, [status, player]);
   // biome-ignore-end lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
 
   if (status === Status.Idle || status === Status.Loading) {
