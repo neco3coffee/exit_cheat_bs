@@ -288,12 +288,12 @@ export default function RankedPage() {
                       );
                     })
                   ) : (
-                    <h5 style={{ marginTop: "100px" }}>
+                    <h5 style={{ marginTop: "100px", marginBottom: "100px" }}>
                       No reports waiting for review.
                     </h5>
                   )
                 ) : (
-                  <h5 style={{ marginTop: "100px" }}>
+                  <h5 style={{ marginTop: "100px", marginBottom: "100px" }}>
                     Only moderator can review, approve, reject reports!
                   </h5>
                 )}
