@@ -32,7 +32,7 @@ function SuccessSection(props: { player: Player; onReset: () => void }) {
         height={96}
       />
       <p className="notranslate">{player.name}</p>
-      <p>{player.tag}</p>
+      <p className="notranslate">{player.tag}</p>
       <p>
         <Image
           src="/icon_trophy1.png"
