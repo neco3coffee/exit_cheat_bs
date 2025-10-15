@@ -242,7 +242,16 @@ export default function RankedPage() {
         <>
           <div className={styles.recentVideoContainer} ref={topRef}>
             {videoUrl && (
-              <video id="mainVideo" key={videoUrl} autoPlay loop src={videoUrl}>
+              // 再生ボタンを表示しないと自動再生されないブラウザがあるため、autoPlay属性をつけるだけでは不十分
+
+              <video
+                id="mainVideo"
+                key={videoUrl}
+                autoPlay
+                loop
+                playsInline
+                src={videoUrl}
+              >
                 <track kind="captions" src={videoUrl} label="No captions" />
               </video>
             )}
