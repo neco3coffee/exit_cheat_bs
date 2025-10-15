@@ -34,6 +34,7 @@ export default function RankedPage() {
   const [reports, setReports] = useState<any[] | null>(null);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const topRef = useRef<HTMLDivElement>(null);
+  const [approvedReports, setApprovedReports] = useState<any[]>([]);
 
   const checkAuth = async () => {
     setStatus(Status.Loading);
@@ -137,6 +138,37 @@ export default function RankedPage() {
     topRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  useEffect(() => {
+    if (status !== Status.Authenticated || !player) return;
+
+    try {
+      (async() => {
+        const res = await fetch('/api/v1/reports/latest', {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setApprovedReports(data);
+        }
+      })();
+    } catch (error) {
+      console.error("Error fetching latest approved reports:", error);
+    }
+  },[status, player]);
+
+  useEffect(() => {
+    if (approvedReports.length === 0) return;
+
+    const randomIndex = Math.floor(Math.random() * approvedReports.length);
+    const selectedReport = approvedReports[randomIndex];
+    if (selectedReport && selectedReport.video_url) {
+      setVideoUrl(selectedReport.video_url);
+    }
+  }, [approvedReports]);
+
   if (status === Status.Idle || status === Status.Loading) {
     return (
       <div className={`${styles.container} justify-center`}>
@@ -163,7 +195,7 @@ export default function RankedPage() {
         <>
           <div className={styles.recentVideoContainer} ref={topRef}>
             {videoUrl && (
-              <video autoPlay loop src={videoUrl}>
+              <video key={videoUrl} autoPlay loop src={videoUrl}>
                 <track kind="captions" src={videoUrl} label="No captions" />
               </video>
             )}
