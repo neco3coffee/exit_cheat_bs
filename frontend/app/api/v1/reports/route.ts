@@ -13,11 +13,14 @@ export async function POST(req: NextRequest) {
   return NextResponse.json(data, { status: res.status });
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const authHeader = req.headers.get("Authorization");
+
   const res = await fetch("http://app:3000/api/v1/reports", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      ...(authHeader ? { Authorization: authHeader } : {}),
     },
   });
   const data = await res.json();

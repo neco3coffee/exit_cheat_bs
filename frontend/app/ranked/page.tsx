@@ -25,6 +25,7 @@ interface Player {
   trophies: number;
   current_icon: string;
   rank: number;
+  role?: string;
 }
 
 export default function RankedPage() {
@@ -35,6 +36,8 @@ export default function RankedPage() {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const topRef = useRef<HTMLDivElement>(null);
   const [approvedReports, setApprovedReports] = useState<any[]>([]);
+  const [waitingReviewReports, setWaitingReviewReports] = useState<any[]>([]);
+  const [activeTab, setActiveTab] = useState<string>("battlelogs");
 
   const checkAuth = async () => {
     setStatus(Status.Loading);
@@ -78,6 +81,21 @@ export default function RankedPage() {
   }, []);
   // biome-ignore-end lint/correctness/useExhaustiveDependencies: レンダーのたびに実行されてほしくないため
 
+  // biome-ignore-start lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
+  useEffect(() => {
+    if (status !== Status.Authenticated || !player || !videoUrl) return;
+    const videoElement = document.getElementById(
+      "mainVideo",
+    ) as HTMLVideoElement | null;
+    if (videoElement) {
+      videoElement.play().catch((error) => {
+        console.error("Error attempting to play", error);
+      });
+    }
+  }, [videoUrl, status, player, activeTab]);
+  // biome-ignore-end lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
+
+  // biome-ignore-start lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
   useEffect(() => {
     if (status !== Status.Authenticated || !player) return;
     // Fetch player data
@@ -104,8 +122,10 @@ export default function RankedPage() {
     } catch (error) {
       console.error("Error fetching player data:", error);
     }
-  }, [status, player]);
+  }, [status, player, activeTab]);
+  // biome-ignore-end lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
 
+  // biome-ignore-start lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
   useEffect(() => {
     if (status !== Status.Authenticated || !player) return;
     // Fetch player reports
@@ -131,7 +151,8 @@ export default function RankedPage() {
     } catch (error) {
       console.error("Error fetching player reports:", error);
     }
-  }, [status, player]);
+  }, [status, player, activeTab]);
+  // biome-ignore-end lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
 
   const setVideo = (url: string | null) => {
     setVideoUrl(url);
@@ -169,6 +190,32 @@ export default function RankedPage() {
     }
   }, [approvedReports]);
 
+  // biome-ignore-start lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
+  useEffect(() => {
+    if (status !== Status.Authenticated || !player) return;
+
+    const sessionToken = localStorage.getItem("session_token");
+
+    try {
+      (async () => {
+        const res = await fetch("/api/v1/reports", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${sessionToken}`,
+            "Content-Type": "application/json",
+          },
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setWaitingReviewReports(data);
+        }
+      })();
+    } catch (error) {
+      console.error("Error fetching reports waiting for review:", error);
+    }
+  }, [status, player, activeTab]);
+  // biome-ignore-end lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
+
   if (status === Status.Idle || status === Status.Loading) {
     return (
       <div className={`${styles.container} justify-center`}>
@@ -195,12 +242,16 @@ export default function RankedPage() {
         <>
           <div className={styles.recentVideoContainer} ref={topRef}>
             {videoUrl && (
-              <video key={videoUrl} autoPlay loop src={videoUrl}>
+              <video id="mainVideo" key={videoUrl} autoPlay loop src={videoUrl}>
                 <track kind="captions" src={videoUrl} label="No captions" />
               </video>
             )}
           </div>
-          <Tabs defaultValue="battlelogs" className="w-full">
+          <Tabs
+            value={activeTab}
+            className="w-full"
+            onValueChange={setActiveTab}
+          >
             <TabsList className={styles.tabsList}>
               <TabsTrigger value="review" className={styles.tabTrigger}>
                 review
@@ -214,38 +265,68 @@ export default function RankedPage() {
             </TabsList>
             <TabsContent value="review">
               <div className={styles.reviewContainer}>
-                <h5>Only moderator can review, approve, reject reports!</h5>
+                {player?.role === "moderator" || player?.role === "admin" ? (
+                  waitingReviewReports && waitingReviewReports.length > 0 ? (
+                    waitingReviewReports.map((report) => {
+                      const battleLog = report.battle_data;
+                      const ownTag = report.reporter_tag.startsWith("#")
+                        ? report.reporter_tag.substring(1)
+                        : report.reporter_tag;
+
+                      return (
+                        <ReportedBattleLogSoloRanked
+                          key={`report-${report.id}`}
+                          battleLog={battleLog}
+                          ownTag={ownTag}
+                          status={report.status}
+                          reported_tag={report.reported_tag}
+                          video_url={report.video_url}
+                          setVideoUrl={setVideo}
+                          reason={report.reason}
+                          reportId={report.id}
+                        />
+                      );
+                    })
+                  ) : (
+                    <h5 style={{ marginTop: "100px" }}>
+                      No reports waiting for review.
+                    </h5>
+                  )
+                ) : (
+                  <h5 style={{ marginTop: "100px" }}>
+                    Only moderator can review, approve, reject reports!
+                  </h5>
+                )}
               </div>
             </TabsContent>
             <TabsContent value="battlelogs">
               <div className={styles.battlelogContainer}>
-                {battleLogs &&
-                  battleLogs.map((battlelog, index) => {
-                    const tag = player?.tag.startsWith("#")
-                      ? player?.tag.substring(1)
-                      : player?.tag;
-                    const isReported = reports?.some(
-                      (report) =>
-                        report?.battle_data?.battle?.teams
-                          .flat()
-                          .map((p: any) => p.tag)
-                          .sort()
-                          .join("-") ===
-                        battlelog?.battle?.teams
-                          .flat()
-                          .map((p: any) => p.tag)
-                          .sort()
-                          .join("-"),
-                    );
-                    return (
-                      <BattleLogSoloRanked
-                        key={`${battlelog.battleTime}-${index}`}
-                        battleLog={battlelog}
-                        ownTag={tag}
-                        isReported={isReported}
-                      />
-                    );
-                  })}
+                {battleLogs?.map((battlelog, index) => {
+                  const tag = player?.tag.startsWith("#")
+                    ? player?.tag.substring(1)
+                    : player?.tag;
+                  const isReported = reports?.some(
+                    (report) =>
+                      report?.battle_data?.battle?.teams
+                        .flat()
+                        .map((p: any) => p.tag)
+                        .sort()
+                        .join("-") ===
+                      battlelog?.battle?.teams
+                        .flat()
+                        .map((p: any) => p.tag)
+                        .sort()
+                        .join("-"),
+                  );
+                  return (
+                    <BattleLogSoloRanked
+                      key={`${battlelog.battleTime}-${index}`}
+                      battleLog={battlelog}
+                      ownTag={tag}
+                      isReported={isReported}
+                    />
+                  );
+                })}
                 {!battleLogs ||
                   (battleLogs?.length === 0 && (
                     <h5>No ranked battle logs available.</h5>
@@ -260,10 +341,6 @@ export default function RankedPage() {
                     const ownTag = report.reporter_tag.startsWith("#")
                       ? report.reporter_tag.substring(1)
                       : report.reporter_tag;
-
-                    console.log("Rendering report:", report);
-                    console.log("Battle log:", battleLog);
-                    console.log("Own tag:", ownTag);
 
                     return (
                       <ReportedBattleLogSoloRanked

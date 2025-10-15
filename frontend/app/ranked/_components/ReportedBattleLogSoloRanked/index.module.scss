@@ -494,3 +494,49 @@
     }
   }
 }
+
+.reviewContainer {
+  background-color: var(--battlelog-bg-bottom);
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+
+  .buttonContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+
+    .reject {
+      background-color: var(--cancel-red);
+      min-width: 100px;
+      padding: 8px 16px;
+      color: var(--white);
+      font-size: 14px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--black);
+    }
+    .approve {
+      background-color: var(--submit-blue);
+      min-width: 100px;
+      padding: 8px 16px;
+      color: var(--white);
+      font-size: 14px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--black);
+    }
+  }
+
+
+}

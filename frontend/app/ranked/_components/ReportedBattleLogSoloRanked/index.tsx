@@ -59,6 +59,8 @@ const ReportedBattleLogSoloRanked = ({
   reported_tag,
   video_url,
   setVideoUrl,
+  reason,
+  reportId,
 }: {
   battleLog: any;
   ownTag: string;
@@ -66,6 +68,8 @@ const ReportedBattleLogSoloRanked = ({
   reported_tag: string;
   video_url: string | null;
   setVideoUrl: (url: string | null) => void;
+  reason?: string;
+  reportId?: string;
 }) => {
   // console.log("battleLog!: ", JSON.stringify(battleLog, null, 2));
   const tag = ownTag.trim().toUpperCase().replace(/O/g, "0");
@@ -247,6 +251,90 @@ const ReportedBattleLogSoloRanked = ({
             })}
           </div>
         </div>
+        {reportId && (
+          <div className={styles.reviewContainer}>
+            <Textarea
+              rows={6}
+              value={reason}
+              placeholder="Type your reason here."
+              id="reason"
+              disabled
+              style={{
+                backgroundColor: "var(--blue-black)",
+                color: "var(--white)",
+                padding: "8px",
+              }}
+            />
+            <div className={styles.buttonContainer}>
+              <button
+                className={styles.reject}
+                onClick={() => {
+                  (async () => {
+                    if (!reportId) {
+                      toast.error("Report ID is missing.");
+                      return;
+                    }
+                    try {
+                      const res = await fetch(`/api/v1/reports/${reportId}`, {
+                        method: "PUT",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ status: "rejected" }),
+                      });
+                      if (res.ok) {
+                        toast.success("Report rejected successfully.");
+                        return;
+                      } else {
+                        toast.error("Failed to reject the report.");
+                      }
+                    } catch (error) {
+                      toast.error(
+                        "An error occurred while rejecting the report.",
+                      );
+                    }
+                  })();
+                }}
+                type="button"
+              >
+                Reject
+              </button>
+              <button
+                className={styles.approve}
+                onClick={() => {
+                  (async () => {
+                    if (!reportId) {
+                      toast.error("Report ID is missing.");
+                      return;
+                    }
+                    try {
+                      const res = await fetch(`/api/v1/reports/${reportId}`, {
+                        method: "PUT",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ status: "approved" }),
+                      });
+                      if (res.ok) {
+                        toast.success("Report approved successfully.");
+                        return;
+                      } else {
+                        toast.error("Failed to approve the report.");
+                      }
+                    } catch (error) {
+                      toast.error(
+                        "An error occurred while approving the report.",
+                      );
+                    }
+                  })();
+                }}
+                type="button"
+              >
+                Approve
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
