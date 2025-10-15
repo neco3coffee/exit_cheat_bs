@@ -13,12 +13,16 @@ Rails.application.routes.draw do
       get 'players/search', to: 'players#search'
       get 'players/:tag', to: 'players#show'
       get 'players/:tag/ranked', to: 'players#ranked'
+      get 'players/:tag/reports', to: 'players#reports'
 
       namespace :auth do
         post "login",  to: "sessions#login"
         post "verify", to: "sessions#verify"
         get "me", to: "sessions#me"
       end
+
+      resources :reports, only: [:create, :update, :index], param: :id
+      get 'reports/latest', to: 'reports#latest'
     end
   end
 

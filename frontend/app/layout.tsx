@@ -5,6 +5,7 @@ import Header from "@/app/_components/Header";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Suspense } from "react";
+import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "./analytics";
 
 const geistSans = Geist({
@@ -40,6 +41,7 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <Analytics />
         </Suspense>
+        <Toaster position="top-center" />
       </body>
     </html>
   );

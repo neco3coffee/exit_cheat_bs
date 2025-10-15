@@ -95,6 +95,7 @@
           }
       }
     }
+
   }
 
   .victory {
@@ -139,9 +140,34 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    color: var(--trophy-yellow);
     font-size: 11px;
     font-weight: bold;
+
+    .statusContainer {
+      color: var(--white);
+      padding: 0px 6px;
+      font-size: 11px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      border-radius: 4px;
+
+      svg {
+        margin-left: 4px;
+      }
+    }
+    .statusPending {
+      background-color: var(--report-gray);
+    }
+    .statusReview {
+      background-color: var(--on-blue);
+    }
+    .statusApproved {
+      background-color: #16a34a;
+    }
+    .statusRejected {
+      background-color: #dc2626;
+    }
 
     img {
         width: 15px;
@@ -274,6 +300,38 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
+
+        .replayContainer {
+          display: flex;
+          align-items: center;
+          background-color: var(--report-bg);
+          padding: 0px 6px;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 11px;
+          font-weight: bold;
+
+          svg {
+            margin-left: 4px;
+          }
+        }
+
+        .replayContainerDisabled {
+          opacity: 0.5;
+          display: flex;
+          align-items: center;
+          background-color: var(--report-bg);
+          padding: 0px 6px;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 11px;
+          font-weight: bold;
+
+          svg {
+            margin-left: 4px;
+          }
+        }
+
 
         .reportButtonClicked {
           opacity: 0.5;
@@ -435,4 +493,50 @@
       }
     }
   }
+}
+
+.reviewContainer {
+  background-color: var(--battlelog-bg-bottom);
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+
+  .buttonContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+
+    .reject {
+      background-color: var(--cancel-red);
+      min-width: 100px;
+      padding: 8px 16px;
+      color: var(--white);
+      font-size: 14px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--black);
+    }
+    .approve {
+      background-color: var(--submit-blue);
+      min-width: 100px;
+      padding: 8px 16px;
+      color: var(--white);
+      font-size: 14px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--black);
+    }
+  }
+
+
 }

@@ -38,7 +38,7 @@ module Api
                 name: player_data["name"],
                 club_name: player_data.dig("club", "name"),
                 trophies: player_data["trophies"],
-                current_icon: current_icon
+                current_icon: current_icon,
               },
               requested_icon: requested_icon
             }
@@ -153,7 +153,8 @@ module Api
               club_name: player.club_name,
               trophies: player.trophies,
               current_icon: player.icon_id&.to_s,
-              rank: player.rank
+              rank: player.rank,
+              role: player.role,
             },
             session_expires_at: session.expires_at
           }

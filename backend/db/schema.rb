@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_10_025550) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_15_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pg_catalog.plpgsql"
@@ -51,24 +51,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_10_025550) do
     t.integer "approved_reports_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role", default: "user", null: false
     t.index ["name"], name: "index_players_on_name"
     t.index ["rank"], name: "index_players_on_rank"
     t.index ["tag"], name: "index_players_on_tag", unique: true
   end
 
   create_table "reports", force: :cascade do |t|
-    t.bigint "reporter_id", null: false
-    t.bigint "reported_id", null: false
     t.integer "report_type", null: false
     t.string "video_url"
     t.string "result_url"
-    t.boolean "approved", default: false
     t.text "reason"
     t.jsonb "battle_data", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["reported_id"], name: "index_reports_on_reported_id"
-    t.index ["reporter_id"], name: "index_reports_on_reporter_id"
+    t.string "reporter_tag", null: false
+    t.string "reported_tag", null: false
+    t.string "status"
+    t.index ["reported_tag"], name: "index_reports_on_reported_tag"
+    t.index ["reporter_tag"], name: "index_reports_on_reporter_tag"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -215,8 +216,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_10_025550) do
   end
 
   add_foreign_key "player_name_histories", "players"
-  add_foreign_key "reports", "players", column: "reported_id"
-  add_foreign_key "reports", "players", column: "reporter_id"
   add_foreign_key "sessions", "players"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
