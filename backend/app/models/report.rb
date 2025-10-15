@@ -8,4 +8,14 @@ class Report < ApplicationRecord
   validates :reported_tag, presence: true
   validates :report_type, presence: true
   validates :battle_data, presence: true
+
+  after_update :increment_approved_reports_count
+
+  private
+
+  def increment_approved_reports_count
+    if saved_change_to_status? && status == 'approved' && status_before_last_save == 'waiting_review'
+      reported.increment!(:approved_reports_count)
+    end
+  end
 end

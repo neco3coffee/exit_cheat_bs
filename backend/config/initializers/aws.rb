@@ -6,6 +6,7 @@ Aws.config.update({
     ENV.fetch('AWS_ACCESS_KEY_ID', ''),
     ENV.fetch('AWS_SECRET_ACCESS_KEY', '')
   ),
-  endpoint: ENV['AWS_ENDPOINT'],
-  force_path_style: ENV['AWS_FORCE_PATH_STYLE'] == 'true',
+  # envがdevelopmentのときだけエンドポイントを指定
+  endpoint: (ENV['AWS_ENDPOINT'] if Rails.env.development?),
+  force_path_style: (ENV['AWS_FORCE_PATH_STYLE'] == 'true' if Rails.env.development?),
 })
