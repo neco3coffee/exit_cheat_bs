@@ -563,6 +563,9 @@ const BattleLogSoloRanked = ({ battleLog, ownTag, isReported }: any) => {
                       if (res.ok) {
                         setDialogOpen(false);
                         toast.success("Player reported, thanks!");
+                        setTimeout(() => {
+                          window.location.reload();
+                        }, 1500);
                       }
                     } catch (error) {
                       console.error("Error submitting report:", error);

@@ -284,6 +284,9 @@ const ReportedBattleLogSoloRanked = ({
                       });
                       if (res.ok) {
                         toast.success("Report rejected successfully.");
+                        setTimeout(() => {
+                          window.location.reload();
+                        }, 1500);
                         return;
                       } else {
                         toast.error("Failed to reject the report.");
@@ -317,6 +320,9 @@ const ReportedBattleLogSoloRanked = ({
                       });
                       if (res.ok) {
                         toast.success("Report approved successfully.");
+                        setTimeout(() => {
+                          window.location.reload();
+                        }, 1500);
                         return;
                       } else {
                         toast.error("Failed to approve the report.");
