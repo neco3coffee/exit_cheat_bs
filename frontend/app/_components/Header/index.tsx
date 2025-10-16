@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+import { useRouter } from "@/app/_messages/i18n/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,19 +15,26 @@ import styles from "./index.module.scss";
 
 const Header = () => {
   const pathname = usePathname();
-  if (pathname === "/") {
-    return null;
-  }
+  const router = useRouter();
   const locale = pathname.split("/")[1];
   const locales = ["en", "ja"];
   const nationalFlags: { [key: string]: string } = {
     en: "🇺🇸",
     ja: "🇯🇵",
   };
-  if (!locales.includes(locale)) {
-    return null;
-  }
+
   const leftPath = pathname.split("/").slice(2).join("/");
+
+  useEffect(() => {
+    const savedLocale = localStorage.getItem("locale");
+    if (
+      savedLocale &&
+      savedLocale !== locale &&
+      locales.includes(savedLocale)
+    ) {
+      router.push(`/${savedLocale}/${leftPath}`);
+    }
+  }, [router, locale, leftPath]);
 
   return (
     <>
