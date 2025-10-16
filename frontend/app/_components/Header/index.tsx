@@ -25,6 +25,7 @@ const Header = () => {
 
   const leftPath = pathname.split("/").slice(2).join("/");
 
+  // biome-ignore-start lint/correctness/useExhaustiveDependencies: we only want to run this effect once on mount
   useEffect(() => {
     const savedLocale = localStorage.getItem("locale");
     if (
@@ -32,9 +33,13 @@ const Header = () => {
       savedLocale !== locale &&
       locales.includes(savedLocale)
     ) {
-      router.push(`/${savedLocale}/${leftPath}`);
+      const newPath = leftPath
+        ? `/${savedLocale}/${leftPath}`
+        : `/${savedLocale}`;
+      router.push(newPath);
     }
-  }, [router, locale, leftPath]);
+  }, []);
+  // biome-ignore-end lint/correctness/useExhaustiveDependencies: we only want to run this effect once on mount
 
   return (
     <>
