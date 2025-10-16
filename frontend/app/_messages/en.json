@@ -1,0 +1,74 @@
+{
+  "home": {
+    "placeholder": "Player Name"
+  },
+  "ranked": {
+    "login": "Login",
+    "unauthenticated": "You need to be logged in to access this page",
+    "error": "Error occurred. Please try again later.",
+    "tabs": {
+      "review": "Review",
+      "battleLog": "Battle Log",
+      "report": "Report"
+    },
+    "review": {
+      "noReport": "No reports waiting for review.",
+      "onlyModerators": "Only moderator can review, approve, reject reports!"
+    },
+    "pending": "Pending",
+    "waitingReview": "Waiting for review",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "replay": "Replay",
+    "reject": "Serious Play",
+    "approve": "Griefing / Feeding / Trolling",
+    "defeat": "Defeat",
+    "victory": "Victory",
+    "draw": "Draw",
+    "ongoing": "Ongoing",
+    "report": "Report",
+    "reported": "Reported",
+    "reportPlayer": "Report {name}?",
+    "reportType": {
+      "badRandom": "BAD RANDOM",
+      "griefPlay": "GRIEF PLAY",
+      "cheating": "CHEATING"
+    },
+    "reportReason": {
+      "badRandom": "No aim, no skill, no coordination",
+      "griefPlay": "Standing still, not attacking, team sabotage or giving up",
+      "cheating": "Using hacks, bots, exploits, or takedown trading"
+    },
+    "pleaseUploadVideo": "Please Upload Battle Replay Video to report this player",
+    "successUploadVideo": "Successfully uploaded video. You can now report this player.",
+    "reportReasonText": "Report Reason",
+    "reportReasonPlaceholder": "Please briefly describe the situation (optional)",
+    "reportButton": "Report Player",
+    "cancelReportButton": "Cancel",
+    "mainVideoDescription": "Recently Reported Player",
+    "failedReport": "Failed to report the player",
+    "successReport": "Player reported, thanks!",
+    "reportIdMissing": "Report ID is missing.",
+    "reportRejected": "Report rejected successfully.",
+    "failedReject": "Failed to reject the report.",
+    "errorReject": "An error occurred while rejecting the report.",
+    "reportApproved": "Report approved successfully.",
+    "failedApprove": "Failed to approve the report.",
+    "errorApprove": "An error occurred while approving the report."
+  },
+  "account": {
+    "checkLogin": "Confirming your login...",
+    "login": "Login",
+    "switchAccountDescription": "Please switch your profile icon to this one",
+    "switchAccount": "Tap this button after I’ve Changed My Icon",
+    "checkIconChange": "Confirming your icon change...",
+    "checkIconChangeDescription": "This may take up to 90 seconds.",
+    "loginFailed": "Login failed. Please try again.",
+    "retry": "Retry",
+    "loginSuccess": "You’re logged in!",
+    "autoReload": "This page will automatically refresh in 5 seconds.",
+    "loginStatus": "Currently logged in as",
+    "logout": "Logout"
+  },
+  "players": {}
+}

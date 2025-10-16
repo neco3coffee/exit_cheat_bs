@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "avoid cheaters, enjoy Brawl Stars",
     start_url: "/",
     // display: "standalone",
-    display: "browser",
+    display: "standalone",
     background_color: "#181818",
     theme_color: "#181818",
     icons: [

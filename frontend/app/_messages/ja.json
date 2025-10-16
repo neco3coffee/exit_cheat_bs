@@ -1,0 +1,74 @@
+{
+  "home": {
+    "placeholder": "プレイヤー名"
+  },
+  "ranked": {
+    "login": "ログイン",
+    "unauthenticated": "このページにアクセスするにはログインが必要です",
+    "error": "エラーが発生しました。後でもう一度お試しください。",
+    "tabs": {
+      "review": "レビュー",
+      "battleLog": "バトル履歴",
+      "report": "報告"
+    },
+    "review": {
+      "noReport": "レビュー待ちの報告はありません",
+      "onlyModerators": "レビュー、承認、拒否できるのはモデレーターのみです！"
+    },
+    "pending": "保留中",
+    "waitingReview": "レビュー待ち",
+    "approved": "承認済み",
+    "rejected": "拒否済み",
+    "replay": "リプレイ",
+    "reject": "真面目にやってる",
+    "approve": "利敵・献上・迷惑",
+    "defeat": "敗北",
+    "victory": "勝利",
+    "draw": "引き分け",
+    "ongoing": "進行中",
+    "report": "報告",
+    "reported": "報告済み",
+    "reportPlayer": "{name}を報告しますか？",
+    "reportType": {
+      "badRandom": "お荷物プレイヤー",
+      "griefPlay": "嫌がらせ行為",
+      "cheating": "チート行為"
+    },
+    "reportReason": {
+      "badRandom": "エイム力もスキルも協調性もなし",
+      "griefPlay": "立ち止まって攻撃しない、チーム妨害、プレイ放棄",
+      "cheating": "ハッキング、ボットの使用、システム・不具合の悪用、八百長"
+    },
+    "pleaseUploadVideo": "プレイヤーを報告するには、リプレイ動画をアップロードしてください",
+    "successUploadVideo": "動画のアップロードに成功しました。下のボタンからこのプレイヤーを報告できます",
+    "reportReasonText": "報告理由",
+    "reportReasonPlaceholder": "状況を簡単に説明してください（任意）",
+    "reportButton": "プレイヤーを報告する",
+    "cancelReportButton": "キャンセル",
+    "mainVideoDescription": "最近報告されたプレイヤー",
+    "failedReport": "プレイヤーの報告に失敗しました",
+    "successReport": "プレイヤーが報告されました。ありがとうございます！",
+    "reportIdMissing": "報告IDがありません。",
+    "reportRejected": "プレイヤーは真面目にプレイしていると判断されました。",
+    "failedReject": "報告のレビューに失敗しました。",
+    "errorReject": "報告のレビュー中にエラーが発生しました。",
+    "reportApproved": "プレイヤーは利敵・献上・迷惑行為を行ったと判断されました。",
+    "failedApprove": "報告のレビューに失敗しました。",
+    "errorApprove": "報告のレビュー中にエラーが発生しました。"
+  },
+  "account": {
+    "checkLogin": "ログイン状況を確認しています...",
+    "login": "ログイン",
+    "switchAccountDescription": "このプロフィールアイコンに変更してください",
+    "switchAccount": "アイコンを変更した後にこのボタンをタップしてください",
+    "checkIconChange": "アイコンの変更を確認しています...",
+    "checkIconChangeDescription": "最大90秒かかる場合があります。",
+    "loginFailed": "ログインに失敗しました。もう一度お試しください。",
+    "retry": "再試行",
+    "loginSuccess": "ログインしました！",
+    "autoReload": "このページは5秒後に自動的に更新されます。",
+    "loginStatus": "現在のログインユーザー",
+    "logout": "ログアウト"
+  },
+  "players": {}
+}
