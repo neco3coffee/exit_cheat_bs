@@ -10,9 +10,35 @@
   border-bottom: 1px solid var(--black-border);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   color: var(--white);
   font-size: 24px;
   font-weight: bold;
   text-align: center;
+}
+
+.logoContainer {
+  width: 20%
+}
+
+.localeContainer {
+  padding-right: 16px;
+  width: 20%;
+}
+
+.dropdownContent {
+  z-index: 1500 !important;
+  margin-top: 8px;
+  background-color: var(--blue-black);
+  color: var(--white);
+  border: none;
+  padding: 8px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 16px;
+
+  a {
+    font-size: 24px;
+  }
 }

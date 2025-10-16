@@ -346,7 +346,7 @@ const BattleLogSoloRanked = ({ battleLog, ownTag, isReported }: any) => {
           </div>
         </div>
       </div>
-      <Dialog open={dialogOpen}>
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent className={styles.dialogContent}>
           <DialogHeader className={styles.dialogHeader}>
             <DialogTitle>
