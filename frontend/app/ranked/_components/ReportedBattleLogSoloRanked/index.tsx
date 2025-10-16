@@ -61,6 +61,9 @@ const ReportedBattleLogSoloRanked = ({
   setVideoUrl,
   reason,
   reportId,
+  setDisplayingReport,
+  setMainVideoDescription,
+  report,
 }: {
   battleLog: any;
   ownTag: string;
@@ -70,6 +73,9 @@ const ReportedBattleLogSoloRanked = ({
   setVideoUrl: (url: string | null) => void;
   reason?: string;
   reportId?: string;
+  setDisplayingReport: (report: any) => void;
+  setMainVideoDescription: (description: string) => void;
+  report?: any;
 }) => {
   // console.log("battleLog!: ", JSON.stringify(battleLog, null, 2));
   const tag = ownTag.trim().toUpperCase().replace(/O/g, "0");
@@ -235,6 +241,12 @@ const ReportedBattleLogSoloRanked = ({
                         onClick={() => {
                           if (video_url) {
                             setVideoUrl(video_url);
+                            setMainVideoDescription(
+                              `Replay of ${
+                                battleLog?.event?.map
+                              } (${battleLog?.event?.mode})`,
+                            );
+                            setDisplayingReport(report);
                             return;
                           }
                         }}

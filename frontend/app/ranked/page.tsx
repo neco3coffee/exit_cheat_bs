@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { formatBattleLog } from "@/app/_lib/formatBattleLog";
@@ -37,6 +38,8 @@ export default function RankedPage() {
   const topRef = useRef<HTMLDivElement>(null);
   const [approvedReports, setApprovedReports] = useState<any[]>([]);
   const [waitingReviewReports, setWaitingReviewReports] = useState<any[]>([]);
+  const [displayingReport, setDisplayingReport] = useState<any>(null);
+  const [mainVideoDescription, setMainVideoDescription] = useState<string>("");
 
   const checkAuth = async () => {
     setStatus(Status.Loading);
@@ -168,6 +171,8 @@ export default function RankedPage() {
     const selectedReport = approvedReports[randomIndex];
     if (selectedReport && selectedReport.video_url) {
       setVideoUrl(selectedReport.video_url);
+      setDisplayingReport(selectedReport);
+      setMainVideoDescription("Recently Reported Player");
     }
   }, [approvedReports]);
 
@@ -220,9 +225,12 @@ export default function RankedPage() {
       {status === Status.Authenticated && (
         <>
           <div className={styles.recentVideoContainer} ref={topRef}>
+            {mainVideoDescription && (
+              <div className={styles.mainVideoDescription}>
+                {mainVideoDescription}
+              </div>
+            )}
             {videoUrl && (
-              // 再生ボタンを表示しないと自動再生されないブラウザがあるため、autoPlay属性をつけるだけでは不十分
-
               <video
                 id="mainVideo"
                 key={videoUrl}
@@ -234,6 +242,39 @@ export default function RankedPage() {
               >
                 <track kind="captions" src={videoUrl} label="No captions" />
               </video>
+            )}
+            {displayingReport && (
+              <div className={styles.reportInfo}>
+                {
+                  <div className={styles.reportedPlayerIconContainer}>
+                    <Image
+                      src={`https://cdn.brawlify.com/brawlers/borderless/${displayingReport.battle_data.battle.teams.flat().find((p: any) => p.tag === displayingReport.reported_tag).brawler.id}.png`}
+                      alt="reported brawler"
+                      width={50}
+                      height={50}
+                      style={{ height: "50px", width: "auto" }}
+                    />
+                    <Image
+                      src="/reported_player.png"
+                      alt="reported player"
+                      width={24}
+                      height={24}
+                      className={styles.reportedIcon}
+                    />
+                  </div>
+                }
+                {
+                  <p className="notranslate">
+                    {
+                      displayingReport.battle_data.battle.teams
+                        .flat()
+                        .find(
+                          (p: any) => p.tag === displayingReport.reported_tag,
+                        ).name
+                    }
+                  </p>
+                }
+              </div>
             )}
           </div>
           <Tabs className="w-full" defaultValue="battleLogs">
@@ -269,6 +310,9 @@ export default function RankedPage() {
                           setVideoUrl={setVideo}
                           reason={report.reason}
                           reportId={report.id}
+                          setDisplayingReport={setDisplayingReport}
+                          setMainVideoDescription={setMainVideoDescription}
+                          report={report}
                         />
                       );
                     })
@@ -336,6 +380,9 @@ export default function RankedPage() {
                         reported_tag={report.reported_tag}
                         video_url={report.video_url}
                         setVideoUrl={setVideo}
+                        setDisplayingReport={setDisplayingReport}
+                        setMainVideoDescription={setMainVideoDescription}
+                        report={report}
                       />
                     );
                   })
