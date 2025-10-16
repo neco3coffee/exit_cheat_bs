@@ -56,6 +56,7 @@
       padding: 5px;
       background-color: var(--danger-red);
       color: var(--white);
+      box-shadow: 0px 3px 50px  var(--danger-red);
     }
 }
 
@@ -103,6 +104,7 @@
       font-size: 16px;
       font-weight: bold;
       color: var(--white);
+      box-shadow: 0px 3px 10px var(--on-blue);
     }
 
     .spinner {
@@ -148,15 +150,29 @@
     margin-top: 16px;
     border: none;
     border-radius: 16px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     width: 300px;
     padding: 5px;
     background-color: var(--on-blue);
     color: var(--white);
+    box-shadow: 0px 3px 50px  var(--on-blue);
+    animation: flash-shadow 3s infinite;
   }
 
 
+}
+
+@keyframes flash-shadow {
+  0% {
+    box-shadow: 0 0 5px var(--on-blue);
+  }
+  50% {
+    box-shadow: 0 0 50px var(--on-blue);
+  }
+  100% {
+    box-shadow: 0 0 5px var(--on-blue);
+  }
 }
 
 .verifyingContainer {

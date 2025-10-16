@@ -372,7 +372,7 @@ export default function AccountPage() {
           </p>
 
           <button type="button" onClick={handleVerify}>
-            I’ve Changed My Icon
+            Tap this button after I’ve Changed My Icon
           </button>
         </div>
       )}
