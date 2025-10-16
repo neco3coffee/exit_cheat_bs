@@ -1,8 +1,9 @@
 "use client";
 import { CircleUserRound, House } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+// import Link from "next/link";
+import { Link } from "@/app/_messages/i18n/navigation";
 import styles from "./index.module.scss";
 
 const Footer = () => {
@@ -11,12 +12,17 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        <Link href="/" className={pathname === "/" ? styles.active : ""}>
+        <Link
+          href="/"
+          className={
+            pathname === "/ja" || pathname === "/en" ? styles.active : ""
+          }
+        >
           <House />
         </Link>
         <Link
           href="/ranked"
-          className={pathname === "/ranked" ? styles.active : ""}
+          className={pathname.includes("/ranked") ? styles.active : ""}
         >
           <Image
             src="/icon_ranked_front 1.png"
@@ -27,7 +33,7 @@ const Footer = () => {
         </Link>
         <Link
           href="/account"
-          className={pathname === "/account" ? styles.active : ""}
+          className={pathname.includes("/account") ? styles.active : ""}
         >
           <CircleUserRound />
         </Link>
