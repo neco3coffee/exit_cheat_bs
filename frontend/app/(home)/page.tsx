@@ -162,6 +162,40 @@ export default function Home() {
   }, []);
   // biome-ignore-end lint/correctness/useExhaustiveDependencies: レンダーのたびに実行されてほしくないため
 
+  const handleNameSearch = (inputValue?: string) => {
+    setLoading(true);
+    if (nameInputRef.current) {
+      nameInputRef.current.blur();
+    }
+    const inputName = (inputValue ?? nameInputRef.current?.value ?? "").trim();
+
+    if (!inputName) {
+      setTimeout(() => {
+        alert("プレイヤー名を入力してください");
+      }, 500);
+      setLoading(false);
+      return;
+    }
+
+    // 絵文字の場合もあるのだが、改名時の制限だと英数字だと15文字まで、絵文字だと６文字
+    if (inputName.length < 1 || inputName.length > 15) {
+      setTimeout(() => {
+        alert("プレイヤー名の長さは1〜15文字である必要があります");
+      }, 500);
+      setLoading(false);
+      return;
+    }
+
+    sendGAEvent("event", "name_lookup_start", {
+      name: inputName,
+      searchWithHistroy: searchWitHistory,
+      rank: searchWithRank,
+    });
+    router.push(
+      `/players/search?name=${encodeURIComponent(inputName)}&history=${searchWitHistory}&rank=${searchWithRank}`,
+    );
+  };
+
   return (
     <>
       <div className={styles.searchWrapper}>
@@ -251,39 +285,9 @@ export default function Home() {
           enterKeyHint="search"
           maxLength={15}
           onKeyUp={(e) => {
+            e.preventDefault();
             if (e.key === "Enter") {
-              e.preventDefault();
-              setLoading(true);
-              if (nameInputRef.current) {
-                nameInputRef.current.blur();
-              }
-              const inputName = e.currentTarget.value.trim();
-
-              if (!inputName) {
-                setTimeout(() => {
-                  alert("プレイヤー名を入力してください");
-                }, 500);
-                setLoading(false);
-                return;
-              }
-
-              // 絵文字の場合もあるのだが、改名時の制限だと英数字だと15文字まで、絵文字だと６文字
-              if (inputName.length < 1 || inputName.length > 15) {
-                setTimeout(() => {
-                  alert("プレイヤー名の長さは1〜15文字である必要があります");
-                }, 500);
-                setLoading(false);
-                return;
-              }
-
-              sendGAEvent("event", "name_lookup_start", {
-                name: inputName,
-                searchWithHistroy: searchWitHistory,
-                rank: searchWithRank,
-              });
-              router.push(
-                `/players/search?name=${encodeURIComponent(inputName)}&history=${searchWitHistory}&rank=${searchWithRank}`,
-              );
+              handleNameSearch(e.currentTarget.value);
             }
           }}
         />
@@ -310,7 +314,10 @@ export default function Home() {
                   (rank, i) => (
                     <DropdownMenuItem
                       key={rank}
-                      onClick={() => setSearchWithRank(rank)}
+                      onClick={() => {
+                        setSearchWithRank(rank);
+                        handleNameSearch();
+                      }}
                       className={styles.dropDownMenuItem}
                     >
                       <Image
