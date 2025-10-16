@@ -211,16 +211,17 @@ export default function RankedPage() {
   return (
     <div className={styles.container}>
       {status === Status.Error && (
-        <p>Error occurred. Please try again later.</p>
+        <div className={styles.inner}>
+          <p>Error occurred. Please try again later.</p>
+        </div>
       )}
       {status === Status.Unauthenticated && (
-        <>
-          <h1>Ranked Page</h1>
+        <div className={styles.inner}>
           <p>To access this page, you need to login!</p>
           <Link className={styles.login} href="/account">
             Login
           </Link>
-        </>
+        </div>
       )}
       {status === Status.Authenticated && (
         <>
