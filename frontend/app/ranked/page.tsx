@@ -37,7 +37,6 @@ export default function RankedPage() {
   const topRef = useRef<HTMLDivElement>(null);
   const [approvedReports, setApprovedReports] = useState<any[]>([]);
   const [waitingReviewReports, setWaitingReviewReports] = useState<any[]>([]);
-  const [activeTab, setActiveTab] = useState<string>("battlelogs");
 
   const checkAuth = async () => {
     setStatus(Status.Loading);
@@ -81,21 +80,6 @@ export default function RankedPage() {
   }, []);
   // biome-ignore-end lint/correctness/useExhaustiveDependencies: レンダーのたびに実行されてほしくないため
 
-  // biome-ignore-start lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
-  useEffect(() => {
-    if (status !== Status.Authenticated || !player || !videoUrl) return;
-    const videoElement = document.getElementById(
-      "mainVideo",
-    ) as HTMLVideoElement | null;
-    if (videoElement) {
-      videoElement.play().catch((error) => {
-        console.error("Error attempting to play", error);
-      });
-    }
-  }, [videoUrl, status, player]);
-  // biome-ignore-end lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
-
-  // biome-ignore-start lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
   useEffect(() => {
     if (status !== Status.Authenticated || !player) return;
     // Fetch player data
@@ -123,9 +107,7 @@ export default function RankedPage() {
       console.error("Error fetching player data:", error);
     }
   }, [status, player]);
-  // biome-ignore-end lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
 
-  // biome-ignore-start lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
   useEffect(() => {
     if (status !== Status.Authenticated || !player) return;
     // Fetch player reports
@@ -152,7 +134,6 @@ export default function RankedPage() {
       console.error("Error fetching player reports:", error);
     }
   }, [status, player]);
-  // biome-ignore-end lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
 
   const setVideo = (url: string | null) => {
     setVideoUrl(url);
@@ -190,7 +171,6 @@ export default function RankedPage() {
     }
   }, [approvedReports]);
 
-  // biome-ignore-start lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
   useEffect(() => {
     if (status !== Status.Authenticated || !player) return;
 
@@ -214,7 +194,6 @@ export default function RankedPage() {
       console.error("Error fetching reports waiting for review:", error);
     }
   }, [status, player]);
-  // biome-ignore-end lint/correctness/useExhaustiveDependencies: activeTabが変わったときに実行されてほしい
 
   if (status === Status.Idle || status === Status.Loading) {
     return (
@@ -248,6 +227,7 @@ export default function RankedPage() {
                 id="mainVideo"
                 key={videoUrl}
                 autoPlay
+                muted
                 loop
                 playsInline
                 src={videoUrl}
@@ -256,16 +236,12 @@ export default function RankedPage() {
               </video>
             )}
           </div>
-          <Tabs
-            value={activeTab}
-            className="w-full"
-            onValueChange={setActiveTab}
-          >
+          <Tabs className="w-full" defaultValue="battleLogs">
             <TabsList className={styles.tabsList}>
               <TabsTrigger value="review" className={styles.tabTrigger}>
                 review
               </TabsTrigger>
-              <TabsTrigger value="battlelogs" className={styles.tabTrigger}>
+              <TabsTrigger value="battleLogs" className={styles.tabTrigger}>
                 Battle Logs
               </TabsTrigger>
               <TabsTrigger value="reports" className={styles.tabTrigger}>
@@ -308,7 +284,7 @@ export default function RankedPage() {
                 )}
               </div>
             </TabsContent>
-            <TabsContent value="battlelogs">
+            <TabsContent value="battleLogs">
               <div className={styles.battlelogContainer}>
                 {battleLogs?.map((battlelog, index) => {
                   const tag = player?.tag.startsWith("#")
