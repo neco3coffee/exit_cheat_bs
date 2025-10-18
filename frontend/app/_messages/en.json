@@ -86,6 +86,7 @@
     "Normal": "NORMAL",
     "Hard": "HARD",
     "Expert": "EXPERT",
+    "Master": "MASTER",
     "Insane": "INSANE",
     "Impossible": "IMPOSSIBLE",
     "undefined": "UNDEFINED BATTLE TYPE"
