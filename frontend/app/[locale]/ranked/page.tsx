@@ -43,6 +43,24 @@ export default function RankedPage() {
   const [displayingReport, setDisplayingReport] = useState<any>(null);
   const [mainVideoDescription, setMainVideoDescription] = useState<string>("");
   const t = useTranslations("ranked");
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPaused, setIsPaused] = useState(true);
+
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (!videoElement || !videoUrl) return;
+
+    const handlePlay = () => setIsPaused(false);
+    const handlePause = () => setIsPaused(true);
+
+    videoElement.addEventListener("play", handlePlay);
+    videoElement.addEventListener("pause", handlePause);
+
+    return () => {
+      videoElement.removeEventListener("play", handlePlay);
+      videoElement.removeEventListener("pause", handlePause);
+    };
+  }, [videoUrl]);
 
   const reportKeys = useMemo(() => {
     return new Set(
@@ -163,6 +181,7 @@ export default function RankedPage() {
 
   const setVideo = (url: string | null) => {
     setVideoUrl(url);
+    setIsPaused(true);
     topRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -192,7 +211,7 @@ export default function RankedPage() {
 
     const randomIndex = Math.floor(Math.random() * approvedReports.length);
     const selectedReport = approvedReports[randomIndex];
-    if (selectedReport && selectedReport.video_url) {
+    if (selectedReport?.video_url) {
       setVideoUrl(selectedReport.video_url);
       setDisplayingReport(selectedReport);
       setMainVideoDescription(t("mainVideoDescription"));
@@ -254,15 +273,29 @@ export default function RankedPage() {
                 {mainVideoDescription}
               </div>
             )}
+            {isPaused && (
+              <button
+                className={styles.playButtonOverlay}
+                onClick={() => videoRef.current?.play()}
+                type="button"
+              >
+                <Image
+                  src="/play_button.svg"
+                  alt="Play Button"
+                  width={64}
+                  height={64}
+                />
+              </button>
+            )}
             {videoUrl && (
               <video
+                ref={videoRef}
                 id="mainVideo"
                 key={videoUrl}
-                autoPlay
                 muted
-                loop
                 playsInline
                 src={videoUrl}
+                preload="none"
               >
                 <track kind="captions" src={videoUrl} label="No captions" />
               </video>

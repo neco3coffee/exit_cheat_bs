@@ -40,6 +40,26 @@
   align-items: center;
   position: relative;
 
+  .playButtonOverlay {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+
+  video {
+    width: 100%;
+    object-fit: cover;
+    will-change: transform;
+    contain: layout paint;
+  }
   .mainVideoDescription {
     position: absolute;
     top: 0px;
@@ -56,6 +76,7 @@
     font-size: 14px;
     font-weight: bold;
     border-radius: 8px;
+    z-index: 10;
   }
 
   .reportInfo {
