@@ -1,5 +1,7 @@
 import { Rocket } from "lucide-react";
 import Image from "next/image";
+// import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Record from "@/app/_components/Record";
 import ClubName from "@/app/_lib/ClubName";
 import { appendToEightDigits } from "@/app/_lib/common";
@@ -49,6 +51,8 @@ export default async function Page({
   const battleLogs = formatBattleLog(player.battlelog?.items || []);
   console.log("club: ", JSON.stringify(player?.club, null, 2));
   console.log("player: ", JSON.stringify(player, null, 2));
+
+  const t = await getTranslations("players");
 
   if (player?.error) {
     return (
@@ -119,22 +123,22 @@ export default async function Page({
         </div>
         <div className={styles.recordsContainer}>
           <Record
-            label="SEASON HIGH"
+            label={t("seasonHigh")}
             imagePath="/icon_trophy1.png"
             value={player.trophies}
           />
           <Record
-            label="ALL TIME HIGH"
+            label={t("allTimeHigh")}
             imagePath="/icon_trophy1.png"
             value={player.highestTrophies}
           />
           <Record
-            label="3VS3 VICTORIES"
+            label={t("3vs3Victories")}
             imagePath="/3vs3.png"
             value={player.vs3Victories}
           />
           <Record
-            label="VICTORIES"
+            label={t("victories")}
             imagePath="https://cdn.brawlify.com/game-modes/regular/48000006.png"
             value={player.soloVictories}
           />
@@ -157,7 +161,7 @@ export default async function Page({
 
         {/* バトル履歴 */}
         <div className={styles.battlelogContainer}>
-          <h2>BATTLE LOG</h2>
+          <h2>{t("battleLog")}</h2>
           {battleLogs.map((battleLog, index) => {
             if (battleLog.rounds) {
               return (
@@ -250,7 +254,7 @@ export default async function Page({
             } else {
               return (
                 <div key={`${battleLog?.battleTime}-${index}`}>
-                  不明なバトル形式
+                  {t("undefined")}
                 </div>
               );
             }

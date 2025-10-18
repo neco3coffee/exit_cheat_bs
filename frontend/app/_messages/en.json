@@ -70,5 +70,24 @@
     "loginStatus": "Currently logged in as",
     "logout": "Logout"
   },
-  "players": {}
+  "players": {
+    "seasonHigh": "SEASON HIGH",
+    "allTimeHigh": "ALL TIME HIGHT",
+    "3vs3Victories": "3VS3 VICTORIES",
+    "victories": "VICTORIES",
+    "notInClub": "Not in a Club",
+    "battleLog": "BATTLE LOG",
+    "defeat": "Defeat",
+    "victory": "Victory",
+    "draw": "Draw",
+    "ongoing": "Ongoing",
+    "rank": "RANK {rank}",
+    "challengeCleared": "CHALLENGE: {level} CLEARED!",
+    "Normal": "NORMAL",
+    "Hard": "HARD",
+    "Expert": "EXPERT",
+    "Insane": "INSANE",
+    "Impossible": "IMPOSSIBLE",
+    "undefined": "UNDEFINED BATTLE TYPE"
+  }
 }

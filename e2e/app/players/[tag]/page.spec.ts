@@ -7,7 +7,7 @@ test.describe('ユーザーがバトル履歴を見れるようにする#3', () 
 
   // バトル履歴のタイトルが表示される
   test('バトル履歴のタイトルが表示される', async ({ page}) => {
-    await expect(page.getByText("BATTLE LOG")).toBeVisible({ timeout: 15000 })
+    await expect(page.getByText("バトル履歴")).toBeVisible({ timeout: 15000 })
   })
 
   // バトル履歴が8件以上表示される, data-testid="battleLog"
