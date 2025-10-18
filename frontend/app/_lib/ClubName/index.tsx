@@ -1,3 +1,4 @@
+"use client";
 import { useTranslations } from "next-intl";
 
 const clubNameRegex = /<c([0-9])>(.*?)<\/c>/;

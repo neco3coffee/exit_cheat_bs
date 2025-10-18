@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { shortenMapName } from "@/app/_lib/common";
