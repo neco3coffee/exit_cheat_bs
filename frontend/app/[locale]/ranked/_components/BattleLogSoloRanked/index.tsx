@@ -4,7 +4,7 @@ import axios from "axios";
 import { TriangleAlert } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { shortenMapName } from "@/app/_lib/common";
 import { Duration, RelativeTime } from "@/app/_lib/time";
@@ -45,7 +45,7 @@ const ReportType = {
   cheating: "cheating",
 };
 
-const BattleLogSoloRanked = ({ battleLog, ownTag, isReported }: any) => {
+const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
   // console.log("battleLog!: ", JSON.stringify(battleLog, null, 2));
   const tag = ownTag.trim().toUpperCase().replace(/O/g, "0");
   const ownTeam = battleLog?.battle?.teams.find((team: any) => {
@@ -132,6 +132,7 @@ const BattleLogSoloRanked = ({ battleLog, ownTag, isReported }: any) => {
         });
         if (!res.ok) {
           setStatus(ReportStatus.error);
+          toast.error(t("failedGenerateSignedUrl"));
           setDialogOpen(false);
           return;
         }
@@ -167,12 +168,13 @@ const BattleLogSoloRanked = ({ battleLog, ownTag, isReported }: any) => {
       } catch (error) {
         console.error("Error uploading video:", error);
         setStatus(ReportStatus.error);
+        toast.error(t("failedUploadVideo"));
         setDialogOpen(false);
         return;
       }
       setStatus(ReportStatus.videoUploaded);
     })();
-  }, [signedUrl, videoFile]);
+  }, [signedUrl, videoFile, t]);
 
   useEffect(() => {
     if (!dialogOpen) {
@@ -214,6 +216,7 @@ const BattleLogSoloRanked = ({ battleLog, ownTag, isReported }: any) => {
               alt={battleLog?.event?.mode || "mode"}
               width={30}
               height={30}
+              style={{ height: "30px", width: "auto" }}
             />
             <div className={styles.modeAndMapContainer}>
               {/* TODO:DADGEBALLじゃなくてDOGDEBRAWLって表示できるようにする */}
@@ -345,6 +348,7 @@ const BattleLogSoloRanked = ({ battleLog, ownTag, isReported }: any) => {
             })}
           </div>
         </div>
+        <div style={{ backgroundColor: "var(--black)" }}></div>
       </div>
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent className={styles.dialogContent}>
@@ -577,7 +581,7 @@ const BattleLogSoloRanked = ({ battleLog, ownTag, isReported }: any) => {
       </Dialog>
     </>
   );
-};
+});
 
 export default BattleLogSoloRanked;
 

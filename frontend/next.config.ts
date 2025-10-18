@@ -13,6 +13,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  experimental: {
+    optimizeCss: true,
+  },
 };
 
 const withNextIntl = createNextIntPlugin("./app/_messages/i18n/request.tsx");

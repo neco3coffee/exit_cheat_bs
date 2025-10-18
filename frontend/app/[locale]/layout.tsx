@@ -44,6 +44,13 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
+      <head>
+        <link
+          rel="manifest"
+          href="/manifest.webmanifest"
+          crossOrigin="use-credentials"
+        />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <NextIntlClientProvider
           locale={locale}

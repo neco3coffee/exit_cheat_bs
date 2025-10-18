@@ -1,4 +1,4 @@
-import { type NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   const res = await fetch("http://app:3000/api/v1/reports/latest", {
