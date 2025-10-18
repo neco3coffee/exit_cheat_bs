@@ -40,9 +40,9 @@ type Player = {
 export default async function Page({
   params,
 }: {
-  params: Promise<{ tag: string }>;
+  params: Promise<{ locale: string; tag: string }>;
 }) {
-  const { tag } = await params;
+  const { locale, tag } = await params;
   const res = await fetch(
     `http://app:3000/api/v1/players/${encodeURIComponent(tag)}`,
     { next: { revalidate: 60 } },
@@ -52,7 +52,7 @@ export default async function Page({
   console.log("club: ", JSON.stringify(player?.club, null, 2));
   console.log("player: ", JSON.stringify(player, null, 2));
 
-  const t = await getTranslations("players");
+  const t = await getTranslations({ locale, namespace: "players" });
 
   if (player?.error) {
     return (
