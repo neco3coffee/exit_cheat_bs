@@ -76,6 +76,7 @@ const PlayerComponent = ({
               : player?.brawler?.name || "brawler"
           }
           fill={true}
+          sizes="100%"
         />
         <div className={styles.rank}>
           <Image

@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { List, type RowComponentProps } from "react-window";
 import { formatBattleLog } from "@/app/_lib/formatBattleLog";
 import { Link } from "@/app/_messages/i18n/navigation";
 import BattleLogSoloRanked from "@/app/[locale]/ranked/_components/BattleLogSoloRanked";
@@ -33,7 +34,7 @@ interface Player {
 export default function RankedPage() {
   const [status, setStatus] = useState(Status.Idle);
   const [player, setPlayer] = useState<Player | null>(null);
-  const [battleLogs, setBattleLogs] = useState<any[] | null>(null);
+  const [battleLogs, setBattleLogs] = useState<any[]>([]);
   const [reports, setReports] = useState<any[] | null>(null);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const topRef = useRef<HTMLDivElement>(null);
@@ -42,6 +43,26 @@ export default function RankedPage() {
   const [displayingReport, setDisplayingReport] = useState<any>(null);
   const [mainVideoDescription, setMainVideoDescription] = useState<string>("");
   const t = useTranslations("ranked");
+
+  const reportKeys = useMemo(() => {
+    return new Set(
+      reports?.map((r) =>
+        r?.battle_data?.battle?.teams
+          .flat()
+          .map((p: any) => p.tag)
+          .sort()
+          .join("-"),
+      ) || [],
+    );
+  }, [reports]);
+
+  const tag = player?.tag?.startsWith("#")
+    ? player.tag.substring(1)!
+    : player?.tag!;
+
+  const stableRowProps = useMemo(() => {
+    return { battleLogs, reportKeys, tag };
+  }, [battleLogs, reportKeys, tag]);
 
   const checkAuth = async () => {
     setStatus(Status.Loading);
@@ -333,36 +354,17 @@ export default function RankedPage() {
             </TabsContent>
             <TabsContent value="battleLogs">
               <div className={styles.battlelogContainer}>
-                {battleLogs?.map((battlelog, index) => {
-                  const tag = player?.tag.startsWith("#")
-                    ? player?.tag.substring(1)
-                    : player?.tag;
-                  const isReported = reports?.some(
-                    (report) =>
-                      report?.battle_data?.battle?.teams
-                        .flat()
-                        .map((p: any) => p.tag)
-                        .sort()
-                        .join("-") ===
-                      battlelog?.battle?.teams
-                        .flat()
-                        .map((p: any) => p.tag)
-                        .sort()
-                        .join("-"),
-                  );
-                  return (
-                    <BattleLogSoloRanked
-                      key={`${battlelog.battleTime}-${index}`}
-                      battleLog={battlelog}
-                      ownTag={tag}
-                      isReported={isReported}
-                    />
-                  );
-                })}
-                {!battleLogs ||
-                  (battleLogs?.length === 0 && (
-                    <h5>No ranked battle logs available.</h5>
-                  ))}
+                {!battleLogs || battleLogs.length === 0 ? (
+                  <h5>No battle logs available.</h5>
+                ) : (
+                  <List
+                    rowComponent={BattleLogRow}
+                    rowCount={battleLogs.length}
+                    rowHeight={rowHeight}
+                    rowProps={stableRowProps}
+                    style={{ width: "100%", height: "calc(100vh - 422px)" }} // 明示的に高さを指定する
+                  />
+                )}
               </div>
             </TabsContent>
             <TabsContent value="reports">
@@ -399,4 +401,47 @@ export default function RankedPage() {
       )}
     </div>
   );
+}
+
+function BattleLogRow({
+  index,
+  battleLogs,
+  reportKeys,
+  tag,
+  style,
+}: RowComponentProps<{
+  battleLogs: any[];
+  reportKeys: Set<string>;
+  tag: string;
+}>) {
+  const battlelog = battleLogs[index];
+  const battleKey = battlelog?.battle?.teams
+    ?.flat()
+    ?.map((p: any) => p.tag)
+    ?.sort()
+    ?.join("-");
+  const isReported = reportKeys.has(battleKey);
+
+  return (
+    <div style={style}>
+      <BattleLogSoloRanked
+        battleLog={battlelog}
+        ownTag={tag}
+        isReported={isReported}
+      />
+    </div>
+  );
+}
+
+function rowHeight(index: number, { battleLogs }: any) {
+  switch (battleLogs[index].rounds.length) {
+    case 1:
+      return 160;
+    case 2:
+      return 192;
+    case 3:
+      return 224;
+    default:
+      return 160;
+  }
 }

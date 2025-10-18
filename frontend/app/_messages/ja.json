@@ -47,6 +47,8 @@
     "cancelReportButton": "キャンセル",
     "mainVideoDescription": "最近報告されたプレイヤー",
     "failedReport": "プレイヤーの報告に失敗しました",
+    "failedGenerateSignedUrl": "署名付きURLの生成に失敗しました",
+    "failedUploadVideo": "動画のアップロードに失敗しました",
     "successReport": "プレイヤーが報告されました。ありがとうございます！",
     "reportIdMissing": "報告IDがありません。",
     "reportRejected": "プレイヤーは真面目にプレイしていると判断されました。",

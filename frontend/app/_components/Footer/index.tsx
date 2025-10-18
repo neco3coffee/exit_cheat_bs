@@ -29,6 +29,7 @@ const Footer = () => {
             alt="Logo"
             width={34}
             height={26}
+            priority
           />
         </Link>
         <Link

@@ -47,6 +47,8 @@
     "cancelReportButton": "Cancel",
     "mainVideoDescription": "Recently Reported Player",
     "failedReport": "Failed to report the player",
+    "failedGenerateSignedUrl": "Failed to generate signed URL",
+    "failedUploadVideo": "Failed to upload video",
     "successReport": "Player reported, thanks!",
     "reportIdMissing": "Report ID is missing.",
     "reportRejected": "Report rejected successfully.",
