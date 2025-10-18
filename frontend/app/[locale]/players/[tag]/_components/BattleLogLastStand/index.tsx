@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { shortenMapName } from "@/app/_lib/common";
 import { RelativeTime } from "@/app/_lib/time";
 import { classifyModeByMapName } from "@/app/_lib/unknownMode";
@@ -14,6 +15,7 @@ const BattleLogLastStand = ({ battleLog, ownTag }: any) => {
       : classifyModeByMapName(battleLog?.event?.map);
   const level = battleLog?.battle?.level?.name;
   const result = battleLog?.battle?.result;
+  const t = useTranslations("players");
 
   console.log("battleLog: ", JSON.stringify(battleLog, null, 2));
   return (
@@ -52,7 +54,9 @@ const BattleLogLastStand = ({ battleLog, ownTag }: any) => {
           </div>
         </div>
         <h5 className={result === "victory" ? styles.victory : styles.defeat}>
-          {result === "victory" ? `CHALLENGE: ${level} CLEARED!` : `DEFEAT`}
+          {result === "victory"
+            ? t("challengeCleared", { level: t(level) })
+            : t("defeat")}
         </h5>
         <div className={styles.right}>
           {battleLog?.battle.type === "ranked" &&

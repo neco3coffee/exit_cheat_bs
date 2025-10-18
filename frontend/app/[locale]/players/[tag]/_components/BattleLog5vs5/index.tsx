@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { shortenMapName } from "@/app/_lib/common";
 import { Duration, RelativeTime } from "@/app/_lib/time";
 import { classifyModeByMapName } from "@/app/_lib/unknownMode";
@@ -18,6 +19,7 @@ const BattleLog5vs5 = ({ battleLog, ownTag }: any) => {
     battleLog?.event?.mode !== "unknown"
       ? battleLog?.event.mode
       : classifyModeByMapName(battleLog?.event?.map);
+  const t = useTranslations("players");
 
   return (
     <div className={styles.container} data-testid="battleLog">
@@ -63,7 +65,7 @@ const BattleLog5vs5 = ({ battleLog, ownTag }: any) => {
                 : styles.draw
           }
         >
-          {battleLog?.battle?.result?.toUpperCase()}
+          {t(battleLog?.battle?.result)}
         </h5>
         <div className={styles.right}>
           {battleLog?.battle.type === "ranked" &&

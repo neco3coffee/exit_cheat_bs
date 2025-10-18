@@ -70,5 +70,25 @@
     "loginStatus": "現在のログインユーザー",
     "logout": "ログアウト"
   },
-  "players": {}
+  "players": {
+    "seasonHigh": "シーズン記録",
+    "allTimeHigh": "歴代記録",
+    "3vs3Victories": "3対3 勝利数",
+    "victories": "勝利数",
+    "notInClub": "クラブに参加していません",
+    "battleLog": "バトル履歴",
+    "defeat": "敗北",
+    "victory": "勝利",
+    "draw": "引き分け",
+    "ongoing": "進行中",
+    "rank": "ランク {rank}",
+    "challengeCleared": "チャレンジレベル: {level}クリア！",
+    "Normal": "ノーマル",
+    "Hard": "ハード",
+    "Expert": "エキスパート",
+    "Master": "マスター",
+    "Insane": "クレイジー",
+    "Impossible": "インポッシブル",
+    "undefined": "不明なバトル形式"
+  }
 }

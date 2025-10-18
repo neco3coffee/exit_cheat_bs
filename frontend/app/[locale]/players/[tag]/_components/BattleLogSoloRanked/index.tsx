@@ -1,5 +1,6 @@
 import { TriangleAlert } from "lucide-react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { shortenMapName } from "@/app/_lib/common";
 import { Duration, RelativeTime } from "@/app/_lib/time";
 import { classifyModeByMapName } from "@/app/_lib/unknownMode";
@@ -33,6 +34,7 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
   } else {
     result = battleLog?.battle?.result;
   }
+  const t = useTranslations("players");
 
   return (
     <div className={styles.container} data-testid="battleLog">
@@ -80,7 +82,7 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
                   : styles.draw
           }
         >
-          {result?.toUpperCase()}
+          {t(result)}
         </h5>
         <div className={styles.right}>
           {battleLog?.battle.type === "ranked" &&
@@ -152,7 +154,7 @@ const BattleLogSoloRanked = ({ battleLog, ownTag }: any) => {
                         : styles.draw
                   }
                 >
-                  {round?.result?.toUpperCase()}
+                  {t(round?.result)}
                 </h5>
                 <div className={styles.right}>
                   {/* <button type="button" className={styles.reportButton}>
