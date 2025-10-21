@@ -13,15 +13,18 @@ import { Spinner } from "@/components/ui/spinner";
 import styles from "./page.module.scss";
 
 // ログイン成功時のアイコン表示と5秒後自動遷移
-function SuccessSection(props: { player: Player; onReset: () => void }) {
-  const { player, onReset } = props;
+function SuccessSection(props: {
+  player: Player;
+  checkExistingSession: () => void;
+}) {
+  const { player, checkExistingSession } = props;
   const t = useTranslations("account");
   useEffect(() => {
     const timer = setTimeout(() => {
-      window.location.reload();
+      checkExistingSession();
     }, 5000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [checkExistingSession]);
   return (
     <div className={styles.successContainer}>
       <h3>{t("loginSuccess")}</h3>
@@ -392,7 +395,10 @@ export default function AccountPage() {
       )}
 
       {status === "success" && player && (
-        <SuccessSection player={player} onReset={handleReset} />
+        <SuccessSection
+          player={player}
+          checkExistingSession={checkExistingSession}
+        />
       )}
 
       {status === "error" && (
