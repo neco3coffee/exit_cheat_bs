@@ -187,7 +187,6 @@ export default function AccountPage() {
 
       if (!res.ok) {
         // セッションが無効な場合は削除
-        localStorage.removeItem("session_token");
         setStatus("idle");
         return;
       }
@@ -197,7 +196,6 @@ export default function AccountPage() {
       setStatus("logged_in");
     } catch (error) {
       console.error("Session check error:", error);
-      localStorage.removeItem("session_token");
       setStatus("idle");
     }
   };
