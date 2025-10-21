@@ -14,6 +14,7 @@ class Report < ApplicationRecord
   private
 
   def increment_approved_reports_count
+    # TODO: reportedがnilの場合の処理を追加
     if saved_change_to_status? && status == 'approved' && status_before_last_save == 'waiting_review'
       reported.increment!(:approved_reports_count)
     end
