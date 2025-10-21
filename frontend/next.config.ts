@@ -27,6 +27,15 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        source: "/:locale/players/search",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=15, must-revalidate",
+          },
+        ]
+      },
     ];
   },
 };
