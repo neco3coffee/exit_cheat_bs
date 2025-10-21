@@ -19,16 +19,16 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: '/:locale/players/:tag',
+        source: "/:locale/players/:tag",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=60, must-revalidate',
-          }
-        ]
-      }
-    ]
-  }
+            key: "Cache-Control",
+            value: "public, max-age=60, must-revalidate",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 const withNextIntl = createNextIntPlugin("./app/_messages/i18n/request.tsx");
