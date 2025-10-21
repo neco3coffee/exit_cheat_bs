@@ -318,9 +318,6 @@ export default function Home() {
                       key={rank}
                       onClick={() => {
                         setSearchWithRank(rank);
-                        setTimeout(() => {
-                          handleNameSearch();
-                        }, 1000);
                       }}
                       className={styles.dropDownMenuItem}
                     >
