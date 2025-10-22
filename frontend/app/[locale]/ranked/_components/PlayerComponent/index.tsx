@@ -56,6 +56,7 @@ const PlayerComponent = ({
           alt="reported player"
           width={24}
           height={24}
+          sizes="24px"
           className={styles.reportedIcon}
         />
       )}
@@ -76,7 +77,7 @@ const PlayerComponent = ({
               : player?.brawler?.name || "brawler"
           }
           fill={true}
-          sizes="100%"
+          sizes="42px"
         />
         <div className={styles.rank}>
           <Image
@@ -84,6 +85,7 @@ const PlayerComponent = ({
             alt="rank"
             height={20}
             width={20}
+            sizes="20px"
             style={{ height: "20px", width: "auto" }}
           />
         </div>

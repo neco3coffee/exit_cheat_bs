@@ -38,6 +38,7 @@ const BattleLogTrio = ({ battleLog, ownTag }: any) => {
             alt={battleLog?.event?.mode || "mode"}
             width={30}
             height={30}
+            sizes="30px"
           />
           <div className={styles.modeAndMapContainer}>
             {/* TODO:DADGEBALLじゃなくてDOGDEBRAWLって表示できるようにする */}
@@ -70,6 +71,7 @@ const BattleLogTrio = ({ battleLog, ownTag }: any) => {
                 alt="trophy icon"
                 width={15}
                 height={15}
+                sizes="15px"
               />
             </>
           ) : (

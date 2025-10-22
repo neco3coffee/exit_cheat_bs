@@ -216,6 +216,7 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
               alt={battleLog?.event?.mode || "mode"}
               width={30}
               height={30}
+              sizes="30px"
               style={{ height: "30px", width: "auto" }}
             />
             <div className={styles.modeAndMapContainer}>
@@ -255,6 +256,7 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
                   alt="trophy icon"
                   width={15}
                   height={15}
+                  sizes="15px"
                 />
               </>
             ) : (
@@ -381,6 +383,7 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
                   alt="bad random"
                   width={50}
                   height={50}
+                  sizes="50px"
                   style={{ height: "50px", width: "auto" }}
                 />
                 <h5>{t("reportType.badRandom")}</h5>
@@ -399,6 +402,7 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
                   alt="grief play"
                   width={50}
                   height={50}
+                  sizes="50px"
                   style={{ height: "50px", width: "auto" }}
                 />
                 <h5>{t("reportType.griefPlay")}</h5>
@@ -417,6 +421,7 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
                   alt="cheating"
                   width={50}
                   height={50}
+                  sizes="50px"
                   style={{ height: "50px", width: "auto" }}
                 />
                 <h5>{t("reportType.cheating")}</h5>

@@ -181,6 +181,7 @@ function SearchPage() {
                 alt="icon"
                 width={80}
                 height={80}
+                sizes="80px"
               />
               <h3>{player.tag}</h3>
             </div>
@@ -201,6 +202,7 @@ function SearchPage() {
                         alt="rank"
                         height={60}
                         width={60}
+                        sizes="60px"
                         style={{ height: "60px", width: "auto" }}
                       />
                       <Rocket className={styles.icon} />
@@ -211,6 +213,7 @@ function SearchPage() {
                     alt="rank"
                     height={60}
                     width={60}
+                    sizes="60px"
                     style={{ height: "60px", width: "auto" }}
                   />
                 </div>
@@ -224,6 +227,7 @@ function SearchPage() {
                     alt="icon"
                     width={55}
                     height={55}
+                    sizes="55px"
                     style={{
                       width: "55px",
                       height: "auto",
@@ -237,6 +241,7 @@ function SearchPage() {
                     alt="icon"
                     width={55}
                     height={55}
+                    sizes="55px"
                     style={{
                       width: "55px",
                       height: "auto",
@@ -253,6 +258,7 @@ function SearchPage() {
                       alt="icon"
                       width={55}
                       height={55}
+                      sizes="55px"
                       style={{
                         width: "55px",
                         height: "auto",
@@ -292,6 +298,7 @@ function SearchPage() {
                                   alt={brawler.name}
                                   width={137}
                                   height={114}
+                                  sizes="137px"
                                   style={{
                                     height: "100%",
                                     width: "auto",
@@ -314,6 +321,7 @@ function SearchPage() {
                                             alt={gadget.name}
                                             width={18}
                                             height={18}
+                                            sizes="18px"
                                             style={{
                                               width: "18px",
                                               height: "18px",
@@ -327,6 +335,7 @@ function SearchPage() {
                                             alt={gadget.name}
                                             width={40}
                                             height={40}
+                                            sizes="40px"
                                             style={{
                                               width: "40px",
                                               height: "40px",
@@ -352,6 +361,7 @@ function SearchPage() {
                                             alt={starPower.name}
                                             width={18}
                                             height={18}
+                                            sizes="18px"
                                             style={{
                                               width: "18px",
                                               height: "18px",
@@ -363,6 +373,7 @@ function SearchPage() {
                                             alt={starPower.name}
                                             width={40}
                                             height={40}
+                                            sizes="40px"
                                             style={{
                                               width: "40px",
                                               height: "40px",
@@ -383,6 +394,7 @@ function SearchPage() {
                                           alt={gear.name}
                                           width={24}
                                           height={24}
+                                          sizes="24px"
                                           style={{
                                             width: "24px",
                                             height: "24px",
@@ -549,6 +561,7 @@ function SearchPage() {
                           alt="icon"
                           width={29}
                           height={29}
+                          sizes="29px"
                           style={{
                             width: "auto",
                             height: "29px",
@@ -562,6 +575,7 @@ function SearchPage() {
                           alt="icon"
                           width={29}
                           height={29}
+                          sizes="29px"
                           style={{
                             width: "auto",
                             height: "29px",
@@ -583,6 +597,7 @@ function SearchPage() {
                           alt="trophy"
                           width={12}
                           height={12}
+                          sizes="12px"
                           style={{
                             width: "auto",
                             height: "17px",
@@ -599,6 +614,7 @@ function SearchPage() {
                         alt="rank"
                         height={33}
                         width={33}
+                        sizes="33px"
                         style={{ height: "33px", width: "auto" }}
                       />
                     </div>
@@ -643,6 +659,7 @@ function SearchPage() {
                       alt="rank"
                       height={30}
                       width={30}
+                      sizes="30px"
                       style={{ height: "30px", width: "auto" }}
                     />
                     <ChevronDownIcon className="size-3" />
@@ -664,6 +681,7 @@ function SearchPage() {
                             alt="rank"
                             height={40}
                             width={40}
+                            sizes="40px"
                             style={{ height: "40px", width: "auto" }}
                           />
                         </DropdownMenuItem>

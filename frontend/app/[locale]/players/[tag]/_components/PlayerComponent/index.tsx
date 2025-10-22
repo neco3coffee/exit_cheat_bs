@@ -54,6 +54,7 @@ const PlayerComponent = ({
               : player?.brawler?.name || "brawler"
           }
           fill={true}
+          sizes="42px"
         />
         {battleType === "ranked" && (
           <div className={styles.trophiesContainer}>
@@ -62,6 +63,7 @@ const PlayerComponent = ({
               alt="trophy icon"
               width={8}
               height={8}
+              sizes="8px"
               style={{ transform: `rotate(7deg)` }}
             />
             {player?.brawler?.trophies}
@@ -74,6 +76,7 @@ const PlayerComponent = ({
               alt="rank"
               height={20}
               width={20}
+              sizes="20px"
               style={{ height: "20px", width: "auto" }}
             />
           </div>

@@ -12,7 +12,13 @@ const Record = ({ label, imagePath, value }: RecordProps) => {
     <div className={styles.container}>
       <h5>{label}</h5>
       <div className={styles.recordContainer}>
-        <Image src={imagePath} alt={label} width={28} height={28} />
+        <Image
+          src={imagePath}
+          alt={label}
+          width={28}
+          height={28}
+          sizes="28px"
+        />
         <p>{value}</p>
       </div>
     </div>

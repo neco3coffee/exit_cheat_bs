@@ -33,6 +33,7 @@ function SuccessSection(props: {
         alt="login icon"
         width={96}
         height={96}
+        sizes="96px"
       />
       <p>{player.name}</p>
       <p>{player.tag}</p>
@@ -42,6 +43,7 @@ function SuccessSection(props: {
           alt="trophy icon"
           width={20}
           height={20}
+          sizes="20px"
           className="inline-block mr-1"
         />
         {player.trophies.toLocaleString()}
@@ -279,6 +281,7 @@ export default function AccountPage() {
             alt="login icon"
             width={96}
             height={96}
+            sizes="96px"
           />
           <p>{player.name}</p>
           <p>{player.tag}</p>
@@ -288,6 +291,7 @@ export default function AccountPage() {
               alt="trophy icon"
               width={20}
               height={20}
+              sizes="20px"
               className="inline-block mr-1"
             />
             {player.trophies.toLocaleString()}
@@ -356,6 +360,7 @@ export default function AccountPage() {
             alt="login icon"
             width={96}
             height={96}
+            sizes="96px"
           />
 
           <p>{player.name}</p>
@@ -367,6 +372,7 @@ export default function AccountPage() {
               alt="trophy icon"
               width={20}
               height={20}
+              sizes="20px"
               className="inline-block mr-1"
             />
             {player.trophies.toLocaleString()}

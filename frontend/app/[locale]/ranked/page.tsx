@@ -284,6 +284,7 @@ export default function RankedPage() {
                   alt="Play Button"
                   width={64}
                   height={64}
+                  sizes="64px"
                 />
               </button>
             )}
@@ -309,6 +310,7 @@ export default function RankedPage() {
                       alt="reported brawler"
                       width={50}
                       height={50}
+                      sizes="50px"
                       style={{ height: "50px", width: "auto" }}
                     />
                     <Image
@@ -316,6 +318,7 @@ export default function RankedPage() {
                       alt="reported player"
                       width={24}
                       height={24}
+                      sizes="24px"
                       className={styles.reportedIcon}
                     />
                   </div>
