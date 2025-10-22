@@ -302,6 +302,7 @@ export default function Home() {
                   alt="rank"
                   height={30}
                   width={30}
+                  sizes="30px"
                   style={{ height: "30px", width: "auto" }}
                 />
                 <ChevronDownIcon className="size-3" />
@@ -326,6 +327,7 @@ export default function Home() {
                         alt="rank"
                         height={40}
                         width={40}
+                        sizes="40px"
                         style={{ height: "40px", width: "auto" }}
                       />
                     </DropdownMenuItem>

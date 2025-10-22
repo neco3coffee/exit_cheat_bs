@@ -85,6 +85,7 @@ export default async function Page({
               alt="icon"
               width={80}
               height={80}
+              sizes="80px"
             />
             <h3>{player.tag}</h3>
           </div>
@@ -105,6 +106,7 @@ export default async function Page({
                       alt="rank"
                       height={60}
                       width={60}
+                      sizes="60px"
                       style={{ height: "60px", width: "auto" }}
                     />
                     <Rocket className={styles.icon} />
@@ -115,6 +117,7 @@ export default async function Page({
                   alt="rank"
                   height={60}
                   width={60}
+                  sizes="60px"
                   style={{ height: "60px", width: "auto" }}
                 />
               </div>
@@ -150,6 +153,7 @@ export default async function Page({
               alt=""
               width={32}
               height={36}
+              sizes="32px"
             />
           ) : (
             <div></div>

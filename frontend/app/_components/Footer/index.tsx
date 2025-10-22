@@ -30,6 +30,7 @@ const Footer = () => {
             width={34}
             height={26}
             priority
+            sizes="34px"
           />
         </Link>
         <Link
