@@ -4,7 +4,7 @@ FROM node:20-alpine AS base
 FROM base AS development
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm install --force
 COPY . .
 EXPOSE 3000
 ENV NEXT_WATCHPACK_POLLING=1
