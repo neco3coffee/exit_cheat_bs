@@ -17,7 +17,7 @@ FROM base AS dependencies
 RUN apk update && apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm ci --force
 
 # ビルドステップ
 FROM base AS builder
