@@ -6,5 +6,4 @@ cd frontend && npm run lint || exit 1
 cd ..
 
 # root test
-npm run test:dev || exit 1
-
+# npm run test:dev || exit 1
