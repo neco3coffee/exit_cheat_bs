@@ -85,19 +85,13 @@ export default function RankedPage() {
   const checkAuth = async () => {
     setStatus(Status.Loading);
 
-    const sessionToken = localStorage.getItem("session_token");
-    if (!sessionToken) {
-      setStatus(Status.Unauthenticated);
-      return;
-    }
-
     try {
       const res = await fetch("/api/v1/auth/me", {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${sessionToken}`,
           "Content-Type": "application/json",
         },
+        credentials: "include",
       });
 
       if (!res.ok) {

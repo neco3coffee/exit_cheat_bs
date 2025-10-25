@@ -131,18 +131,13 @@ export default function Home() {
   const t = useTranslations("home");
 
   const setDefaultRank = async () => {
-    const sessionToken = localStorage.getItem("session_token");
-    if (!sessionToken) {
-      return;
-    }
-
     try {
       const res = await fetch("/api/v1/auth/me", {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${sessionToken}`,
           "Content-Type": "application/json",
         },
+        credentials: "include",
       });
       if (!res.ok) {
         console.error("Failed to fetch user data");
