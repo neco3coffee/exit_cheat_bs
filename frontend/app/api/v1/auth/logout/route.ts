@@ -1,23 +1,14 @@
-import { cookies } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
-    const cookieStore = await cookies();
-    const sessionCookie = cookieStore.get("session_token");
-
-    if (!sessionCookie) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
     // Docker Compose環境ではapp:3000を使用
     const backendUrl = "http://app:3000";
 
-    const response = await fetch(`${backendUrl}/api/v1/auth/me`, {
+    const response = await fetch(`${backendUrl}/api/v1/auth/logout`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Cookie: `session_token=${sessionCookie.value}`,
       },
       // cookieを含める
       credentials: "include",
@@ -29,9 +20,15 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(data, { status: response.status });
     }
 
-    return NextResponse.json(data);
+    const nextResponse = NextResponse.json(data);
+    nextResponse.headers.append(
+      "Set-Cookie",
+      `session_token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; SameSite=Lax`,
+    );
+
+    return nextResponse;
   } catch (error) {
-    console.error("Me API proxy error:", error);
+    console.error("Logout proxy error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },

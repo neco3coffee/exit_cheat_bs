@@ -4,6 +4,7 @@ import createNextIntPlugin from "next-intl/plugin";
 const nextConfig: NextConfig = {
   // reactStrictMode: false,
   output: "standalone",
+  cacheComponents: true,
   /* config options here */
   images: {
     remotePatterns: [
