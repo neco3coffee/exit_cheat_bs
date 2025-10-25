@@ -16,12 +16,18 @@ export async function POST(request: NextRequest) {
     });
 
     const data = await response.json();
+    const sessionToken = response.headers.get("Set-Cookie");
 
     if (!response.ok) {
       return NextResponse.json(data, { status: response.status });
     }
 
-    return NextResponse.json(data);
+    if (sessionToken) {
+      // クッキーをNextResponseに設定
+      const nextResponse = NextResponse.json(data);
+      nextResponse.headers.append("Set-Cookie", sessionToken);
+      return nextResponse;
+    }
   } catch (error) {
     console.error("Verify proxy error:", error);
     return NextResponse.json(

@@ -80,7 +80,6 @@ interface VerifyResponse {
 
 interface MeResponse {
   player: Player;
-  session_expires_at: string;
 }
 
 type Status =
@@ -138,7 +137,6 @@ export default function AccountPage() {
         });
         setStatus("success");
         // セッショントークンをローカルストレージに保存
-        localStorage.setItem("session_token", data.session_token);
       } else {
         setStatus("error");
         setErrorMessage(data.message || "認証に失敗しました");
@@ -171,20 +169,13 @@ export default function AccountPage() {
   );
 
   const checkExistingSession = async () => {
-    const sessionToken = localStorage.getItem("session_token");
-
-    if (!sessionToken) {
-      setStatus("idle");
-      return;
-    }
-
     try {
       const res = await fetch("/api/v1/auth/me", {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${sessionToken}`,
           "Content-Type": "application/json",
         },
+        credentials: "include",
       });
 
       if (!res.ok) {
@@ -260,8 +251,22 @@ export default function AccountPage() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("session_token");
-    handleReset();
+    fetch("/api/v1/auth/logout", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("ログアウトに失敗しました");
+        }
+      })
+      .catch((error) => {
+        console.error("Logout error:", error);
+      })
+      .finally(() => {
+        handleReset();
+      });
   };
 
   return (

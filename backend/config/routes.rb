@@ -19,6 +19,7 @@ Rails.application.routes.draw do
         post "login",  to: "sessions#login"
         post "verify", to: "sessions#verify"
         get "me", to: "sessions#me"
+        get "logout", to: "sessions#logout"
       end
 
       resources :reports, only: [:create, :update, :index], param: :id
