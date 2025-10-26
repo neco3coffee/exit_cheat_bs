@@ -39,13 +39,25 @@ type Player = {
   error?: any;
 };
 
-export default async function Page({
+export default function Page({
   params,
 }: {
   params: Promise<{ locale: string; tag: string }>;
 }) {
-  "use cache";
+  return (
+    <Suspense fallback={null}>
+      <ServerLocaleMessageProviderWrapper params={params}>
+        <PlayerPage params={params} />
+      </ServerLocaleMessageProviderWrapper>
+    </Suspense>
+  );
+}
 
+async function PlayerPage({
+  params,
+}: {
+  params: Promise<{ locale: string; tag: string }>;
+}) {
   const { locale, tag } = await params;
   const res = await fetch(
     `http://app:3000/api/v1/players/${encodeURIComponent(tag)}`,
