@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useMemo } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,6 +11,16 @@ import {
 import styles from "./index.module.scss";
 
 export default function LocaleBox() {
+  const localeMenu = useMemo(() => <LocaleMenu />, []);
+
+  return (
+    <>
+      <div className={styles.localeContainer}>{localeMenu}</div>
+    </>
+  );
+}
+
+const LocaleMenu = () => {
   const pathname = usePathname();
   const locale = pathname.split("/")[1];
   const locales = ["en", "ja"];
@@ -17,39 +28,34 @@ export default function LocaleBox() {
     en: "🇺🇸",
     ja: "🇯🇵",
   };
-
   const leftPath = pathname.split("/").slice(2).join("/");
 
   return (
-    <>
-      <div className={styles.localeContainer}>
-        <DropdownMenu>
-          <DropdownMenuTrigger className={styles.locale}>
-            <span role="img" aria-label={locale}>
-              {nationalFlags[locale]}
-            </span>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className={styles.dropdownContent} align="end">
-            {locales.map((loc) => (
-              <DropdownMenuItem className={styles.item} key={loc} asChild>
-                <Link
-                  href={`/${loc}/${leftPath}`}
-                  className={`${styles.locale} ${
-                    loc === locale ? styles.selected : ""
-                  }`}
-                  onClick={() => {
-                    localStorage.setItem("locale", loc);
-                  }}
-                >
-                  <span role="img" aria-label={loc}>
-                    {nationalFlags[loc]}
-                  </span>
-                </Link>
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-    </>
+    <DropdownMenu>
+      <DropdownMenuTrigger className={styles.locale}>
+        <span role="img" aria-label={locale}>
+          {nationalFlags[locale]}
+        </span>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className={styles.dropdownContent} align="end">
+        {locales.map((loc) => (
+          <DropdownMenuItem className={styles.item} key={loc} asChild>
+            <Link
+              href={`/${loc}/${leftPath}`}
+              className={`${styles.locale} ${
+                loc === locale ? styles.selected : ""
+              }`}
+              onClick={() => {
+                localStorage.setItem("locale", loc);
+              }}
+            >
+              <span role="img" aria-label={loc}>
+                {nationalFlags[loc]}
+              </span>
+            </Link>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
-}
+};
