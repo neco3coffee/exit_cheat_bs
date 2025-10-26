@@ -3,7 +3,10 @@
 
 # frontend lint
 cd frontend && npm run lint || exit 1
-cd ..
+npm run build || exit 1
 
+
+# cd .. to project root
+# cd ..
 # root test
 # npm run test:dev || exit 1
