@@ -2,11 +2,13 @@ import { Rocket } from "lucide-react";
 import Image from "next/image";
 // import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { Suspense } from "react";
 import Record from "@/app/_components/Record";
 import ClubName from "@/app/_lib/ClubName";
 import { appendToEightDigits } from "@/app/_lib/common";
 import { formatBattleLog } from "@/app/_lib/formatBattleLog";
 import { Link } from "@/app/_messages/i18n/navigation";
+import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
 import BattleLog3vs3 from "@/app/[locale]/players/[tag]/_components/BattleLog3vs3";
 import BattleLog5vs5 from "@/app/[locale]/players/[tag]/_components/BattleLog5vs5";
 import BattleLogDuel from "@/app/[locale]/players/[tag]/_components/BattleLogDuel";
@@ -42,6 +44,8 @@ export default async function Page({
 }: {
   params: Promise<{ locale: string; tag: string }>;
 }) {
+  "use cache";
+
   const { locale, tag } = await params;
   const res = await fetch(
     `http://app:3000/api/v1/players/${encodeURIComponent(tag)}`,
@@ -53,6 +57,7 @@ export default async function Page({
   console.log("player: ", JSON.stringify(player, null, 2));
 
   const t = await getTranslations({ locale, namespace: "players" });
+  const notInClubText = t("notInClub");
 
   if (player?.error) {
     return (
@@ -159,110 +164,117 @@ export default async function Page({
             <div></div>
           )}
           <div className={styles.clubNameContainer}>
-            <ClubName clubName={player?.club?.name} />
+            <ClubName
+              clubName={player?.club?.name}
+              notInClubText={notInClubText}
+            />
           </div>
         </div>
 
         {/* バトル履歴 */}
         <div className={styles.battlelogContainer}>
           <h2>{t("battleLog")}</h2>
-          {battleLogs.map((battleLog, index) => {
-            if (battleLog.rounds) {
-              return (
-                <BattleLogSoloRanked
-                  key={`${battleLog?.battleTime}-${index}`}
-                  battleLog={battleLog}
-                  ownTag={tag}
-                />
-              );
-            } else if (
-              battleLog.battle.teams &&
-              battleLog.battle.teams.length === 2 &&
-              battleLog.battle.teams[0].length === 3
-            ) {
-              return (
-                <BattleLog3vs3
-                  key={`${battleLog?.battleTime}-${index}`}
-                  battleLog={battleLog}
-                  ownTag={tag}
-                />
-              );
-            } else if (
-              battleLog.battle.teams &&
-              battleLog.battle.teams.length === 2 &&
-              battleLog.battle.teams[0].length === 5
-            ) {
-              return (
-                <BattleLog5vs5
-                  key={`${battleLog?.battleTime}-${index}`}
-                  battleLog={battleLog}
-                  ownTag={tag}
-                />
-              );
-            } else if (
-              battleLog.battle.teams &&
-              battleLog.battle.teams.length === 4
-            ) {
-              return (
-                <BattleLogTrio
-                  key={`${battleLog?.battleTime}-${index}`}
-                  battleLog={battleLog}
-                  ownTag={tag}
-                />
-              );
-            } else if (
-              battleLog.battle.teams &&
-              battleLog.battle.teams.length === 5
-            ) {
-              return (
-                <BattleLogDuo
-                  key={`${battleLog?.battleTime}-${index}`}
-                  battleLog={battleLog}
-                  ownTag={tag}
-                />
-              );
-            } else if (
-              battleLog.battle.players &&
-              battleLog.battle.players.length === 10
-            ) {
-              return (
-                <BattleLogSolo
-                  key={`${battleLog?.battleTime}-${index}`}
-                  battleLog={battleLog}
-                  ownTag={tag}
-                />
-              );
-            } else if (
-              battleLog.battle.players &&
-              battleLog.battle.players.length === 2
-            ) {
-              return (
-                <BattleLogDuel
-                  key={`${battleLog?.battleTime}-${index}`}
-                  battleLog={battleLog}
-                  ownTag={tag}
-                />
-              );
-            } else if (
-              battleLog.battle.players &&
-              battleLog.battle.players.length === 3 &&
-              battleLog.battle.level
-            ) {
-              return (
-                <BattleLogLastStand
-                  key={`${battleLog?.battleTime}-${index}`}
-                  battleLog={battleLog}
-                  ownTag={tag}
-                />
-              );
-            } else {
-              return (
-                <div key={`${battleLog?.battleTime}-${index}`}>
-                  {t("undefined")}
-                </div>
-              );
-            }
-          })}
+          <Suspense fallback={null}>
+            <ServerLocaleMessageProviderWrapper params={params}>
+              {battleLogs.map((battleLog, index) => {
+                if (battleLog.rounds) {
+                  return (
+                    <BattleLogSoloRanked
+                      key={`${battleLog?.battleTime}-${index}`}
+                      battleLog={battleLog}
+                      ownTag={tag}
+                    />
+                  );
+                } else if (
+                  battleLog.battle.teams &&
+                  battleLog.battle.teams.length === 2 &&
+                  battleLog.battle.teams[0].length === 3
+                ) {
+                  return (
+                    <BattleLog3vs3
+                      key={`${battleLog?.battleTime}-${index}`}
+                      battleLog={battleLog}
+                      ownTag={tag}
+                    />
+                  );
+                } else if (
+                  battleLog.battle.teams &&
+                  battleLog.battle.teams.length === 2 &&
+                  battleLog.battle.teams[0].length === 5
+                ) {
+                  return (
+                    <BattleLog5vs5
+                      key={`${battleLog?.battleTime}-${index}`}
+                      battleLog={battleLog}
+                      ownTag={tag}
+                    />
+                  );
+                } else if (
+                  battleLog.battle.teams &&
+                  battleLog.battle.teams.length === 4
+                ) {
+                  return (
+                    <BattleLogTrio
+                      key={`${battleLog?.battleTime}-${index}`}
+                      battleLog={battleLog}
+                      ownTag={tag}
+                    />
+                  );
+                } else if (
+                  battleLog.battle.teams &&
+                  battleLog.battle.teams.length === 5
+                ) {
+                  return (
+                    <BattleLogDuo
+                      key={`${battleLog?.battleTime}-${index}`}
+                      battleLog={battleLog}
+                      ownTag={tag}
+                    />
+                  );
+                } else if (
+                  battleLog.battle.players &&
+                  battleLog.battle.players.length === 10
+                ) {
+                  return (
+                    <BattleLogSolo
+                      key={`${battleLog?.battleTime}-${index}`}
+                      battleLog={battleLog}
+                      ownTag={tag}
+                    />
+                  );
+                } else if (
+                  battleLog.battle.players &&
+                  battleLog.battle.players.length === 2
+                ) {
+                  return (
+                    <BattleLogDuel
+                      key={`${battleLog?.battleTime}-${index}`}
+                      battleLog={battleLog}
+                      ownTag={tag}
+                    />
+                  );
+                } else if (
+                  battleLog.battle.players &&
+                  battleLog.battle.players.length === 3 &&
+                  battleLog.battle.level
+                ) {
+                  return (
+                    <BattleLogLastStand
+                      key={`${battleLog?.battleTime}-${index}`}
+                      battleLog={battleLog}
+                      ownTag={tag}
+                    />
+                  );
+                } else {
+                  return (
+                    <div key={`${battleLog?.battleTime}-${index}`}>
+                      {t("undefined")}
+                    </div>
+                  );
+                }
+              })}
+            </ServerLocaleMessageProviderWrapper>
+          </Suspense>
         </div>
       </div>
     </>
