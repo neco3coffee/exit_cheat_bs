@@ -1,5 +1,4 @@
 "use client";
-import { TriangleAlert } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { shortenMapName } from "@/app/_lib/common";

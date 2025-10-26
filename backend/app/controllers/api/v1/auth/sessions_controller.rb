@@ -111,6 +111,14 @@ module Api
               expires_at: 30.days.from_now
             )
 
+            if Rails.env.production?
+              cookies[:session_token] = { value: session_token, httponly: true, secure: true, expires: 30.days.from_now }
+            end
+
+            if Rails.env.development?
+              cookies[:session_token] = { value: session_token, httponly: true, expires: 30.days.from_now}
+            end
+
             render json: {
               status: "success",
               player: {
@@ -131,10 +139,11 @@ module Api
 
         # GET /api/v1/auth/me
         def me
-          session_token = request.headers['Authorization']&.sub(/^Bearer /, '')
+          session_token = cookies[:session_token]
+
 
           if session_token.blank?
-            render json: { error: "Authorization header required" }, status: :unauthorized
+            render json: { error: "session token required" }, status: :unauthorized
             return
           end
 
@@ -157,8 +166,21 @@ module Api
               rank: player.rank,
               role: player.role,
             },
-            session_expires_at: session.expires_at
           }
+        end
+
+        def logout
+          if Rails.env.production?
+            cookies.delete(:session_token, httponly: true, secure: true)
+          else
+            cookies.delete(:session_token, httponly: true)
+          end
+          Session.find_by(session_token: cookies[:session_token])&.destroy
+          render json: { message: "Logged out successfully" }
+
+          rescue => e
+            Rails.logger.error("Logout error: #{e.message}")
+            render json: { error: "Logout failed" }, status: :internal_server_error
         end
 
         private

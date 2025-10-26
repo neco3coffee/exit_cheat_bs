@@ -1,14 +1,13 @@
+import { cookies } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
-    const authorization = request.headers.get("authorization");
+    const cookieStore = await cookies();
+    const sessionCookie = cookieStore.get("session_token");
 
-    if (!authorization) {
-      return NextResponse.json(
-        { error: "Authorization header required" },
-        { status: 401 },
-      );
+    if (!sessionCookie) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     // Docker Compose環境ではapp:3000を使用
@@ -17,9 +16,11 @@ export async function GET(request: NextRequest) {
     const response = await fetch(`${backendUrl}/api/v1/auth/me`, {
       method: "GET",
       headers: {
-        Authorization: authorization,
         "Content-Type": "application/json",
+        Cookie: `session_token=${sessionCookie.value}`,
       },
+      // cookieを含める
+      credentials: "include",
     });
 
     const data = await response.json();

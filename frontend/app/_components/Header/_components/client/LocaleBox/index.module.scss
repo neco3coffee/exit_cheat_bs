@@ -1,0 +1,21 @@
+.localeContainer {
+  padding-right: 16px;
+  width: 20%;
+}
+
+.dropdownContent {
+  z-index: 1500 !important;
+  margin-top: 8px;
+  background-color: var(--blue-black);
+  color: var(--white);
+  border: none;
+  padding: 8px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 16px;
+
+  a {
+    font-size: 24px;
+  }
+}

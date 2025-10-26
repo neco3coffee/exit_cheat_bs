@@ -4,11 +4,8 @@ import Footer from "@/app/_components/Footer";
 import Header from "@/app/_components/Header";
 import "../globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { notFound } from "next/navigation";
-import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { Suspense } from "react";
 import { Toaster } from "@/components/ui/sonner";
-import { routing } from "../_messages/i18n/routing";
 import { Analytics } from "../analytics";
 
 const geistSans = Geist({
@@ -36,14 +33,8 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }>) {
-  const { locale } = await params;
-  console.log("locale: ", locale);
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
-
   return (
-    <html lang={locale}>
+    <html lang="en">
       <head>
         <link
           rel="manifest"
@@ -52,19 +43,18 @@ export default async function RootLayout({
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <NextIntlClientProvider
-          locale={locale}
-          messages={(await import(`@/app/_messages/${locale}.json`)).default}
-        >
+        <Suspense fallback={null}>
           <Header />
-          <main>{children}</main>
-          <Footer />
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
-          <Suspense fallback={null}>
-            <Analytics />
-          </Suspense>
-          <Toaster position="top-center" />
-        </NextIntlClientProvider>
+        </Suspense>
+        <main>{children}</main>
+        <Suspense fallback={null}>
+          <Footer params={params} />
+        </Suspense>
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
+        <Suspense fallback={null}>
+          <Analytics />
+        </Suspense>
+        <Toaster position="top-center" />
       </body>
     </html>
   );
