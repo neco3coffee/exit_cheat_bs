@@ -40,7 +40,7 @@ export default function LocaleBoxContent() {
       >
         <button
           className={styles.locale}
-          onClick={() => {}}
+          onClick={() => setIsOpen(!isOpen)}
           onKeyDown={() => setIsOpen(!isOpen)}
           type="button"
         >
@@ -50,7 +50,6 @@ export default function LocaleBoxContent() {
           <button
             className={styles.container}
             onClick={() => setIsOpen(!isOpen)}
-            onBlur={() => setIsOpen(false)}
             type="button"
           >
             {locales.map((loc) => (
