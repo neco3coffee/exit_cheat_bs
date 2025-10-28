@@ -1,0 +1,28 @@
+.locale {
+  cursor: pointer;
+}
+
+.container {
+  position: absolute;
+  top: 100%;
+  margin-top: 8px;
+  background-color: var(--blue-black);
+  padding: 8px;
+  display: flex;
+  border: none;
+  border-radius: 8px;
+  gap: 8px;
+  z-index: 1500 !important;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+.item {
+  background-color: var(--blue-black);
+  color: var(--white);
+  border: none;
+  gap: 16px;
+  display: flex;
+  font-size: 24px;
+}

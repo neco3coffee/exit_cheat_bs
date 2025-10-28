@@ -43,9 +43,7 @@ export default async function RootLayout({
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Suspense fallback={null}>
-          <Header />
-        </Suspense>
+        <Header />
         <main>{children}</main>
         <Suspense fallback={null}>
           <Footer params={params} />
