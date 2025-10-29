@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { shortenMapName } from "@/app/_lib/common";
 import { Duration, RelativeTime } from "@/app/_lib/time";
 import { classifyModeByMapName } from "@/app/_lib/unknownMode";
+import { Link } from "@/app/_messages/i18n/navigation";
 import PlayerComponent from "@/app/[locale]/players/[tag]/_components/PlayerComponent";
 import styles from "./index.module.scss";
 
@@ -22,6 +23,7 @@ const BattleLogDuel = ({ battleLog, ownTag }: any) => {
   );
   const isDuel = true;
   const t = useTranslations("players");
+  const mapId = battleLog?.event?.id;
 
   return (
     <div className={styles.container} data-testid="battleLog">
@@ -39,7 +41,7 @@ const BattleLogDuel = ({ battleLog, ownTag }: any) => {
         )}
       </div>
       <div className={styles.middleContainer}>
-        <div className={styles.left}>
+        <Link className={styles.left} href={`/maps/${mapId}`}>
           <Image
             src={`/modes/${mode}.png`}
             alt={battleLog?.event?.mode || "mode"}
@@ -58,7 +60,7 @@ const BattleLogDuel = ({ battleLog, ownTag }: any) => {
               {shortenMapName(battleLog?.event?.map)}
             </h6>
           </div>
-        </div>
+        </Link>
         <h5
           className={
             battleLog?.battle?.result === "victory"

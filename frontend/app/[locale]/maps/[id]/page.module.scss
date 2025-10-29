@@ -1,0 +1,15 @@
+.container {
+  width: 100%;
+  height: calc(100vh - 150px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .mapImage {
+    // aspect-ratio: 21 / 33;
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+}

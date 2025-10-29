@@ -5,6 +5,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  padding-bottom: 50px;
+  overflow-y: auto;
 
   @media (min-width: 768px) {
     padding: 36px;
