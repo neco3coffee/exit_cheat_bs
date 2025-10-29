@@ -14,8 +14,26 @@ class Report < ApplicationRecord
   private
 
   def increment_approved_reports_count
-    # TODO: reportedがnilの場合の処理を追加
-    if saved_change_to_status? && status == 'approved' && status_before_last_save == 'waiting_review'
+    if reported.nil?
+      fetcher = PlayerFetcher.new
+      player_data = fetcher.fetch_player(reported_tag)
+      if player_data.present?
+        reported_player = Player.create(
+          tag: player_data["tag"],
+          name: player_data["name"],
+          club_name: player_data.dig("club", "name"),
+          trophies: player_data["trophies"],
+          icon_id: player_data.dig("icon", "id").to_s
+        )
+        self.reported = reported_player
+        save!
+      else
+        Rails.logger.error("Failed to fetch player data for tag: #{reported_tag}")
+        return
+      end
+    end
+
+    if saved_change_to_status? && status == 'approved' && ['pending', 'waiting_review'].include?(status_before_last_save)
       reported.increment!(:approved_reports_count)
     end
   end

@@ -1,35 +1,15 @@
 "use client";
 
 import axios from "axios";
-import {
-  CircleCheck,
-  CircleX,
-  Clock,
-  FileSearch,
-  icons,
-  TriangleAlert,
-  Tv,
-} from "lucide-react";
+import { CircleCheck, CircleX, Clock, FileSearch, Tv } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { shortenMapName } from "@/app/_lib/common";
 import { Duration, RelativeTime } from "@/app/_lib/time";
 import { classifyModeByMapName } from "@/app/_lib/unknownMode";
 import PlayerComponent from "@/app/[locale]/ranked/_components/PlayerComponent";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Progress } from "@/components/ui/progress";
 import { Textarea } from "@/components/ui/textarea";
 import styles from "./index.module.scss";
 
@@ -78,7 +58,7 @@ const ReportedBattleLogSoloRanked = ({
   setMainVideoDescription: (description: string) => void;
   report?: any;
 }) => {
-  // console.log("battleLog!: ", JSON.stringify(battleLog, null, 2));
+  const router = useRouter();
   const tag = ownTag.trim().toUpperCase().replace(/O/g, "0");
   const ownTeam = battleLog?.battle?.teams.find((team: any) => {
     return team.some((player: any) => player.tag === `#${tag}`);
@@ -296,9 +276,8 @@ const ReportedBattleLogSoloRanked = ({
                       });
                       if (res.ok) {
                         toast.success(t("reportRejected"));
-                        setTimeout(() => {
-                          window.location.reload();
-                        }, 1500);
+                        await fetch("/api/v1/revalidate?tag=reports");
+                        router.refresh();
                         return;
                       } else {
                         toast.error(t("failedReject"));
@@ -330,9 +309,8 @@ const ReportedBattleLogSoloRanked = ({
                       });
                       if (res.ok) {
                         toast.success(t("reportApproved"));
-                        setTimeout(() => {
-                          window.location.reload();
-                        }, 1500);
+                        await fetch("/api/v1/revalidate?tag=reports");
+                        router.refresh();
                         return;
                       } else {
                         toast.error(t("failedApprove"));

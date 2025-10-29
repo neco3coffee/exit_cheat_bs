@@ -3,6 +3,7 @@
 import axios from "axios";
 import { TriangleAlert } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { memo, useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -12,12 +13,9 @@ import { classifyModeByMapName } from "@/app/_lib/unknownMode";
 import PlayerComponent from "@/app/[locale]/ranked/_components/PlayerComponent";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -46,7 +44,7 @@ const ReportType = {
 };
 
 const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
-  // console.log("battleLog!: ", JSON.stringify(battleLog, null, 2));
+  const router = useRouter();
   const tag = ownTag.trim().toUpperCase().replace(/O/g, "0");
   const ownTeam = battleLog?.battle?.teams.find((team: any) => {
     return team.some((player: any) => player.tag === `#${tag}`);
@@ -99,6 +97,16 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
     console.log("reportType: ", reportType);
     console.log("reportReason: ", reportReason);
   }
+
+  const debounce = (func: Function, delay: number) => {
+    let timer: NodeJS.Timeout;
+    return (...args: any[]) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func(...args);
+      }, delay);
+    };
+  };
 
   const handleReasonChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
@@ -339,7 +347,14 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
                         ) : (
                           <>
                             {t("report")}{" "}
-                            <TriangleAlert className={styles.icon} />
+                            <Image
+                              src="/reported_player.png"
+                              alt="reported player"
+                              width={18}
+                              height={18}
+                              sizes="18px"
+                              style={{ marginLeft: "4px" }}
+                            />
                           </>
                         )}
                       </button>
@@ -444,6 +459,8 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
                 <video
                   loop
                   autoPlay
+                  playsInline
+                  muted
                   src={cdnUrl}
                   style={{
                     backgroundColor: "var(--blue-black)",
@@ -517,8 +534,7 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
               </Label>
               <Textarea
                 rows={6}
-                value={reportReason}
-                onChange={handleReasonChange}
+                onChange={debounce(handleReasonChange, 500)}
                 placeholder={t("reportReasonPlaceholder")}
                 id="reason"
                 style={{
@@ -561,9 +577,8 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
                       }
 
                       if (res.ok) {
-                        setTimeout(() => {
-                          window.location.reload();
-                        }, 1500);
+                        await fetch("/api/v1/revalidate?tag=reports");
+                        router.refresh();
                         setDialogOpen(false);
                         toast.success(t("successReport"));
                         return;
