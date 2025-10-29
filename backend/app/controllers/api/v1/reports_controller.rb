@@ -58,6 +58,25 @@ module Api
         end
       end
 
+      def reports
+        session_token = cookies[:session_token]
+
+        unless session_token
+          render json: { error: 'Unauthorized' }, status: :unauthorized
+          return
+        end
+
+        session = Session.find_by(session_token: session_token)
+        player = session.player
+
+        unless player
+          render json: { error: 'Forbidden' }, status: :forbidden
+          return
+        end
+
+        render json: Report.where(reporter_tag: player.tag).order(created_at: :desc), status: :ok
+      end
+
       def index
         # sessionを確認し、playerがmoderatorかadminでなければ403を返す
         session_token = cookies[:session_token]
