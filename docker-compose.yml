@@ -10,6 +10,8 @@ services:
       - app
     environment:
       NEXT_PUBLIC_GA_ID: ${NEXT_PUBLIC_GA_ID}
+    networks:
+      - safebrawl_net
   app:
     build:
       context: ./backend
@@ -40,6 +42,8 @@ services:
       http_proxy: ${API_PROXY_URL}
       https_proxy: ${API_PROXY_URL}
       no_proxy: "localhost,127.0.0.1,db,app,web"
+    networks:
+      - safebrawl_net
   solid_queue:
     build:
       context: ./backend
@@ -65,6 +69,8 @@ services:
     restart: unless-stopped  # 異常終了時の自動再起動
     # profiles:
     #   - production  # 開発環境でも使用するためコメントアウト
+    networks:
+      - safebrawl_net
   db:
     image: postgres:16
     ports:
@@ -75,6 +81,11 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - safebrawl_net
 
 volumes:
   postgres_data:
+
+networks:
+  safebrawl_net:

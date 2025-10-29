@@ -7,13 +7,13 @@ import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMess
 import RankedPage from "@/app/[locale]/ranked/_components/client/RankedPage";
 import styles from "./page.module.scss";
 
+const apiUrl = "http://app:3000";
+
 async function getPlayerData(sessionToken: string) {
   "use cache";
   cacheLife("weeks");
 
-  const backendUrl = "http://app:3000";
-
-  const res = await fetch(`${backendUrl}/api/v1/auth/me`, {
+  const res = await fetch(`${apiUrl}/api/v1/auth/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ async function getPlayerData(sessionToken: string) {
     credentials: "include",
   });
   if (!res.ok) {
-    throw new Error("Failed to fetch player data");
+    return null;
   }
   return res.json();
 }
@@ -31,10 +31,8 @@ async function getBattleLogs(playerTag: string) {
   "use cache";
   cacheLife("seconds");
 
-  const backendUrl = "http://app:3000";
-
   const res = await fetch(
-    `${backendUrl}/api/v1/players/${encodeURIComponent(playerTag)}/ranked`,
+    `${apiUrl}/api/v1/players/${encodeURIComponent(playerTag)}/ranked`,
     {
       method: "GET",
       headers: {
@@ -44,7 +42,7 @@ async function getBattleLogs(playerTag: string) {
   );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch battle logs");
+    return [];
   }
   const data = await res.json();
   const formattedBattleLogs = formatBattleLog(data.battle_logs);
@@ -56,10 +54,8 @@ async function getReports(playerTag: string, sessionToken: string) {
   cacheLife("minutes");
   cacheTag("reports");
 
-  const backendUrl = "http://app:3000";
-
   const res = await fetch(
-    `${backendUrl}/api/v1/players/${encodeURIComponent(playerTag)}/reports`,
+    `${apiUrl}/api/v1/players/${encodeURIComponent(playerTag)}/reports`,
     {
       method: "GET",
       headers: {
@@ -70,7 +66,7 @@ async function getReports(playerTag: string, sessionToken: string) {
     },
   );
   if (!res.ok) {
-    throw new Error("Failed to fetch reports");
+    return [];
   }
   return res.json();
 }
@@ -79,16 +75,14 @@ async function getRecentReport() {
   "use cache";
   cacheLife("minutes");
 
-  const backendUrl = "http://app:3000";
-
-  const res = await fetch(`${backendUrl}/api/v1/reports/latest`, {
+  const res = await fetch(`${apiUrl}/api/v1/reports/latest`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   });
   if (!res.ok) {
-    throw new Error("Failed to fetch recent report");
+    return null;
   }
   const reports = await res.json();
   if (reports.length === 0) {
@@ -101,9 +95,7 @@ async function getWaitingReviewReports(sessionToken: string) {
   "use cache";
   cacheLife("minutes");
 
-  const backendUrl = "http://app:3000";
-
-  const res = await fetch(`${backendUrl}/api/v1/reports`, {
+  const res = await fetch(`${apiUrl}/api/v1/reports`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -112,7 +104,7 @@ async function getWaitingReviewReports(sessionToken: string) {
     credentials: "include",
   });
   if (!res.ok) {
-    throw new Error("Failed to fetch reports");
+    return [];
   }
   return res.json();
 }
