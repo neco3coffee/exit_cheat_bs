@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -6,6 +7,12 @@ export async function GET(
 ) {
   try {
     const { tag } = await params;
+    const cookieStore = await cookies();
+    const sessionCookie = cookieStore.get("session_token");
+
+    if (!sessionCookie) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
     const response = await fetch(
       `http://app:3000/api/v1/players/${encodeURIComponent(tag)}/reports`,
@@ -13,8 +20,10 @@ export async function GET(
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Cookie: `session_token=${sessionCookie.value}`,
         },
-        next: { revalidate: 15 },
+        // cookieを含める
+        credentials: "include",
       },
     );
 
