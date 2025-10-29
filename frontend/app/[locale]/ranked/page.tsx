@@ -9,7 +9,7 @@ import styles from "./page.module.scss";
 
 async function getPlayerData(sessionToken: string) {
   "use cache";
-  cacheLife("max");
+  cacheLife("weeks");
 
   const backendUrl = "http://app:3000";
 
@@ -29,7 +29,7 @@ async function getPlayerData(sessionToken: string) {
 
 async function getBattleLogs(playerTag: string) {
   "use cache";
-  cacheLife("minutes");
+  cacheLife("seconds");
 
   const backendUrl = "http://app:3000";
 
