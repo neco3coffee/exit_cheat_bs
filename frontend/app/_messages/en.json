@@ -15,6 +15,8 @@
       "noReport": "No reports waiting for review.",
       "onlyModerators": "Only moderator can review, approve, reject reports!"
     },
+    "noBattleLog": "No recent ranked battle log available.",
+    "noReport": "No reports available.",
     "pending": "Pending",
     "waitingReview": "Waiting for review",
     "approved": "Approved",

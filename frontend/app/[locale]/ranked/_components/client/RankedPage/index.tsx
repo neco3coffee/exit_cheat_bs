@@ -214,7 +214,7 @@ export default function RankedPage({
         <TabsContent value="battleLogs">
           <div className={styles.battlelogContainer}>
             {!battleLogs || battleLogs.length === 0 ? (
-              <h5>No battle logs available.</h5>
+              <h5>{t("noBattleLog")}</h5>
             ) : (
               <List
                 rowComponent={BattleLogRow}
@@ -251,7 +251,7 @@ export default function RankedPage({
                 );
               })
             ) : (
-              <h5>No reports available.</h5>
+              <h5>{t("noReport")}</h5>
             )}
           </div>
         </TabsContent>

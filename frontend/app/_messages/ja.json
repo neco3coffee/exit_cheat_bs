@@ -15,6 +15,8 @@
       "noReport": "レビュー待ちの報告はありません",
       "onlyModerators": "レビュー、承認、拒否できるのはモデレーターのみです！"
     },
+    "noBattleLog": "直近のガチバトル履歴はありません。",
+    "noReport": "報告はありません。",
     "pending": "保留中",
     "waitingReview": "レビュー待ち",
     "approved": "承認済み",

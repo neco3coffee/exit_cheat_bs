@@ -131,9 +131,9 @@ export default async function Page({
     );
   }
 
-  const { player } = await (sessionToken ? getPlayerData(sessionToken) : null);
+  const playerData = await (sessionToken ? getPlayerData(sessionToken) : null);
 
-  if (!player) {
+  if (!playerData || !playerData.player) {
     return (
       <div className={styles.container}>
         <div className={styles.inner}>
@@ -145,6 +145,7 @@ export default async function Page({
       </div>
     );
   }
+  const player = playerData.player;
 
   const playerTag = player?.tag?.startsWith("#")
     ? player.tag.substring(1)
