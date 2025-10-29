@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { shortenMapName } from "@/app/_lib/common";
 import { RelativeTime } from "@/app/_lib/time";
 import { classifyModeByMapName } from "@/app/_lib/unknownMode";
+import { Link } from "@/app/_messages/i18n/navigation";
 import PlayerComponent from "@/app/[locale]/players/[tag]/_components/PlayerComponent";
 import styles from "./index.module.scss";
 
@@ -17,8 +18,8 @@ const BattleLogLastStand = ({ battleLog, ownTag }: any) => {
   const level = battleLog?.battle?.level?.name;
   const result = battleLog?.battle?.result;
   const t = useTranslations("players");
+  const mapId = battleLog?.event?.id;
 
-  console.log("battleLog: ", JSON.stringify(battleLog, null, 2));
   return (
     <div className={styles.container} data-testid="battleLog">
       <div className={styles.topContainer}>
@@ -35,7 +36,7 @@ const BattleLogLastStand = ({ battleLog, ownTag }: any) => {
         )}
       </div>
       <div className={styles.middleContainer}>
-        <div className={styles.left}>
+        <Link className={styles.left} href={`/maps/${mapId}`}>
           <Image
             src={`/modes/${mode}.png`}
             alt={battleLog?.event?.mode || "mode"}
@@ -54,7 +55,7 @@ const BattleLogLastStand = ({ battleLog, ownTag }: any) => {
               {shortenMapName(battleLog?.event?.map)}
             </h6>
           </div>
-        </div>
+        </Link>
         <h5 className={result === "victory" ? styles.victory : styles.defeat}>
           {result === "victory"
             ? t("challengeCleared", { level: t(level) })

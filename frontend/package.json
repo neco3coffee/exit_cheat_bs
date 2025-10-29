@@ -7,7 +7,8 @@
     "build": "next build",
     "lint": "biome check --write --max-diagnostics=1000",
     "ci": "biome ci",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "checkBuild": "next build --debug-prerender"
   },
   "dependencies": {
     "@next/third-parties": "16.0.0",
