@@ -140,6 +140,20 @@ export default async function Page({
   }
 
   const { player } = await (sessionToken ? getPlayerData(sessionToken) : null);
+
+  if (!player) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.inner}>
+          <p>{t("unauthenticated")}</p>
+          <Link className={styles.login} href={`/${locale}/account`}>
+            {t("login")}
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   const playerTag = player?.tag?.startsWith("#")
     ? player.tag.substring(1)
     : player?.tag;
