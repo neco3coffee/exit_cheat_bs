@@ -51,7 +51,7 @@ async function getBattleLogs(playerTag: string) {
   return formattedBattleLogs;
 }
 
-async function getReports(playerTag: string) {
+async function getReports(playerTag: string, sessionToken: string) {
   "use cache";
   cacheLife("minutes");
   cacheTag("reports");
@@ -64,7 +64,9 @@ async function getReports(playerTag: string) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Cookie: `session_token=${sessionToken}`,
       },
+      credentials: "include",
     },
   );
   if (!res.ok) {
@@ -129,7 +131,7 @@ export default async function Page({
       <div className={styles.container}>
         <div className={styles.inner}>
           <p>{t("unauthenticated")}</p>
-          <Link className={styles.login} href="/account">
+          <Link className={styles.login} href={`/${locale}/account`}>
             {t("login")}
           </Link>
         </div>
@@ -142,7 +144,7 @@ export default async function Page({
     ? player.tag.substring(1)
     : player?.tag;
   const battleLogs = playerTag ? await getBattleLogs(playerTag) : null;
-  const reports = playerTag ? await getReports(playerTag) : null;
+  const reports = playerTag ? await getReports(playerTag, sessionToken) : null;
   const recentReport = await getRecentReport();
   const waitingReviewReports = sessionToken
     ? await getWaitingReviewReports(sessionToken)
