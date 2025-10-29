@@ -140,15 +140,30 @@ export default async function Page({
   }
 
   const { player } = await (sessionToken ? getPlayerData(sessionToken) : null);
+
+  if (!player) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.inner}>
+          <p>{t("unauthenticated")}</p>
+          <Link className={styles.login} href={`/${locale}/account`}>
+            {t("login")}
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   const playerTag = player?.tag?.startsWith("#")
     ? player.tag.substring(1)
     : player?.tag;
   const battleLogs = playerTag ? await getBattleLogs(playerTag) : null;
   const reports = playerTag ? await getReports(playerTag, sessionToken) : null;
   const recentReport = await getRecentReport();
-  const waitingReviewReports = sessionToken
-    ? await getWaitingReviewReports(sessionToken)
-    : null;
+  let waitingReviewReports = null;
+  if (player.role === "admin" || player.role === "moderator") {
+    waitingReviewReports = await getWaitingReviewReports(sessionToken);
+  }
 
   return (
     <ServerLocaleMessageProviderWrapper params={params}>
