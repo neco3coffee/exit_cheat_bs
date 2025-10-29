@@ -133,7 +133,7 @@ export default async function Page({
 
   const playerData = await (sessionToken ? getPlayerData(sessionToken) : null);
 
-  if (!playerData || !playerData.player) {
+  if (!playerData || !playerData?.player) {
     return (
       <div className={styles.container}>
         <div className={styles.inner}>
