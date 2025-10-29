@@ -160,9 +160,10 @@ export default async function Page({
   const battleLogs = playerTag ? await getBattleLogs(playerTag) : null;
   const reports = playerTag ? await getReports(playerTag, sessionToken) : null;
   const recentReport = await getRecentReport();
-  const waitingReviewReports = sessionToken
-    ? await getWaitingReviewReports(sessionToken)
-    : null;
+  let waitingReviewReports = null;
+  if (player.role === "admin" || player.role === "moderator") {
+    waitingReviewReports = await getWaitingReviewReports(sessionToken);
+  }
 
   return (
     <ServerLocaleMessageProviderWrapper params={params}>
