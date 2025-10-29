@@ -302,6 +302,11 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
                     player={player}
                     starPlayerTag={starPlayerTag}
                     battleType={battleLog?.battle?.type}
+                    isMe={player?.tag === `#${tag}`}
+                    status={status}
+                    setStatus={setStatus}
+                    setReportedPlayerTag={setReportedPlayerTag}
+                    setDialogOpen={setDialogOpen}
                   />
                 );
               })}
