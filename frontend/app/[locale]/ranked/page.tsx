@@ -123,18 +123,8 @@ export default async function Page({
   const sessionToken = (await cookies()).get("session_token")?.value || null;
   const locale = (await params).locale;
   const t = await getTranslations({ locale, namespace: "ranked" });
-  const { player } = await (sessionToken ? getPlayerData(sessionToken) : null);
-  const playerTag = player?.tag?.startsWith("#")
-    ? player.tag.substring(1)
-    : player?.tag;
-  const battleLogs = playerTag ? await getBattleLogs(playerTag) : null;
-  const reports = playerTag ? await getReports(playerTag) : null;
-  const recentReport = await getRecentReport();
-  const waitingReviewReports = sessionToken
-    ? await getWaitingReviewReports(sessionToken)
-    : null;
 
-  if (!sessionToken || !player) {
+  if (!sessionToken) {
     return (
       <div className={styles.container}>
         <div className={styles.inner}>
@@ -146,6 +136,17 @@ export default async function Page({
       </div>
     );
   }
+
+  const { player } = await (sessionToken ? getPlayerData(sessionToken) : null);
+  const playerTag = player?.tag?.startsWith("#")
+    ? player.tag.substring(1)
+    : player?.tag;
+  const battleLogs = playerTag ? await getBattleLogs(playerTag) : null;
+  const reports = playerTag ? await getReports(playerTag) : null;
+  const recentReport = await getRecentReport();
+  const waitingReviewReports = sessionToken
+    ? await getWaitingReviewReports(sessionToken)
+    : null;
 
   return (
     <ServerLocaleMessageProviderWrapper params={params}>
