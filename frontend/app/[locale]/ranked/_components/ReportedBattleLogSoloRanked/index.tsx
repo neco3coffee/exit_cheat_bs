@@ -183,6 +183,7 @@ const ReportedBattleLogSoloRanked = ({
                     player={player}
                     starPlayerTag={starPlayerTag}
                     battleType={battleLog?.battle?.type}
+                    reportedPlayerTag={reported_tag}
                   />
                 );
               })}
