@@ -60,9 +60,9 @@ module Api
 
       def index
         # sessionを確認し、playerがmoderatorかadminでなければ403を返す
-        # Bearer 99eea99bc8e86bf601d7ff799da82d0123d06f6f0c8443866ab46c2545c19a97 この文字のsession_token部分
-        session_token = request.headers['Authorization']&.split(' ')&.last
-        Rails.logger.info("Authorization Header: #{request.headers['Authorization']}")
+        session_token = cookies[:session_token]
+
+
         unless session_token
           render json: { error: 'Unauthorized' }, status: :unauthorized
           return

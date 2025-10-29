@@ -4,6 +4,7 @@ import Footer from "@/app/_components/Footer";
 import Header from "@/app/_components/Header";
 import "../globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { cacheLife } from "next/cache";
 import { Suspense } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "../analytics";
@@ -26,6 +27,14 @@ export const metadata: Metadata = {
   },
 };
 
+const locales = ["en", "ja"];
+
+export async function generateStaticParams() {
+  return locales.map((locale) => ({
+    locale: locale,
+  }));
+}
+
 export default async function RootLayout({
   children,
   params,
@@ -33,6 +42,9 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }>) {
+  "use cache";
+  cacheLife("max");
+
   return (
     <html lang="en">
       <head>
@@ -45,14 +57,16 @@ export default async function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Header />
         <main>{children}</main>
+        <Footer params={params} />
         <Suspense fallback={null}>
-          <Footer params={params} />
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
         </Suspense>
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
         <Suspense fallback={null}>
           <Analytics />
         </Suspense>
-        <Toaster position="top-center" />
+        <Suspense fallback={null}>
+          <Toaster position="top-center" />
+        </Suspense>
       </body>
     </html>
   );

@@ -95,18 +95,28 @@ const PlayerComponent = ({
         </div>
       </div>
       {!isMe && status === ReportStatus.reportClicked && (
-        <button
-          className={styles.reportButton}
-          onClick={(e) => {
-            e.preventDefault();
-            setStatus(ReportStatus.reportedPlayerClicked);
-            setReportedPlayerTag(player?.tag);
-            setDialogOpen(true);
-          }}
-          type="button"
-        >
-          {t("report")}
-        </button>
+        <>
+          <button
+            className={styles.reportButton}
+            onClick={(e) => {
+              e.preventDefault();
+              setStatus(ReportStatus.reportedPlayerClicked);
+              setReportedPlayerTag(player?.tag);
+              setDialogOpen(true);
+            }}
+            type="button"
+          >
+            {t("report")}
+          </button>
+          <Image
+            src="/reported_player.png"
+            alt="reported player"
+            width={16}
+            height={16}
+            sizes="16px"
+            className={styles.reportIcon}
+          />
+        </>
       )}
       <span>{shortenedName}</span>
     </Link>

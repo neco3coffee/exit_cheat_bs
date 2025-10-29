@@ -8,10 +8,8 @@ export default function Page({
   params: Promise<{ locale: string }>;
 }) {
   return (
-    <Suspense fallback={null}>
-      <ServerLocaleMessageProviderWrapper params={params}>
-        <AccountPage />
-      </ServerLocaleMessageProviderWrapper>
-    </Suspense>
+    <ServerLocaleMessageProviderWrapper params={params}>
+      <AccountPage />
+    </ServerLocaleMessageProviderWrapper>
   );
 }
