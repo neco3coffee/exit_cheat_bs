@@ -6,6 +6,7 @@ import { getTranslations } from "next-intl/server";
 import { formatBattleLog } from "@/app/_lib/formatBattleLog";
 import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
 import RankedPage from "@/app/[locale]/ranked/_components/client/RankedPage";
+import ReportedBattleLogSoloRanked from "./_components/ReportedBattleLogSoloRanked";
 import styles from "./page.module.scss";
 
 const apiUrl = "http://app:3000";
@@ -162,12 +163,19 @@ export default async function Page({
   return (
     <ServerLocaleMessageProviderWrapper params={params}>
       <RankedPage
+        locale={locale}
         player={player}
         battleLogs={battleLogs || []}
         reports={reports || []}
-        waitingReviewReports={waitingReviewReports || []}
         recentReportComponent={
           <RecentVideoComponent locale={locale} recentReport={recentReport} />
+        }
+        reviewTabContent={
+          <ReviewTabContent
+            locale={locale}
+            player={player}
+            waitingReviewReports={waitingReviewReports || []}
+          />
         }
       />
     </ServerLocaleMessageProviderWrapper>
@@ -230,6 +238,58 @@ async function RecentVideoComponent({
           }
         </p>
       </div>
+    </div>
+  );
+}
+
+async function ReviewTabContent({
+  locale,
+  player,
+  waitingReviewReports,
+}: {
+  locale: string;
+  player: any;
+  waitingReviewReports: any[];
+}) {
+  "use cache";
+  cacheLife("minutes");
+  const t = await getTranslations({ locale, namespace: "ranked" });
+
+  return (
+    <div className={styles.reviewContainer}>
+      {player?.role === "moderator" || player?.role === "admin" ? (
+        waitingReviewReports && waitingReviewReports.length > 0 ? (
+          waitingReviewReports.map((report) => {
+            const battleLog = report.battle_data;
+            const ownTag = report.reporter_tag.startsWith("#")
+              ? report.reporter_tag.substring(1)
+              : report.reporter_tag;
+
+            return (
+              <ReportedBattleLogSoloRanked
+                locale={locale}
+                key={`report-${report.id}`}
+                battleLog={battleLog}
+                ownTag={ownTag}
+                status={report.status}
+                reported_tag={report.reported_tag}
+                video_url={report.video_url}
+                reason={report.reason}
+                reportId={report.id}
+                report={report}
+              />
+            );
+          })
+        ) : (
+          <h5 style={{ marginTop: "100px", marginBottom: "100px" }}>
+            {t("review.noReport")}
+          </h5>
+        )
+      ) : (
+        <h5 style={{ marginTop: "100px", marginBottom: "100px" }}>
+          {t("review.onlyModerators")}
+        </h5>
+      )}
     </div>
   );
 }

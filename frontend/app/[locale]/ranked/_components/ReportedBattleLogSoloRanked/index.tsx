@@ -1,17 +1,17 @@
-"use client";
-
-import axios from "axios";
 import { CircleCheck, CircleX, Clock, FileSearch, Tv } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
-import { toast } from "sonner";
+import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { shortenMapName } from "@/app/_lib/common";
 import { Duration, RelativeTime } from "@/app/_lib/time";
 import { classifyModeByMapName } from "@/app/_lib/unknownMode";
-import { Link } from "@/app/_messages/i18n/navigation";
 import PlayerComponent from "@/app/[locale]/ranked/_components/PlayerComponent";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  ApproveButton,
+  RejectButton,
+  ReplayButton,
+} from "./_components/client/Button";
 import styles from "./index.module.scss";
 
 const ReportType = {
@@ -34,7 +34,8 @@ const StatusIcon = {
   rejected: <CircleX className={styles.statusIconRejected} />,
 };
 
-const ReportedBattleLogSoloRanked = ({
+export default async function ReportedBattleLogSoloRanked({
+  locale,
   battleLog,
   ownTag,
   status,
@@ -44,6 +45,7 @@ const ReportedBattleLogSoloRanked = ({
   reportId,
   report,
 }: {
+  locale: string;
   battleLog: any;
   ownTag: string;
   status: string;
@@ -52,8 +54,7 @@ const ReportedBattleLogSoloRanked = ({
   reason?: string;
   reportId?: string;
   report?: any;
-}) => {
-  const router = useRouter();
+}) {
   const tag = ownTag.trim().toUpperCase().replace(/O/g, "0");
   const ownTeam = battleLog?.battle?.teams.find((team: any) => {
     return team.some((player: any) => player.tag === `#${tag}`);
@@ -81,7 +82,7 @@ const ReportedBattleLogSoloRanked = ({
   } else {
     result = battleLog?.battle?.result;
   }
-  const t = useTranslations("ranked");
+  const t = await getTranslations({ locale, namespace: "ranked" });
 
   return (
     <>
@@ -100,7 +101,7 @@ const ReportedBattleLogSoloRanked = ({
           )}
         </div>
         <div className={styles.middleContainer}>
-          <Link className={styles.left} href={`/maps/${mapId}`}>
+          <Link className={styles.left} href={`/${locale}/maps/${mapId}`}>
             <Image
               src={`/modes/${mode}.png`}
               alt={battleLog?.event?.mode || "mode"}
@@ -159,6 +160,7 @@ const ReportedBattleLogSoloRanked = ({
                 return (
                   <PlayerComponent
                     key={player?.tag}
+                    locale={locale}
                     player={player}
                     starPlayerTag={starPlayerTag}
                     battleType={battleLog?.battle?.type}
@@ -176,6 +178,7 @@ const ReportedBattleLogSoloRanked = ({
                 return (
                   <PlayerComponent
                     key={player?.tag}
+                    locale={locale}
                     player={player}
                     starPlayerTag={starPlayerTag}
                     battleType={battleLog?.battle?.type}
@@ -209,21 +212,10 @@ const ReportedBattleLogSoloRanked = ({
                   </h5>
                   <div className={styles.right}>
                     {index === 0 && (
-                      <button
-                        className={
-                          video_url
-                            ? styles.replayContainer
-                            : styles.replayContainerDisabled
-                        }
-                        onClick={() => {
-                          // TODO: 報告モーダルに遷移してそこで動画再生するようにする
-                        }}
-                        type="button"
-                        disabled={!video_url}
-                      >
-                        {t("replay")}
-                        <Tv className={styles.tv} />
-                      </button>
+                      <ReplayButton
+                        video_url={video_url}
+                        replay={t("replay")}
+                      />
                     )}
                   </div>
                 </div>
@@ -246,81 +238,29 @@ const ReportedBattleLogSoloRanked = ({
               }}
             />
             <div className={styles.buttonContainer}>
-              <button
-                className={styles.reject}
-                onClick={() => {
-                  (async () => {
-                    if (!reportId) {
-                      toast.error(t("reportIdMissing"));
-                      return;
-                    }
-                    try {
-                      const res = await fetch(`/api/v1/reports/${reportId}`, {
-                        method: "PUT",
-                        headers: {
-                          "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({ status: "rejected" }),
-                      });
-                      if (res.ok) {
-                        toast.success(t("reportRejected"));
-                        await fetch("/api/v1/revalidate?tag=reports");
-                        router.refresh();
-                        return;
-                      } else {
-                        toast.error(t("failedReject"));
-                      }
-                    } catch (error) {
-                      toast.error(t("errorReject"));
-                    }
-                  })();
-                }}
-                type="button"
-              >
-                {t("reject")}
-              </button>
-              <button
-                className={styles.approve}
-                onClick={() => {
-                  (async () => {
-                    if (!reportId) {
-                      toast.error(t("reportIdMissing"));
-                      return;
-                    }
-                    try {
-                      const res = await fetch(`/api/v1/reports/${reportId}`, {
-                        method: "PUT",
-                        headers: {
-                          "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({ status: "approved" }),
-                      });
-                      if (res.ok) {
-                        toast.success(t("reportApproved"));
-                        await fetch("/api/v1/revalidate?tag=reports");
-                        router.refresh();
-                        return;
-                      } else {
-                        toast.error(t("failedApprove"));
-                      }
-                    } catch (error) {
-                      toast.error(t("errorApprove"));
-                    }
-                  })();
-                }}
-                type="button"
-              >
-                {t("approve")}
-              </button>
+              <RejectButton
+                reportId={reportId}
+                reportIdMissing={t("reportIdMissing")}
+                reportRejected={t("reportRejected")}
+                failedReject={t("failedReject")}
+                errorReject={t("errorReject")}
+                reject={t("reject")}
+              />
+              <ApproveButton
+                reportId={reportId}
+                reportIdMissing={t("reportIdMissing")}
+                reportApproved={t("reportApproved")}
+                failedApprove={t("failedApprove")}
+                errorApprove={t("errorApprove")}
+                approve={t("approve")}
+              />
             </div>
           </div>
         )}
       </div>
     </>
   );
-};
-
-export default ReportedBattleLogSoloRanked;
+}
 
 const getResult = (rounds: any[]) => {
   const victoryCount = rounds.filter(

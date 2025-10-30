@@ -1,8 +1,4 @@
-"use client";
-
-// TODO: use clientを外してvideoとタブの中身をserver component化する
-import { useTranslations } from "next-intl";
-import { List, type RowComponentProps } from "react-window";
+import { getTranslations } from "next-intl/server";
 import BattleLogSoloRanked from "@/app/[locale]/ranked/_components/BattleLogSoloRanked";
 import ReportedBattleLogSoloRanked from "@/app/[locale]/ranked/_components/ReportedBattleLogSoloRanked";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -19,20 +15,22 @@ interface Player {
   role?: string;
 }
 
-export default function RankedPage({
+export default async function RankedPage({
+  locale,
   player,
   battleLogs,
   reports,
-  waitingReviewReports,
   recentReportComponent,
+  reviewTabContent,
 }: {
+  locale: string;
   player: Player;
   battleLogs: any[];
   reports: any[];
-  waitingReviewReports: any[];
   recentReportComponent: React.ReactNode;
+  reviewTabContent: React.ReactNode;
 }) {
-  const t = useTranslations("ranked");
+  const t = await getTranslations({ locale, namespace: "ranked" });
 
   const reportKeys = new Set(
     reports?.map((r) =>
@@ -63,54 +61,30 @@ export default function RankedPage({
             {t("tabs.report")}
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="review">
-          <div className={styles.reviewContainer}>
-            {player?.role === "moderator" || player?.role === "admin" ? (
-              waitingReviewReports && waitingReviewReports.length > 0 ? (
-                waitingReviewReports.map((report) => {
-                  const battleLog = report.battle_data;
-                  const ownTag = report.reporter_tag.startsWith("#")
-                    ? report.reporter_tag.substring(1)
-                    : report.reporter_tag;
-
-                  return (
-                    <ReportedBattleLogSoloRanked
-                      key={`report-${report.id}`}
-                      battleLog={battleLog}
-                      ownTag={ownTag}
-                      status={report.status}
-                      reported_tag={report.reported_tag}
-                      video_url={report.video_url}
-                      reason={report.reason}
-                      reportId={report.id}
-                      report={report}
-                    />
-                  );
-                })
-              ) : (
-                <h5 style={{ marginTop: "100px", marginBottom: "100px" }}>
-                  {t("review.noReport")}
-                </h5>
-              )
-            ) : (
-              <h5 style={{ marginTop: "100px", marginBottom: "100px" }}>
-                {t("review.onlyModerators")}
-              </h5>
-            )}
-          </div>
-        </TabsContent>
+        <TabsContent value="review">{reviewTabContent}</TabsContent>
         <TabsContent value="battleLogs">
           <div className={styles.battlelogContainer}>
             {!battleLogs || battleLogs.length === 0 ? (
               <h5>{t("noBattleLog")}</h5>
             ) : (
-              <List
-                rowComponent={BattleLogRow}
-                rowCount={battleLogs.length}
-                rowHeight={rowHeight}
-                rowProps={{ battleLogs, reportKeys, tag }}
-                style={{ width: "100%", height: "calc(100vh - 422px)" }} // 明示的に高さを指定する
-              />
+              battleLogs.map((battleLog, index) => {
+                const battlelog = battleLogs[index];
+                const battleKey = battlelog?.battle?.teams
+                  ?.flat()
+                  ?.map((p: any) => p.tag)
+                  ?.sort()
+                  ?.join("-");
+                const isReported = reportKeys.has(battleKey);
+
+                return (
+                  <BattleLogSoloRanked
+                    key={`${battleKey}-${battleLog?.battleTime}`}
+                    battleLog={battlelog}
+                    ownTag={tag}
+                    isReported={isReported}
+                  />
+                );
+              })
             )}
           </div>
         </TabsContent>
@@ -125,6 +99,7 @@ export default function RankedPage({
 
                 return (
                   <ReportedBattleLogSoloRanked
+                    locale={locale}
                     key={`report-${report.id}`}
                     battleLog={battleLog}
                     ownTag={ownTag}
@@ -143,47 +118,4 @@ export default function RankedPage({
       </Tabs>
     </div>
   );
-}
-
-function BattleLogRow({
-  index,
-  battleLogs,
-  reportKeys,
-  tag,
-  style,
-}: RowComponentProps<{
-  battleLogs: any[];
-  reportKeys: Set<string>;
-  tag: string;
-}>) {
-  const battlelog = battleLogs[index];
-  const battleKey = battlelog?.battle?.teams
-    ?.flat()
-    ?.map((p: any) => p.tag)
-    ?.sort()
-    ?.join("-");
-  const isReported = reportKeys.has(battleKey);
-
-  return (
-    <div style={style}>
-      <BattleLogSoloRanked
-        battleLog={battlelog}
-        ownTag={tag}
-        isReported={isReported}
-      />
-    </div>
-  );
-}
-
-function rowHeight(index: number, { battleLogs }: any) {
-  switch (battleLogs[index].rounds.length) {
-    case 1:
-      return 160;
-    case 2:
-      return 192;
-    case 3:
-      return 224;
-    default:
-      return 160;
-  }
 }
