@@ -57,20 +57,10 @@ export function Modal({ children }: { children: React.ReactNode }) {
     <dialog ref={dialogRef} className={styles.modal} key="map-modal">
       {children}
       <button
-        style={{
-          cursor: "pointer",
-          fontSize: "50px",
-          color: "white",
-          position: "absolute",
-          top: "110px",
-          right: "20px",
-          zIndex: "3000",
-        }}
+        className={styles.closeBackground}
         onClick={onDismiss}
         type="button"
-      >
-        X
-      </button>
+      ></button>
     </dialog>,
     modalRoot,
   );
