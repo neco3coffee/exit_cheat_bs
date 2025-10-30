@@ -40,11 +40,8 @@ const ReportedBattleLogSoloRanked = ({
   status,
   reported_tag,
   video_url,
-  setVideoUrl,
   reason,
   reportId,
-  setDisplayingReport,
-  setMainVideoDescription,
   report,
 }: {
   battleLog: any;
@@ -52,11 +49,8 @@ const ReportedBattleLogSoloRanked = ({
   status: string;
   reported_tag: string;
   video_url: string | null;
-  setVideoUrl: (url: string | null) => void;
   reason?: string;
   reportId?: string;
-  setDisplayingReport: (report: any) => void;
-  setMainVideoDescription: (description: string) => void;
   report?: any;
 }) => {
   const router = useRouter();
@@ -222,16 +216,7 @@ const ReportedBattleLogSoloRanked = ({
                             : styles.replayContainerDisabled
                         }
                         onClick={() => {
-                          if (video_url) {
-                            setVideoUrl(video_url);
-                            setMainVideoDescription(
-                              `Replay of ${
-                                battleLog?.event?.map
-                              } (${battleLog?.event?.mode})`,
-                            );
-                            setDisplayingReport(report);
-                            return;
-                          }
+                          // TODO: 報告モーダルに遷移してそこで動画再生するようにする
                         }}
                         type="button"
                         disabled={!video_url}
