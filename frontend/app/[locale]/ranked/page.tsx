@@ -1,5 +1,6 @@
 import { cacheLife, cacheTag } from "next/cache";
 import { cookies } from "next/headers";
+import Image from "next/image";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { formatBattleLog } from "@/app/_lib/formatBattleLog";
@@ -164,9 +165,71 @@ export default async function Page({
         player={player}
         battleLogs={battleLogs || []}
         reports={reports || []}
-        recentReport={recentReport}
         waitingReviewReports={waitingReviewReports || []}
+        recentReportComponent={
+          <RecentVideoComponent locale={locale} recentReport={recentReport} />
+        }
       />
     </ServerLocaleMessageProviderWrapper>
+  );
+}
+
+async function RecentVideoComponent({
+  locale,
+  recentReport,
+}: {
+  locale: string;
+  recentReport: any;
+}) {
+  "use cache";
+  cacheLife("minutes");
+
+  const t = await getTranslations({ locale, namespace: "ranked" });
+  const mainVideoDescription = t("mainVideoDescription");
+  const videoUrl = recentReport?.video_url || null;
+
+  return (
+    <div className={styles.recentVideoContainer}>
+      <div className={styles.mainVideoDescription}>{mainVideoDescription}</div>
+      <video
+        id="mainVideo"
+        key={videoUrl}
+        autoPlay
+        loop
+        muted
+        playsInline
+        src={videoUrl}
+        preload="none"
+      >
+        <track kind="captions" src={videoUrl} label="No captions" />
+      </video>
+      <div className={styles.reportInfo}>
+        <div className={styles.reportedPlayerIconContainer}>
+          <Image
+            src={`https://cdn.brawlify.com/brawlers/borderless/${recentReport.battle_data.battle.teams.flat().find((p: any) => p.tag === recentReport.reported_tag).brawler.id}.png`}
+            alt="reported brawler"
+            width={50}
+            height={50}
+            sizes="50px"
+            style={{ height: "50px", width: "auto" }}
+          />
+          <Image
+            src="/reported_player.png"
+            alt="reported player"
+            width={24}
+            height={24}
+            sizes="24px"
+            className={styles.reportedIcon}
+          />
+        </div>
+        <p>
+          {
+            recentReport.battle_data.battle.teams
+              .flat()
+              .find((p: any) => p.tag === recentReport.reported_tag).name
+          }
+        </p>
+      </div>
+    </div>
   );
 }
