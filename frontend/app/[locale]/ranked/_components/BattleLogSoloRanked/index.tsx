@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { shortenMapName } from "@/app/_lib/common";
 import { Duration, RelativeTime } from "@/app/_lib/time";
 import { classifyModeByMapName } from "@/app/_lib/unknownMode";
+import { Link } from "@/app/_messages/i18n/navigation";
 import PlayerComponent from "@/app/[locale]/ranked/_components/PlayerComponent";
 import {
   Dialog,
@@ -57,6 +58,7 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
     battleLog?.event?.mode !== "unknown"
       ? battleLog?.event.mode
       : classifyModeByMapName(battleLog?.event?.map);
+  const mapId = battleLog?.event?.id;
   const mythic1 = 12; // diamond1 = 9,mythic1 = 12, legendary1 = 15, master1 = 18, pro = 21
   const existAtLeastMythic1 = battleLog?.battle?.teams
     .flat()
@@ -218,7 +220,7 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
           )}
         </div>
         <div className={styles.middleContainer}>
-          <div className={styles.left}>
+          <Link className={styles.left} href={`/maps/${mapId}`}>
             <Image
               src={`/modes/${mode}.png`}
               alt={battleLog?.event?.mode || "mode"}
@@ -238,7 +240,7 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
                 {shortenMapName(battleLog?.event?.map)}
               </h6>
             </div>
-          </div>
+          </Link>
           <h5
             className={
               result === "victory"
