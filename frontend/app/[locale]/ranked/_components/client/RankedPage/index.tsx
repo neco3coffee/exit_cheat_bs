@@ -44,7 +44,7 @@ export default async function RankedPage({
 
   const tag = player?.tag?.startsWith("#")
     ? player.tag.substring(1)!
-    : player?.tag!;
+    : player?.tag;
 
   return (
     <div className={styles.container}>
