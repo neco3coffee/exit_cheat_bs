@@ -18,6 +18,7 @@ import BattleLogSoloRanked from "@/app/[locale]/players/[tag]/_components/Battle
 import BattleLogTrio from "@/app/[locale]/players/[tag]/_components/BattleLogTrio";
 import { Telemetry } from "@/app/[locale]/players/[tag]/_components/Telemetry.tsx";
 import BattleLogLastStand from "./_components/BattleLogLastStand";
+import LocalStorage from "./_components/LocalStorage";
 import styles from "./page.module.scss";
 
 type Player = {
@@ -92,6 +93,7 @@ async function PlayerPage({
 
   return (
     <>
+      <LocalStorage playerTag={player.tag} playerName={player.name} />
       <Telemetry />
       <div className={styles.container}>
         {/* プレイヤー基本情報 */}

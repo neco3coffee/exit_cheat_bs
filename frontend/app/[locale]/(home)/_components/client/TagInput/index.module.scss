@@ -24,3 +24,20 @@
   margin-left: 15px;
   font-size: large;
 }
+
+
+
+.dropdownMenuContent {
+  background-color: var(--blue-black);
+  color: var(--white);
+  border: none;
+
+  .dropdownMenuItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 8px;
+    border: solid 1px var(--black-border);
+    cursor: pointer;
+  }
+}

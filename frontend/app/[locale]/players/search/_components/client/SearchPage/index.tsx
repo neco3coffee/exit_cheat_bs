@@ -193,7 +193,7 @@ export default function SearchPage() {
               >
                 {player.name}
               </h1>
-              {player?.currentRank! >= 0 && (
+              {player?.currentRank && player?.currentRank >= 0 && (
                 <div className={styles.rankContainer}>
                   {player.currentRank! > 0 && (
                     <>

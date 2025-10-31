@@ -1,19 +1,35 @@
 "use client";
 
 import { sendGAEvent } from "@next/third-parties/google";
+import { History } from "lucide-react";
 import { useRef } from "react";
 import { useRouter } from "@/app/_messages/i18n/navigation";
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
   InputGroup,
   InputGroupAddon,
+  InputGroupButton,
   InputGroupInput,
   InputGroupText,
 } from "@/components/ui/input-group";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import styles from "./index.module.scss";
 
 export default function TagInput() {
   const router = useRouter();
   const tagInputRef = useRef<HTMLInputElement>(null);
+  const searchLogList: { tag: string; name: string }[] =
+    typeof window !== "undefined"
+      ? (JSON.parse(localStorage.getItem("searchLogList") || "[]") as {
+          tag: string;
+          name: string;
+        }[])
+      : [];
 
   const handleTagSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -63,6 +79,9 @@ export default function TagInput() {
   return (
     <>
       <InputGroup className={styles.inputGroup}>
+        <InputGroupAddon>
+          <InputGroupText className={styles.inputGroupText}>#</InputGroupText>
+        </InputGroupAddon>
         <InputGroupInput
           ref={tagInputRef}
           placeholder="Y2YPGCGC"
@@ -72,8 +91,40 @@ export default function TagInput() {
           maxLength={10}
           onKeyDown={handleTagSearch}
         />
-        <InputGroupAddon>
-          <InputGroupText className={styles.inputGroupText}>#</InputGroupText>
+        <InputGroupAddon align="inline-end">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild className={styles.DropdownMenuTrigger}>
+              <InputGroupButton variant="ghost" style={{ marginRight: "15px" }}>
+                <History
+                  style={{ width: "20px", height: "20px", fontSize: "20px" }}
+                />
+              </InputGroupButton>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              className={styles.dropdownMenuContent}
+            >
+              <ScrollArea className="max-h-[250px] w-[15rem]">
+                {searchLogList.length === 0 && (
+                  <DropdownMenuItem className="cursor-default">
+                    No History
+                  </DropdownMenuItem>
+                )}
+                {searchLogList.map((item) => (
+                  <DropdownMenuItem
+                    key={item.tag}
+                    onClick={() => {
+                      router.push(`/players/${item.tag}`);
+                    }}
+                    className={styles.dropdownMenuItem}
+                  >
+                    #{item.tag}
+                    {item.name && ` ${item.name}`}
+                  </DropdownMenuItem>
+                ))}
+              </ScrollArea>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </InputGroupAddon>
       </InputGroup>
     </>
