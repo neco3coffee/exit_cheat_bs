@@ -27,10 +27,10 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install --force
+        run: npm install --legacy-peer-deps
 
       - name: Run biome check
-        run: npm run ci
+        run: npm run lint
 
       - name: TypeScript type check
         run: npm run typecheck
