@@ -32,7 +32,7 @@ jobs:
         run: npm install --force
 
       - name: Run biome check
-        run: npm run ci
+        run: npm run ci --force
 
       - name: TypeScript type check
         run: npm run typecheck
