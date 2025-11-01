@@ -10,6 +10,7 @@ services:
       - app
     environment:
       NEXT_PUBLIC_GA_ID: ${NEXT_PUBLIC_GA_ID}
+      SITE_URL: ${SITE_URL}
     networks:
       - safebrawl_net
   app:
