@@ -19,13 +19,78 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "SafeBrawl",
-  description: "avoid cheaters, enjoy Brawl Stars",
-  other: {
-    "format-detection": "telephone=no",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+
+  if (locale === "ja") {
+    return {
+      title: "SafeBrawl - ブロスタ利敵献上プレイヤー回避サービス",
+      description:
+        "ブロスタで利敵行為や献上プレイヤーを回避してランクマッチを楽しもう。SafeBrawlで問題のあるプレイヤーを事前にチェック。",
+      openGraph: {
+        title: "SafeBrawl - ブロスタ利敵献上プレイヤー回避サービス",
+        description:
+          "ブロスタで利敵行為や献上プレイヤーを回避してランクマッチを楽しもう。SafeBrawlで問題のあるプレイヤーを事前にチェック。",
+        images: [
+          {
+            url: "/ja_ogp.png",
+            width: 1200,
+            height: 675,
+            alt: "SafeBrawl - ブロスタ利敵献上プレイヤー回避サービス",
+          },
+        ],
+        locale: "ja_JP",
+        type: "website",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: "SafeBrawl - ブロスタ利敵献上プレイヤー回避サービス",
+        description:
+          "ブロスタで利敵行為や献上プレイヤーを回避してランクマッチを楽しもう。SafeBrawlで問題のあるプレイヤーを事前にチェック。",
+        images: ["/ja_ogp.png"],
+      },
+      other: {
+        "format-detection": "telephone=no",
+      },
+    };
+  }
+
+  // Default to English
+  return {
+    title: "SafeBrawl - Avoid griefing / feeding players in Brawl Stars",
+    description:
+      "Avoid griefing / feeding players in Brawl Stars ranked matches. Check problematic players before your game with SafeBrawl.",
+    openGraph: {
+      title: "SafeBrawl - Avoid griefing / feeding players in Brawl Stars",
+      description:
+        "Avoid griefing / feeding players in Brawl Stars ranked matches. Check problematic players before your game with SafeBrawl.",
+      images: [
+        {
+          url: "/en_ogp.png",
+          width: 1200,
+          height: 675,
+          alt: "SafeBrawl - Avoid griefing / feeding players in Brawl Stars",
+        },
+      ],
+      locale: "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "SafeBrawl - Avoid griefing / feeding players in Brawl Stars",
+      description:
+        "Avoid griefing / feeding players in Brawl Stars ranked matches. Check problematic players before your game with SafeBrawl.",
+      images: ["/en_ogp.png"],
+    },
+    other: {
+      "format-detection": "telephone=no",
+    },
+  };
+}
 
 const locales = ["en", "ja"];
 
@@ -47,8 +112,10 @@ export default async function RootLayout({
   "use cache";
   cacheLife("max");
 
+  const { locale } = await params;
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <head>
         <link
           rel="manifest"
