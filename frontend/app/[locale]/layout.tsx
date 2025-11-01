@@ -8,6 +8,7 @@ import { cacheLife } from "next/cache";
 import { Suspense } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "../analytics";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -124,6 +125,14 @@ export default async function RootLayout({
           href="/manifest.webmanifest"
           crossOrigin="use-credentials"
         />
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3651729056445822"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        >
+
+        </Script>
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Header params={params} />
