@@ -13,24 +13,40 @@ export default async function TermsOfServicePage({
   const t = await getTranslations({ locale, namespace: "termsOfService" });
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto bg-white shadow-sm rounded-lg p-8 md:p-12">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">{t("title")}</h1>
+    <div
+      className="min-h-screen py-12 px-4 sm:px-6 lg:px-8"
+      style={{ backgroundColor: "var(--black)", padding: "23px" }}
+    >
+      <div className="max-w-4xl mx-auto shadow-sm rounded-lg p-8 md:p-12">
+        <h1
+          className="text-3xl font-bold mb-4"
+          style={{ color: "var(--white)" }}
+        >
+          {t("title")}
+        </h1>
 
-        <div className="text-sm text-gray-600 mb-8 space-y-1">
+        <div
+          className="text-sm mb-8 space-y-1"
+          style={{ color: "var(--white)" }}
+        >
           <p>{t("effectiveDate")}</p>
           <p>{t("lastUpdated")}</p>
         </div>
 
         <div className="prose prose-gray max-w-none">
-          <p className="text-gray-700 mb-8">{t("intro")}</p>
+          <p className="mb-8" style={{ color: "var(--white)" }}>
+            {t("intro")}
+          </p>
 
           {/* Article 1 */}
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            <h2
+              className="text-xl font-semibold mb-4"
+              style={{ color: "var(--white)" }}
+            >
               {t("article1.title")}
             </h2>
-            <div className="space-y-3 text-gray-700">
+            <div className="space-y-3" style={{ color: "var(--white)" }}>
               <p>{t("article1.section1")}</p>
               <p>{t("article1.section2")}</p>
               <p>{t("article1.section3")}</p>
@@ -41,10 +57,13 @@ export default async function TermsOfServicePage({
 
           {/* Article 2 */}
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            <h2
+              className="text-xl font-semibold mb-4"
+              style={{ color: "var(--white)" }}
+            >
               {t("article2.title")}
             </h2>
-            <div className="space-y-3 text-gray-700">
+            <div className="space-y-3" style={{ color: "var(--white)" }}>
               <p>{t("article2.section1")}</p>
               <p>{t("article2.section2")}</p>
               <p>{t("article2.section3")}</p>
@@ -62,11 +81,16 @@ export default async function TermsOfServicePage({
 
           {/* Article 3 */}
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            <h2
+              className="text-xl font-semibold mb-4"
+              style={{ color: "var(--white)" }}
+            >
               {t("article3.title")}
             </h2>
-            <p className="text-gray-700 mb-3">{t("article3.intro")}</p>
-            <div className="space-y-2 text-gray-700">
+            <p className="mb-3" style={{ color: "var(--white)" }}>
+              {t("article3.intro")}
+            </p>
+            <div className="space-y-2" style={{ color: "var(--white)" }}>
               <p>{t("article3.item1")}</p>
               <p>{t("article3.item2")}</p>
               <p>{t("article3.item3")}</p>
@@ -87,10 +111,13 @@ export default async function TermsOfServicePage({
 
           {/* Article 4 */}
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            <h2
+              className="text-xl font-semibold mb-4"
+              style={{ color: "var(--white)" }}
+            >
               {t("article4.title")}
             </h2>
-            <div className="space-y-3 text-gray-700">
+            <div className="space-y-3" style={{ color: "var(--white)" }}>
               <p>{t("article4.section1")}</p>
               <p>{t("article4.section2")}</p>
             </div>
@@ -98,10 +125,13 @@ export default async function TermsOfServicePage({
 
           {/* Article 5 */}
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            <h2
+              className="text-xl font-semibold mb-4"
+              style={{ color: "var(--white)" }}
+            >
               {t("article5.title")}
             </h2>
-            <div className="space-y-3 text-gray-700">
+            <div className="space-y-3" style={{ color: "var(--white)" }}>
               <p>{t("article5.section1")}</p>
               <p>{t("article5.section2")}</p>
               <p>{t("article5.section3")}</p>
@@ -110,10 +140,13 @@ export default async function TermsOfServicePage({
 
           {/* Article 6 */}
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            <h2
+              className="text-xl font-semibold mb-4"
+              style={{ color: "var(--white)" }}
+            >
               {t("article6.title")}
             </h2>
-            <div className="space-y-3 text-gray-700">
+            <div className="space-y-3" style={{ color: "var(--white)" }}>
               <p>{t("article6.section1")}</p>
               <div className="pl-6 space-y-2">
                 <p>{t("article6.section1a")}</p>
@@ -127,10 +160,13 @@ export default async function TermsOfServicePage({
 
           {/* Article 7 */}
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            <h2
+              className="text-xl font-semibold mb-4"
+              style={{ color: "var(--white)" }}
+            >
               {t("article7.title")}
             </h2>
-            <div className="space-y-3 text-gray-700">
+            <div className="space-y-3" style={{ color: "var(--white)" }}>
               <p>{t("article7.section1")}</p>
               <div className="pl-6 space-y-2">
                 <p>{t("article7.section1a")}</p>
@@ -143,10 +179,13 @@ export default async function TermsOfServicePage({
 
           {/* Article 8 */}
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            <h2
+              className="text-xl font-semibold mb-4"
+              style={{ color: "var(--white)" }}
+            >
               {t("article8.title")}
             </h2>
-            <div className="space-y-3 text-gray-700">
+            <div className="space-y-3" style={{ color: "var(--white)" }}>
               <p>{t("article8.section1")}</p>
               <p>{t("article8.section2")}</p>
               <p>{t("article8.section3")}</p>
@@ -156,10 +195,13 @@ export default async function TermsOfServicePage({
 
           {/* Article 9 */}
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            <h2
+              className="text-xl font-semibold mb-4"
+              style={{ color: "var(--white)" }}
+            >
               {t("article9.title")}
             </h2>
-            <div className="space-y-3 text-gray-700">
+            <div className="space-y-3" style={{ color: "var(--white)" }}>
               <p>{t("article9.section1")}</p>
               <p>{t("article9.section2")}</p>
             </div>
@@ -167,10 +209,13 @@ export default async function TermsOfServicePage({
 
           {/* Article 10 */}
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            <h2
+              className="text-xl font-semibold mb-4"
+              style={{ color: "var(--white)" }}
+            >
               {t("article10.title")}
             </h2>
-            <div className="space-y-3 text-gray-700">
+            <div className="space-y-3" style={{ color: "var(--white)" }}>
               <p>{t("article10.section1")}</p>
               <p>{t("article10.section2")}</p>
               <p>{t("article10.section3")}</p>
@@ -179,34 +224,46 @@ export default async function TermsOfServicePage({
 
           {/* Article 11 */}
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            <h2
+              className="text-xl font-semibold mb-4"
+              style={{ color: "var(--white)" }}
+            >
               {t("article11.title")}
             </h2>
-            <p className="text-gray-700">{t("article11.content")}</p>
+            <p style={{ color: "var(--white)" }}>{t("article11.content")}</p>
           </section>
 
           {/* Article 12 */}
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            <h2
+              className="text-xl font-semibold mb-4"
+              style={{ color: "var(--white)" }}
+            >
               {t("article12.title")}
             </h2>
-            <p className="text-gray-700">{t("article12.content")}</p>
+            <p style={{ color: "var(--white)" }}>{t("article12.content")}</p>
           </section>
 
           {/* Article 13 */}
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            <h2
+              className="text-xl font-semibold mb-4"
+              style={{ color: "var(--white)" }}
+            >
               {t("article13.title")}
             </h2>
-            <p className="text-gray-700">{t("article13.content")}</p>
+            <p style={{ color: "var(--white)" }}>{t("article13.content")}</p>
           </section>
 
           {/* Article 14 */}
           <section className="mb-8">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            <h2
+              className="text-xl font-semibold mb-4"
+              style={{ color: "var(--white)" }}
+            >
               {t("article14.title")}
             </h2>
-            <div className="space-y-3 text-gray-700">
+            <div className="space-y-3" style={{ color: "var(--white)" }}>
               <p>{t("article14.section1")}</p>
               <p>{t("article14.section2")}</p>
             </div>
