@@ -67,7 +67,7 @@ export default async function CreditsPage({
       name: "GitHub",
       url: "https://github.com/",
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-      needsInvert: false,
+      needsInvert: true,
     },
   ];
 
