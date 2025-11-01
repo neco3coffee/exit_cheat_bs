@@ -205,6 +205,20 @@
       "section2": "2. In the event of any dispute arising in connection with the Service, the district court or summary court having jurisdiction over the location of the Developer shall be the exclusive court of first instance."
     }
   },
+  "credits": {
+    "title": "Credits",
+    "linkText": "Credits",
+    "intro": "SafeBrawl is powered by the following technologies and services.",
+    "services": {
+      "frontend": "Next.js, React, TypeScript, Tailwind CSS, Radix UI",
+      "backend": "Ruby on Rails 8 and PostgreSQL",
+      "infrastructure": "AWS (Lightsail, S3, CloudFront, Route53)",
+      "tools": "Docker, GitHub Actions, SolidQueue",
+      "apiPrefix": "Official ",
+      "apiAnd": " and ",
+      "community": "And supported by many open source communities."
+    }
+  },
   "privacyPolicy": {
     "title": "Privacy Policy",
     "linkText": "Privacy Policy",
