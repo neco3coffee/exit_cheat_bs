@@ -29,10 +29,7 @@ export default function FAQ() {
   ];
 
   return (
-    <div
-      className="w-full max-w-3xl mx-auto px-[32px] py-8"
-      style={{ marginTop: "32px" }}
-    >
+    <div className="w-full max-w-3xl mx-auto px-[32px] py-8 mt-8">
       <h2
         className="text-2xl font-bold mb-6 text-center"
         style={{ color: "var(--white)" }}
@@ -50,7 +47,6 @@ export default function FAQ() {
               border: "1px solid var(--blue-black-border)",
               borderRadius: "8px",
               padding: "8px",
-              marginBottom: "8px",
             }}
           >
             <AccordionTrigger style={{ color: "var(--white)" }}>
