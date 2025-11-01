@@ -57,7 +57,7 @@ export default async function RootLayout({
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Header />
+        <Header params={params} />
         <main>{children}</main>
         <div key="modal">{modal}</div>
         <div id="modal-root" />
