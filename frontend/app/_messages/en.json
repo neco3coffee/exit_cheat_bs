@@ -94,5 +94,115 @@
     "Insane": "INSANE",
     "Impossible": "IMPOSSIBLE",
     "undefined": "UNDEFINED BATTLE TYPE"
+  },
+  "termsOfService": {
+    "title": "Terms of Service",
+    "linkText": "Terms of Service",
+    "effectiveDate": "Effective Date: November 1, 2025",
+    "lastUpdated": "Last Updated: November 1, 2025",
+    "intro": "These Terms of Service (hereinafter referred to as \"these Terms\") set forth the conditions for the use of Brawl Insights (hereinafter referred to as \"the Service\"). All users of the Service (hereinafter referred to as \"Users\") shall use the Service in accordance with these Terms.",
+    "article1": {
+      "title": "Article 1 (Agreement to and Scope of Application of these Terms)",
+      "section1": "1. These Terms shall apply to all relationships between Users and the developer of the Service (hereinafter referred to as \"the Developer\") regarding the use of the Service. The Service includes all websites, application software, and services incidental thereto provided by the Developer.",
+      "section2": "2. By using the Service, Users shall be deemed to have agreed to all the contents of these Terms.",
+      "section3": "3. The rules regarding the use of the Service posted by the Developer on the Service shall constitute a part of these Terms.",
+      "section4": "4. In the event of any discrepancy between the contents of these Terms and the rules in the preceding paragraph or other descriptions of the Service outside of these Terms, the provisions of these Terms shall prevail.",
+      "section5": "5. Even if these Terms are provided in a language other than Japanese, the Japanese version of these Terms shall apply as the authentic text. The translated version is provided for reference only."
+    },
+    "article2": {
+      "title": "Article 2 (Account Registration)",
+      "section1": "1. Account registration may be required to use some features of the Service. Account registration is not mandatory.",
+      "section2": "2. Those who wish to register an account (hereinafter referred to as \"Registration Applicants\") may apply for account registration to the Developer by agreeing to these Terms and providing certain information determined by the Developer in the manner determined by the Developer.",
+      "section3": "3. The Developer may refuse to approve an application for account registration if it determines that the Registration Applicant has any of the following reasons, and shall have no obligation to disclose the reasons for such refusal:",
+      "section3a": "(1) If all or part of the registration information provided to the Developer is false, incorrect, or incomplete",
+      "section3b": "(2) If the application is from a person who has violated these Terms in the past",
+      "section3c": "(3) If the Developer otherwise determines that the account registration is inappropriate",
+      "section4": "4. Users shall appropriately manage their username and password for the Service at their own responsibility.",
+      "section5": "5. Users may not, under any circumstances, transfer, lend, or share their username and password with a third party. The Developer shall deem that the use of a username and password combination that matches the registered information is by the User who registered the username.",
+      "section6": "6. The Developer shall not be liable for any damage caused by the use of a username and password by a third party, except in cases where the Developer has intent or gross negligence.",
+      "section7": "7. Users may delete their accounts at any time by following the procedures determined by the Developer."
+    },
+    "article3": {
+      "title": "Article 3 (Prohibited Acts)",
+      "intro": "Users shall not engage in any of the following acts or acts that the Developer determines to fall under any of the following when using the Service:",
+      "item1": "1. Acts that violate laws or public order and morals",
+      "item2": "2. Acts related to criminal activities",
+      "item3": "3. Acts that destroy or interfere with the functions of the Service's servers or networks",
+      "item4": "4. Acts that may interfere with the operation of the Service",
+      "item5": "5. Acts of unauthorized access or attempts to do so",
+      "item6": "6. Acts of collecting or accumulating personal information about other Users",
+      "item7": "7. Acts of using the Service for illegal purposes",
+      "item8": "8. Acts that cause disadvantage, damage, or discomfort to other Users of the Service or other third parties",
+      "item9": "9. Acts of impersonating other Users",
+      "item10": "10. Advertising, publicity, solicitation, or business activities on the Service without the Developer's permission",
+      "item11": "11. Acts of commercially using the Service's content (as defined in the next article) beyond the scope of personal use without the Developer's prior permission (including but not limited to reproduction, sale, and publication)",
+      "item12": "12. Acts of directly or indirectly providing benefits to antisocial forces in connection with the Service",
+      "item13": "13. Acts that infringe upon the intellectual property rights, portrait rights, privacy, honor, or other rights or interests of the Service or third parties",
+      "item14": "14. Acts of posting or transmitting expressions that contain excessively violent expressions, explicit sexual expressions, expressions that lead to discrimination based on race, nationality, creed, gender, social status, family origin, etc., expressions that induce or encourage suicide, self-harm, or drug abuse, or other antisocial content that causes discomfort to others (if the Service has a posting function)",
+      "item15": "15. Other acts that the Developer deems inappropriate"
+    },
+    "article4": {
+      "title": "Article 4 (Intellectual Property Rights)",
+      "section1": "1. All copyrights and other intellectual property rights concerning the Service and all information related to the Service belong to the Developer or rights holders who have permitted the Developer to use them.",
+      "section2": "2. Users may not use information or content provided through the Service (including but not limited to game statistics, images, text, design, and programs; hereinafter referred to as \"the Content\") beyond the scope of private use permitted by copyright law, including reproduction, adaptation, public transmission, or any other form of use."
+    },
+    "article5": {
+      "title": "Article 5 (Use of External Services)",
+      "section1": "1. The Service uses one or more external APIs provided by third parties (hereinafter collectively referred to as \"External APIs\"), including the Brawl Stars API provided by Supercell, for the purpose of providing information.",
+      "section2": "2. Users shall comply with the terms of service and other conditions (hereinafter referred to as \"External API Terms\") established by the providers of each External API (hereinafter collectively referred to as \"API Providers\") regarding the use of External APIs. In the event of any conflict between these Terms and the External API Terms, the External API Terms shall prevail with respect to the use of External APIs.",
+      "section3": "3. All or part of the Service may become unavailable due to changes in the specifications of External APIs, suspension of provision, or other circumstances of the API Providers. The Developer shall not be liable for any damage caused to Users as a result."
+    },
+    "article6": {
+      "title": "Article 6 (Suspension or Interruption of Service Provision)",
+      "section1": "1. The Developer may suspend or interrupt the provision of all or part of the Service without prior notice to Users if it determines that any of the following reasons exist:",
+      "section1a": "(1) When performing maintenance or updates to the computer system related to the Service",
+      "section1b": "(2) When provision of the Service becomes difficult due to force majeure such as earthquakes, lightning, fires, power outages, or natural disasters",
+      "section1c": "(3) When computers or communication lines, etc. stop due to accidents",
+      "section1d": "(4) When the Developer otherwise determines that provision of the Service is difficult",
+      "section2": "2. The Developer shall not be liable for any disadvantage or damage suffered by Users or third parties due to the suspension or interruption of the Service, except in cases where the Developer has intent or gross negligence."
+    },
+    "article7": {
+      "title": "Article 7 (Restriction of Use and Account Deletion)",
+      "section1": "1. The Developer may, without prior notice, restrict the use of all or part of the Service for Users or delete their account registration if the User falls under any of the following:",
+      "section1a": "(1) If the User violates any provision of these Terms",
+      "section1b": "(2) If it is found that there is false information in the registration information",
+      "section1c": "(3) If the Developer otherwise determines that the use of the Service is inappropriate",
+      "section2": "2. The Developer shall not be liable for any damage caused to Users by actions taken by the Developer under this Article."
+    },
+    "article8": {
+      "title": "Article 8 (Disclaimer and Limitation of Liability)",
+      "section1": "1. The Service is an unofficial tool that provides game records and statistical information, and has no relationship whatsoever with API Providers or game developers/operators.",
+      "section2": "2. The Developer does not warrant that the Service will meet Users' specific purposes, have expected functions, commercial value, accuracy, or usefulness, that Users' use of the Service will comply with laws or industry group internal rules applicable to Users, or that defects will not occur.",
+      "section3": "3. The Developer does not explicitly or implicitly guarantee that any information or content on the Service is free from defects in safety, reliability, accuracy, completeness, effectiveness, suitability for a specific purpose, security, errors or bugs, or infringement of rights.",
+      "section4": "4. Users shall use the Service at their own judgment and responsibility, and the Developer shall not be liable for any damage (including all disadvantages such as mental distress or other monetary loss) caused to Users due to the use of the Service, except in cases where the Developer has intent or gross negligence."
+    },
+    "article9": {
+      "title": "Article 9 (Changes, Additions, or Discontinuation of Service Content)",
+      "section1": "1. The Developer may change, add, or discontinue the content of the Service at any time without notice to Users.",
+      "section2": "2. The Developer shall not be liable for any damage caused to Users due to changes in the Service content."
+    },
+    "article10": {
+      "title": "Article 10 (Changes to the Terms of Service)",
+      "section1": "1. The Developer may change these Terms at any time without obtaining individual consent from Users if it deems it necessary.",
+      "section2": "2. The revised Terms shall take effect from the time they are displayed on the Service, unless the Developer specifies otherwise.",
+      "section3": "3. If Users use the Service after these Terms are changed, Users shall be deemed to have agreed to the revised Terms. If you do not agree with the changes, please refrain from using the Service. The Developer will strive to provide advance notice for important changes."
+    },
+    "article11": {
+      "title": "Article 11 (Handling of Personal Information)",
+      "content": "The Developer shall appropriately handle Users' personal information obtained through the use of the Service in accordance with the separately established \"Privacy Policy.\" Users must review and agree to the Privacy Policy before using the Service."
+    },
+    "article12": {
+      "title": "Article 12 (Prohibition of Assignment of Rights and Obligations)",
+      "content": "Users may not assign their position under the usage contract or rights or obligations under these Terms to a third party or provide them as security without the Developer's prior written consent."
+    },
+    "article13": {
+      "title": "Article 13 (Severability)",
+      "content": "Even if any provision of these Terms or any part thereof is determined to be invalid or unenforceable under the Consumer Contract Act or other laws and regulations, the remaining provisions of these Terms and the remaining parts of provisions determined to be partially invalid or unenforceable shall continue to be fully effective."
+    },
+    "article14": {
+      "title": "Article 14 (Governing Law and Jurisdiction)",
+      "section1": "1. These Terms shall be governed by and construed in accordance with the laws of Japan.",
+      "section2": "2. In the event of any dispute arising in connection with the Service, the district court or summary court having jurisdiction over the location of the Developer shall be the exclusive court of first instance."
+    }
   }
 }
