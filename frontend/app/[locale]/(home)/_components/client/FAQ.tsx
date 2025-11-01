@@ -29,10 +29,13 @@ export default function FAQ() {
   ];
 
   return (
-    <div className="w-full max-w-3xl mx-auto px-[32px] py-8 mt-8">
+    <div
+      className="w-full max-w-3xl mx-auto px-[32px]"
+      style={{ padding: "32px", marginTop: "32px" }}
+    >
       <h2
-        className="text-2xl font-bold mb-6 text-center"
-        style={{ color: "var(--white)" }}
+        className="text-2xl font-bold text-center"
+        style={{ color: "var(--white)", marginBottom: "24px" }}
       >
         {t("title")}
       </h2>

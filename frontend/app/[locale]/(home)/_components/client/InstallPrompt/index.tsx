@@ -60,15 +60,11 @@ export default function InstallPrompt() {
   }
 
   return (
-    <div className="w-full h-full relative">
+    <>
       {isIOS && (
         <Sheet>
           <SheetTrigger>
-            <SquarePlus
-              size={50}
-              aria-label="plus icon"
-              className="absolute bottom-[10px] right-[10px]"
-            />
+            <SquarePlus size={24} aria-label="plus icon" className="" />
           </SheetTrigger>
           <SheetContent
             side="top"
@@ -90,13 +86,13 @@ export default function InstallPrompt() {
       {isAndroid && deferredPrompt && (
         <button
           onClick={handleInstallClick}
-          className="absolute bottom-[10px] right-[10px] bg-blue-600 hover:bg-blue-700 text-white rounded-full p-3 shadow-lg transition-colors"
+          className=""
           aria-label="Install app"
           type="button"
         >
-          <SquarePlus size={50} />
+          <SquarePlus size={24} />
         </button>
       )}
-    </div>
+    </>
   );
 }

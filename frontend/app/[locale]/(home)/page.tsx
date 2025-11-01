@@ -14,6 +14,7 @@ export default function Home({
   return (
     <>
       <div className={styles.margin}></div>
+      {/* <InstallPrompt /> */}
       <Suspense fallback={null}>
         <ServerLocaleMessageProviderWrapper params={params}>
           <TagInput />
@@ -24,7 +25,6 @@ export default function Home({
           <NameInput />
         </ServerLocaleMessageProviderWrapper>
       </Suspense>
-      <InstallPrompt />
       <Suspense fallback={null}>
         <ServerLocaleMessageProviderWrapper params={params}>
           <FAQ />
