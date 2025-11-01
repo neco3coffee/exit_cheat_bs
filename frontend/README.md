@@ -20,6 +20,33 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## SEO Configuration
+
+This project uses [next-sitemap](https://github.com/iamvishnusankar/next-sitemap) to automatically generate `robots.txt` and `sitemap.xml` files during the build process.
+
+### Configuration
+
+The sitemap configuration is defined in `next-sitemap.config.js`. The sitemap will be automatically generated when running `npm run build`.
+
+### Environment Variables
+
+Set the `SITE_URL` environment variable to your production domain:
+
+```bash
+SITE_URL=https://safebrawl.com
+```
+
+If not set, it defaults to `https://safebrawl.com`.
+
+### Generated Files
+
+After building the project, the following files will be created in the `public` directory:
+- `public/robots.txt` - Search engine crawler rules
+- `public/sitemap.xml` - Complete sitemap with all routes
+
+These files are automatically generated and should not be committed to the repository.
+
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
