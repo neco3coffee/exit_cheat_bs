@@ -204,5 +204,105 @@
       "section1": "1. These Terms shall be governed by and construed in accordance with the laws of Japan.",
       "section2": "2. In the event of any dispute arising in connection with the Service, the district court or summary court having jurisdiction over the location of the Developer shall be the exclusive court of first instance."
     }
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "linkText": "Privacy Policy",
+    "effectiveDate": "Effective Date: November 1, 2025",
+    "lastUpdated": "Last Updated: November 1, 2025",
+    "intro": "The developer of SafeBrawl (hereinafter referred to as \"the Service\") (hereinafter referred to as \"the Developer\") establishes this Privacy Policy (hereinafter referred to as \"this Policy\") regarding the handling of information of users of the Service. This Policy explains what information the Developer collects, how it is used and shared, and how users can manage their information.",
+    "article1": {
+      "title": "Article 1 (Information We Collect)",
+      "section1": "In providing the Service, the Developer may collect the following information:",
+      "section1a": "1. Information provided by users",
+      "section2": "• Information provided during account registration (optional): Player tags and other information determined by the Developer.",
+      "section2a": "2. Information automatically collected when using the Service",
+      "section2b": "• Cookies and similar technologies: The Service uses cookies to improve convenience, manage sessions (such as maintaining login status), and understand access status.",
+      "section2b1": "• Access logs: When users use the Service, the following information is automatically generated and recorded as access logs:",
+      "section2b2": "• IP address",
+      "section2b3": "• User agent information (browser type and version, operating system type and version, etc.)",
+      "section2b4": "• Request date and time",
+      "section2b5": "• URL of accessed pages and resources",
+      "section2b6": "• Referrer information",
+      "section2c": "• Device information: Information such as the type of device used by users may be collected for analyzing Service usage."
+    },
+    "article2": {
+      "title": "Article 2 (Purpose of Using Information)",
+      "intro": "The Developer uses the collected information for the following purposes:",
+      "item1": "1. To provide, maintain, protect, and improve the Service (including account authentication, battle record display, and information provision)",
+      "item2": "2. To respond to inquiries from users (including identity verification)",
+      "item3": "3. To analyze Service usage, improve the Service, and develop new services",
+      "item4": "4. To prevent and respond to acts that violate the Terms of Service or use the Service for illegal or improper purposes",
+      "item5": "5. To allow users to view their own registration information",
+      "item6": "6. To deliver advertisements tailored to users' interests",
+      "item7": "7. To provide necessary communications such as important notices regarding the Service",
+      "item8": "8. For purposes incidental to the above purposes"
+    },
+    "article3": {
+      "title": "Article 3 (Provision of Information to Third Parties)",
+      "intro": "The Developer will not provide personal information (as defined in Article 2, Paragraph 1 of the Act on the Protection of Personal Information; the same shall apply hereinafter) to third parties without prior consent from users, except in the following cases. However, this excludes cases permitted by the Personal Information Protection Act and other laws:",
+      "item1": "1. When based on laws and regulations",
+      "item2": "2. When it is necessary for the protection of the life, body, or property of a person and it is difficult to obtain the consent of the person",
+      "item3": "3. When it is particularly necessary to improve public health or promote the sound growth of children and it is difficult to obtain the consent of the person",
+      "item4": "4. When it is necessary to cooperate with a national agency, local government, or a person entrusted by them in performing affairs prescribed by laws and regulations, and obtaining the consent of the person may interfere with the performance of such affairs"
+    },
+    "article4": {
+      "title": "Article 4 (Use of Access Analysis Tools)",
+      "section1": "1. The Service uses \"Google Analytics\" provided by Google Inc. to understand Service usage and improve the Service.",
+      "section2": "2. Google Analytics uses cookies to collect user traffic data. This traffic data is collected anonymously and does not identify individuals.",
+      "section3": "3. Users can refuse this information collection by disabling cookies in their browser settings. However, some features of the Service may not be available in that case.",
+      "section4Prefix": "4. For details on Google Analytics terms, please see",
+      "section4Link1": "here",
+      "section4Middle": ", and for details on Google's privacy policy, please see",
+      "section4Link2": "here",
+      "section4Suffix": "."
+    },
+    "article5": {
+      "title": "Article 5 (Advertising Distribution)",
+      "section1": "1. The Service uses third-party advertising services (such as Google AdSense).",
+      "section2": "2. Such advertising distributors may use information (cookies) about access to the Service and other sites to display advertisements for products and services according to users' interests. This does not include names, addresses, email addresses, or phone numbers.",
+      "section3Prefix": "3. Users can disable personalized advertising from",
+      "section3Link1": "Google Ad Settings",
+      "section3Middle": ". You can also visit",
+      "section3Link2": "www.aboutads.info",
+      "section3Suffix": " to disable cookies used for personalized advertising by third-party distributors.",
+      "section4": "4. Advertising opt-out using advertising identifiers can be done from the OS settings of your device. Please check the official information for each OS for setting methods."
+    },
+    "article6": {
+      "title": "Article 6 (Joint Use of Information)",
+      "content": "At present, the Developer does not jointly use collected personal information with specific parties. If joint use is to be conducted in the future, the items of information to be jointly used, the scope of joint users, the purpose of use, and the person responsible for management will be notified in advance or published in this Policy, etc."
+    },
+    "article7": {
+      "title": "Article 7 (Security Management Measures for Information)",
+      "content": "The Developer shall take necessary and appropriate measures for the security management of the information handled, including preventing leakage, loss, or damage of information. Specifically, measures such as unauthorized access prevention and access control will be implemented."
+    },
+    "article8": {
+      "title": "Article 8 (Cookie Management)",
+      "section1": "1. Most browsers are set to accept cookies by default. Users can disable cookies or display warnings when cookies are sent by changing browser settings.",
+      "section2": "2. Please note that if cookies are disabled, some features of the Service may not be available.",
+      "section3": "3. For information on how to change cookie settings, please refer to the official support site of each browser."
+    },
+    "article9": {
+      "title": "Article 9 (Information Retention Period)",
+      "content": "The Developer will retain collected information for an appropriate period within the scope necessary to achieve the purpose of use and in accordance with relevant laws and regulations."
+    },
+    "article10": {
+      "title": "Article 10 (User Rights: Disclosure, Correction, Deletion, Suspension of Use, etc. of Personal Information)",
+      "section1": "1. Users may request disclosure, correction, addition, deletion, suspension of use, or erasure (hereinafter referred to as \"disclosure, etc.\") of their personal information held by the Developer in accordance with the Personal Information Protection Act.",
+      "section2": "2. Requests for disclosure, etc. should be made to the contact point specified in Article 12. After confirming that the request is from the user, the Developer will respond without delay in accordance with laws and regulations.",
+      "section3": "3. Registered account users can view and correct their registration information from the settings screen within the Service. Account deletion can also be done from within the Service.",
+      "section4": "4. Please note that a fee of up to 1,000 yen per case may be charged for disclosure of personal information."
+    },
+    "article11": {
+      "title": "Article 11 (Changes to the Privacy Policy)",
+      "section1": "1. The Developer may change the contents of this Policy as necessary due to amendments to laws and regulations, changes in business content, user requests, etc.",
+      "section2": "2. The revised Policy shall take effect when posted on the Service. However, if user consent is required by law for changes to the content, the Developer shall obtain user consent in a manner determined by the Developer.",
+      "section3": "3. The Developer will strive to clearly announce important changes to this Policy, including the content of changes and the effective date."
+    },
+    "article12": {
+      "title": "Article 12 (Contact)",
+      "section1": "For comments, questions, or other inquiries regarding the handling of user information related to this Policy, please contact the following:",
+      "section2": "• Email: neco3coffee+brawl@gmail.com"
+    }
   }
 }

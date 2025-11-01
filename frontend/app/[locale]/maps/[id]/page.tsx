@@ -1,4 +1,3 @@
-import { cacheLife } from "next/cache";
 import Image from "next/image";
 import { Suspense } from "react";
 import styles from "./page.module.scss";

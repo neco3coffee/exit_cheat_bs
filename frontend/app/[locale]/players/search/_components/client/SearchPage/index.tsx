@@ -309,7 +309,7 @@ export default function SearchPage() {
                                   {brawler.gadgets &&
                                     brawler.gadgets.length > 0 &&
                                     brawler.gadgets.map(
-                                      (gadget: any, index: number) => (
+                                      (gadget: any, _index: number) => (
                                         <div
                                           className={
                                             styles.gadgetImageContainer
@@ -349,7 +349,7 @@ export default function SearchPage() {
                                   {brawler.starPowers &&
                                     brawler.starPowers.length > 0 &&
                                     brawler.starPowers.map(
-                                      (starPower: any, index: number) => (
+                                      (starPower: any, _index: number) => (
                                         <div
                                           className={
                                             styles.starPowerImageContainer
@@ -535,95 +535,94 @@ export default function SearchPage() {
             {initialized && !loadingPlayers && players?.length < 1 && (
               <div className={styles.notFoundContainer}>No players found.</div>
             )}
-            {players &&
-              players.map((player) => {
-                return (
-                  <button
-                    type="button"
-                    key={player.tag}
-                    className={
-                      player.tag.includes(tag)
-                        ? styles.playerItemContainerActive
-                        : styles.playerItemContainer
-                    }
-                    onClick={() => {
-                      // 現在見ているプレイヤーのタグじゃなかったら実行
-                      if (player.tag.replace(/^#/, "") === tag) return;
-                      setLoadingPlayer(true);
-                      setTag(player.tag.replace(/^#/, ""));
-                    }}
-                    onKeyUp={() => {}}
-                  >
-                    <div className={styles.leftBox}>
-                      {player.approved_reports_count > 0 && (
-                        <Image
-                          src={"/reported_player.png"}
-                          alt="icon"
-                          width={29}
-                          height={29}
-                          sizes="29px"
-                          style={{
-                            width: "auto",
-                            height: "29px",
-                            marginLeft: "3px",
-                          }}
-                        />
-                      )}
-                      {player.approved_reports_count === 0 && (
-                        <Image
-                          src={"/clean_player.png"}
-                          alt="icon"
-                          width={29}
-                          height={29}
-                          sizes="29px"
-                          style={{
-                            width: "auto",
-                            height: "29px",
-                            marginLeft: "3px",
-                          }}
-                        />
-                      )}
-                      <div className={styles.nameAndClubContainer}>
-                        <h4>{player?.name}</h4>
-                        <h5>
-                          <ClubName
-                            clubName={player?.club_name}
-                            notInClubText={notInClubText}
-                          />
-                        </h5>
-                      </div>
-                    </div>
-                    <div className={styles.rightBox}>
-                      <div className={styles.trophyContainer}>
-                        <Image
-                          src={"/icon_trophy1.png"}
-                          alt="trophy"
-                          width={12}
-                          height={12}
-                          sizes="12px"
-                          style={{
-                            width: "auto",
-                            height: "17px",
-                            marginRight: "3px",
-                            paddingTop: "5px",
-                          }}
-                        />
-                        <span className={styles.trophyText}>
-                          {player.trophies}
-                        </span>
-                      </div>
+            {players?.map((player) => {
+              return (
+                <button
+                  type="button"
+                  key={player.tag}
+                  className={
+                    player.tag.includes(tag)
+                      ? styles.playerItemContainerActive
+                      : styles.playerItemContainer
+                  }
+                  onClick={() => {
+                    // 現在見ているプレイヤーのタグじゃなかったら実行
+                    if (player.tag.replace(/^#/, "") === tag) return;
+                    setLoadingPlayer(true);
+                    setTag(player.tag.replace(/^#/, ""));
+                  }}
+                  onKeyUp={() => {}}
+                >
+                  <div className={styles.leftBox}>
+                    {player.approved_reports_count > 0 && (
                       <Image
-                        src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player.rank)}.png`}
-                        alt="rank"
-                        height={33}
-                        width={33}
-                        sizes="33px"
-                        style={{ height: "33px", width: "auto" }}
+                        src={"/reported_player.png"}
+                        alt="icon"
+                        width={29}
+                        height={29}
+                        sizes="29px"
+                        style={{
+                          width: "auto",
+                          height: "29px",
+                          marginLeft: "3px",
+                        }}
                       />
+                    )}
+                    {player.approved_reports_count === 0 && (
+                      <Image
+                        src={"/clean_player.png"}
+                        alt="icon"
+                        width={29}
+                        height={29}
+                        sizes="29px"
+                        style={{
+                          width: "auto",
+                          height: "29px",
+                          marginLeft: "3px",
+                        }}
+                      />
+                    )}
+                    <div className={styles.nameAndClubContainer}>
+                      <h4>{player?.name}</h4>
+                      <h5>
+                        <ClubName
+                          clubName={player?.club_name}
+                          notInClubText={notInClubText}
+                        />
+                      </h5>
                     </div>
-                  </button>
-                );
-              })}
+                  </div>
+                  <div className={styles.rightBox}>
+                    <div className={styles.trophyContainer}>
+                      <Image
+                        src={"/icon_trophy1.png"}
+                        alt="trophy"
+                        width={12}
+                        height={12}
+                        sizes="12px"
+                        style={{
+                          width: "auto",
+                          height: "17px",
+                          marginRight: "3px",
+                          paddingTop: "5px",
+                        }}
+                      />
+                      <span className={styles.trophyText}>
+                        {player.trophies}
+                      </span>
+                    </div>
+                    <Image
+                      src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player.rank)}.png`}
+                      alt="rank"
+                      height={33}
+                      width={33}
+                      sizes="33px"
+                      style={{ height: "33px", width: "auto" }}
+                    />
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </div>
         <div className={styles.searchConditionContainer}>

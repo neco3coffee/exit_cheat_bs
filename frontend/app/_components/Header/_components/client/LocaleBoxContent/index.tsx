@@ -32,40 +32,38 @@ export default function LocaleBoxContent() {
   }, [isOpen]);
 
   return (
-    <>
-      <div
-        ref={menuRef}
-        style={{ display: "inline-block", position: "relative" }}
-        role="menu"
+    <div
+      ref={menuRef}
+      style={{ display: "inline-block", position: "relative" }}
+      role="menu"
+    >
+      <button
+        className={styles.locale}
+        onClick={() => setIsOpen(!isOpen)}
+        onKeyDown={() => setIsOpen(!isOpen)}
+        type="button"
       >
+        {nationalFlags[locale]}
+      </button>
+      {isOpen && (
         <button
-          className={styles.locale}
+          className={styles.container}
           onClick={() => setIsOpen(!isOpen)}
-          onKeyDown={() => setIsOpen(!isOpen)}
           type="button"
         >
-          {nationalFlags[locale]}
+          {locales.map((loc) => (
+            <Link
+              href={`/${loc}/${leftPath}`}
+              className={`${styles.locale} ${styles.item} ${
+                loc === locale ? styles.selected : ""
+              }`}
+              key={loc}
+            >
+              {nationalFlags[loc]}
+            </Link>
+          ))}
         </button>
-        {isOpen && (
-          <button
-            className={styles.container}
-            onClick={() => setIsOpen(!isOpen)}
-            type="button"
-          >
-            {locales.map((loc) => (
-              <Link
-                href={`/${loc}/${leftPath}`}
-                className={`${styles.locale} ${styles.item} ${
-                  loc === locale ? styles.selected : ""
-                }`}
-                key={loc}
-              >
-                {nationalFlags[loc]}
-              </Link>
-            ))}
-          </button>
-        )}
-      </div>
-    </>
+      )}
+    </div>
   );
 }

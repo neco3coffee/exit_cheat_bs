@@ -77,56 +77,54 @@ export default function TagInput() {
   };
 
   return (
-    <>
-      <InputGroup className={styles.inputGroup}>
-        <InputGroupAddon>
-          <InputGroupText className={styles.inputGroupText}>#</InputGroupText>
-        </InputGroupAddon>
-        <InputGroupInput
-          ref={tagInputRef}
-          placeholder="Y2YPGCGC"
-          type="search"
-          enterKeyHint="search"
-          className={styles.inputGroupInput}
-          maxLength={10}
-          onKeyDown={handleTagSearch}
-        />
-        <InputGroupAddon align="inline-end">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild className={styles.DropdownMenuTrigger}>
-              <InputGroupButton variant="ghost" style={{ marginRight: "15px" }}>
-                <History
-                  style={{ width: "20px", height: "20px", fontSize: "20px" }}
-                />
-              </InputGroupButton>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="end"
-              className={styles.dropdownMenuContent}
-            >
-              <ScrollArea className="max-h-[250px] w-[15rem]">
-                {searchLogList.length === 0 && (
-                  <DropdownMenuItem className="cursor-default">
-                    No History
-                  </DropdownMenuItem>
-                )}
-                {searchLogList.map((item) => (
-                  <DropdownMenuItem
-                    key={item.tag}
-                    onClick={() => {
-                      router.push(`/players/${item.tag}`);
-                    }}
-                    className={styles.dropdownMenuItem}
-                  >
-                    #{item.tag}
-                    {item.name && ` ${item.name}`}
-                  </DropdownMenuItem>
-                ))}
-              </ScrollArea>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </InputGroupAddon>
-      </InputGroup>
-    </>
+    <InputGroup className={styles.inputGroup}>
+      <InputGroupAddon>
+        <InputGroupText className={styles.inputGroupText}>#</InputGroupText>
+      </InputGroupAddon>
+      <InputGroupInput
+        ref={tagInputRef}
+        placeholder="Y2YPGCGC"
+        type="search"
+        enterKeyHint="search"
+        className={styles.inputGroupInput}
+        maxLength={10}
+        onKeyDown={handleTagSearch}
+      />
+      <InputGroupAddon align="inline-end">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild className={styles.DropdownMenuTrigger}>
+            <InputGroupButton variant="ghost" style={{ marginRight: "15px" }}>
+              <History
+                style={{ width: "20px", height: "20px", fontSize: "20px" }}
+              />
+            </InputGroupButton>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="end"
+            className={styles.dropdownMenuContent}
+          >
+            <ScrollArea className="max-h-[250px] w-[15rem]">
+              {searchLogList.length === 0 && (
+                <DropdownMenuItem className="cursor-default">
+                  No History
+                </DropdownMenuItem>
+              )}
+              {searchLogList.map((item) => (
+                <DropdownMenuItem
+                  key={item.tag}
+                  onClick={() => {
+                    router.push(`/players/${item.tag}`);
+                  }}
+                  className={styles.dropdownMenuItem}
+                >
+                  #{item.tag}
+                  {item.name && ` ${item.name}`}
+                </DropdownMenuItem>
+              ))}
+            </ScrollArea>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </InputGroupAddon>
+    </InputGroup>
   );
 }

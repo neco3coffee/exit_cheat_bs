@@ -20,7 +20,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
     const timer = setTimeout(() => {
       try {
         // すでに open の場合は二重呼び出しエラーになるので無視
-        if (dialog && dialog.isConnected && !dialog.open) dialog.showModal();
+        if (dialog?.isConnected && !dialog.open) dialog.showModal();
       } catch (e) {
         console.warn("Dialog already open:", e);
       }
@@ -30,7 +30,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
       clearTimeout(timer);
       // document.body.style.overflow = "";
       try {
-        if (dialog && dialog.open) dialog.close();
+        if (dialog?.open) dialog.close();
       } catch {}
       // 手動canvas除去もそのまま
       document

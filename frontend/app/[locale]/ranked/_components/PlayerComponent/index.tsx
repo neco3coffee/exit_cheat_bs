@@ -23,7 +23,7 @@ export default async function PlayerComponent({
     ? `/${locale}`
     : `/${locale}/players/${hashRemovedPlayerTag}`;
 
-  const t = await getTranslations({ locale, namespace: "ranked" });
+  const _t = await getTranslations({ locale, namespace: "ranked" });
 
   return (
     <Link
