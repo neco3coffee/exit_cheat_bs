@@ -61,6 +61,7 @@ export default async function PrivacyPolicyPage({
                   <p>{t("article1.section2b3")}</p>
                   <p>{t("article1.section2b4")}</p>
                   <p>{t("article1.section2b5")}</p>
+                  <p>{t("article1.section2b6")}</p>
                 </div>
                 <p>{t("article1.section2c")}</p>
               </div>
