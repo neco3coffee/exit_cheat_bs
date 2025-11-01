@@ -1,3 +1,4 @@
+import { MailPlus } from "lucide-react";
 import { cacheLife } from "next/cache";
 import { Suspense } from "react";
 import LocaleBoxContent from "./_components/client/LocaleBoxContent";
@@ -9,7 +10,16 @@ export default async function Header() {
 
   return (
     <header className={styles.header}>
-      <div className={styles.logoContainer}></div>
+      <div className={styles.logoContainer}>
+        <a
+          href="https://x.com/neco3desu"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.contactLink}
+        >
+          <MailPlus />
+        </a>
+      </div>
       <h1>SafeBrawl</h1>
 
       <div className={styles.localeContainer}>
