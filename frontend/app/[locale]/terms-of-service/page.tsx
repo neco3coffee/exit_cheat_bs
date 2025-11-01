@@ -1,11 +1,16 @@
 import { cacheLife } from "next/cache";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
-export default async function TermsOfServicePage() {
+export default async function TermsOfServicePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   "use cache";
   cacheLife("max");
 
-  const t = useTranslations("termsOfService");
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "termsOfService" });
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
