@@ -318,5 +318,66 @@
       "section1": "For comments, questions, or other inquiries regarding the handling of user information related to this Policy, please contact the following:",
       "section2": "• Email: neco3coffee+brawl@gmail.com"
     }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": {
+      "whatIsSafeBrawl": {
+        "question": "What is SafeBrawl?",
+        "answer": "SafeBrawl is an information viewing and ranked battle support tool for Brawl Stars players. By searching with a player name and current rank, you can find out if that player has engaged in griefing or feeding behavior. If the player has engaged in griefing or feeding, you can avoid them by disconnecting from the match at the pick screen. Users can report players from recent battle history through this site (login required). You can view a player's past name change history, recent matches (25 matches), current ranked battle rank, available Power 11 characters, and match-by-match performance."
+      },
+      "isFree": {
+        "question": "Is it free to use?",
+        "answer": "Yes, all basic features are available for free."
+      },
+      "mobileSupport": {
+        "question": "Can I use it on mobile?",
+        "answer": "Yes. It works on browsers such as Safari and Chrome. Accessible on iPhone and Android."
+      },
+      "cannotSearchByName": {
+        "question": "What if I can't search by player name?",
+        "answer": "The name may have been changed. Use the \"Old Name Search\" function (press the clock icon on the left to enable it in blue) to find matches with past names. Tag search is also recommended (example: #ABCD123)."
+      },
+      "updateFrequency": {
+        "question": "How often is data updated?",
+        "answer": "Rank and battle records are automatically updated every few hours. If the latest data is not reflected, cache may remain."
+      },
+      "wrongNameDisplayed": {
+        "question": "The name is displayed incorrectly",
+        "answer": "We refer to the latest data from the official Brawl Stars API. Please wait a while and try reloading."
+      },
+      "reportFeature": {
+        "question": "What is the \"report\" feature?",
+        "answer": "It's a mechanism for uploading videos of suspected cheating or \"match-fixing\" for moderator review. Once approved, they are shared on SafeBrawl."
+      },
+      "videoStorage": {
+        "question": "Where are videos stored?",
+        "answer": "Videos are securely stored in S3 (AWS), and only approved ones are published via CloudFront."
+      },
+      "videoNotDisplayed": {
+        "question": "I uploaded a video but it's not displayed",
+        "answer": "The status may be \"waiting for review\" or \"upload incomplete\". Please reload after a few minutes to check."
+      },
+      "dataSource": {
+        "question": "What is SafeBrawl's data source?",
+        "answer": "All player data uses the official Brawl Stars API (https://developer.brawlstars.com)."
+      },
+      "adsDisplayed": {
+        "question": "Are ads displayed?",
+        "answer": "Yes, we display some ads to cover site operating costs. They are placed in a way that does not detract from the gaming experience."
+      },
+      "deletePlayerData": {
+        "question": "Can I delete my player data?",
+        "answer": "Data on the Brawl Stars API cannot be deleted, but you can request deletion of specific reports or uploaded videos on SafeBrawl."
+      },
+      "contact": {
+        "question": "How do I contact you?",
+        "answer": "Please send a DM to @neco3desu on X (formerly Twitter)."
+      },
+      "siteNotLoading": {
+        "question": "The site won't load / An error occurs",
+        "answer": "Please try clearing your cache and reloading. If it still doesn't work, please report the bug."
+      }
+    }
   }
 }
