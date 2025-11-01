@@ -128,10 +128,10 @@ export default async function CreditsPage({
                 className="underline hover:text-gray-300"
                 style={{ color: "var(--on-blue)" }}
               >
-                {locale === "ja" ? "公式 " : "Official "}
+                {t("services.apiPrefix")}
                 <strong>Brawl Stars API</strong>
               </a>
-              {locale === "ja" ? " および " : " and "}
+              {t("services.apiAnd")}
               <a
                 href="https://brawlify.com/"
                 target="_blank"

@@ -214,7 +214,8 @@
       "backend": "Ruby on Rails 8 and PostgreSQL",
       "infrastructure": "AWS (Lightsail, S3, CloudFront, Route53)",
       "tools": "Docker, GitHub Actions, SolidQueue",
-      "api": "Official Brawl Stars API and Brawlify CDN",
+      "apiPrefix": "Official ",
+      "apiAnd": " and ",
       "community": "And supported by many open source communities."
     }
   },
