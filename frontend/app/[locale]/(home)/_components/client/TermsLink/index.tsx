@@ -6,6 +6,7 @@ import { Link } from "@/app/_messages/i18n/navigation";
 export default function TermsLink() {
   const tTerms = useTranslations("termsOfService");
   const tPrivacy = useTranslations("privacyPolicy");
+  const tCredits = useTranslations("credits");
 
   return (
     <div className="flex justify-center mt-8 mb-4 gap-4">
@@ -20,6 +21,12 @@ export default function TermsLink() {
         className="text-sm text-gray-600 hover:text-gray-900 underline"
       >
         {tPrivacy("linkText")}
+      </Link>
+      <Link
+        href="/credits"
+        className="text-sm text-gray-600 hover:text-gray-900 underline"
+      >
+        {tCredits("linkText")}
       </Link>
     </div>
   );
