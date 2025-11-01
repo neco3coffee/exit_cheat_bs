@@ -2,6 +2,7 @@ import { MailPlus } from "lucide-react";
 import { cacheLife } from "next/cache";
 import { Suspense } from "react";
 import LocaleBoxContent from "./_components/client/LocaleBoxContent";
+import SafeBrawlMenuContent from "./_components/client/SafeBrawlMenuContent";
 import styles from "./index.module.scss";
 
 export default async function Header() {
@@ -20,7 +21,9 @@ export default async function Header() {
           <MailPlus />
         </a>
       </div>
-      <h1>SafeBrawl</h1>
+      <Suspense fallback={<h1>SafeBrawl</h1>}>
+        <SafeBrawlMenuContent />
+      </Suspense>
 
       <div className={styles.localeContainer}>
         <Suspense fallback={null}>

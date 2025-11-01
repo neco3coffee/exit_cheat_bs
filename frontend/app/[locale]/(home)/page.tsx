@@ -3,7 +3,6 @@ import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMess
 import InstallPrompt from "./_components/client/InstallPrompt";
 import NameInput from "./_components/client/NameInput";
 import TagInput from "./_components/client/TagInput";
-import TermsLink from "./_components/client/TermsLink";
 import styles from "./page.module.scss";
 
 export default function Home({
@@ -22,11 +21,6 @@ export default function Home({
       <Suspense fallback={null}>
         <ServerLocaleMessageProviderWrapper params={params}>
           <NameInput />
-        </ServerLocaleMessageProviderWrapper>
-      </Suspense>
-      <Suspense fallback={null}>
-        <ServerLocaleMessageProviderWrapper params={params}>
-          <TermsLink />
         </ServerLocaleMessageProviderWrapper>
       </Suspense>
       <InstallPrompt />
