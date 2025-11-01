@@ -19,7 +19,7 @@ export default async function CreditsPage({
       name: "Next.js",
       url: "https://nextjs.org/",
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-      needsInvert: true,
+      needsInvert: false,
     },
     {
       name: "React",
@@ -43,7 +43,7 @@ export default async function CreditsPage({
       name: "Ruby on Rails",
       url: "https://rubyonrails.org/",
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rails/rails-plain.svg",
-      needsInvert: true,
+      needsInvert: false,
     },
     {
       name: "PostgreSQL",
@@ -67,7 +67,7 @@ export default async function CreditsPage({
       name: "GitHub",
       url: "https://github.com/",
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-      needsInvert: true,
+      needsInvert: false,
     },
   ];
 
