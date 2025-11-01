@@ -44,7 +44,7 @@ export default function FAQ() {
             className="border-0 mb-2"
             style={{
               backgroundColor: "var(--blue-black)",
-              border: "1px solid var(--blue-black-border)",
+              border: "1px solid var(--black-border)",
               borderRadius: "8px",
               padding: "8px",
             }}
