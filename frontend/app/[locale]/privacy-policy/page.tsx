@@ -129,6 +129,7 @@ export default async function PrivacyPolicyPage({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline hover:text-gray-300"
+                  style={{ color: "var(--on-blue)" }}
                 >
                   {t("article4.section4Link1")}
                 </a>
@@ -142,6 +143,7 @@ export default async function PrivacyPolicyPage({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline hover:text-gray-300"
+                  style={{ color: "var(--on-blue)" }}
                 >
                   {t("article4.section4Link2")}
                 </a>
@@ -168,6 +170,7 @@ export default async function PrivacyPolicyPage({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline hover:text-gray-300"
+                  style={{ color: "var(--on-blue)" }}
                 >
                   {t("article5.section3Link1")}
                 </a>
@@ -177,6 +180,7 @@ export default async function PrivacyPolicyPage({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline hover:text-gray-300"
+                  style={{ color: "var(--on-blue)" }}
                 >
                   {t("article5.section3Link2")}
                 </a>
