@@ -89,80 +89,78 @@ export default function NameInput() {
   };
 
   return (
-    <>
-      <InputGroup className={styles.inputGroup}>
-        <InputGroupAddon align="inline-start">
-          <InputGroupButton
-            onClick={() => setSearchWithHistory(!searchWitHistory)}
-            className={
-              searchWitHistory
-                ? styles.inputGroupHistoryButtonActive
-                : styles.inputGroupHistoryButton
-            }
-            size="icon-xs"
+    <InputGroup className={styles.inputGroup}>
+      <InputGroupAddon align="inline-start">
+        <InputGroupButton
+          onClick={() => setSearchWithHistory(!searchWitHistory)}
+          className={
+            searchWitHistory
+              ? styles.inputGroupHistoryButtonActive
+              : styles.inputGroupHistoryButton
+          }
+          size="icon-xs"
+        >
+          <History />
+        </InputGroupButton>
+      </InputGroupAddon>
+      <InputGroupInput
+        placeholder={t("placeholder")}
+        className={styles.inputGroupNameInput}
+        ref={nameInputRef}
+        type="search"
+        enterKeyHint="search"
+        maxLength={15}
+        onKeyUp={(e) => {
+          e.preventDefault();
+          if (e.key === "Enter") {
+            handleNameSearch(e.currentTarget.value);
+          }
+        }}
+      />
+      <InputGroupAddon align="inline-end">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild className={styles.DropdownMenuTrigger}>
+            <InputGroupButton variant="ghost" className="!pr-1.5 text-xs">
+              <Image
+                src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, searchWithRank)}.png`}
+                alt="rank"
+                height={30}
+                width={30}
+                sizes="30px"
+                style={{ height: "30px", width: "auto" }}
+              />
+              <ChevronDownIcon className="size-3" />
+            </InputGroupButton>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="end"
+            className={styles.dropdownMenuContent}
           >
-            <History />
-          </InputGroupButton>
-        </InputGroupAddon>
-        <InputGroupInput
-          placeholder={t("placeholder")}
-          className={styles.inputGroupNameInput}
-          ref={nameInputRef}
-          type="search"
-          enterKeyHint="search"
-          maxLength={15}
-          onKeyUp={(e) => {
-            e.preventDefault();
-            if (e.key === "Enter") {
-              handleNameSearch(e.currentTarget.value);
-            }
-          }}
-        />
-        <InputGroupAddon align="inline-end">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild className={styles.DropdownMenuTrigger}>
-              <InputGroupButton variant="ghost" className="!pr-1.5 text-xs">
-                <Image
-                  src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, searchWithRank)}.png`}
-                  alt="rank"
-                  height={30}
-                  width={30}
-                  sizes="30px"
-                  style={{ height: "30px", width: "auto" }}
-                />
-                <ChevronDownIcon className="size-3" />
-              </InputGroupButton>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="end"
-              className={styles.dropdownMenuContent}
-            >
-              <ScrollArea className="max-h-[140px] w-[4rem]">
-                {Array.from({ length: 22 }, (_, index) => index).map(
-                  (rank, i) => (
-                    <DropdownMenuItem
-                      key={rank}
-                      onClick={() => {
-                        setSearchWithRank(rank);
-                      }}
-                      className={styles.dropDownMenuItem}
-                    >
-                      <Image
-                        src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, i)}.png`}
-                        alt="rank"
-                        height={40}
-                        width={40}
-                        sizes="40px"
-                        style={{ height: "40px", width: "auto" }}
-                      />
-                    </DropdownMenuItem>
-                  ),
-                )}
-              </ScrollArea>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </InputGroupAddon>
-      </InputGroup>
-    </>
+            <ScrollArea className="max-h-[140px] w-[4rem]">
+              {Array.from({ length: 22 }, (_, index) => index).map(
+                (rank, i) => (
+                  <DropdownMenuItem
+                    key={rank}
+                    onClick={() => {
+                      setSearchWithRank(rank);
+                    }}
+                    className={styles.dropDownMenuItem}
+                  >
+                    <Image
+                      src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, i)}.png`}
+                      alt="rank"
+                      height={40}
+                      width={40}
+                      sizes="40px"
+                      style={{ height: "40px", width: "auto" }}
+                    />
+                  </DropdownMenuItem>
+                ),
+              )}
+            </ScrollArea>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </InputGroupAddon>
+    </InputGroup>
   );
 }

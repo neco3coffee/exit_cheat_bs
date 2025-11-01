@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
   return NextResponse.json(data, { status: res.status });
 }
 
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
   const cookieStore = await cookies();
   const sessionCookie = cookieStore.get("session_token");
 

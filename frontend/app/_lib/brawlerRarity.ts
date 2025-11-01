@@ -108,7 +108,7 @@ const legendary = [
   "KENJI",
 ];
 
-const ultraLegendary = ["KAZE"];
+const _ultraLegendary = ["KAZE"];
 
 export const brawlerBgColor = (name: string) => {
   if (normal.includes(name)) return "#94D7F4";

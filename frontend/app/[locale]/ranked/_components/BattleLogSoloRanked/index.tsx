@@ -1,7 +1,6 @@
 "use client";
 
 import axios from "axios";
-import { TriangleAlert } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -469,7 +468,7 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
                         }
                       >
                         {isReported ? (
-                          <>{t("reported")}</>
+                          t("reported")
                         ) : (
                           <>
                             {t("report")}{" "}

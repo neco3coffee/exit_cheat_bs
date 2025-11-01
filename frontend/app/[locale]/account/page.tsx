@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
 import AccountPage from "@/app/[locale]/account/_components/client/AccountPage";
 

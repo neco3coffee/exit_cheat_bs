@@ -251,13 +251,21 @@
       "section1": "1. The Service uses \"Google Analytics\" provided by Google Inc. to understand Service usage and improve the Service.",
       "section2": "2. Google Analytics uses cookies to collect user traffic data. This traffic data is collected anonymously and does not identify individuals.",
       "section3": "3. Users can refuse this information collection by disabling cookies in their browser settings. However, some features of the Service may not be available in that case.",
-      "section4": "4. For details on Google Analytics terms, please see <a href=\"https://marketingplatform.google.com/about/analytics/terms/us/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline hover:text-gray-300\">here</a>, and for details on Google's privacy policy, please see <a href=\"https://policies.google.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline hover:text-gray-300\">here</a>."
+      "section4Prefix": "4. For details on Google Analytics terms, please see",
+      "section4Link1": "here",
+      "section4Middle": ", and for details on Google's privacy policy, please see",
+      "section4Link2": "here",
+      "section4Suffix": "."
     },
     "article5": {
       "title": "Article 5 (Advertising Distribution)",
       "section1": "1. The Service uses third-party advertising services (such as Google AdSense).",
       "section2": "2. Such advertising distributors may use information (cookies) about access to the Service and other sites to display advertisements for products and services according to users' interests. This does not include names, addresses, email addresses, or phone numbers.",
-      "section3": "3. Users can disable personalized advertising from <a href=\"https://www.google.com/settings/ads\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline hover:text-gray-300\">Google Ad Settings</a>. You can also visit <a href=\"https://www.aboutads.info\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline hover:text-gray-300\">www.aboutads.info</a> to disable cookies used for personalized advertising by third-party distributors.",
+      "section3Prefix": "3. Users can disable personalized advertising from",
+      "section3Link1": "Google Ad Settings",
+      "section3Middle": ". You can also visit",
+      "section3Link2": "www.aboutads.info",
+      "section3Suffix": " to disable cookies used for personalized advertising by third-party distributors.",
       "section4": "4. Advertising opt-out using advertising identifiers can be done from the OS settings of your device. Please check the official information for each OS for setting methods."
     },
     "article6": {

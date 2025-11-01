@@ -117,10 +117,35 @@ export default async function PrivacyPolicyPage({
               <p>{t("article4.section1")}</p>
               <p>{t("article4.section2")}</p>
               <p>{t("article4.section3")}</p>
-              <p
-                dangerouslySetInnerHTML={{ __html: t.raw("article4.section4") }}
-                style={{ color: "var(--white)" }}
-              />
+              <p style={{ color: "var(--white)" }}>
+                {t("article4.section4Prefix")}{" "}
+                <a
+                  href={
+                    locale === "ja"
+                      ? "https://marketingplatform.google.com/about/analytics/terms/jp/"
+                      : "https://marketingplatform.google.com/about/analytics/terms/us/"
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-gray-300"
+                >
+                  {t("article4.section4Link1")}
+                </a>
+                {t("article4.section4Middle")}{" "}
+                <a
+                  href={
+                    locale === "ja"
+                      ? "https://policies.google.com/privacy?hl=ja"
+                      : "https://policies.google.com/privacy"
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-gray-300"
+                >
+                  {t("article4.section4Link2")}
+                </a>
+                {t("article4.section4Suffix")}
+              </p>
             </div>
           </section>
 
@@ -135,10 +160,27 @@ export default async function PrivacyPolicyPage({
             <div className="space-y-3" style={{ color: "var(--white)" }}>
               <p>{t("article5.section1")}</p>
               <p>{t("article5.section2")}</p>
-              <p
-                dangerouslySetInnerHTML={{ __html: t.raw("article5.section3") }}
-                style={{ color: "var(--white)" }}
-              />
+              <p style={{ color: "var(--white)" }}>
+                {t("article5.section3Prefix")}{" "}
+                <a
+                  href="https://www.google.com/settings/ads"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-gray-300"
+                >
+                  {t("article5.section3Link1")}
+                </a>
+                {t("article5.section3Middle")}{" "}
+                <a
+                  href="https://www.aboutads.info"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-gray-300"
+                >
+                  {t("article5.section3Link2")}
+                </a>
+                {t("article5.section3Suffix")}
+              </p>
               <p>{t("article5.section4")}</p>
             </div>
           </section>

@@ -251,13 +251,21 @@
       "section1": "1. 本サービスでは、サービスの利用状況を把握し、サービス向上を図る目的で、Google Inc.が提供する「Google アナリティクス」を利用しています。",
       "section2": "2. Google アナリティクスは、Cookieを利用してユーザーのトラフィックデータを収集します。このトラフィックデータは匿名で収集されており、個人を特定するものではありません。",
       "section3": "3. ユーザーは、ブラウザの設定でCookieを無効にすることで、この情報収集を拒否することができます。ただし、その際に本サービスの一部機能が利用できなくなる場合があります。",
-      "section4": "4. Google アナリティクスの規約に関する詳細は<a href=\"https://marketingplatform.google.com/about/analytics/terms/jp/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline hover:text-gray-300\">こちら</a>、Google社のプライバシーポリシーに関する詳細は<a href=\"https://policies.google.com/privacy?hl=ja\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline hover:text-gray-300\">こちら</a>をご覧ください。"
+      "section4Prefix": "4. Google アナリティクスの規約に関する詳細は",
+      "section4Link1": "こちら",
+      "section4Middle": "、Google社のプライバシーポリシーに関する詳細は",
+      "section4Link2": "こちら",
+      "section4Suffix": "をご覧ください。"
     },
     "article5": {
       "title": "第5条（広告の配信）",
       "section1": "1. 本サービスでは、第三者配信の広告サービス（Google AdSense等）を利用しています。",
       "section2": "2. このような広告配信事業者は、ユーザーの興味に応じた商品やサービスの広告を表示するため、本サービスや他のサイトへのアクセスに関する情報（Cookie）を使用することがあります。これには氏名、住所、メールアドレス、電話番号は含まれません。",
-      "section3": "3. ユーザーは、<a href=\"https://www.google.com/settings/ads\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline hover:text-gray-300\">Google広告設定</a>から、パーソナライズ広告を無効にすることができます。また、<a href=\"https://www.aboutads.info\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline hover:text-gray-300\">www.aboutads.info</a>にアクセスすれば、パーソナライズ広告に使われる第三者配信事業者のCookieをまとめて無効にできます。",
+      "section3Prefix": "3. ユーザーは、",
+      "section3Link1": "Google広告設定",
+      "section3Middle": "から、パーソナライズ広告を無効にすることができます。また、",
+      "section3Link2": "www.aboutads.info",
+      "section3Suffix": "にアクセスすれば、パーソナライズ広告に使われる第三者配信事業者のCookieをまとめて無効にできます。",
       "section4": "4. 広告識別子を利用した広告の無効化（オプトアウト）は、ご利用の端末のOS設定から行うことができます。設定方法については、各OSの公式情報をご確認ください。"
     },
     "article6": {

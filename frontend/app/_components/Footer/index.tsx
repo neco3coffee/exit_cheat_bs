@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
 import { AccountIcon, HomeIcon, RankedIcon } from "./_components/client/Icons";
 import styles from "./index.module.scss";

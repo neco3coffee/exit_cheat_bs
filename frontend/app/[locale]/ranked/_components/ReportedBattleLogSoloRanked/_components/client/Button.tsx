@@ -46,7 +46,7 @@ export const RejectButton = ({
             } else {
               toast.error(failedReject);
             }
-          } catch (error) {
+          } catch (_error) {
             toast.error(errorReject);
           }
         })();
@@ -100,7 +100,7 @@ export const ApproveButton = ({
             } else {
               toast.error(failedApprove);
             }
-          } catch (error) {
+          } catch (_error) {
             toast.error(errorApprove);
           }
         })();
