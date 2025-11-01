@@ -19,46 +19,55 @@ export default async function CreditsPage({
       name: "Next.js",
       url: "https://nextjs.org/",
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+      needsInvert: true,
     },
     {
       name: "React",
       url: "https://react.dev/",
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+      needsInvert: false,
     },
     {
       name: "TypeScript",
       url: "https://www.typescriptlang.org/",
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+      needsInvert: false,
     },
     {
       name: "Tailwind CSS",
       url: "https://tailwindcss.com/",
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+      needsInvert: false,
     },
     {
       name: "Ruby on Rails",
       url: "https://rubyonrails.org/",
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rails/rails-plain.svg",
+      needsInvert: true,
     },
     {
       name: "PostgreSQL",
       url: "https://www.postgresql.org/",
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+      needsInvert: false,
     },
     {
       name: "AWS",
       url: "https://aws.amazon.com/",
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+      needsInvert: false,
     },
     {
       name: "Docker",
       url: "https://www.docker.com/",
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+      needsInvert: false,
     },
     {
       name: "GitHub",
       url: "https://github.com/",
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+      needsInvert: true,
     },
   ];
 
@@ -96,9 +105,13 @@ export default async function CreditsPage({
                   width={80}
                   height={80}
                   className="max-w-full max-h-full object-contain"
-                  style={{
-                    filter: "brightness(0) invert(1)",
-                  }}
+                  style={
+                    service.needsInvert
+                      ? {
+                          filter: "brightness(0) invert(1)",
+                        }
+                      : undefined
+                  }
                   unoptimized
                 />
               </div>
