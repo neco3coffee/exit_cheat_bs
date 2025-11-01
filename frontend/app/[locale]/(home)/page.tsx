@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
+import FAQ from "./_components/client/FAQ";
 import InstallPrompt from "./_components/client/InstallPrompt";
 import NameInput from "./_components/client/NameInput";
 import TagInput from "./_components/client/TagInput";
@@ -24,6 +25,11 @@ export default function Home({
         </ServerLocaleMessageProviderWrapper>
       </Suspense>
       <InstallPrompt />
+      <Suspense fallback={null}>
+        <ServerLocaleMessageProviderWrapper params={params}>
+          <FAQ />
+        </ServerLocaleMessageProviderWrapper>
+      </Suspense>
     </>
   );
 }
