@@ -26,6 +26,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
+  const baseUrl = "https://safebrawl.com";
+
   if (locale === "ja") {
     return {
       title: "SafeBrawl - ブロスタ利敵献上プレイヤー回避サービス",
@@ -37,7 +39,7 @@ export async function generateMetadata({
           "ブロスタで利敵行為や献上プレイヤーを回避してランクマッチを楽しもう。SafeBrawlで問題のあるプレイヤーを事前にチェック。",
         images: [
           {
-            url: "/ja_ogp.png",
+            url: `${baseUrl}/ja_ogp.png`,
             width: 1200,
             height: 675,
             alt: "SafeBrawl - ブロスタ利敵献上プレイヤー回避サービス",
@@ -51,7 +53,7 @@ export async function generateMetadata({
         title: "SafeBrawl - ブロスタ利敵献上プレイヤー回避サービス",
         description:
           "ブロスタで利敵行為や献上プレイヤーを回避してランクマッチを楽しもう。SafeBrawlで問題のあるプレイヤーを事前にチェック。",
-        images: ["/ja_ogp.png"],
+        images: [`${baseUrl}/ja_ogp.png`],
       },
       other: {
         "format-detection": "telephone=no",
@@ -70,7 +72,7 @@ export async function generateMetadata({
         "Avoid griefing / feeding players in Brawl Stars ranked matches. Check problematic players before your game with SafeBrawl.",
       images: [
         {
-          url: "/en_ogp.png",
+          url: `${baseUrl}/en_ogp.png`,
           width: 1200,
           height: 675,
           alt: "SafeBrawl - Avoid griefing / feeding players in Brawl Stars",
@@ -84,7 +86,7 @@ export async function generateMetadata({
       title: "SafeBrawl - Avoid griefing / feeding players in Brawl Stars",
       description:
         "Avoid griefing / feeding players in Brawl Stars ranked matches. Check problematic players before your game with SafeBrawl.",
-      images: ["/en_ogp.png"],
+      images: [`${baseUrl}/en_ogp.png`],
     },
     other: {
       "format-detection": "telephone=no",

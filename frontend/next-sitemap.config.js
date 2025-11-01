@@ -8,7 +8,7 @@ module.exports = {
   generateRobotsTxt: true,
   generateIndexSitemap: false,
   // Exclude API routes and special Next.js paths
-  exclude: ["/api/*", "/_next/*", "/[locale]/api/*"],
+  exclude: ["/api/*", "/_next/*", "/[locale]/api/*", "/ja_ogp.png", "/en_ogp.png"],
   robotsTxtOptions: {
     policies: [
       {
