@@ -14,7 +14,7 @@ export default async function TermsOfServicePage({
 
   return (
     <div
-      className="min-h-screen py-12 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen"
       style={{ backgroundColor: "var(--black)", padding: "23px" }}
     >
       <div className="max-w-4xl mx-auto shadow-sm rounded-lg p-8 md:p-12">
