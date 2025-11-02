@@ -1,17 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import { cacheLife } from "next/cache";
 import styles from "./landing.module.scss";
 
-// Set page revalidation to 1 day (86400 seconds)
-export const revalidate = 86400;
-
 async function getStats() {
+  "use cache";
+  cacheLife("days");
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_FRONTEND_URL || "http://localhost:3001"}/api/v1/stats`,
-      {
-        next: { revalidate: 86400 },
-      },
     );
     if (!res.ok) {
       const errorText = await res.text().catch(() => "No response body");
