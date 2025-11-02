@@ -112,9 +112,6 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
   modal: React.ReactNode;
 }>) {
-  "use cache";
-  cacheLife("max");
-
   const { locale } = await params;
 
   return (

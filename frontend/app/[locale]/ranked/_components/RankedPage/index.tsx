@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
-import BattleLogSoloRanked from "@/app/[locale]/ranked/_components/BattleLogSoloRanked";
-import ReportedBattleLogSoloRanked from "@/app/[locale]/ranked/_components/ReportedBattleLogSoloRanked";
+import { Suspense } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Loading from "../../loading";
 import styles from "./index.module.scss";
 
 interface Player {
@@ -32,7 +32,7 @@ export default async function RankedPage({
 
   return (
     <div className={styles.container}>
-      {recentReportComponent}
+      <Suspense fallback={<Loading />}>{recentReportComponent}</Suspense>
       <Tabs className="w-full" defaultValue="battleLogs">
         <TabsList className={styles.tabsList}>
           <TabsTrigger value="review" className={styles.tabTrigger}>
@@ -45,9 +45,15 @@ export default async function RankedPage({
             {t("tabs.report")}
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="review">{reviewTabContent}</TabsContent>
-        <TabsContent value="battleLogs">{battleLogsTabContent}</TabsContent>
-        <TabsContent value="reports">{reportsTabContent}</TabsContent>
+        <TabsContent value="review">
+          <Suspense fallback={<Loading />}>{reviewTabContent}</Suspense>
+        </TabsContent>
+        <TabsContent value="battleLogs">
+          <Suspense fallback={<Loading />}>{battleLogsTabContent}</Suspense>
+        </TabsContent>
+        <TabsContent value="reports">
+          <Suspense fallback={<Loading />}>{reportsTabContent}</Suspense>
+        </TabsContent>
       </Tabs>
     </div>
   );

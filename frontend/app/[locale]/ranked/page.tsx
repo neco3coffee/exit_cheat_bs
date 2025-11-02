@@ -5,7 +5,7 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { formatBattleLog } from "@/app/_lib/formatBattleLog";
 import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
-import RankedPage from "@/app/[locale]/ranked/_components/client/RankedPage";
+import RankedPage from "@/app/[locale]/ranked/_components/RankedPage";
 import BattleLogSoloRanked from "./_components/BattleLogSoloRanked";
 import ReportedBattleLogSoloRanked from "./_components/ReportedBattleLogSoloRanked";
 import styles from "./page.module.scss";
