@@ -3,13 +3,15 @@ module Api
     class StatsController < ApplicationController
       # GET /api/v1/stats
       def index
-        approved_reports_count = Report.where(status: 'approved').count
-        total_players_count = Player.count
+        # Cache the stats for 1 hour to reduce database load
+        stats = Rails.cache.fetch('landing_page_stats', expires_in: 1.hour) do
+          {
+            approvedReportsCount: Report.where(status: 'approved').count,
+            totalPlayersCount: Player.count
+          }
+        end
         
-        render json: {
-          approvedReportsCount: approved_reports_count,
-          totalPlayersCount: total_players_count
-        }, status: :ok
+        render json: stats, status: :ok
       end
     end
   end

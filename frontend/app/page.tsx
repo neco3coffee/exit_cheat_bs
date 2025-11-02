@@ -14,7 +14,12 @@ async function getStats() {
       },
     );
     if (!res.ok) {
-      throw new Error("Failed to fetch stats");
+      const errorText = await res.text().catch(() => "No response body");
+      console.error(
+        `Failed to fetch stats: ${res.status} ${res.statusText}`,
+        errorText,
+      );
+      throw new Error(`Failed to fetch stats: ${res.status}`);
     }
     return await res.json();
   } catch (error) {
