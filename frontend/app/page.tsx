@@ -156,6 +156,7 @@ export default async function LandingPage() {
               className={styles.demoVideoPlayer}
               autoPlay
               muted
+              playsInline
               loop
             ></video>
           </div>
