@@ -1,6 +1,7 @@
 {
   "home": {
-    "placeholder": "Player Name"
+    "placeholder": "Player Name",
+    "linkText": "Home"
   },
   "ranked": {
     "login": "Login",

@@ -69,7 +69,7 @@ export default function InstallPrompt() {
           <SheetContent
             side="top"
             className="h-[80%] w-full border-none flex justify-center items-center"
-            style={{ paddingTop: "100px" }}
+            style={{ paddingTop: "100px", zIndex: 10000 }}
           >
             <SheetTitle className="text-2xl mb-4">Install SafeBrawl</SheetTitle>
             <video

@@ -10,6 +10,7 @@ export default function SafeBrawlMenuContent() {
   const tTerms = useTranslations("termsOfService");
   const tPrivacy = useTranslations("privacyPolicy");
   const tCredits = useTranslations("credits");
+  const tHome = useTranslations("home");
 
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -44,6 +45,13 @@ export default function SafeBrawlMenuContent() {
       </button>
       {isOpen && (
         <div className={styles.container}>
+          <Link
+            href="https://safebrawl.com/"
+            className={styles.item}
+            onClick={() => setIsOpen(false)}
+          >
+            {tHome("linkText")}
+          </Link>
           <Link
             href="/terms-of-service"
             className={styles.item}

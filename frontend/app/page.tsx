@@ -33,13 +33,24 @@ export default async function LandingPage() {
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>
+          <Image
+            src="https://cdn.brawlify.com//ranked/tiered/58000021.png"
+            alt="prorank_logo"
+            width={60}
+            height={60}
+            className={styles.heroLogo}
+          />
           <h1 className={styles.heroTitle}>
-            🎯 プロランクを目指すなら、運ゲーは終わりにしよう。
+            プロランクを目指すなら
+            <br />
+            運ゲーは終わりにしよう。
           </h1>
           <p className={styles.heroSubtitle}>
             SafeBrawl は、利敵・献上プレイヤーを見抜き、
             <br />
-            公平なマッチで実力勝負をしたい人のための分析ツールです。
+            公平なマッチで実力勝負をしたい人のための
+            <br />
+            サービスです。
           </p>
           <div className={styles.heroCta}>
             <Link href="/ja" className={styles.ctaButton}>
@@ -63,10 +74,10 @@ export default async function LandingPage() {
       <section className={styles.pain}>
         <h2 className={styles.sectionTitle}>こんな経験、ありませんか？</h2>
         <ul className={styles.problemList}>
-          <li>• 味方が動かない</li>
-          <li>• わざと敵に突っ込んでやられる</li>
-          <li>• くるくる回って戦わない</li>
-          <li>• 明らかに勝つ気がない</li>
+          <li>味方が動かない</li>
+          <li>わざと敵に突っ込んでやられる</li>
+          <li>くるくる回って戦わない</li>
+          <li>明らかに勝つ気がない</li>
         </ul>
         <p className={styles.painClosing}>
           そんな味方とマッチするたびに、
@@ -123,7 +134,7 @@ export default async function LandingPage() {
           <div className={styles.step}>
             <div className={styles.stepNumber}>2️⃣</div>
             <p className={styles.stepText}>
-              ログイン！（Brawl Starsアカウント連携）
+              ログイン（Brawl Starsアカウント連携）
             </p>
           </div>
           <div className={styles.step}>

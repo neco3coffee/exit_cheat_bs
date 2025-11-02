@@ -71,7 +71,8 @@
     }
   },
   "home": {
-    "placeholder": "プレイヤー名"
+    "placeholder": "プレイヤー名",
+    "linkText": "ホーム"
   },
   "ranked": {
     "login": "ログイン",
