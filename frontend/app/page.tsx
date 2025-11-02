@@ -1,7 +1,33 @@
+import Image from "next/image";
 import Link from "next/link";
+import { cacheLife } from "next/cache";
 import styles from "./landing.module.scss";
 
-export default function LandingPage() {
+async function getStats() {
+  "use cache";
+  cacheLife("days");
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_FRONTEND_URL || "http://localhost:3001"}/api/v1/stats`,
+    );
+    if (!res.ok) {
+      const errorText = await res.text().catch(() => "No response body");
+      console.error(
+        `Failed to fetch stats: ${res.status} ${res.statusText}`,
+        errorText,
+      );
+      throw new Error(`Failed to fetch stats: ${res.status}`);
+    }
+    return await res.json();
+  } catch (error) {
+    console.error("Error fetching stats:", error);
+    return { approvedReportsCount: 0, totalPlayersCount: 0 };
+  }
+}
+
+export default async function LandingPage() {
+  const stats = await getStats();
+
   return (
     <div className={styles.landingPage}>
       {/* Hero Section */}
@@ -22,10 +48,14 @@ export default function LandingPage() {
           </div>
         </div>
         <div className={styles.heroBackground}>
-          {/* Placeholder for background image/video */}
-          <div className={styles.placeholder}>
-            [Brawl Stars風UI＋戦場の一瞬を切り取ったイラスト or ショート動画]
-          </div>
+          <Image
+            src="/ja_ogp.png"
+            alt="SafeBrawl"
+            width={800}
+            height={450}
+            priority
+            className={styles.heroImage}
+          />
         </div>
       </section>
 
@@ -111,9 +141,6 @@ export default function LandingPage() {
           <Link href="/ja" className={styles.ctaButton}>
             今すぐ始める
           </Link>
-          <Link href="/ja" className={styles.ctaButtonSecondary}>
-            使い方動画を見る
-          </Link>
         </div>
       </section>
 
@@ -137,15 +164,11 @@ export default function LandingPage() {
         <div className={styles.statsGrid}>
           <div className={styles.statCard}>
             <p className={styles.statLabel}>承認済み報告</p>
-            <p className={styles.statValue}>○件</p>
+            <p className={styles.statValue}>{stats.approvedReportsCount}件</p>
           </div>
           <div className={styles.statCard}>
             <p className={styles.statLabel}>総ユーザー数</p>
-            <p className={styles.statValue}>○○人</p>
-          </div>
-          <div className={styles.statCard}>
-            <p className={styles.statLabel}>Xでの反響</p>
-            <p className={styles.statValue}>好評！</p>
+            <p className={styles.statValue}>{stats.totalPlayersCount}人</p>
           </div>
         </div>
         <div className={styles.socialLinks}>
@@ -166,14 +189,6 @@ export default function LandingPage() {
           >
             Discord (Coming Soon)
           </button>
-          <a
-            href="https://github.com/neco3coffee/exit_cheat_bs"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.socialButton}
-          >
-            GitHub
-          </a>
         </div>
       </section>
 

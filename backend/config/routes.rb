@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
       resources :reports, only: [:create, :update, :index], param: :id
       get 'reports/latest', to: 'reports#latest'
+
+      get 'stats', to: 'stats#index'
     end
   end
 
