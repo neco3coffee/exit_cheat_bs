@@ -6,6 +6,7 @@ import { getTranslations } from "next-intl/server";
 import { formatBattleLog } from "@/app/_lib/formatBattleLog";
 import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
 import RankedPage from "@/app/[locale]/ranked/_components/client/RankedPage";
+import BattleLogSoloRanked from "./_components/BattleLogSoloRanked";
 import ReportedBattleLogSoloRanked from "./_components/ReportedBattleLogSoloRanked";
 import styles from "./page.module.scss";
 
@@ -164,9 +165,6 @@ export default async function Page({
     <ServerLocaleMessageProviderWrapper params={params}>
       <RankedPage
         locale={locale}
-        player={player}
-        battleLogs={battleLogs || []}
-        reports={reports || []}
         recentReportComponent={
           <RecentVideoComponent locale={locale} recentReport={recentReport} />
         }
@@ -176,6 +174,17 @@ export default async function Page({
             player={player}
             waitingReviewReports={waitingReviewReports || []}
           />
+        }
+        battleLogsTabContent={
+          <BattleLogsTabContent
+            locale={locale}
+            player={player}
+            battleLogs={battleLogs || []}
+            reports={reports || []}
+          />
+        }
+        reportsTabContent={
+          <ReportsTabContent locale={locale} reports={reports || []} />
         }
       />
     </ServerLocaleMessageProviderWrapper>
@@ -289,6 +298,105 @@ async function ReviewTabContent({
         <h5 style={{ marginTop: "100px", marginBottom: "100px" }}>
           {t("review.onlyModerators")}
         </h5>
+      )}
+    </div>
+  );
+}
+
+async function BattleLogsTabContent({
+  locale,
+  player,
+  battleLogs,
+  reports,
+}: {
+  locale: string;
+  player: any;
+  battleLogs: any[];
+  reports: any[];
+}) {
+  "use cache";
+  cacheLife("seconds");
+  const t = await getTranslations({ locale, namespace: "ranked" });
+
+  const tag = player?.tag?.startsWith("#")
+    ? player.tag.substring(1)!
+    : player?.tag;
+
+  const reportKeys = new Set(
+    reports?.map((r) =>
+      r?.battle_data?.battle?.teams
+        .flat()
+        .map((p: any) => p.tag)
+        .sort()
+        .join("-"),
+    ) || [],
+  );
+
+  return (
+    <div className={styles.battlelogContainer}>
+      {!battleLogs || battleLogs.length === 0 ? (
+        <h5>{t("noBattleLog")}</h5>
+      ) : (
+        battleLogs.map((battleLog, index) => {
+          const battlelog = battleLogs[index];
+          const battleKey = battlelog?.battle?.teams
+            ?.flat()
+            ?.map((p: any) => p.tag)
+            ?.sort()
+            ?.join("-");
+          const isReported = reportKeys.has(battleKey);
+
+          return (
+            <BattleLogSoloRanked
+              locale={locale}
+              key={`${battleKey}-${battleLog?.battleTime}`}
+              battleLog={battlelog}
+              ownTag={tag}
+              isReported={isReported}
+            />
+          );
+        })
+      )}
+    </div>
+  );
+}
+
+async function ReportsTabContent({
+  locale,
+  reports,
+}: {
+  locale: string;
+  reports: any[];
+}) {
+  "use cache";
+  cacheLife("minutes");
+
+  const t = await getTranslations({ locale, namespace: "ranked" });
+
+  return (
+    <div className={styles.reportsContainer}>
+      {reports && reports.length > 0 ? (
+        reports.map((report) => {
+          const battleLog = report.battle_data;
+          const ownTag = report.reporter_tag.startsWith("#")
+            ? report.reporter_tag.substring(1)
+            : report.reporter_tag;
+
+          return (
+            <ReportedBattleLogSoloRanked
+              locale={locale}
+              key={`report-${report.id}`}
+              battleLog={battleLog}
+              ownTag={ownTag}
+              status={report.status}
+              reported_tag={report.reported_tag}
+              video_url={report.video_url}
+              report={report}
+            />
+          );
+        })
+      ) : (
+        <h5>{t("noReport")}</h5>
       )}
     </div>
   );

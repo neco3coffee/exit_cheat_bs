@@ -17,34 +17,18 @@ interface Player {
 
 export default async function RankedPage({
   locale,
-  player,
-  battleLogs,
-  reports,
   recentReportComponent,
   reviewTabContent,
+  battleLogsTabContent,
+  reportsTabContent,
 }: {
   locale: string;
-  player: Player;
-  battleLogs: any[];
-  reports: any[];
   recentReportComponent: React.ReactNode;
   reviewTabContent: React.ReactNode;
+  battleLogsTabContent: React.ReactNode;
+  reportsTabContent: React.ReactNode;
 }) {
   const t = await getTranslations({ locale, namespace: "ranked" });
-
-  const reportKeys = new Set(
-    reports?.map((r) =>
-      r?.battle_data?.battle?.teams
-        .flat()
-        .map((p: any) => p.tag)
-        .sort()
-        .join("-"),
-    ) || [],
-  );
-
-  const tag = player?.tag?.startsWith("#")
-    ? player.tag.substring(1)!
-    : player?.tag;
 
   return (
     <div className={styles.container}>
@@ -62,59 +46,8 @@ export default async function RankedPage({
           </TabsTrigger>
         </TabsList>
         <TabsContent value="review">{reviewTabContent}</TabsContent>
-        <TabsContent value="battleLogs">
-          <div className={styles.battlelogContainer}>
-            {!battleLogs || battleLogs.length === 0 ? (
-              <h5>{t("noBattleLog")}</h5>
-            ) : (
-              battleLogs.map((battleLog, index) => {
-                const battlelog = battleLogs[index];
-                const battleKey = battlelog?.battle?.teams
-                  ?.flat()
-                  ?.map((p: any) => p.tag)
-                  ?.sort()
-                  ?.join("-");
-                const isReported = reportKeys.has(battleKey);
-
-                return (
-                  <BattleLogSoloRanked
-                    key={`${battleKey}-${battleLog?.battleTime}`}
-                    battleLog={battlelog}
-                    ownTag={tag}
-                    isReported={isReported}
-                  />
-                );
-              })
-            )}
-          </div>
-        </TabsContent>
-        <TabsContent value="reports">
-          <div className={styles.reportsContainer}>
-            {reports && reports.length > 0 ? (
-              reports.map((report) => {
-                const battleLog = report.battle_data;
-                const ownTag = report.reporter_tag.startsWith("#")
-                  ? report.reporter_tag.substring(1)
-                  : report.reporter_tag;
-
-                return (
-                  <ReportedBattleLogSoloRanked
-                    locale={locale}
-                    key={`report-${report.id}`}
-                    battleLog={battleLog}
-                    ownTag={ownTag}
-                    status={report.status}
-                    reported_tag={report.reported_tag}
-                    video_url={report.video_url}
-                    report={report}
-                  />
-                );
-              })
-            ) : (
-              <h5>{t("noReport")}</h5>
-            )}
-          </div>
-        </TabsContent>
+        <TabsContent value="battleLogs">{battleLogsTabContent}</TabsContent>
+        <TabsContent value="reports">{reportsTabContent}</TabsContent>
       </Tabs>
     </div>
   );
