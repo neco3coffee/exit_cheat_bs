@@ -168,8 +168,9 @@ export default function LandingPage() {
             className={styles.socialButton}
             disabled
             aria-label="Discord (Coming Soon)"
+            title="Coming Soon"
           >
-            Discord
+            Discord (Coming Soon)
           </button>
           <a
             href="https://github.com/neco3coffee/exit_cheat_bs"
@@ -209,7 +210,7 @@ export default function LandingPage() {
             プライバシーポリシー
           </Link>
           <Link href="/ja" className={styles.footerLink}>
-            Q&amp;A
+            Q&A
           </Link>
         </div>
         <p className={styles.copyright}>
