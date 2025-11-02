@@ -71,7 +71,7 @@ async function PlayerComponent({
   const isBot = hashRemovedPlayerTag && hashRemovedPlayerTag.length < 4;
   const href = isBot
     ? `/${locale}`
-    : `${locale}/players/${hashRemovedPlayerTag}`;
+    : `/${locale}/players/${hashRemovedPlayerTag}`;
 
   const t = await getTranslations({ locale, namespace: "ranked" });
 
