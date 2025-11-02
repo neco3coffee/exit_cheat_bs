@@ -122,3 +122,23 @@
     font-weight: bold;
   }
 }
+
+.battlelogContainer {
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0px 23px 8px 23px;
+}
+
+.reportsContainer {
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0px 23px 8px 23px;
+}

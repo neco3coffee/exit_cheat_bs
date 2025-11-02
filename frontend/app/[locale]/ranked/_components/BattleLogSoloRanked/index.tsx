@@ -1,12 +1,13 @@
-"use client";
-
-import axios from "axios";
+// import axios from "axios";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
-import { memo, useEffect, useState } from "react";
-import { toast } from "sonner";
-import Searching from "@/app/_components/Searching";
+// import { Link } from "@/app/_messages/i18n/navigation";
+import Link from "next/link";
+// import { useRouter } from "next/navigation";
+// import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+// import { memo, useEffect, useState } from "react";
+// import { toast } from "sonner";
+// import Searching from "@/app/_components/Searching";
 import {
   appendToEightDigits,
   shortenMapName,
@@ -14,17 +15,16 @@ import {
 } from "@/app/_lib/common";
 import { Duration, RelativeTime } from "@/app/_lib/time";
 import { classifyModeByMapName } from "@/app/_lib/unknownMode";
-import { Link } from "@/app/_messages/i18n/navigation";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Progress } from "@/components/ui/progress";
-import { Textarea } from "@/components/ui/textarea";
+// import {
+//   Dialog,
+//   DialogContent,
+//   DialogHeader,
+//   DialogTitle,
+// } from "@/components/ui/dialog";
+// import { Input } from "@/components/ui/input";
+// import { Label } from "@/components/ui/label";
+// import { Progress } from "@/components/ui/progress";
+// import { Textarea } from "@/components/ui/textarea";
 import styles from "./index.module.scss";
 
 export const ReportStatus = {
@@ -47,30 +47,33 @@ const ReportType = {
   cheating: "cheating",
 };
 
-const PlayerComponent = ({
+async function PlayerComponent({
+  locale,
   player,
   starPlayerTag,
   battleType,
   isDuel,
   isMe,
-  status,
-  setStatus,
-  setReportedPlayerTag,
-  setDialogOpen,
+  // status,
+  // setStatus,
+  // setReportedPlayerTag,
+  // setDialogOpen,
   reportedPlayerTag,
-}: any) => {
+}: any) {
   const shortenedName = shortenPlayerName(player?.name);
   const isStarPlayer = player?.tag === starPlayerTag;
   const hashRemovedPlayerTag = player?.tag?.startsWith("#")
     ? player?.tag.slice(1)
     : player?.tag;
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   // Tags with less than 4 characters are bots, so link to home
   const isBot = hashRemovedPlayerTag && hashRemovedPlayerTag.length < 4;
-  const href = isBot ? "/" : `/players/${hashRemovedPlayerTag}`;
+  const href = isBot
+    ? `/${locale}`
+    : `${locale}/players/${hashRemovedPlayerTag}`;
 
-  const t = useTranslations("ranked");
+  const t = await getTranslations({ locale, namespace: "ranked" });
 
   return (
     <Link
@@ -78,16 +81,16 @@ const PlayerComponent = ({
       href={href}
       className={styles.playerContainer}
       data-testid="playerComponent"
-      onClick={(e) => {
-        if (status === ReportStatus.reportClicked) {
-          e.preventDefault();
-          return;
-        }
-        setLoading(true);
-        if (typeof window !== "undefined") {
-          sessionStorage.setItem("last_source", "battle_history");
-        }
-      }}
+      // onClick={(e) => {
+      //   if (status === ReportStatus.reportClicked) {
+      //     e.preventDefault();
+      //     return;
+      //   }
+      //   setLoading(true);
+      //   if (typeof window !== "undefined") {
+      //     sessionStorage.setItem("last_source", "battle_history");
+      //   }
+      // }}
     >
       {reportedPlayerTag === player?.tag && (
         <Image
@@ -103,11 +106,11 @@ const PlayerComponent = ({
         <div className={`${styles.mvpContainer}  `}>STAR PLAYER</div>
       )}
       <div className={styles.brawlerContainer}>
-        {!isMe && loading && (
+        {/* {!isMe && loading && (
           <div className={styles.searchContainer}>
             <Searching loading={loading} />
           </div>
-        )}
+        )} */}
         <Image
           src={`https://cdn.brawlify.com/brawlers/borderless/${isDuel ? player?.brawlers[0].id : player?.brawler?.id}.png`}
           alt={
@@ -133,7 +136,7 @@ const PlayerComponent = ({
           <h6>{player?.brawler?.power}</h6>
         </div>
       </div>
-      {!isMe && status === ReportStatus.reportClicked && (
+      {/* {!isMe && status === ReportStatus.reportClicked && (
         <>
           <button
             className={styles.reportButton}
@@ -156,14 +159,19 @@ const PlayerComponent = ({
             className={styles.reportIcon}
           />
         </>
-      )}
+      )} */}
       <span>{shortenedName}</span>
     </Link>
   );
-};
+}
 
-const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
-  const router = useRouter();
+async function BattleLogSoloRanked({
+  locale,
+  battleLog,
+  ownTag,
+  isReported,
+}: any) {
+  // const router = useRouter();
   const tag = ownTag.trim().toUpperCase().replace(/O/g, "0");
   const ownTeam = battleLog?.battle?.teams.find((team: any) => {
     return team.some((player: any) => player.tag === `#${tag}`);
@@ -191,135 +199,135 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
   } else {
     result = battleLog?.battle?.result;
   }
-  const t = useTranslations("ranked");
+  const t = await getTranslations({ locale, namespace: "ranked" });
 
-  const [status, setStatus] = useState(ReportStatus.reportNotClicked);
-  const [reportedBattleLog, setReportedBattleLog] = useState<any | null>(null);
-  const [reportedPlayerTag, setReportedPlayerTag] = useState<string | null>(
-    null,
-  );
-  const [reportType, setReportType] = useState<string | null>(null);
-  const [reportReason, setReportReason] = useState<string>("");
-  const [videoFile, setVideoFile] = useState<File | null>(null);
-  const [signedUrl, setSignedUrl] = useState<string | null>(null);
-  const [cdnUrl, setCdnUrl] = useState<string | null>(null);
-  const [reportId, setReportId] = useState<string | null>(null);
-  const [uploadProgress, setUploadProgress] = useState<number>(0);
-  const [dialogOpen, setDialogOpen] = useState(false);
-  if (status !== ReportStatus.reportNotClicked) {
-    console.log(
-      "reportedBattleLog: ",
-      JSON.stringify(reportedBattleLog, null, 2),
-    );
-    console.log("reportedPlayerTag: ", reportedPlayerTag);
-    console.log("status: ", status);
-    console.log("dialogOpen: ", dialogOpen);
-    console.log("reportType: ", reportType);
-    console.log("reportReason: ", reportReason);
-  }
+  // const [status, setStatus] = useState(ReportStatus.reportNotClicked);
+  // const [reportedBattleLog, setReportedBattleLog] = useState<any | null>(null);
+  // const [reportedPlayerTag, setReportedPlayerTag] = useState<string | null>(
+  //   null,
+  // );
+  // const [reportType, setReportType] = useState<string | null>(null);
+  // const [reportReason, setReportReason] = useState<string>("");
+  // const [videoFile, setVideoFile] = useState<File | null>(null);
+  // const [signedUrl, setSignedUrl] = useState<string | null>(null);
+  // const [cdnUrl, setCdnUrl] = useState<string | null>(null);
+  // const [reportId, setReportId] = useState<string | null>(null);
+  // const [uploadProgress, setUploadProgress] = useState<number>(0);
+  // const [dialogOpen, setDialogOpen] = useState(false);
+  // if (status !== ReportStatus.reportNotClicked) {
+  //   console.log(
+  //     "reportedBattleLog: ",
+  //     JSON.stringify(reportedBattleLog, null, 2),
+  //   );
+  //   console.log("reportedPlayerTag: ", reportedPlayerTag);
+  //   console.log("status: ", status);
+  //   console.log("dialogOpen: ", dialogOpen);
+  //   console.log("reportType: ", reportType);
+  //   console.log("reportReason: ", reportReason);
+  // }
 
-  const debounce = (func: Function, delay: number) => {
-    let timer: NodeJS.Timeout;
-    return (...args: any[]) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        func(...args);
-      }, delay);
-    };
-  };
+  // const debounce = (func: Function, delay: number) => {
+  //   let timer: NodeJS.Timeout;
+  //   return (...args: any[]) => {
+  //     clearTimeout(timer);
+  //     timer = setTimeout(() => {
+  //       func(...args);
+  //     }, delay);
+  //   };
+  // };
 
-  const handleReasonChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value;
-    const lines = value.split("\n").length;
-    if (lines <= 6) {
-      setReportReason(value);
-    }
-  };
+  // const handleReasonChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  //   const value = e.target.value;
+  //   const lines = value.split("\n").length;
+  //   if (lines <= 6) {
+  //     setReportReason(value);
+  //   }
+  // };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) setVideoFile(file);
-  };
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   if (file) setVideoFile(file);
+  // };
 
   // biome-ignore-start lint/correctness/useExhaustiveDependencies: 意図的にvideoFileだけで実行したい
-  useEffect(() => {
-    if (!videoFile) return;
-    setStatus(ReportStatus.videoSelected);
-    (async () => {
-      try {
-        const res = await fetch("/api/v1/reports", {
-          method: "POST",
-          body: JSON.stringify({
-            reporterTag: `#${tag}`,
-            battleLog: reportedBattleLog,
-            reportedPlayerTag: reportedPlayerTag,
-            reportType: reportType,
-            fileType: videoFile.type,
-          }),
-          headers: { "Content-Type": "application/json" },
-        });
-        if (!res.ok) {
-          setStatus(ReportStatus.error);
-          toast.error(t("failedGenerateSignedUrl"));
-          setDialogOpen(false);
-          return;
-        }
-        const { reportId, signedUrl, cdnUrl } = await res.json();
-        setReportId(reportId);
-        setSignedUrl(signedUrl);
-        setCdnUrl(cdnUrl);
-        setStatus(ReportStatus.signedUrlGenerated);
-      } catch (error) {
-        console.error("Error generating signed URL:", error);
-        setStatus(ReportStatus.error);
-      }
-    })();
-  }, [videoFile]);
+  // useEffect(() => {
+  //   if (!videoFile) return;
+  //   setStatus(ReportStatus.videoSelected);
+  //   (async () => {
+  //     try {
+  //       const res = await fetch("/api/v1/reports", {
+  //         method: "POST",
+  //         body: JSON.stringify({
+  //           reporterTag: `#${tag}`,
+  //           battleLog: reportedBattleLog,
+  //           reportedPlayerTag: reportedPlayerTag,
+  //           reportType: reportType,
+  //           fileType: videoFile.type,
+  //         }),
+  //         headers: { "Content-Type": "application/json" },
+  //       });
+  //       if (!res.ok) {
+  //         setStatus(ReportStatus.error);
+  //         toast.error(t("failedGenerateSignedUrl"));
+  //         setDialogOpen(false);
+  //         return;
+  //       }
+  //       const { reportId, signedUrl, cdnUrl } = await res.json();
+  //       setReportId(reportId);
+  //       setSignedUrl(signedUrl);
+  //       setCdnUrl(cdnUrl);
+  //       setStatus(ReportStatus.signedUrlGenerated);
+  //     } catch (error) {
+  //       console.error("Error generating signed URL:", error);
+  //       setStatus(ReportStatus.error);
+  //     }
+  //   })();
+  // }, [videoFile]);
   // biome-ignore-end lint/correctness/useExhaustiveDependencies: 意図的にvideoFileだけで実行したい
 
-  useEffect(() => {
-    if (!signedUrl || !videoFile) return;
-    setStatus(ReportStatus.videoUploading);
-    (async () => {
-      try {
-        await axios.put(signedUrl, videoFile, {
-          headers: {
-            "Content-Type": videoFile.type,
-          },
-          onUploadProgress: (progressEvent) => {
-            const progress = progressEvent.total
-              ? Math.round((progressEvent.loaded * 100) / progressEvent.total)
-              : 0;
-            setUploadProgress(progress);
-          },
-        });
-      } catch (error) {
-        console.error("Error uploading video:", error);
-        setStatus(ReportStatus.error);
-        toast.error(t("failedUploadVideo"));
-        setDialogOpen(false);
-        return;
-      }
-      setStatus(ReportStatus.videoUploaded);
-    })();
-  }, [signedUrl, videoFile, t]);
+  // useEffect(() => {
+  //   if (!signedUrl || !videoFile) return;
+  //   setStatus(ReportStatus.videoUploading);
+  //   (async () => {
+  //     try {
+  //       await axios.put(signedUrl, videoFile, {
+  //         headers: {
+  //           "Content-Type": videoFile.type,
+  //         },
+  //         onUploadProgress: (progressEvent) => {
+  //           const progress = progressEvent.total
+  //             ? Math.round((progressEvent.loaded * 100) / progressEvent.total)
+  //             : 0;
+  //           setUploadProgress(progress);
+  //         },
+  //       });
+  //     } catch (error) {
+  //       console.error("Error uploading video:", error);
+  //       setStatus(ReportStatus.error);
+  //       toast.error(t("failedUploadVideo"));
+  //       setDialogOpen(false);
+  //       return;
+  //     }
+  //     setStatus(ReportStatus.videoUploaded);
+  //   })();
+  // }, [signedUrl, videoFile, t]);
 
-  useEffect(() => {
-    if (!dialogOpen) {
-      setTimeout(() => {
-        setStatus(ReportStatus.reportNotClicked);
-        setReportedBattleLog(null);
-        setReportedPlayerTag(null);
-        setReportType(null);
-        setReportReason("");
-        setVideoFile(null);
-        setSignedUrl(null);
-        setCdnUrl(null);
-        setReportId(null);
-        setUploadProgress(0);
-      }, 1000);
-    }
-  }, [dialogOpen]);
+  // useEffect(() => {
+  //   if (!dialogOpen) {
+  //     setTimeout(() => {
+  //       setStatus(ReportStatus.reportNotClicked);
+  //       setReportedBattleLog(null);
+  //       setReportedPlayerTag(null);
+  //       setReportType(null);
+  //       setReportReason("");
+  //       setVideoFile(null);
+  //       setSignedUrl(null);
+  //       setCdnUrl(null);
+  //       setReportId(null);
+  //       setUploadProgress(0);
+  //     }, 1000);
+  //   }
+  // }, [dialogOpen]);
 
   return (
     <>
@@ -338,7 +346,7 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
           )}
         </div>
         <div className={styles.middleContainer}>
-          <Link className={styles.left} href={`/maps/${mapId}`}>
+          <Link className={styles.left} href={`/${locale}/maps/${mapId}`}>
             <Image
               src={`/modes/${mode}.png`}
               alt={battleLog?.event?.mode || "mode"}
@@ -398,15 +406,16 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
               {ownTeam?.map((player: any) => {
                 return (
                   <PlayerComponent
+                    locale={locale}
                     key={player?.tag}
                     player={player}
                     starPlayerTag={starPlayerTag}
                     battleType={battleLog?.battle?.type}
                     isMe={player?.tag === `#${tag}`}
-                    status={status}
-                    setStatus={setStatus}
-                    setReportedPlayerTag={setReportedPlayerTag}
-                    setDialogOpen={setDialogOpen}
+                    // status={status}
+                    // setStatus={setStatus}
+                    // setReportedPlayerTag={setReportedPlayerTag}
+                    // setDialogOpen={setDialogOpen}
                   />
                 );
               })}
@@ -418,15 +427,16 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
               {enemyTeam?.map((player: any) => {
                 return (
                   <PlayerComponent
+                    locale={locale}
                     key={player?.tag}
                     player={player}
                     starPlayerTag={starPlayerTag}
                     battleType={battleLog?.battle?.type}
                     isMe={player?.tag === `#${tag}`}
-                    status={status}
-                    setStatus={setStatus}
-                    setReportedPlayerTag={setReportedPlayerTag}
-                    setDialogOpen={setDialogOpen}
+                    // status={status}
+                    // setStatus={setStatus}
+                    // setReportedPlayerTag={setReportedPlayerTag}
+                    // setDialogOpen={setDialogOpen}
                   />
                 );
               })}
@@ -455,7 +465,7 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
                     {t(round?.result)}
                   </h5>
                   <div className={styles.right}>
-                    {index === 0 && (
+                    {/* {index === 0 && (
                       <button
                         type="button"
                         className={`${styles.reportButton} ${status !== ReportStatus.reportNotClicked || isReported ? styles.reportButtonClicked : ""}`}
@@ -483,7 +493,7 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
                           </>
                         )}
                       </button>
-                    )}
+                    )} */}
                   </div>
                 </div>
               );
@@ -492,7 +502,7 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
         </div>
         <div style={{ backgroundColor: "var(--black)" }}></div>
       </div>
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+      {/* <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent className={styles.dialogContent}>
           <DialogHeader className={styles.dialogHeader}>
             <DialogTitle>
@@ -723,10 +733,10 @@ const BattleLogSoloRanked = memo(({ battleLog, ownTag, isReported }: any) => {
             </div>
           )}
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </>
   );
-});
+}
 
 export default BattleLogSoloRanked;
 
