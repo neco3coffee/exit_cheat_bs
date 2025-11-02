@@ -1,4 +1,75 @@
 {
+  "landing": {
+    "hero": {
+      "title": "プロランクを目指すなら、運ゲーは終わりにしよう。",
+      "subtitle": "SafeBrawl は、利敵・献上プレイヤーを見抜き、公平なマッチで実力勝負をしたい人のための分析ツールです。",
+      "ctaStart": "無料で始める",
+      "ctaSearch": "プレイヤーを検索"
+    },
+    "pain": {
+      "title": "こんな経験、ありませんか？",
+      "problems": {
+        "1": "味方が動かない",
+        "2": "わざと敵に突っ込んでやられる",
+        "3": "くるくる回って戦わない",
+        "4": "明らかに勝つ気がない"
+      },
+      "closing": "そんな味方とマッチするたびに、「もうランク上げは無理かも…」って思ったこと、ありませんか？"
+    },
+    "solution": {
+      "title": "SafeBrawlが、あなたの努力を守ります。",
+      "features": {
+        "videoReport": {
+          "title": "動画付き報告システム",
+          "description": "利敵・献上プレイヤーをリプレイ動画付きで報告"
+        },
+        "moderation": {
+          "title": "モデレーターによる承認制",
+          "description": "不正確な報告を排除し、公平に審査"
+        },
+        "playerSearch": {
+          "title": "ピック中プレイヤー検索機能",
+          "description": "味方候補の名前とランク（±3）を即検索"
+        },
+        "avoidance": {
+          "title": "利敵・献上プレイヤー回避機能",
+          "description": "マッチ前に危険プレイヤーを検知して離脱！"
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "SafeBrawlの使い方はシンプル",
+      "steps": {
+        "1": "SafeBrawlにアクセス！",
+        "2": "ログイン！（Brawl Starsアカウント連携）",
+        "3": "バトル履歴から報告！",
+        "4": "ピック中に味方の名前を検索！"
+      },
+      "ctaStart": "今すぐ始める",
+      "ctaDemo": "使い方動画を見る"
+    },
+    "demo": {
+      "title": "実際の流れを動画で紹介",
+      "description": "SafeBrawlを使えば、たった数タップで公平なマッチができる！"
+    },
+    "community": {
+      "title": "コミュニティ",
+      "approvedReports": "承認済み報告：",
+      "totalUsers": "総ユーザー数：",
+      "socialReaction": "Xでの反響"
+    },
+    "cta": {
+      "title": "さぁ、SafeBrawlと共に不正のない真のランクマッチへ。",
+      "ctaStart": "SafeBrawlを使ってみる",
+      "ctaSearch": "プレイヤーを検索"
+    },
+    "footer": {
+      "termsOfService": "利用規約",
+      "privacyPolicy": "プライバシーポリシー",
+      "faq": "Q&A",
+      "copyright": "© SafeBrawl 2025 — Powered by Brawlify API, AWS, etc."
+    }
+  },
   "home": {
     "placeholder": "プレイヤー名"
   },
