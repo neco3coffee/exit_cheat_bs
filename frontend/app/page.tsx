@@ -163,9 +163,14 @@ export default function LandingPage() {
           >
             X (Twitter)
           </a>
-          <a href="#" className={styles.socialButton}>
+          <button
+            type="button"
+            className={styles.socialButton}
+            disabled
+            aria-label="Discord (Coming Soon)"
+          >
             Discord
-          </a>
+          </button>
           <a
             href="https://github.com/neco3coffee/exit_cheat_bs"
             target="_blank"

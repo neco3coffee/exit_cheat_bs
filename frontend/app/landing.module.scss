@@ -394,11 +394,19 @@
   text-decoration: none;
   transition: all 0.3s ease;
   font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background: var(--blue-black);
     border-color: var(--white);
     transform: translateY(-2px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   @media (max-width: 768px) {
