@@ -6,11 +6,11 @@ module Api
         # Cache the stats for 1 hour to reduce database load
         stats = Rails.cache.fetch('landing_page_stats', expires_in: 1.hour) do
           {
-            approvedReportsCount: Report.where(status: 'approved').count,
+            totalReportsCount: Report.count,
             totalPlayersCount: Player.count
           }
         end
-        
+
         render json: stats, status: :ok
       end
     end

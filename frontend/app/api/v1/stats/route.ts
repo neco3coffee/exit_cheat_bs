@@ -11,7 +11,7 @@ export async function GET() {
       },
       next: { revalidate: 86400 }, // Cache for 1 day (86400 seconds)
     });
-    
+
     if (!res.ok) {
       const errorText = await res.text().catch(() => "No response body");
       console.error(
@@ -23,7 +23,7 @@ export async function GET() {
         { status: 200 }, // Return 200 with default values to prevent frontend errors
       );
     }
-    
+
     const data = await res.json();
     return NextResponse.json(data, { status: res.status });
   } catch (error) {

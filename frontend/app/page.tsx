@@ -1,15 +1,15 @@
+import { cacheLife } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
-import { cacheLife } from "next/cache";
 import styles from "./landing.module.scss";
+
+const apiUrl = "http://app:3000";
 
 async function getStats() {
   "use cache";
   cacheLife("days");
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_FRONTEND_URL || "http://localhost:3001"}/api/v1/stats`,
-    );
+    const res = await fetch(`${apiUrl}/api/v1/stats`);
     if (!res.ok) {
       const errorText = await res.text().catch(() => "No response body");
       console.error(
@@ -21,7 +21,7 @@ async function getStats() {
     return await res.json();
   } catch (error) {
     console.error("Error fetching stats:", error);
-    return { approvedReportsCount: 0, totalPlayersCount: 0 };
+    return { totalReportsCount: 0, totalPlayersCount: 0 };
   }
 }
 
@@ -150,7 +150,14 @@ export default async function LandingPage() {
         <div className={styles.demoVideo}>
           {/* Placeholder for demo video */}
           <div className={styles.placeholder}>
-            [30秒〜1分のデモ動画（例：「報告→承認→検索」の流れ）]
+            {/* [30秒〜1分のデモ動画（例：「報告→承認→検索」の流れ）] */}
+            <video
+              src="/introduce.mp4"
+              className={styles.demoVideoPlayer}
+              autoPlay
+              muted
+              loop
+            ></video>
           </div>
         </div>
         <p className={styles.demoDescription}>
@@ -163,8 +170,8 @@ export default async function LandingPage() {
         <h2 className={styles.sectionTitle}>コミュニティ</h2>
         <div className={styles.statsGrid}>
           <div className={styles.statCard}>
-            <p className={styles.statLabel}>承認済み報告</p>
-            <p className={styles.statValue}>{stats.approvedReportsCount}件</p>
+            <p className={styles.statLabel}>報告件数</p>
+            <p className={styles.statValue}>{stats.totalReportsCount}件</p>
           </div>
           <div className={styles.statCard}>
             <p className={styles.statLabel}>総ユーザー数</p>

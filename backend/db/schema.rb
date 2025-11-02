@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_15_000000) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_02_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pg_catalog.plpgsql"
@@ -70,6 +70,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_15_000000) do
     t.string "status"
     t.index ["reported_tag"], name: "index_reports_on_reported_tag"
     t.index ["reporter_tag"], name: "index_reports_on_reporter_tag"
+    t.index ["status"], name: "index_reports_on_status"
   end
 
   create_table "sessions", force: :cascade do |t|
