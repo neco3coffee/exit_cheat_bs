@@ -17,13 +17,7 @@ export default function LandingPage() {
           </p>
           <div className={styles.heroCta}>
             <Link href="/ja" className={styles.ctaButton}>
-              無料で始める
-            </Link>
-            <Link
-              href="/ja/players/search"
-              className={styles.ctaButtonSecondary}
-            >
-              プレイヤーを検索
+              今すぐ始める
             </Link>
           </div>
         </div>
@@ -193,9 +187,6 @@ export default function LandingPage() {
         <div className={styles.heroCta}>
           <Link href="/ja" className={styles.ctaButton}>
             SafeBrawlを使ってみる
-          </Link>
-          <Link href="/ja/players/search" className={styles.ctaButtonSecondary}>
-            プレイヤーを検索
           </Link>
         </div>
       </section>

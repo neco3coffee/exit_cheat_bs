@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "SafeBrawl",
     short_name: "SafeBrawl",
     description: "avoid cheaters, enjoy Brawl Stars",
-    start_url: "/",
+    start_url: "/ja",
     // display: "standalone",
     display: "standalone",
     background_color: "#181818",
