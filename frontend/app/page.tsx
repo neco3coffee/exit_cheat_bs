@@ -77,9 +77,7 @@ export default async function LandingPage() {
 
       {/* Solution Section */}
       <section className={styles.solution}>
-        <h2 className={styles.sectionTitle}>
-          SafeBrawlが、あなたの努力を守ります。
-        </h2>
+        <h2 className={styles.sectionTitle}>その悩みを解決します！</h2>
         <div className={styles.featureGrid}>
           <div className={styles.featureCard}>
             <div className={styles.featureIcon}>🎥</div>
@@ -205,7 +203,7 @@ export default async function LandingPage() {
         <h2 className={styles.ctaTitle}>
           さぁ、SafeBrawlと共に
           <br />
-          不正のない真のランクマッチへ。
+          不正のない真のガチバトルへ。
         </h2>
         <div className={styles.heroCta}>
           <Link href="/ja" className={styles.ctaButton}>
