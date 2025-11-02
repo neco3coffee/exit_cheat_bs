@@ -7,7 +7,7 @@ const apiUrl = "http://app:3000";
 
 async function getStats() {
   "use cache";
-  cacheLife("days");
+  cacheLife("minutes");
   try {
     const res = await fetch(`${apiUrl}/api/v1/stats`);
     if (!res.ok) {
