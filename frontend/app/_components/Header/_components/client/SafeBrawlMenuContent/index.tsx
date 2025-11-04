@@ -73,6 +73,13 @@ export default function SafeBrawlMenuContent() {
           >
             {tCredits("linkText")}
           </Link>
+          <Link
+            href="https://neco3coffee.me"
+            className={styles.item}
+            onClick={() => setIsOpen(false)}
+          >
+            {`© ${new Date().getFullYear()} SafeBrawl ${tHome("operator")}`}
+          </Link>
         </div>
       )}
     </div>
