@@ -22,8 +22,9 @@ Rails.application.routes.draw do
         get "logout", to: "sessions#logout"
       end
 
-      resources :reports, only: [:create, :update, :index], param: :id
+      resources :reports, only: [:create, :show, :update, :index], param: :id
       get 'reports/latest', to: 'reports#latest'
+      get 'reports/:id/signed_url', to: 'reports#signed_url'
 
       get 'stats', to: 'stats#index'
     end

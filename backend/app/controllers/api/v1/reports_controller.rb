@@ -2,22 +2,76 @@ module Api
   module V1
     class ReportsController < ApplicationController
       # protect_from_forgery with: :null_session
+      before_action :authenticate_reporter, only: [:create, :signed_url, :update]
 
       # POST /api/v1/reports
       def create
         report = Report.new(
           reporter_tag: params[:reporterTag],
           battle_data: params[:battleLog],
+          status: :created,
+        )
+
+        if report.save
+          render json: { reportId: report.id }, status: :created
+        else
+          render json: { errors: report.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
+
+      # GET /api/v1/reports/:id
+      def show
+        session_token = cookies[:session_token]
+
+        unless session_token
+          render json: { error: 'Unauthorized' }, status: :unauthorized
+          return
+        end
+
+        session = Session.find_by(session_token: session_token)
+        player = session.player
+
+        unless player
+          render json: { error: 'Forbidden' }, status: :forbidden
+          return
+        end
+
+        report = Report.find(params[:id])
+
+        if report && player
+          render json: {
+            report: report,
+            player_role: player.role,
+            player_tag: player.tag
+          }, status: :ok
+        else
+          render json: { error: 'Report not found' }, status: :not_found
+        end
+      end
+
+
+      # GET /api/v1/reports/:id/signed_url
+      def signed_url
+        report = Report.find(params[:id])
+
+        if report.nil?
+          render json: { error: 'Report not found' }, status: :not_found
+          return
+        end
+
+        # reportのカラムを更新
+        report.assign_attributes(
           reported_tag: params[:reportedPlayerTag],
           report_type: params[:reportType],
-          status: 'pending'
+          status: :signed_url_generated,
         )
+
         if report.save
           # S3署名付きURL生成
           s3 = Aws::S3::Resource.new
           bucket = ENV.fetch('AWS_BUCKET')
           ext = params[:fileType]&.split('/')&.last || 'mp4'
-          object_key = "reports/#{report.id}/video.#{ext}"
+          object_key = "reports/#{report.uuid}/video.#{ext}"
           signer = Aws::S3::Presigner.new
           signed_url = signer.presigned_url(:put_object,
             bucket: bucket,
@@ -36,6 +90,11 @@ module Api
       def update
         report = Report.find(params[:id])
 
+        if report.nil?
+          render json: { error: 'Report not found' }, status: :not_found
+          return
+        end
+
         # statusのみの更新をしたい
         if params[:status] == 'approved' || params[:status] == 'rejected'
           if report.update(status: params[:status])
@@ -49,7 +108,7 @@ module Api
         if report.update(
           video_url: params[:cdnUrl],
           reason: params[:reportReason],
-          status: 'waiting_review'
+          status: :info_and_video_updated,
         )
 
           render json: { message: 'Report updated' }, status: :ok
@@ -102,6 +161,32 @@ module Api
 
         reports = Report.where(status: 'approved').order(updated_at: :desc).limit(10)
         render json: reports, status: :ok
+      end
+
+      private
+
+      def authenticate_reporter
+        session_token = cookies[:session_token]
+        unless session_token
+          render json: { error: 'Unauthorized' }, status: :unauthorized
+          return
+        end
+
+        session = Session.find_by(session_token: session_token)
+        player = session.player
+
+        if params[:reporterTag].present?
+          unless player && player.tag == params[:reporterTag]
+            render json: { error: 'Forbidden' }, status: :forbidden
+            return
+          end
+        else
+          report = Report.find_by(id: params[:id])
+          unless player && player.tag == report.reporter_tag
+            render json: { error: 'Forbidden' }, status: :forbidden
+            return
+          end
+        end
       end
 
 
