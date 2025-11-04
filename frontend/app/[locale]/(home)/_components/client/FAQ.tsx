@@ -19,6 +19,9 @@ export default function FAQ() {
     "updateFrequency",
     "wrongNameDisplayed",
     "reportFeature",
+    "appealReport",
+    "reportReviewTime",
+    "howLongDataStored",
     "videoStorage",
     "videoNotDisplayed",
     "dataSource",
@@ -55,7 +58,13 @@ export default function FAQ() {
             <AccordionTrigger style={{ color: "var(--white)" }}>
               {t(`items.${item}.question`)}
             </AccordionTrigger>
-            <AccordionContent style={{ color: "var(--white)" }}>
+            <AccordionContent
+              style={{
+                color: "var(--placeholder-gray)",
+                marginTop: "8px",
+                lineHeight: "1.8",
+              }}
+            >
               {t(`items.${item}.answer`)}
             </AccordionContent>
           </AccordionItem>

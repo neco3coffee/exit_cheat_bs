@@ -352,6 +352,18 @@
         "question": "What is the \"report\" feature?",
         "answer": "It's a mechanism for uploading videos of suspected cheating or \"match-fixing\" for moderator review. Once approved, they are shared on SafeBrawl."
       },
+      "appealReport": {
+        "question": "Can I appeal if I have been reported?",
+        "answer": "Yes, you can. Reported players can log in, open the report tab, select the report they want to appeal, and submit an appeal by entering the reason for it."
+      },
+      "reportReviewTime": {
+        "question": "How long does it take to review a report?",
+        "answer": "Reviews are usually completed within a few hours to a few days. However, it may take longer if there are a large number of reports."
+      },
+      "howLongDataStored": {
+        "question": "How long are report data and videos stored?",
+        "answer": "Report data and videos are stored for 90 days from the date of the report. After that, they are scheduled to be automatically deleted. (This takes into account cases such as when a player reforms and stops engaging in unfair behavior, or when accounts are transferred between players.)"
+      },
       "videoStorage": {
         "question": "Where are videos stored?",
         "answer": "Videos are securely stored in S3 (AWS), and only approved ones are published via CloudFront."
