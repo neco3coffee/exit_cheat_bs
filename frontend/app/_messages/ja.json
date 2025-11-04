@@ -72,7 +72,8 @@
   },
   "home": {
     "placeholder": "プレイヤー名",
-    "linkText": "ホーム"
+    "linkText": "ホーム",
+    "operator": "運営者"
   },
   "ranked": {
     "login": "ログイン",
