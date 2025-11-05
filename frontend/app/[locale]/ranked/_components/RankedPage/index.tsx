@@ -18,13 +18,11 @@ interface Player {
 export default async function RankedPage({
   locale,
   recentReportComponent,
-  reviewTabContent,
   battleLogsTabContent,
   reportsTabContent,
 }: {
   locale: string;
   recentReportComponent: React.ReactNode;
-  reviewTabContent: React.ReactNode;
   battleLogsTabContent: React.ReactNode;
   reportsTabContent: React.ReactNode;
 }) {
@@ -35,9 +33,6 @@ export default async function RankedPage({
       <Suspense fallback={<Loading />}>{recentReportComponent}</Suspense>
       <Tabs className="w-full" defaultValue="battleLogs">
         <TabsList className={styles.tabsList}>
-          <TabsTrigger value="review" className={styles.tabTrigger}>
-            {t("tabs.review")}
-          </TabsTrigger>
           <TabsTrigger value="battleLogs" className={styles.tabTrigger}>
             {t("tabs.battleLog")}
           </TabsTrigger>
@@ -45,9 +40,6 @@ export default async function RankedPage({
             {t("tabs.report")}
           </TabsTrigger>
         </TabsList>
-        <TabsContent value="review">
-          <Suspense fallback={<Loading />}>{reviewTabContent}</Suspense>
-        </TabsContent>
         <TabsContent value="battleLogs">
           <Suspense fallback={<Loading />}>{battleLogsTabContent}</Suspense>
         </TabsContent>

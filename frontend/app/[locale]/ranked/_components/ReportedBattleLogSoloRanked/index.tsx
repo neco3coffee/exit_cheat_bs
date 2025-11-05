@@ -1,4 +1,4 @@
-import { CircleCheck, CircleX, Clock, FileSearch } from "lucide-react";
+import { Bot, CircleCheck, CircleX, Clock, FileSearch } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
@@ -7,11 +7,7 @@ import { Duration, RelativeTime } from "@/app/_lib/time";
 import { classifyModeByMapName } from "@/app/_lib/unknownMode";
 import PlayerComponent from "@/app/[locale]/ranked/_components/PlayerComponent";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  ApproveButton,
-  RejectButton,
-  ReplayButton,
-} from "./_components/client/Button";
+import { ApproveButton, RejectButton } from "./_components/client/Button";
 import styles from "./index.module.scss";
 
 const _ReportType = {
@@ -21,14 +17,21 @@ const _ReportType = {
 };
 
 const StatusType = {
-  pending: "pending",
+  created: "created",
+  signed_url_generated: "signedUrlGenerated",
+  info_and_vide_updated: "infoAndVideoUpdated",
+  video_optimized: "videoOptimized",
   waiting_review: "waitingReview",
   approved: "approved",
   rejected: "rejected",
+  appealed: "appealed",
 };
 
 const StatusIcon = {
-  pending: <Clock className={styles.statusIconPending} />,
+  created: <Clock className={styles.statusIconPending} />,
+  signed_url_generated: <Clock className={styles.statusIconPending} />,
+  info_and_video_updated: <Bot className={styles.statusIconPending} />,
+  video_optimized: <FileSearch className={styles.statusIconPending} />,
   waiting_review: <FileSearch className={styles.statusIconReview} />,
   approved: <CircleCheck className={styles.statusIconApproved} />,
   rejected: <CircleX className={styles.statusIconRejected} />,
@@ -134,14 +137,15 @@ export default async function ReportedBattleLogSoloRanked({
           {t(result)}
         </h5>
         <div className={styles.right}>
-          <div
+          <Link
+            href={`/${locale}/reports/${reportId}`}
             className={`${styles.statusContainer}
               ${
                 status === "approved"
                   ? styles.statusApproved
                   : status === "rejected"
                     ? styles.statusRejected
-                    : status === "waiting_review"
+                    : status === "waiting_review" || status === "videoOptimized"
                       ? styles.statusReview
                       : styles.statusPending
               }
@@ -149,7 +153,7 @@ export default async function ReportedBattleLogSoloRanked({
           >
             {t(StatusType[status as keyof typeof StatusType])}
             {StatusIcon[status as keyof typeof StatusIcon]}
-          </div>
+          </Link>
         </div>
       </div>
       <div className={styles.bottomContainer}>
@@ -209,50 +213,12 @@ export default async function ReportedBattleLogSoloRanked({
                 >
                   {t(round?.result)}
                 </h5>
-                <div className={styles.right}>
-                  {index === 0 && (
-                    <ReplayButton video_url={video_url} replay={t("replay")} />
-                  )}
-                </div>
+                <div className={styles.right}></div>
               </div>
             );
           })}
         </div>
       </div>
-      {reportId && (
-        <div className={styles.reviewContainer}>
-          <Textarea
-            rows={6}
-            value={reason}
-            placeholder="Type your reason here."
-            id="reason"
-            disabled
-            style={{
-              backgroundColor: "var(--blue-black)",
-              color: "var(--white)",
-              padding: "8px",
-            }}
-          />
-          <div className={styles.buttonContainer}>
-            <RejectButton
-              reportId={reportId}
-              reportIdMissing={t("reportIdMissing")}
-              reportRejected={t("reportRejected")}
-              failedReject={t("failedReject")}
-              errorReject={t("errorReject")}
-              reject={t("reject")}
-            />
-            <ApproveButton
-              reportId={reportId}
-              reportIdMissing={t("reportIdMissing")}
-              reportApproved={t("reportApproved")}
-              failedApprove={t("failedApprove")}
-              errorApprove={t("errorApprove")}
-              approve={t("approve")}
-            />
-          </div>
-        </div>
-      )}
     </div>
   );
 }

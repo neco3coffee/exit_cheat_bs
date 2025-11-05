@@ -151,6 +151,7 @@
       display: flex;
       align-items: center;
       border-radius: 4px;
+      box-shadow: 0px 3px 10px var(--blue-black);
 
       svg {
         margin-left: 4px;
@@ -158,15 +159,19 @@
     }
     .statusPending {
       background-color: var(--report-gray);
+      cursor: pointer;
     }
     .statusReview {
       background-color: var(--on-blue);
+      cursor: pointer;
     }
     .statusApproved {
       background-color: #16a34a;
+      cursor: pointer;
     }
     .statusRejected {
       background-color: #dc2626;
+      cursor: pointer;
     }
 
     img {

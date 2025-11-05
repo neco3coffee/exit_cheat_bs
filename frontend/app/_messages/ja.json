@@ -89,7 +89,10 @@
     },
     "noBattleLog": "直近のガチバトル履歴はありません。",
     "noReport": "報告はありません。",
-    "pending": "保留中",
+    "created": "動画アップ待ち",
+    "signedUrlGenerated": "動画アップ待ち",
+    "infoAndVideoUpdated": "動画AIチェック中",
+    "videoOptimized": "レビュー待ち",
     "waitingReview": "レビュー待ち",
     "approved": "承認済み",
     "rejected": "拒否済み",
@@ -130,7 +133,10 @@
     "errorReject": "報告のレビュー中にエラーが発生しました。",
     "reportApproved": "プレイヤーは利敵・献上・迷惑行為を行ったと判断されました。",
     "failedApprove": "報告のレビューに失敗しました。",
-    "errorApprove": "報告のレビュー中にエラーが発生しました。"
+    "errorApprove": "報告のレビュー中にエラーが発生しました。",
+    "failedCreateReport": "報告の作成に失敗しました。",
+    "successCreateReport": "報告が作成されました。",
+    "noRecentReport": "最近報告されたプレイヤーはいません。"
   },
   "account": {
     "checkLogin": "ログイン状況を確認しています...",

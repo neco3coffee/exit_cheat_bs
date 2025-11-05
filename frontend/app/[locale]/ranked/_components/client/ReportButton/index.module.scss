@@ -1,0 +1,11 @@
+.reportButton {
+  background-color: var(--report-gray);
+  height: 14px;
+  border-radius: 4px;
+  box-shadow: 0px 3px 10px var(--blue-black);
+  cursor: pointer;
+}
+
+.reportButtonClicked {
+  opacity: 0.5;
+}

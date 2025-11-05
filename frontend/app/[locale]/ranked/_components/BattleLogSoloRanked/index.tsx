@@ -2,9 +2,9 @@
 import Image from "next/image";
 // import { Link } from "@/app/_messages/i18n/navigation";
 import Link from "next/link";
-// import { useRouter } from "next/navigation";
 // import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { Suspense } from "react";
 // import { memo, useEffect, useState } from "react";
 // import { toast } from "sonner";
 // import Searching from "@/app/_components/Searching";
@@ -15,6 +15,8 @@ import {
 } from "@/app/_lib/common";
 import { Duration, RelativeTime } from "@/app/_lib/time";
 import { classifyModeByMapName } from "@/app/_lib/unknownMode";
+import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
+import ReportButton from "../client/ReportButton";
 // import {
 //   Dialog,
 //   DialogContent,
@@ -166,12 +168,12 @@ async function PlayerComponent({
 }
 
 async function BattleLogSoloRanked({
+  params,
   locale,
   battleLog,
   ownTag,
   isReported,
 }: any) {
-  // const router = useRouter();
   const tag = ownTag.trim().toUpperCase().replace(/O/g, "0");
   const ownTeam = battleLog?.battle?.teams.find((team: any) => {
     return team.some((player: any) => player.tag === `#${tag}`);
@@ -381,23 +383,16 @@ async function BattleLogSoloRanked({
             {t(result)}
           </h5>
           <div className={styles.right}>
-            {battleLog?.battle.type === "ranked" &&
-            battleLog?.battle?.trophyChange ? (
-              <>
-                {battleLog?.battle?.trophyChange > 0
-                  ? `+${battleLog?.battle?.trophyChange}`
-                  : battleLog?.battle?.trophyChange}
-                <Image
-                  src="/icon_trophy1.png"
-                  alt="trophy icon"
-                  width={15}
-                  height={15}
-                  sizes="15px"
+            <Suspense fallback={null}>
+              <ServerLocaleMessageProviderWrapper params={params}>
+                <ReportButton
+                  locale={locale}
+                  tag={tag}
+                  battleLog={battleLog}
+                  isReported={isReported}
                 />
-              </>
-            ) : (
-              <div></div>
-            )}
+              </ServerLocaleMessageProviderWrapper>
+            </Suspense>
           </div>
         </div>
         <div className={styles.bottomContainer}>
@@ -464,37 +459,7 @@ async function BattleLogSoloRanked({
                   >
                     {t(round?.result)}
                   </h5>
-                  <div className={styles.right}>
-                    {/* {index === 0 && (
-                      <button
-                        type="button"
-                        className={`${styles.reportButton} ${status !== ReportStatus.reportNotClicked || isReported ? styles.reportButtonClicked : ""}`}
-                        onClick={() => {
-                          setStatus(ReportStatus.reportClicked);
-                          setReportedBattleLog(battleLog);
-                        }}
-                        disabled={
-                          status !== ReportStatus.reportNotClicked || isReported
-                        }
-                      >
-                        {isReported ? (
-                          t("reported")
-                        ) : (
-                          <>
-                            {t("report")}{" "}
-                            <Image
-                              src="/reported_player.png"
-                              alt="reported player"
-                              width={18}
-                              height={18}
-                              sizes="18px"
-                              style={{ marginLeft: "4px" }}
-                            />
-                          </>
-                        )}
-                      </button>
-                    )} */}
-                  </div>
+                  <div className={styles.right}></div>
                 </div>
               );
             })}

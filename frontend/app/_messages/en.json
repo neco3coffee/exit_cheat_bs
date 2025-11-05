@@ -18,7 +18,10 @@
     },
     "noBattleLog": "No recent ranked battle log available.",
     "noReport": "No reports available.",
-    "pending": "Pending",
+    "created": "Waiting for video upload",
+    "signedUrlGenerated": "Waiting for video upload",
+    "infoAndVideoUpdated": "Video AI checking",
+    "videoOptimized": "Waiting for review",
     "waitingReview": "Waiting for review",
     "approved": "Approved",
     "rejected": "Rejected",
@@ -59,7 +62,10 @@
     "errorReject": "An error occurred while rejecting the report.",
     "reportApproved": "Report approved successfully.",
     "failedApprove": "Failed to approve the report.",
-    "errorApprove": "An error occurred while approving the report."
+    "errorApprove": "An error occurred while approving the report.",
+    "failedCreateReport": "Failed to create report.",
+    "successCreateReport": "Report created successfully.",
+    "noRecentReport": "No recently reported players."
   },
   "account": {
     "checkLogin": "Confirming your login...",
