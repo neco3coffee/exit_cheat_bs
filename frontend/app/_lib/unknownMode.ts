@@ -38,6 +38,8 @@ const bossMapNameList = [
   "Spirit Frank",
 ];
 
+const showdownPlusMapNameList = ["Kroket"];
+
 export function classifyModeByMapName(mapName: string) {
   if (arenaMapNameList.includes(mapName)) {
     return "arena";
@@ -47,6 +49,8 @@ export function classifyModeByMapName(mapName: string) {
     return "dodgeball";
   } else if (bossMapNameList.includes(mapName)) {
     return "boss";
+  } else if (showdownPlusMapNameList.includes(mapName)) {
+    return "showdown+";
   } else {
     return "unknown";
   }
