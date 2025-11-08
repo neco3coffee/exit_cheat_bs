@@ -43,6 +43,7 @@ export default function ReportButton({
             }
             const { reportId } = await res.json();
             toast.success(t("successCreateReport"));
+            await fetch("/api/v1/revalidate?tag=reports");
             router.push(`/${locale}/reports/${reportId}`);
           } catch (error) {
             console.error("Error creating report:", error);
