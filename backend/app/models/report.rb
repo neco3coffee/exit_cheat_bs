@@ -5,13 +5,28 @@ class Report < ApplicationRecord
 
   # 必要に応じてバリデーションを追加
   validates :reporter_tag, presence: true
-  validates :reported_tag, presence: true
-  validates :report_type, presence: true
   validates :battle_data, presence: true
 
   after_update :increment_approved_reports_count
 
+  before_create :set_uuid
+
+  enum :status, {
+    created: 'created',
+    signed_url_generated: 'signed_url_generated',
+    info_and_video_updated: 'info_and_video_updated',
+    video_optimized: 'video_optimized',
+    waiting_review: 'waiting_review',
+    approved: 'approved',
+    rejected: 'rejected',
+    appealed: 'appealed',
+  }
+
   private
+
+  def set_uuid
+    self.uuid ||= SecureRandom.uuid
+  end
 
   def increment_approved_reports_count
     if reported.nil?

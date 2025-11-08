@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_02_000000) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_08_065547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pg_catalog.plpgsql"
@@ -58,7 +58,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_02_000000) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.integer "report_type", null: false
+    t.string "report_type"
     t.string "video_url"
     t.string "result_url"
     t.text "reason"
@@ -66,11 +66,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_02_000000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "reporter_tag", null: false
-    t.string "reported_tag", null: false
+    t.string "reported_tag"
     t.string "status"
+    t.string "uuid", null: false
+    t.text "appeal_comment"
+    t.text "review_comment"
     t.index ["reported_tag"], name: "index_reports_on_reported_tag"
     t.index ["reporter_tag"], name: "index_reports_on_reporter_tag"
     t.index ["status"], name: "index_reports_on_status"
+    t.index ["uuid"], name: "index_reports_on_uuid", unique: true
   end
 
   create_table "sessions", force: :cascade do |t|

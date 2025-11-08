@@ -94,24 +94,6 @@ async function getRecentReport() {
   return reports[0];
 }
 
-async function getWaitingReviewReports(sessionToken: string) {
-  "use cache";
-  cacheLife("minutes");
-
-  const res = await fetch(`${apiUrl}/api/v1/reports`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Cookie: `session_token=${sessionToken}`,
-    },
-    credentials: "include",
-  });
-  if (!res.ok) {
-    return [];
-  }
-  return res.json();
-}
-
 export default async function Page({
   params,
 }: {
@@ -156,10 +138,6 @@ export default async function Page({
   const battleLogs = playerTag ? await getBattleLogs(playerTag) : null;
   const reports = playerTag ? await getReports(playerTag, sessionToken) : null;
   const recentReport = await getRecentReport();
-  let waitingReviewReports = null;
-  if (player.role === "admin" || player.role === "moderator") {
-    waitingReviewReports = await getWaitingReviewReports(sessionToken);
-  }
 
   return (
     <ServerLocaleMessageProviderWrapper params={params}>
@@ -168,15 +146,9 @@ export default async function Page({
         recentReportComponent={
           <RecentVideoComponent locale={locale} recentReport={recentReport} />
         }
-        reviewTabContent={
-          <ReviewTabContent
-            locale={locale}
-            player={player}
-            waitingReviewReports={waitingReviewReports || []}
-          />
-        }
         battleLogsTabContent={
           <BattleLogsTabContent
+            params={params}
             locale={locale}
             player={player}
             battleLogs={battleLogs || []}
@@ -191,7 +163,7 @@ export default async function Page({
   );
 }
 
-async function RecentVideoComponent({
+export async function RecentVideoComponent({
   locale,
   recentReport,
 }: {
@@ -204,6 +176,14 @@ async function RecentVideoComponent({
   const t = await getTranslations({ locale, namespace: "ranked" });
   const mainVideoDescription = t("mainVideoDescription");
   const videoUrl = recentReport?.video_url || null;
+
+  if (!recentReport || !videoUrl) {
+    return (
+      <div className={styles.recentVideoContainer}>
+        <h5>{t("noRecentReport")}</h5>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.recentVideoContainer}>
@@ -251,64 +231,14 @@ async function RecentVideoComponent({
   );
 }
 
-async function ReviewTabContent({
-  locale,
-  player,
-  waitingReviewReports,
-}: {
-  locale: string;
-  player: any;
-  waitingReviewReports: any[];
-}) {
-  "use cache";
-  cacheLife("minutes");
-  const t = await getTranslations({ locale, namespace: "ranked" });
-
-  return (
-    <div className={styles.reviewContainer}>
-      {player?.role === "moderator" || player?.role === "admin" ? (
-        waitingReviewReports && waitingReviewReports.length > 0 ? (
-          waitingReviewReports.map((report) => {
-            const battleLog = report.battle_data;
-            const ownTag = report.reporter_tag.startsWith("#")
-              ? report.reporter_tag.substring(1)
-              : report.reporter_tag;
-
-            return (
-              <ReportedBattleLogSoloRanked
-                locale={locale}
-                key={`report-${report.id}`}
-                battleLog={battleLog}
-                ownTag={ownTag}
-                status={report.status}
-                reported_tag={report.reported_tag}
-                video_url={report.video_url}
-                reason={report.reason}
-                reportId={report.id}
-                report={report}
-              />
-            );
-          })
-        ) : (
-          <h5 style={{ marginTop: "100px", marginBottom: "100px" }}>
-            {t("review.noReport")}
-          </h5>
-        )
-      ) : (
-        <h5 style={{ marginTop: "100px", marginBottom: "100px" }}>
-          {t("review.onlyModerators")}
-        </h5>
-      )}
-    </div>
-  );
-}
-
 async function BattleLogsTabContent({
+  params,
   locale,
   player,
   battleLogs,
   reports,
 }: {
+  params: Promise<{ locale: string }>;
   locale: string;
   player: any;
   battleLogs: any[];
@@ -348,6 +278,7 @@ async function BattleLogsTabContent({
 
           return (
             <BattleLogSoloRanked
+              params={params}
               locale={locale}
               key={`${battleKey}-${battleLog?.battleTime}`}
               battleLog={battlelog}
@@ -392,6 +323,7 @@ async function ReportsTabContent({
               reported_tag={report.reported_tag}
               video_url={report.video_url}
               report={report}
+              reportId={report.id}
             />
           );
         })
