@@ -1,21 +1,25 @@
+import { cookies } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
 
-export async function GET(
+const apiUrl = "http://app:3000";
+
+export async function POST(
   _req: NextRequest,
   { params }: { params: Promise<{ reportId: string }> },
 ) {
+  const cookieStore = await cookies();
+  const sessionCookie = cookieStore.get("session_token")?.value || null;
   const { reportId } = await params;
-  const res = await fetch(
-    `http://app:3000/api/v1/reports/${reportId}/signed_url`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // cookieを含める
-      credentials: "include",
+  const res = await fetch(`${apiUrl}/api/v1/reports/${reportId}/signed_url`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: `session_token=${sessionCookie}`,
     },
-  );
+    body: await _req.text(),
+    // cookieを含める
+    credentials: "include",
+  });
   const data = await res.json();
   return NextResponse.json(data, { status: res.status });
 }

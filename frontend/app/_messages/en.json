@@ -19,10 +19,10 @@
     "noBattleLog": "No recent ranked battle log available.",
     "noReport": "No reports available.",
     "created": "Waiting for video upload",
-    "signedUrlGenerated": "Waiting for video upload",
-    "infoAndVideoUpdated": "Video AI checking",
-    "videoOptimized": "Waiting for review",
-    "waitingReview": "Waiting for review",
+    "signed_url_generated": "Waiting for video upload",
+    "info_and_video_updated": "AI checking",
+    "video_optimized": "Waiting for review",
+    "waiting_review": "Waiting for review",
     "approved": "Approved",
     "rejected": "Rejected",
     "replay": "Replay",
@@ -65,7 +65,12 @@
     "errorApprove": "An error occurred while approving the report.",
     "failedCreateReport": "Failed to create report.",
     "successCreateReport": "Report created successfully.",
-    "noRecentReport": "No recently reported players."
+    "noRecentReport": "No recently reported players.",
+    "selectPlayer": "Player",
+    "selectReportType": "Reason",
+    "replayVideo": "Replay",
+    "reportComplete": "Complete",
+    "reportCompleteDescription": "Report submitted🎉. A moderator will review it shortly🧑‍⚖️. You will be redirected to the ranked battle log page in 5 seconds.↗️"
   },
   "account": {
     "checkLogin": "Confirming your login...",

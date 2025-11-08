@@ -90,10 +90,10 @@
     "noBattleLog": "直近のガチバトル履歴はありません。",
     "noReport": "報告はありません。",
     "created": "動画アップ待ち",
-    "signedUrlGenerated": "動画アップ待ち",
-    "infoAndVideoUpdated": "動画AIチェック中",
-    "videoOptimized": "レビュー待ち",
-    "waitingReview": "レビュー待ち",
+    "signed_url_generated": "動画アップ待ち",
+    "info_and_video_updated": "AIチェック中",
+    "video_optimized": "レビュー待ち",
+    "waiting_review": "レビュー待ち",
     "approved": "承認済み",
     "rejected": "拒否済み",
     "replay": "リプレイ",
@@ -136,7 +136,12 @@
     "errorApprove": "報告のレビュー中にエラーが発生しました。",
     "failedCreateReport": "報告の作成に失敗しました。",
     "successCreateReport": "報告が作成されました。",
-    "noRecentReport": "最近報告されたプレイヤーはいません。"
+    "noRecentReport": "最近報告されたプレイヤーはいません。",
+    "selectPlayer": "プレイヤー",
+    "selectReportType": "報告理由",
+    "replayVideo": "リプレイ",
+    "reportComplete": "報告完了",
+    "reportCompleteDescription": "報告が完了しました🎉。モデレーターがレビューを行いますので、しばらくお待ちください🧑‍⚖️。5秒後にガチバトル履歴ページにリダイレクトされます。↗️"
   },
   "account": {
     "checkLogin": "ログイン状況を確認しています...",

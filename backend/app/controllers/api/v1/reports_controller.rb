@@ -107,7 +107,7 @@ module Api
 
         if report.update(
           video_url: params[:cdnUrl],
-          reason: params[:reportReason],
+          reason: params[:reportReason] || '',
           status: :info_and_video_updated,
         )
 

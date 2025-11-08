@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_04_135830) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_08_065547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pg_catalog.plpgsql"
@@ -58,7 +58,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_04_135830) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.integer "report_type"
+    t.string "report_type"
     t.string "video_url"
     t.string "result_url"
     t.text "reason"

@@ -18,10 +18,10 @@ const _ReportType = {
 
 const StatusType = {
   created: "created",
-  signed_url_generated: "signedUrlGenerated",
-  info_and_vide_updated: "infoAndVideoUpdated",
-  video_optimized: "videoOptimized",
-  waiting_review: "waitingReview",
+  signed_url_generated: "signed_url_generated",
+  info_and_video_updated: "info_and_video_updated",
+  video_optimized: "video_optimized",
+  waiting_review: "waiting_review",
   approved: "approved",
   rejected: "rejected",
   appealed: "appealed",
