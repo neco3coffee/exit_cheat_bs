@@ -163,7 +163,7 @@ export default async function Page({
   );
 }
 
-async function RecentVideoComponent({
+export async function RecentVideoComponent({
   locale,
   recentReport,
 }: {

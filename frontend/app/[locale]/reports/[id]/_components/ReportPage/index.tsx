@@ -3,7 +3,9 @@ import { Bot, CircleCheck, CircleX, Clock, FileSearch } from "lucide-react";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
 import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
+import { RecentVideoComponent } from "@/app/[locale]/ranked/page";
 import ReportCreateView from "@/app/[locale]/reports/[id]/_components/client/ReportCreateView";
+import ReportDetailView from "../client/ReportDetailView";
 import styles from "./index.module.scss";
 
 const StatusType = {
@@ -63,19 +65,24 @@ export default async function ReportPage({
   // statusが info_and_video_uploaded | waiting_review | approved | rejected でsession player=reporter_tagの場合は、報告の詳細情報を表示するUIを表示
   if (
     report.status === StatusType.info_and_video_updated ||
+    report.status === StatusType.video_optimized ||
     report.status === StatusType.waiting_review ||
     report.status === StatusType.approved ||
     report.status === StatusType.rejected
   ) {
     if (player_tag === report.reporter_tag) {
       return (
-        <></>
-        // <ReportDetailView />
+        <Suspense fallback={null}>
+          <ServerLocaleMessageProviderWrapper params={params}>
+            <ReportDetailView report={report} locale={locale} />
+          </ServerLocaleMessageProviderWrapper>
+        </Suspense>
       );
     }
   }
 
   // statusが approved で session playerが reported_tagと一致する場合は、報告を取り下げる申請UIを表示 (appeal_comment入力欄 + 取り下げ申請ボタン)
+  // TODO: 報告されたプレイヤーが異議申し立てをできるようにする
   if (
     report.status === StatusType.approved &&
     player_tag === report.reported_tag
@@ -85,16 +92,5 @@ export default async function ReportPage({
       // <ReportAppealView />
     );
   }
-
-  return (
-    <>
-      report page <br />
-      {locale}
-      <br />
-      {/* json stringifyでreportを表示 */}
-      <pre>{JSON.stringify(report, null, 2)}</pre>
-      <p>player_role: {player_role}</p>
-      <p>player_tag: {player_tag}</p>
-    </>
-  );
+  return <></>;
 }

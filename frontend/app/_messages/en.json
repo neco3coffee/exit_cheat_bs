@@ -72,6 +72,12 @@
     "reportComplete": "Complete",
     "reportCompleteDescription": "Report submitted🎉. A moderator will review it shortly🧑‍⚖️. You will be redirected to the ranked battle log page in 5 seconds.↗️"
   },
+  "reportDetail": {
+    "aiCheck": "AI Checking",
+    "waitingReview": "Waiting Review",
+    "reviewed": "Reviewed",
+    "videoDescription": "Reported Player's Replay Video"
+  },
   "account": {
     "checkLogin": "Confirming your login...",
     "login": "Login",
