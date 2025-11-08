@@ -35,6 +35,7 @@ const bossMapNameList = [
   "Gargoyle RT",
   "Headless Tickman",
   "Carreta Spike",
+  "Spirit Frank",
 ];
 
 export function classifyModeByMapName(mapName: string) {
