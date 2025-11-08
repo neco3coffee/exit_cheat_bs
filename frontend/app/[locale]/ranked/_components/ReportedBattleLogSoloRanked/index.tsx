@@ -73,7 +73,8 @@ export default async function ReportedBattleLogSoloRanked({
     .flat()
     .some((player: any) => {
       return (
-        player?.brawler?.trophies >= mythic1 && player?.brawler?.trophies <= 21
+        player?.brawler?.trophies - 1 >= mythic1 &&
+        player?.brawler?.trophies <= 21
       ); // pro = 21
     });
   let result = null;
