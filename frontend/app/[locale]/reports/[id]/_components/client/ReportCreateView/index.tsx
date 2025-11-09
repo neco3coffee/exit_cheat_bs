@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { use, useEffect, useState } from "react";
 import { toast } from "sonner";
+import VideoPlayer from "@/app/_components/VideoPlayer.tsx";
 import {
   appendToEightDigits,
   shortenMapName,
@@ -526,19 +527,20 @@ const Content = ({
       >
         <div className={styles.reportVideoDialogBody}>
           {cdnUrl && uploadProgress === 100 ? (
-            <video
-              loop
-              autoPlay
-              playsInline
-              muted
-              src={cdnUrl}
-              style={{
-                backgroundColor: "var(--blue-black)",
-                aspectRatio: "16/9",
-              }}
-            >
-              <track kind="captions" src={cdnUrl} label="No captions" />
-            </video>
+            <VideoPlayer src={cdnUrl} />
+            // <video
+            //   loop
+            //   autoPlay
+            //   playsInline
+            //   muted
+            //   src={cdnUrl}
+            //   style={{
+            //     backgroundColor: "var(--blue-black)",
+            //     aspectRatio: "16/9",
+            //   }}
+            // >
+            //   <track kind="captions" src={cdnUrl} label="No captions" />
+            // </video>
           ) : (
             <div className={styles.videoUploadContainer}>
               <Input

@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import VideoPlayer from "@/app/_components/VideoPlayer.tsx";
 import { formatBattleLog } from "@/app/_lib/formatBattleLog";
 import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
 import RankedPage from "@/app/[locale]/ranked/_components/RankedPage";
@@ -188,7 +189,8 @@ export async function RecentVideoComponent({
   return (
     <div className={styles.recentVideoContainer}>
       <div className={styles.mainVideoDescription}>{mainVideoDescription}</div>
-      <video
+      <VideoPlayer src={videoUrl} />
+      {/* <video
         id="mainVideo"
         key={videoUrl}
         autoPlay
@@ -199,7 +201,7 @@ export async function RecentVideoComponent({
         preload="none"
       >
         <track kind="captions" src={videoUrl} label="No captions" />
-      </video>
+      </video> */}
       <div className={styles.reportInfo}>
         <div className={styles.reportedPlayerIconContainer}>
           <Image

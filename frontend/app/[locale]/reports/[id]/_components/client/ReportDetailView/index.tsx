@@ -6,9 +6,11 @@ import {
   CircleX,
   Clock,
   FileSearch,
+  Video,
 } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import VideoPlayer from "@/app/_components/VideoPlayer.tsx";
 import styles from "./index.module.scss";
 
 const StatusType = {
@@ -126,7 +128,8 @@ export default function ReportDetailView({
         <div className={styles.mainVideoDescription}>
           {t("videoDescription")}
         </div>
-        <video
+        <VideoPlayer src={report.video_url} />
+        {/* <video
           id="mainVideo"
           key={report.video_url}
           autoPlay
@@ -137,7 +140,7 @@ export default function ReportDetailView({
           preload="none"
         >
           <track kind="captions" src={report.video_url} label="No captions" />
-        </video>
+        </video> */}
         <div className={styles.reportInfo}>
           <div className={styles.reportedPlayerIconContainer}>
             <Image
