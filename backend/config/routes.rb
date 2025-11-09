@@ -26,10 +26,10 @@ Rails.application.routes.draw do
       get 'reports/latest', to: 'reports#latest'
       post 'reports/:id/signed_url', to: 'reports#signed_url'
       post 'update_video', to: 'reports#update_video'
+      post 'reports/:id/voted', to: 'reports#voted'
+
 
       get 'stats', to: 'stats#index'
     end
   end
-
-
 end
