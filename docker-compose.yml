@@ -11,6 +11,7 @@ services:
     environment:
       NEXT_PUBLIC_GA_ID: ${NEXT_PUBLIC_GA_ID}
       SITE_URL: ${SITE_URL}
+      LAMBDA_API_KEY: ${LAMBDA_API_KEY}
     networks:
       - safebrawl_net
   app:
@@ -43,6 +44,7 @@ services:
       http_proxy: ${API_PROXY_URL}
       https_proxy: ${API_PROXY_URL}
       no_proxy: "localhost,127.0.0.1,db,app,web"
+      LAMBDA_API_KEY: ${LAMBDA_API_KEY}
     networks:
       - safebrawl_net
   solid_queue:

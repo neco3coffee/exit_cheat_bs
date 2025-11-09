@@ -117,6 +117,30 @@ module Api
         end
       end
 
+      # POST /api/v1/update_video
+      def update_video
+        api_key = request.headers['X-API-KEY']
+        expected_api_key = ENV['LAMBDA_API_KEY']
+
+        if api_key != expected_api_key
+          render json: { error: 'Unauthorized' }, status: :unauthorized
+          return
+        end
+
+        report = Report.find_by(uuid: params[:uuid])
+
+        if report.nil?
+          render json: { error: 'Report not found' }, status: :not_found
+          return
+        end
+
+        if report.update(video_url: params[:video_url], status: :video_optimized)
+          render json: { message: 'Report video URL updated' }, status: :ok
+        else
+          render json: { errors: report.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
+
       def reports
         session_token = cookies[:session_token]
 

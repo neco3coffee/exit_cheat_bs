@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       resources :reports, only: [:create, :show, :update, :index], param: :id
       get 'reports/latest', to: 'reports#latest'
       post 'reports/:id/signed_url', to: 'reports#signed_url'
+      post 'update_video', to: 'reports#update_video'
 
       get 'stats', to: 'stats#index'
     end

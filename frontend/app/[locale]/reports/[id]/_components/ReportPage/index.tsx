@@ -52,7 +52,10 @@ export default async function ReportPage({
   const { report, player_role, player_tag } = await res.json();
 
   // statusがcreatedの場合は,reported_tagのプレイヤー選択UI->report_type選択UI->videoアップロード+報告理由入力のUIの順で表示
-  if (report.status === StatusType.created) {
+  if (
+    report.status === StatusType.created ||
+    report.status === StatusType.signed_url_generated
+  ) {
     return (
       <Suspense fallback={null}>
         <ServerLocaleMessageProviderWrapper params={params}>
