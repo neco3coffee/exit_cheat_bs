@@ -52,7 +52,8 @@ export default function ReportDetailView({
               "rounded-full w-10 h-10 flex items-center justify-center " +
               (report.status === StatusType.info_and_video_updated
                 ? "bg-blue-500 text-white"
-                : report.status === StatusType.waiting_review ||
+                : report.status === StatusType.video_optimized ||
+                    report.status === StatusType.waiting_review ||
                     report.status === StatusType.approved ||
                     report.status === StatusType.rejected
                   ? "bg-green-500 text-white"
@@ -67,7 +68,8 @@ export default function ReportDetailView({
         <div
           className={
             "h-2 w-12 mx-2 rounded " +
-            (report.status === StatusType.waiting_review ||
+            (report.status === StatusType.video_optimized ||
+            report.status === StatusType.waiting_review ||
             report.status === StatusType.approved ||
             report.status === StatusType.rejected
               ? "bg-green-500"
@@ -79,7 +81,8 @@ export default function ReportDetailView({
           <span
             className={
               "rounded-full w-10 h-10 flex items-center justify-center " +
-              (report.status === StatusType.waiting_review
+              (report.status === StatusType.video_optimized ||
+              report.status === StatusType.waiting_review
                 ? "bg-blue-500 text-white"
                 : report.status === StatusType.approved ||
                     report.status === StatusType.rejected

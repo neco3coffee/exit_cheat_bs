@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
+import Loading from "../../ranked/loading";
 import ReportPage from "./_components/ReportPage";
 
 export default async function Page({
@@ -9,7 +10,7 @@ export default async function Page({
 }) {
   return (
     <>
-      <Suspense fallback={null}>
+      <Suspense fallback={<Loading />}>
         <ServerLocaleMessageProviderWrapper params={params}>
           <ReportPage params={params} />
         </ServerLocaleMessageProviderWrapper>

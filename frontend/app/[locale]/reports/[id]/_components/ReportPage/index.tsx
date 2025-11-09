@@ -3,6 +3,7 @@ import { Bot, CircleCheck, CircleX, Clock, FileSearch } from "lucide-react";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
 import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
+import Loading from "@/app/[locale]/ranked/loading";
 import { RecentVideoComponent } from "@/app/[locale]/ranked/page";
 import ReportCreateView from "@/app/[locale]/reports/[id]/_components/client/ReportCreateView";
 import ReportDetailView from "../client/ReportDetailView";
@@ -57,7 +58,7 @@ export default async function ReportPage({
     report.status === StatusType.signed_url_generated
   ) {
     return (
-      <Suspense fallback={null}>
+      <Suspense fallback={<Loading />}>
         <ServerLocaleMessageProviderWrapper params={params}>
           <ReportCreateView report={report} locale={locale} />
         </ServerLocaleMessageProviderWrapper>
@@ -75,7 +76,7 @@ export default async function ReportPage({
   ) {
     if (player_tag === report.reporter_tag) {
       return (
-        <Suspense fallback={null}>
+        <Suspense fallback={<Loading />}>
           <ServerLocaleMessageProviderWrapper params={params}>
             <ReportDetailView report={report} locale={locale} />
           </ServerLocaleMessageProviderWrapper>
