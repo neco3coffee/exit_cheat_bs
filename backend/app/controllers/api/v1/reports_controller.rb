@@ -141,6 +141,25 @@ module Api
         end
       end
 
+      def voted
+        report = Report.find_by(id: params[:id])
+        return render json: { error: "Report not found" }, status: :not_found unless report
+
+        result = params[:result]
+
+        case result
+        when "griefer"
+          report.update!(status: :approved)
+        when "normal"
+          report.update!(status: :rejected)
+        else
+          # no_votes / tie などはとりあえず保留に戻すなど
+          report.update!(status: :waiting_review)
+        end
+
+        render json: { message: "Report updated", status: report.status }, status: :ok
+      end
+
       def reports
         session_token = cookies[:session_token]
 

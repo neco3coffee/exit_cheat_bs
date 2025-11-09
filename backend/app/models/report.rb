@@ -7,7 +7,7 @@ class Report < ApplicationRecord
   validates :reporter_tag, presence: true
   validates :battle_data, presence: true
 
-  after_update :increment_approved_reports_count
+  after_update :handle_status_change, if: :saved_change_to_status?
 
   before_create :set_uuid
 
@@ -50,6 +50,16 @@ class Report < ApplicationRecord
 
     if saved_change_to_status? && status == 'approved' && ['pending', 'waiting_review'].include?(status_before_last_save)
       reported.increment!(:approved_reports_count)
+    end
+  end
+
+  def handle_status_change
+    if status == "video_optimized"
+      DiscordVoteNotifier.notify(self)
+    end
+
+    if status == "approved"
+      increment_approved_reports_count
     end
   end
 end
