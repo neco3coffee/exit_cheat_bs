@@ -71,7 +71,7 @@
     "selectReportType": "Reason",
     "replayVideo": "Replay",
     "reportComplete": "Complete",
-    "reportCompleteDescription": "Report submitted🎉. A moderator will review it shortly🧑‍⚖️. You will be redirected to the ranked battle log page in 5 seconds.↗️"
+    "reportCompleteDescription": "Report submitted🎉.\n A moderator will review it shortly🧑‍⚖️."
   },
   "reportDetail": {
     "aiCheck": "AI Checking",
