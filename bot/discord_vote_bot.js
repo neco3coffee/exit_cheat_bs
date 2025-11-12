@@ -131,6 +131,7 @@ app.post("/api/vote_message", async (req, res) => {
       .setDescription(
         `**Report ID:** ${report_id}\n` +
         `**報告対象:** ${battle_data.battle.teams.flat().find((p) => p.tag === reported_tag)?.name || '不明な名前' }\n` +
+        `**報告対象ブロウラー:** ${battle_data.battle.teams.flat().find((p) => p.tag === reported_tag)?.brawler?.name || '不明なブロウラー' }\n` +
         `**報告タイプ:** ${REPORT_TYPE[report_type]}\n` +
         `▶️ [動画を再生する](${video_url})\n\nこのプレイヤーは利敵行為をしていますか？`
       )
