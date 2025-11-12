@@ -11,7 +11,7 @@ import {
 } from "discord.js";
 import fetch from "node-fetch";
 
-const collectVotes = async () => {
+const collectVotes = async (channel, report_id) => {
   try {
     const record = votes.get(String(report_id)) || {
       griefer: new Set(),
@@ -25,7 +25,7 @@ const collectVotes = async () => {
       await channel.send(
         `🕒 投票がありませんでした。投票期間を3時間延長します。（Report #${report_id}）`
       );
-      setTimeout(collectVotes, 60 * 60 * 1000 * 3); // 3時間延長
+      setTimeout(collectVotes(channel, report_id), 60 * 60 * 1000 * 3); // 3時間延長
       return;
     }
 
@@ -159,7 +159,7 @@ app.post("/api/vote_message", async (req, res) => {
     console.log(`📨 投票メッセージ送信完了: Report #${report_id}`);
 
     setTimeout(async () => {
-      collectVotes();
+      collectVotes(channel, report_id);
     // }, 60 * 1000); // ← テストでは1分
     }, 60 * 60 * 1000 * 6); // ← 本番では6時間
 
