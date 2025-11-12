@@ -166,7 +166,7 @@ RSpec.describe Test, type: :model do
     end
 
     it '平均検索時間が20ms以下である' do
-      queries = ["Player", "Gamer", "Master", "NonExistent"]
+      queries = [ "Player", "Gamer", "Master", "NonExistent" ]
       times = []
 
       # 各クエリを5回実行して平均を取る

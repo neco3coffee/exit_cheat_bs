@@ -2,19 +2,19 @@ class UpdateSoloRankedRanksJob < ApplicationJob
   queue_as :default
 
   def perform(battlelog_data)
-    return unless battlelog_data && battlelog_data['items']
+    return unless battlelog_data && battlelog_data["items"]
 
     # soloRankedバトルに参加したプレイヤーの情報を収集（重複除去）
     player_rank_updates = {}
 
-    battlelog_data['items'].each do |item|
-      battle = item['battle']
-      next unless battle['type'] == 'soloRanked'
+    battlelog_data["items"].each do |item|
+      battle = item["battle"]
+      next unless battle["type"] == "soloRanked"
 
-      battle['teams'].each do |team|
+      battle["teams"].each do |team|
         team.each do |player|
-          tag = normalize_tag(player['tag'])
-          trophies = player['brawler']['trophies']
+          tag = normalize_tag(player["tag"])
+          trophies = player["brawler"]["trophies"]
 
           unless player_rank_updates.key?(tag)
             player_rank_updates[tag] = trophies
@@ -43,10 +43,10 @@ class UpdateSoloRankedRanksJob < ApplicationJob
   private
 
   def normalize_tag(tag)
-    return '' unless tag.present?
+    return "" unless tag.present?
 
     tag = tag.to_s.upcase.strip
-    tag = tag.gsub('O', '0')
-    tag = "##{tag}" unless tag.start_with?('#')
+    tag = tag.gsub("O", "0")
+    tag = "##{tag}" unless tag.start_with?("#")
   end
 end

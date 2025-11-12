@@ -1,7 +1,7 @@
-require 'faraday'
-require 'json'
-require 'uri'
-require 'time'
+require "faraday"
+require "json"
+require "uri"
+require "time"
 
 module Api
   module V1
@@ -19,7 +19,7 @@ module Api
         player_data = fetcher.fetch_player(tag)
         Rails.logger.info("Fetched player data: #{player_data} for tag: #{tag}")
         if player_data.nil?
-          render json: {error: "Player not found"}, status: 404 and return
+          render json: { error: "Player not found" }, status: 404 and return
         end
 
         # 2. プレイヤー情報をDBに保存または更新
@@ -31,10 +31,10 @@ module Api
 
         # 4. クラブ情報を取得（badgeId用）
         badgeId = nil
-        if player_data.dig('club', 'tag')
-          club_tag = player_data.dig('club','tag')
+        if player_data.dig("club", "tag")
+          club_tag = player_data.dig("club", "tag")
           club_data = fetcher.fetch_club(club_tag)
-          badgeId = club_data['badgeId'] if club_data
+          badgeId = club_data["badgeId"] if club_data
         end
 
         # 5. 直近3件のバトルから他のプレイヤーのタグを抽出
@@ -76,7 +76,7 @@ module Api
           response_data[:nameHistories] = []
         end
 
-        response.headers['Cache-Control'] = 'public, max-age=60'
+        response.headers["Cache-Control"] = "public, max-age=60"
         render json: response_data
 
       rescue StandardError => e
@@ -107,8 +107,8 @@ module Api
           min_rank = 18
           max_rank = 21
         else
-          min_rank = [target_rank - 3, 0].max
-          max_rank = [target_rank + 3, 21].min
+          min_rank = [ target_rank - 3, 0 ].max
+          max_rank = [ target_rank + 3, 21 ].min
         end
 
         # 基本のプレイヤー検索クエリを構築
@@ -166,7 +166,7 @@ module Api
           render json: { error: "Battlelog not found" }, status: 404 and return
         end
 
-        solo_ranked_battle_logs = battlelog_data['items'].select { |item| item['battle']['type'] == 'soloRanked' }
+        solo_ranked_battle_logs = battlelog_data["items"].select { |item| item["battle"]["type"] == "soloRanked" }
         if solo_ranked_battle_logs.empty?
           render json: { error: "No solo ranked battles found" }, status: 404 and return
         end
@@ -187,26 +187,26 @@ module Api
         Rails.logger.info("fetching reports for tag: #{tag}")
 
         reports = Report.where(reporter_tag: tag).order(created_at: :desc)
-        render json: reports.as_json(only: [:id, :reporter_tag, :reported_tag, :report_type, :status, :reason, :battle_data, :video_url, :result_url, :created_at, :updated_at])
+        render json: reports.as_json(only: [ :id, :reporter_tag, :reported_tag, :report_type, :status, :reason, :battle_data, :video_url, :result_url, :created_at, :updated_at ])
       end
 
       private
-      #TODO: api tokenが制限に達した場合に備える
+      # TODO: api tokenが制限に達した場合に備える
 
       def latest_solo_ranked_trophies(data, player_tag)
         Rails.logger.info("playerTag: #{player_tag}")
         ownTag = player_tag.tr("O", "0")
         Rails.logger.info("ownTag: #{ownTag}")
 
-        data['items'].each do |item|
-          battle = item['battle']
-          next unless battle['type'] == 'soloRanked'
+        data["items"].each do |item|
+          battle = item["battle"]
+          next unless battle["type"] == "soloRanked"
 
-          battle['teams'].each do |team|
+          battle["teams"].each do |team|
             team.each do |player|
               Rails.logger.info("Checking player tag: #{player['tag']}")
-              if player['tag'] == "#{ownTag}"
-                return player['brawler']['trophies']
+              if player["tag"] == "#{ownTag}"
+                return player["brawler"]["trophies"]
               end
             end
           end
@@ -215,29 +215,27 @@ module Api
         nil # 見つからなかった場合
       end
 
-      def construct_response(player ,player_data, battlelog_data, badgeId)
+      def construct_response(player, player_data, battlelog_data, badgeId)
         {
-          tag: player_data['tag'],
-          name: player_data['name'],
-          nameColor: player_data['nameColor'],
-          iconId: player_data.dig('icon', 'id'),
+          tag: player_data["tag"],
+          name: player_data["name"],
+          nameColor: player_data["nameColor"],
+          iconId: player_data.dig("icon", "id"),
           currentRank: player.rank,
-          trophies: player_data['trophies'],
-          highestTrophies: player_data['highestTrophies'],
-          vs3Victories: player_data['3vs3Victories'],
-          soloVictories: player_data['soloVictories'],
+          trophies: player_data["trophies"],
+          highestTrophies: player_data["highestTrophies"],
+          vs3Victories: player_data["3vs3Victories"],
+          soloVictories: player_data["soloVictories"],
           club: {
-            tag: player_data.dig('club', 'tag'),
-            name: player_data.dig('club', 'name'),
-            badgeId: badgeId,
+            tag: player_data.dig("club", "tag"),
+            name: player_data.dig("club", "name"),
+            badgeId: badgeId
           },
           battlelog: battlelog_data,
           approved_reports_count: player.approved_reports_count,
-          brawlers: player_data['brawlers'],
+          brawlers: player_data["brawlers"]
         }
       end
-
-
     end
   end
 end

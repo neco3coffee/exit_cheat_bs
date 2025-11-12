@@ -1,7 +1,7 @@
 class Report < ApplicationRecord
   # reporter_tag, reported_tag で Player と紐付けるアソシエーション
-  belongs_to :reporter, class_name: 'Player', primary_key: :tag, foreign_key: :reporter_tag, optional: true
-  belongs_to :reported, class_name: 'Player', primary_key: :tag, foreign_key: :reported_tag, optional: true
+  belongs_to :reporter, class_name: "Player", primary_key: :tag, foreign_key: :reporter_tag, optional: true
+  belongs_to :reported, class_name: "Player", primary_key: :tag, foreign_key: :reported_tag, optional: true
 
   # 必要に応じてバリデーションを追加
   validates :reporter_tag, presence: true
@@ -12,14 +12,14 @@ class Report < ApplicationRecord
   before_create :set_uuid
 
   enum :status, {
-    created: 'created',
-    signed_url_generated: 'signed_url_generated',
-    info_and_video_updated: 'info_and_video_updated',
-    video_optimized: 'video_optimized',
-    waiting_review: 'waiting_review',
-    approved: 'approved',
-    rejected: 'rejected',
-    appealed: 'appealed',
+    created: "created",
+    signed_url_generated: "signed_url_generated",
+    info_and_video_updated: "info_and_video_updated",
+    video_optimized: "video_optimized",
+    waiting_review: "waiting_review",
+    approved: "approved",
+    rejected: "rejected",
+    appealed: "appealed"
   }
 
   private
@@ -48,7 +48,7 @@ class Report < ApplicationRecord
       end
     end
 
-    if saved_change_to_status? && status == 'approved' && ['pending', 'waiting_review'].include?(status_before_last_save)
+    if saved_change_to_status? && status == "approved" && [ "pending", "waiting_review" ].include?(status_before_last_save)
       reported.increment!(:approved_reports_count)
     end
   end

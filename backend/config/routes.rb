@@ -10,10 +10,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      get 'players/search', to: 'players#search'
-      get 'players/:tag', to: 'players#show'
-      get 'players/:tag/ranked', to: 'players#ranked'
-      get 'players/:tag/reports', to: 'players#reports'
+      get "players/search", to: "players#search"
+      get "players/:tag", to: "players#show"
+      get "players/:tag/ranked", to: "players#ranked"
+      get "players/:tag/reports", to: "players#reports"
 
       namespace :auth do
         post "login",  to: "sessions#login"
@@ -22,14 +22,14 @@ Rails.application.routes.draw do
         get "logout", to: "sessions#logout"
       end
 
-      get 'reports/latest', to: 'reports#latest'
-      resources :reports, only: [:create, :show, :update, :index], param: :id
-      post 'reports/:id/signed_url', to: 'reports#signed_url'
-      post 'update_video', to: 'reports#update_video'
-      post 'reports/:id/voted', to: 'reports#voted'
+      get "reports/latest", to: "reports#latest"
+      resources :reports, only: [ :create, :show, :update, :index ], param: :id
+      post "reports/:id/signed_url", to: "reports#signed_url"
+      post "update_video", to: "reports#update_video"
+      post "reports/:id/voted", to: "reports#voted"
 
 
-      get 'stats', to: 'stats#index'
+      get "stats", to: "stats#index"
     end
   end
 end

@@ -3,8 +3,8 @@ class Player < ApplicationRecord
   has_many :sessions, dependent: :destroy
 
   # reporter/reportedとしてのreports関連
-  has_many :reported_reports, class_name: 'Report', foreign_key: :reported_tag, primary_key: :tag
-  has_many :reports, class_name: 'Report', foreign_key: :reporter_tag, primary_key: :tag
+  has_many :reported_reports, class_name: "Report", foreign_key: :reported_tag, primary_key: :tag
+  has_many :reports, class_name: "Report", foreign_key: :reporter_tag, primary_key: :tag
 
   validates :tag, presence: true, uniqueness: true
   validates :name, presence: true
@@ -26,7 +26,7 @@ class Player < ApplicationRecord
     return unless tag.present?
 
     self.tag = tag.to_s.upcase.strip
-    self.tag = tag.gsub('O', '0')
-    self.tag = "##{tag}" unless tag.start_with?('#')
+    self.tag = tag.gsub("O", "0")
+    self.tag = "##{tag}" unless tag.start_with?("#")
   end
 end

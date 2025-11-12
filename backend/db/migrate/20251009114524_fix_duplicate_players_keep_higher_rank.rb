@@ -5,8 +5,8 @@ class FixDuplicatePlayersKeepHigherRank < ActiveRecord::Migration[8.0]
       CREATE TABLE IF NOT EXISTS duplicate_players_backup AS
       SELECT p1.*
       FROM players p1
-      INNER JOIN players p2 ON p1.name = p2.name 
-        AND p1.club_name = p2.club_name 
+      INNER JOIN players p2 ON p1.name = p2.name#{' '}
+        AND p1.club_name = p2.club_name#{' '}
         AND p1.id != p2.id
       WHERE (
         p1.rank < p2.rank
@@ -19,8 +19,8 @@ class FixDuplicatePlayersKeepHigherRank < ActiveRecord::Migration[8.0]
       SELECT p1.id, p1.tag, p1.name, p1.rank, p1.club_name,
              p2.id as kept_id, p2.tag as kept_tag, p2.rank as kept_rank
       FROM players p1
-      INNER JOIN players p2 ON p1.name = p2.name 
-        AND p1.club_name = p2.club_name 
+      INNER JOIN players p2 ON p1.name = p2.name#{' '}
+        AND p1.club_name = p2.club_name#{' '}
         AND p1.id != p2.id
       WHERE (
         p1.rank < p2.rank
@@ -62,7 +62,7 @@ class FixDuplicatePlayersKeepHigherRank < ActiveRecord::Migration[8.0]
 
     # バックアップテーブルを削除
     execute "DROP TABLE IF EXISTS duplicate_players_backup;"
-    
+
     puts "Restored duplicate players from backup."
   end
 end
