@@ -72,7 +72,7 @@ jobs:
           puts 'Solid Queue tables:'
           puts ActiveRecord::Base.connection.tables.select { |t| t.include?('solid_queue') }
         "
-    - name: Install dependencies
+    - name: Install dependencies at frontend
       run: npm ci --force
       working-directory: frontend
     - name: Debug services
@@ -129,6 +129,8 @@ jobs:
         key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
         restore-keys: |
           playwright-${{ runner.os }}-
+    - name: Install dependencies for Playwright
+      run: npm ci --force
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
