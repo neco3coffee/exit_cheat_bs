@@ -371,6 +371,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 8.0.3)
   rspec-rails
+  rubocop
   rubocop-rails-omakase
   shoulda-matchers
   solid_cable

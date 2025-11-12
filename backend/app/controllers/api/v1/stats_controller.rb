@@ -6,7 +6,8 @@ module Api
         stats =
           {
             totalReportsCount: Report.count,
-            totalPlayersCount: Player.count
+            totalPlayersCount: Player.count,
+            totalSessionsCount: Session.count
           }
 
         render json: stats, status: :ok
