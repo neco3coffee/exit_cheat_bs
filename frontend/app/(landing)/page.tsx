@@ -21,7 +21,11 @@ async function getStats() {
     return await res.json();
   } catch (error) {
     console.error("Error fetching stats:", error);
-    return { totalReportsCount: 0, totalPlayersCount: 0, totalSessionsCount: 0 };
+    return {
+      totalReportsCount: 0,
+      totalPlayersCount: 0,
+      totalSessionsCount: 0,
+    };
   }
 }
 
