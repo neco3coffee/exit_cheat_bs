@@ -39,6 +39,11 @@ jobs:
       - name: Next.js build
         run: npm run build
 
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4.6'
+
       - name: Install backend dependencies
         run: bundle install
         working-directory: backend
