@@ -2,7 +2,7 @@ module Api
   module V1
     class ReportsController < ApplicationController
       # protect_from_forgery with: :null_session
-      before_action :authenticate_reporter, only: [:create, :signed_url, :update]
+      before_action :authenticate_reporter, only: [ :create, :signed_url, :update ]
 
       # POST /api/v1/reports
       def create
@@ -24,7 +24,7 @@ module Api
         session_token = cookies[:session_token]
 
         unless session_token
-          render json: { error: 'Unauthorized' }, status: :unauthorized
+          render json: { error: "Unauthorized" }, status: :unauthorized
           return
         end
 
@@ -32,7 +32,7 @@ module Api
         player = session.player
 
         unless player
-          render json: { error: 'Forbidden' }, status: :forbidden
+          render json: { error: "Forbidden" }, status: :forbidden
           return
         end
 
@@ -45,7 +45,7 @@ module Api
             player_tag: player.tag
           }, status: :ok
         else
-          render json: { error: 'Report not found' }, status: :not_found
+          render json: { error: "Report not found" }, status: :not_found
         end
       end
 
@@ -55,7 +55,7 @@ module Api
         report = Report.find(params[:id])
 
         if report.nil?
-          render json: { error: 'Report not found' }, status: :not_found
+          render json: { error: "Report not found" }, status: :not_found
           return
         end
 
@@ -69,8 +69,8 @@ module Api
         if report.save
           # S3署名付きURL生成
           s3 = Aws::S3::Resource.new
-          bucket = ENV.fetch('AWS_BUCKET')
-          ext = params[:fileType]&.split('/')&.last || 'mp4'
+          bucket = ENV.fetch("AWS_BUCKET")
+          ext = params[:fileType]&.split("/")&.last || "mp4"
           object_key = "reports/#{report.uuid}/video.#{ext}"
           signer = Aws::S3::Presigner.new
           signed_url = signer.presigned_url(:put_object,
@@ -79,7 +79,7 @@ module Api
             content_type: params[:fileType],
             expires_in: 60 * 10 # 10分
           )
-          cdn_url = File.join(ENV.fetch('CDN_URL'), object_key)
+          cdn_url = File.join(ENV.fetch("CDN_URL"), object_key)
           render json: { reportId: report.id, signedUrl: signed_url, cdnUrl: cdn_url }, status: :created
         else
           render json: { errors: report.errors.full_messages }, status: :unprocessable_entity
@@ -91,14 +91,14 @@ module Api
         report = Report.find(params[:id])
 
         if report.nil?
-          render json: { error: 'Report not found' }, status: :not_found
+          render json: { error: "Report not found" }, status: :not_found
           return
         end
 
         # statusのみの更新をしたい
-        if params[:status] == 'approved' || params[:status] == 'rejected'
+        if params[:status] == "approved" || params[:status] == "rejected"
           if report.update(status: params[:status])
-            render json: { message: 'Report status updated' }, status: :ok
+            render json: { message: "Report status updated" }, status: :ok
           else
             render json: { errors: report.errors.full_messages }, status: :unprocessable_entity
           end
@@ -107,11 +107,11 @@ module Api
 
         if report.update(
           video_url: params[:cdnUrl],
-          reason: params[:reportReason] || '',
+          reason: params[:reportReason] || "",
           status: :info_and_video_updated,
         )
 
-          render json: { message: 'Report updated' }, status: :ok
+          render json: { message: "Report updated" }, status: :ok
         else
           render json: { errors: report.errors.full_messages }, status: :unprocessable_entity
         end
@@ -119,23 +119,23 @@ module Api
 
       # POST /api/v1/update_video
       def update_video
-        api_key = request.headers['X-API-KEY']
-        expected_api_key = ENV['LAMBDA_API_KEY']
+        api_key = request.headers["X-API-KEY"]
+        expected_api_key = ENV["LAMBDA_API_KEY"]
 
         if api_key != expected_api_key
-          render json: { error: 'Unauthorized' }, status: :unauthorized
+          render json: { error: "Unauthorized" }, status: :unauthorized
           return
         end
 
         report = Report.find_by(uuid: params[:uuid])
 
         if report.nil?
-          render json: { error: 'Report not found' }, status: :not_found
+          render json: { error: "Report not found" }, status: :not_found
           return
         end
 
         if report.update(video_url: params[:video_url], status: :video_optimized)
-          render json: { message: 'Report video URL updated' }, status: :ok
+          render json: { message: "Report video URL updated" }, status: :ok
         else
           render json: { errors: report.errors.full_messages }, status: :unprocessable_entity
         end
@@ -164,7 +164,7 @@ module Api
         session_token = cookies[:session_token]
 
         unless session_token
-          render json: { error: 'Unauthorized' }, status: :unauthorized
+          render json: { error: "Unauthorized" }, status: :unauthorized
           return
         end
 
@@ -172,7 +172,7 @@ module Api
         player = session.player
 
         unless player
-          render json: { error: 'Forbidden' }, status: :forbidden
+          render json: { error: "Forbidden" }, status: :forbidden
           return
         end
 
@@ -185,24 +185,23 @@ module Api
 
 
         unless session_token
-          render json: { error: 'Unauthorized' }, status: :unauthorized
+          render json: { error: "Unauthorized" }, status: :unauthorized
           return
         end
 
         session = Session.find_by(session_token: session_token)
         player = session.player
-        unless player && ['moderator', 'admin'].include?(player.role)
-          render json: { error: 'Forbidden' }, status: :forbidden
+        unless player && [ "moderator", "admin" ].include?(player.role)
+          render json: { error: "Forbidden" }, status: :forbidden
           return
         end
 
-        reports = Report.where(status: 'waiting_review').order(created_at: :asc)
+        reports = Report.where(status: "waiting_review").order(created_at: :asc)
         render json: reports, status: :ok
       end
 
       def latest
-
-        reports = Report.where(status: 'approved').order(updated_at: :desc).limit(10)
+        reports = Report.where(status: "approved").order(updated_at: :desc).limit(10)
         render json: reports, status: :ok
       end
 
@@ -211,7 +210,7 @@ module Api
       def authenticate_reporter
         session_token = cookies[:session_token]
         unless session_token
-          render json: { error: 'Unauthorized' }, status: :unauthorized
+          render json: { error: "Unauthorized" }, status: :unauthorized
           return
         end
 
@@ -220,19 +219,17 @@ module Api
 
         if params[:reporterTag].present?
           unless player && player.tag == params[:reporterTag]
-            render json: { error: 'Forbidden' }, status: :forbidden
-            return
+            render json: { error: "Forbidden" }, status: :forbidden
+            nil
           end
         else
           report = Report.find_by(id: params[:id])
           unless player && player.tag == report.reporter_tag
-            render json: { error: 'Forbidden' }, status: :forbidden
-            return
+            render json: { error: "Forbidden" }, status: :forbidden
+            nil
           end
         end
       end
-
-
     end
   end
 end

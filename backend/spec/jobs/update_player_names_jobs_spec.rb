@@ -76,7 +76,7 @@ RSpec.describe UpdatePlayerNamesBatchJob, type: :job do
     it 'processes player batch and updates names from external API' do
       # バッチジョブを実行
       expect {
-        UpdatePlayerNamesBatchJob.perform_now([test_player.id])
+        UpdatePlayerNamesBatchJob.perform_now([ test_player.id ])
       }.not_to raise_error
 
       # プレイヤーが処理されたことを確認
@@ -97,7 +97,7 @@ RSpec.describe UpdatePlayerNamesBatchJob, type: :job do
       allow_any_instance_of(PlayerFetcher).to receive(:fetch_battlelog).and_return(nil)
 
       expect {
-        UpdatePlayerNamesBatchJob.perform_now([test_player.id])
+        UpdatePlayerNamesBatchJob.perform_now([ test_player.id ])
       }.to change { PlayerNameHistory.count }.by(1)
 
       # 履歴が正しく保存されたか確認
@@ -118,7 +118,7 @@ RSpec.describe UpdatePlayerNamesBatchJob, type: :job do
       allow_any_instance_of(PlayerFetcher).to receive(:fetch_player).and_return(nil)
 
       expect {
-        UpdatePlayerNamesBatchJob.perform_now([test_player.id])
+        UpdatePlayerNamesBatchJob.perform_now([ test_player.id ])
       }.not_to raise_error
 
       # プレイヤー情報は変更されないはず
@@ -139,7 +139,7 @@ RSpec.describe UpdatePlayerNamesBatchJob, type: :job do
       )
 
       expect {
-        UpdatePlayerNamesBatchJob.perform_now([test_player.id, player2.id])
+        UpdatePlayerNamesBatchJob.perform_now([ test_player.id, player2.id ])
       }.not_to raise_error
     end
   end

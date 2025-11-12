@@ -31,7 +31,7 @@ module Api
 
 
             current_icon = player_data["icon"]["id"].to_s
-            requested_icon = (ICON_CANDIDATES - [current_icon]).sample
+            requested_icon = (ICON_CANDIDATES - [ current_icon ]).sample
 
             render json: {
               player: {
@@ -39,7 +39,7 @@ module Api
                 name: player_data["name"],
                 club_name: player_data.dig("club", "name"),
                 trophies: player_data["trophies"],
-                current_icon: current_icon,
+                current_icon: current_icon
               },
               requested_icon: requested_icon
             }
@@ -116,7 +116,7 @@ module Api
             end
 
             if Rails.env.development?
-              cookies[:session_token] = { value: session_token, httponly: true, expires: 30.days.from_now}
+              cookies[:session_token] = { value: session_token, httponly: true, expires: 30.days.from_now }
             end
 
             render json: {
@@ -164,8 +164,8 @@ module Api
               trophies: player.trophies,
               current_icon: player.icon_id&.to_s,
               rank: player.rank,
-              role: player.role,
-            },
+              role: player.role
+            }
           }
         end
 
@@ -189,8 +189,8 @@ module Api
           return tag unless tag
 
           normalized = tag.to_s.upcase.strip
-          normalized = normalized.gsub('O', '0')
-          normalized = "##{normalized}" unless normalized.start_with?('#')
+          normalized = normalized.gsub("O", "0")
+          normalized = "##{normalized}" unless normalized.start_with?("#")
           normalized
         end
       end

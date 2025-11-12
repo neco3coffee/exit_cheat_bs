@@ -18,7 +18,7 @@ class Test < ApplicationRecord
     if name.present?
       # アクセント除去、小文字化、特殊文字の正規化
       self.normalized_name = name.unicode_normalize(:nfd)
-                                .gsub(/[\u0300-\u036f]/, '') # 結合文字除去
+                                .gsub(/[\u0300-\u036f]/, "") # 結合文字除去
                                 .downcase
                                 .strip
     end

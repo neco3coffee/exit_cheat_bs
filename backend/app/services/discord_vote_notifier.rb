@@ -8,7 +8,10 @@ class DiscordVoteNotifier
   def self.notify(report)
     payload = {
       report_id: report.id,
-      video_url: report.video_url
+      video_url: report.video_url,
+      reported_tag: report.reported_tag,
+      battle_data: report.battle_data,
+      report_type: report.report_type
     }
 
     report.status = "waiting_review"

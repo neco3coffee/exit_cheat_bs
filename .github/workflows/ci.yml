@@ -1,4 +1,4 @@
-name: CI for frontend Next.js PR
+name: CI for frontend Next.js and backend Rails PR
 
 on:
   pull_request:
@@ -27,7 +27,8 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install --force
+        run: npm ci --force
+        working-directory: frontend
 
       - name: Run biome check
         run: npm run lint
@@ -37,3 +38,16 @@ jobs:
 
       - name: Next.js build
         run: npm run build
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4.6'
+
+      - name: Install backend dependencies
+        run: bundle install
+        working-directory: backend
+
+      - name: Run RuboCop (Rails static analysis)
+        run: bundle exec rubocop
+        working-directory: backend
