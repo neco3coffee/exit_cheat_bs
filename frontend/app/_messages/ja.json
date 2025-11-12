@@ -142,7 +142,7 @@
     "selectReportType": "報告理由",
     "replayVideo": "リプレイ",
     "reportComplete": "報告完了",
-    "reportCompleteDescription": "報告が完了しました🎉。\nモデレーターがレビューを行いますので、しばらくお待ちください🧑‍⚖️。"
+    "reportCompleteDescription": "報告が完了しました🎉。モデレーターがレビューを行いますので、しばらくお待ちください🧑‍⚖️。5秒後にガチバトル履歴ページにリダイレクトされます。↗️"
   },
   "reportDetail": {
     "aiCheck": "AI確認中",

@@ -3,9 +3,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
 import { toast } from "sonner";
-import { Spinner } from "@/components/ui/spinner";
 import styles from "./index.module.scss";
 
 export default function ReportButton({
@@ -21,7 +19,6 @@ export default function ReportButton({
 }) {
   const router = useRouter();
   const t = useTranslations("ranked");
-  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <button
@@ -29,7 +26,6 @@ export default function ReportButton({
       className={`${styles.reportButton} ${isReported ? styles.reportButtonClicked : ""}`}
       onClick={() => {
         if (isReported) return;
-        setIsLoading(true);
         async function createReport() {
           try {
             const res = await fetch("/api/v1/reports", {
@@ -52,17 +48,13 @@ export default function ReportButton({
           } catch (error) {
             console.error("Error creating report:", error);
             toast.error(t("failedCreateReport"));
-          } finally {
-            setIsLoading(false);
           }
         }
         createReport();
       }}
-      disabled={isReported || isLoading}
+      disabled={isReported}
     >
-      {isLoading ? (
-        <Spinner />
-      ) : isReported ? (
+      {isReported ? (
         t("reported")
       ) : (
         <>
