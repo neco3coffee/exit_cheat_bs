@@ -81,17 +81,11 @@ const TOKEN = process.env.DISCORD_BOT_TOKEN;
 const SAFE_BRAWL_API_BASE =
   process.env.SAFE_BRAWL_API_URL || "https://safebrawl.com/api/v1";
 const CHANNEL_ID = process.env.DISCORD_CHANNEL_ID;
-const REPORT_TYPE = [
-  {
-    "badRandom": "エイム力もスキルも協調性もなし"
-  },
-  {
-    "griefPlay": "立ち止まって攻撃しない、チーム妨害、プレイ放棄"
-  },
-  {
-    "cheating": "ハッキング、ボットの使用、システム・不具合の悪用、八百長"
-  }
-]
+const REPORT_TYPE = {
+  "badRandom": "エイム力もスキルも協調性もなし",
+  "griefPlay": "立ち止まって攻撃しない、チーム妨害、プレイ放棄",
+  "cheating": "ハッキング、ボットの使用、システム・不具合の悪用、八百長"
+};
 
 // ===============================
 // Discordクライアント初期化
@@ -136,7 +130,7 @@ app.post("/api/vote_message", async (req, res) => {
       .setTitle("🧾 新しい報告が最適化されました")
       .setDescription(
         `**Report ID:** ${report_id}\n` +
-        `**報告対象:** ${battle_data.battle.teams.flat().find((p) => p.tag === reported_tag).name }\n` +
+        `**報告対象:** ${battle_data.battle.teams.flat().find((p) => p.tag === reported_tag)?.name || '不明な名前' }\n` +
         `**報告タイプ:** ${REPORT_TYPE[report_type]}\n` +
         `▶️ [動画を再生する](${video_url})\n\nこのプレイヤーは利敵行為をしていますか？`
       )
