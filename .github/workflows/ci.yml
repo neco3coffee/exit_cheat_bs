@@ -1,4 +1,4 @@
-name: CI for frontend Next.js PR
+name: CI for frontend Next.js and backend Rails PR
 
 on:
   pull_request:
@@ -38,3 +38,11 @@ jobs:
 
       - name: Next.js build
         run: npm run build
+
+      - name: Install backend dependencies
+        run: bundle install
+        working-directory: backend
+
+      - name: Run RuboCop (Rails static analysis)
+        run: bundle exec rubocop
+        working-directory: backend
