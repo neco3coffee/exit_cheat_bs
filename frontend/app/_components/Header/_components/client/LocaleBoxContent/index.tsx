@@ -8,11 +8,35 @@ import styles from "./index.module.scss";
 export default function LocaleBoxContent() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const locale = pathname.split("/")[1] as "en" | "ja";
+  const locale = pathname.split("/")[1] as
+    | "en"
+    | "ja"
+    | "zh"
+    | "cs"
+    | "fr"
+    | "sq"
+    | "pt"
+    | "fr-ca"
+    | "hr";
   const leftPath = pathname.split("/").slice(2).join("/");
 
-  const nationalFlags: Record<"en" | "ja", string> = { en: "🇺🇸", ja: "🇯🇵" };
-  const locales: Array<"en" | "ja"> = ["en", "ja"];
+  const nationalFlags: Record<
+    "en" | "ja" | "zh" | "cs" | "fr" | "sq" | "pt" | "fr-ca" | "hr",
+    string
+  > = {
+    en: "🇺🇸",
+    ja: "🇯🇵",
+    zh: "🇨🇳",
+    cs: "🇨🇿",
+    fr: "🇫🇷",
+    sq: "🇦🇱",
+    pt: "🇧🇷",
+    "fr-ca": "🇨🇦",
+    hr: "🇭🇷",
+  };
+  const locales: Array<
+    "en" | "ja" | "zh" | "cs" | "fr" | "sq" | "pt" | "fr-ca" | "hr"
+  > = ["en", "ja", "zh", "cs", "fr", "sq", "pt", "fr-ca", "hr"];
 
   const menuRef = useRef<HTMLDivElement>(null);
 

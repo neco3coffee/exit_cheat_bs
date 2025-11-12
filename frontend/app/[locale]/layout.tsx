@@ -96,7 +96,7 @@ export async function generateMetadata({
   };
 }
 
-const locales = ["en", "ja"];
+const locales = ["en", "ja", "zh", "cs", "fr", "sq", "pt", "fr-ca", "hr"];
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({
