@@ -21,7 +21,11 @@ async function getStats() {
     return await res.json();
   } catch (error) {
     console.error("Error fetching stats:", error);
-    return { totalReportsCount: 0, totalPlayersCount: 0 };
+    return {
+      totalReportsCount: 0,
+      totalPlayersCount: 0,
+      totalSessionsCount: 0,
+    };
   }
 }
 
@@ -184,8 +188,12 @@ export default async function LandingPage() {
             <p className={styles.statValue}>{stats.totalReportsCount}件</p>
           </div>
           <div className={styles.statCard}>
-            <p className={styles.statLabel}>総ユーザー数</p>
+            <p className={styles.statLabel}>総プレイヤー数</p>
             <p className={styles.statValue}>{stats.totalPlayersCount}人</p>
+          </div>
+          <div className={styles.statCard}>
+            <p className={styles.statLabel}>現在ログイン中のプレイヤー数</p>
+            <p className={styles.statValue}>{stats.totalSessionsCount}人</p>
           </div>
         </div>
         <div className={styles.socialLinks}>
@@ -197,15 +205,14 @@ export default async function LandingPage() {
           >
             X (Twitter)
           </a>
-          <button
-            type="button"
+          <a
+            href="https://discord.gg/rUfH4bAt"
+            target="_blank"
+            rel="noopener noreferrer"
             className={styles.socialButton}
-            disabled
-            aria-label="Discord (Coming Soon)"
-            title="Coming Soon"
           >
-            Discord (Coming Soon)
-          </button>
+            Discord
+          </a>
         </div>
       </section>
 
