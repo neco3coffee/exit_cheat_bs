@@ -73,7 +73,8 @@ jobs:
           puts ActiveRecord::Base.connection.tables.select { |t| t.include?('solid_queue') }
         "
     - name: Install dependencies
-      run: npm i --force
+      run: npm ci --force
+      working-directory: frontend
     - name: Debug services
       run: |
         echo "=== Docker services ==="
