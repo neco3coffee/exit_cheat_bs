@@ -624,7 +624,7 @@ const Content = ({
   if (id === "step-4") {
     return (
       <Stepper.Panel className="h-[400px] content-center p-5! flex flex-col items-center justify-center">
-        <p className="text-xl font-bold text-center">
+        <p className="text-xl font-bold text-center whitespace-pre-wrap">
           {t("reportCompleteDescription")}
         </p>
       </Stepper.Panel>

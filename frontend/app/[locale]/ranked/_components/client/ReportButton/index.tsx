@@ -52,6 +52,8 @@ export default function ReportButton({
           } catch (error) {
             console.error("Error creating report:", error);
             toast.error(t("failedCreateReport"));
+          } finally {
+            setIsLoading(false);
           }
         }
         createReport();
