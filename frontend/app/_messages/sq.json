@@ -1,0 +1,415 @@
+{
+  "home": {
+    "placeholder": "Emri i lojtarit",
+    "linkText": "Ballina",
+    "operator": "Operator"
+  },
+  "ranked": {
+    "login": "Hyr",
+    "unauthenticated": "You need to be logged in to access this page",
+    "error": "Ndodhi një gabim. Ju lutemi provoni përsëri më vonë.",
+    "tabs": {
+      "review": "Review",
+      "battleLog": "Battle Log",
+      "report": "Report"
+    },
+    "review": {
+      "noReport": "No reports waiting for review.",
+      "onlyModerators": "Only moderator can review, approve, reject reports!"
+    },
+    "noBattleLog": "No recent ranked battle log available.",
+    "noReport": "No reports available.",
+    "created": "Waiting for video upload",
+    "signed_url_generated": "Waiting for video upload",
+    "info_and_video_updated": "AI checking",
+    "video_optimized": "Waiting for review",
+    "waiting_review": "Waiting for review",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "replay": "Replay",
+    "reject": "Serious Play",
+    "approve": "Griefing / Feeding / Trolling",
+    "defeat": "Humbje",
+    "victory": "Fitore",
+    "draw": "Barazim",
+    "ongoing": "Ongoing",
+    "report": "Raporto",
+    "reported": "Reported",
+    "reportPlayer": "Report {name}?",
+    "reportType": {
+      "badRandom": "BAD RANDOM",
+      "griefPlay": "GRIEF PLAY",
+      "cheating": "CHEATING"
+    },
+    "reportReason": {
+      "badRandom": "No aim, no skill, no coordination",
+      "griefPlay": "Standing still, not attacking, team sabotage or giving up",
+      "cheating": "Using hacks, bots, exploits, or takedown trading"
+    },
+    "pleaseUploadVideo": "Please Upload Battle Replay Video to report this player",
+    "successUploadVideo": "Successfully uploaded video. You can now report this player.",
+    "reportReasonText": "Report Reason",
+    "reportReasonPlaceholder": "Please briefly describe the situation (optional)",
+    "reportButton": "Report Player",
+    "cancelReportButton": "Cancel",
+    "mainVideoDescription": "Recently Reported Player",
+    "failedReport": "Failed to report the player",
+    "failedGenerateSignedUrl": "Failed to generate signed URL",
+    "failedUploadVideo": "Failed to upload video",
+    "successReport": "Player reported, thanks!",
+    "reportIdMissing": "Report ID is missing.",
+    "reportRejected": "Report rejected successfully.",
+    "failedReject": "Failed to reject the report.",
+    "errorReject": "An error occurred while rejecting the report.",
+    "reportApproved": "Report approved successfully.",
+    "failedApprove": "Failed to approve the report.",
+    "errorApprove": "An error occurred while approving the report.",
+    "failedCreateReport": "Failed to create report.",
+    "successCreateReport": "Report created successfully.",
+    "noRecentReport": "No recently reported players.",
+    "selectPlayer": "Player",
+    "selectReportType": "Reason",
+    "replayVideo": "Replay",
+    "reportComplete": "Complete",
+    "reportCompleteDescription": "Report submitted🎉.\n A moderator will review it shortly🧑‍⚖️."
+  },
+  "reportDetail": {
+    "aiCheck": "AI Checking",
+    "waitingReview": "Waiting Review",
+    "reviewed": "Reviewed",
+    "videoDescription": "Reported Player's Replay Video"
+  },
+  "account": {
+    "checkLogin": "Confirming your login...",
+    "login": "Login",
+    "switchAccountDescription": "Please switch your profile icon to this one",
+    "switchAccount": "Tap this button after I’ve Changed My Icon",
+    "checkIconChange": "Confirming your icon change...",
+    "checkIconChangeDescription": "This may take up to 90 seconds.",
+    "loginFailed": "Login failed. Please try again.",
+    "retry": "Retry",
+    "loginSuccess": "You’re logged in!",
+    "autoReload": "This page will automatically refresh in 5 seconds.",
+    "loginStatus": "Currently logged in as",
+    "logout": "Logout"
+  },
+  "players": {
+    "seasonHigh": "SEASON HIGH",
+    "allTimeHigh": "ALL TIME HIGH",
+    "3vs3Victories": "3VS3 VICTORIES",
+    "victories": "VICTORIES",
+    "notInClub": "Not in a Club",
+    "battleLog": "BATTLE LOG",
+    "defeat": "Defeat",
+    "victory": "Victory",
+    "draw": "Draw",
+    "ongoing": "Ongoing",
+    "rank": "RANK {rank}",
+    "challengeCleared": "CHALLENGE: {level} CLEARED!",
+    "Normal": "NORMAL",
+    "Hard": "HARD",
+    "Expert": "EXPERT",
+    "Master": "MASTER",
+    "Insane": "INSANE",
+    "Impossible": "IMPOSSIBLE",
+    "undefined": "UNDEFINED BATTLE TYPE"
+  },
+  "termsOfService": {
+    "title": "Kushtet e shërbimit",
+    "linkText": "Kushtet e shërbimit",
+    "effectiveDate": "Effective Date: November 1, 2025",
+    "lastUpdated": "Last Updated: November 1, 2025",
+    "intro": "These Terms of Service (hereinafter referred to as \"these Terms\") set forth the conditions for the use of SafeBrawl (hereinafter referred to as \"the Service\"). All users of the Service (hereinafter referred to as \"Users\") shall use the Service in accordance with these Terms.",
+    "article1": {
+      "title": "Article 1 (Agreement to and Scope of Application of these Terms)",
+      "section1": "1. These Terms shall apply to all relationships between Users and the developer of the Service (hereinafter referred to as \"the Developer\") regarding the use of the Service. The Service includes all websites, application software, and services incidental thereto provided by the Developer.",
+      "section2": "2. By using the Service, Users shall be deemed to have agreed to all the contents of these Terms.",
+      "section3": "3. The rules regarding the use of the Service posted by the Developer on the Service shall constitute a part of these Terms.",
+      "section4": "4. In the event of any discrepancy between the contents of these Terms and the rules in the preceding paragraph or other descriptions of the Service outside of these Terms, the provisions of these Terms shall prevail.",
+      "section5": "5. Even if these Terms are provided in a language other than Japanese, the Japanese version of these Terms shall apply as the authentic text. The translated version is provided for reference only."
+    },
+    "article2": {
+      "title": "Article 2 (Account Registration)",
+      "section1": "1. Account registration may be required to use some features of the Service. Account registration is not mandatory.",
+      "section2": "2. Those who wish to register an account (hereinafter referred to as \"Registration Applicants\") may apply for account registration to the Developer by agreeing to these Terms and providing certain information determined by the Developer in the manner determined by the Developer.",
+      "section3": "3. The Developer may refuse to approve an application for account registration if it determines that the Registration Applicant has any of the following reasons, and shall have no obligation to disclose the reasons for such refusal:",
+      "section3a": "(1) If all or part of the registration information provided to the Developer is false, incorrect, or incomplete",
+      "section3b": "(2) If the application is from a person who has violated these Terms in the past",
+      "section3c": "(3) If the Developer otherwise determines that the account registration is inappropriate",
+      "section4": "4. Users shall appropriately manage their username and password for the Service at their own responsibility.",
+      "section5": "5. Users may not, under any circumstances, transfer, lend, or share their username and password with a third party. The Developer shall deem that the use of a username and password combination that matches the registered information is by the User who registered the username.",
+      "section6": "6. The Developer shall not be liable for any damage caused by the use of a username and password by a third party, except in cases where the Developer has intent or gross negligence.",
+      "section7": "7. Users may delete their accounts at any time by following the procedures determined by the Developer."
+    },
+    "article3": {
+      "title": "Article 3 (Prohibited Acts)",
+      "intro": "Users shall not engage in any of the following acts or acts that the Developer determines to fall under any of the following when using the Service:",
+      "item1": "1. Acts that violate laws or public order and morals",
+      "item2": "2. Acts related to criminal activities",
+      "item3": "3. Acts that destroy or interfere with the functions of the Service's servers or networks",
+      "item4": "4. Acts that may interfere with the operation of the Service",
+      "item5": "5. Acts of unauthorized access or attempts to do so",
+      "item6": "6. Acts of collecting or accumulating personal information about other Users",
+      "item7": "7. Acts of using the Service for illegal purposes",
+      "item8": "8. Acts that cause disadvantage, damage, or discomfort to other Users of the Service or other third parties",
+      "item9": "9. Acts of impersonating other Users",
+      "item10": "10. Advertising, publicity, solicitation, or business activities on the Service without the Developer's permission",
+      "item11": "11. Acts of commercially using the Service's content (as defined in the next article) beyond the scope of personal use without the Developer's prior permission (including but not limited to reproduction, sale, and publication)",
+      "item12": "12. Acts of directly or indirectly providing benefits to antisocial forces in connection with the Service",
+      "item13": "13. Acts that infringe upon the intellectual property rights, portrait rights, privacy, honor, or other rights or interests of the Service or third parties",
+      "item14": "14. Acts of posting or transmitting expressions that contain excessively violent expressions, explicit sexual expressions, expressions that lead to discrimination based on race, nationality, creed, gender, social status, family origin, etc., expressions that induce or encourage suicide, self-harm, or drug abuse, or other antisocial content that causes discomfort to others (if the Service has a posting function)",
+      "item15": "15. Other acts that the Developer deems inappropriate"
+    },
+    "article4": {
+      "title": "Article 4 (Intellectual Property Rights)",
+      "section1": "1. All copyrights and other intellectual property rights concerning the Service and all information related to the Service belong to the Developer or rights holders who have permitted the Developer to use them.",
+      "section2": "2. Users may not use information or content provided through the Service (including but not limited to game statistics, images, text, design, and programs; hereinafter referred to as \"the Content\") beyond the scope of private use permitted by copyright law, including reproduction, adaptation, public transmission, or any other form of use."
+    },
+    "article5": {
+      "title": "Article 5 (Use of External Services)",
+      "section1": "1. The Service uses one or more external APIs provided by third parties (hereinafter collectively referred to as \"External APIs\"), including the Brawl Stars API provided by Supercell, for the purpose of providing information.",
+      "section2": "2. Users shall comply with the terms of service and other conditions (hereinafter referred to as \"External API Terms\") established by the providers of each External API (hereinafter collectively referred to as \"API Providers\") regarding the use of External APIs. In the event of any conflict between these Terms and the External API Terms, the External API Terms shall prevail with respect to the use of External APIs.",
+      "section3": "3. All or part of the Service may become unavailable due to changes in the specifications of External APIs, suspension of provision, or other circumstances of the API Providers. The Developer shall not be liable for any damage caused to Users as a result."
+    },
+    "article6": {
+      "title": "Article 6 (Suspension or Interruption of Service Provision)",
+      "section1": "1. The Developer may suspend or interrupt the provision of all or part of the Service without prior notice to Users if it determines that any of the following reasons exist:",
+      "section1a": "(1) When performing maintenance or updates to the computer system related to the Service",
+      "section1b": "(2) When provision of the Service becomes difficult due to force majeure such as earthquakes, lightning, fires, power outages, or natural disasters",
+      "section1c": "(3) When computers or communication lines, etc. stop due to accidents",
+      "section1d": "(4) When the Developer otherwise determines that provision of the Service is difficult",
+      "section2": "2. The Developer shall not be liable for any disadvantage or damage suffered by Users or third parties due to the suspension or interruption of the Service, except in cases where the Developer has intent or gross negligence."
+    },
+    "article7": {
+      "title": "Article 7 (Restriction of Use and Account Deletion)",
+      "section1": "1. The Developer may, without prior notice, restrict the use of all or part of the Service for Users or delete their account registration if the User falls under any of the following:",
+      "section1a": "(1) If the User violates any provision of these Terms",
+      "section1b": "(2) If it is found that there is false information in the registration information",
+      "section1c": "(3) If the Developer otherwise determines that the use of the Service is inappropriate",
+      "section2": "2. The Developer shall not be liable for any damage caused to Users by actions taken by the Developer under this Article."
+    },
+    "article8": {
+      "title": "Article 8 (Disclaimer and Limitation of Liability)",
+      "section1": "1. The Service is an unofficial tool that provides game records and statistical information, and has no relationship whatsoever with API Providers or game developers/operators.",
+      "section2": "2. The Developer does not warrant that the Service will meet Users' specific purposes, have expected functions, commercial value, accuracy, or usefulness, that Users' use of the Service will comply with laws or industry group internal rules applicable to Users, or that defects will not occur.",
+      "section3": "3. The Developer does not explicitly or implicitly guarantee that any information or content on the Service is free from defects in safety, reliability, accuracy, completeness, effectiveness, suitability for a specific purpose, security, errors or bugs, or infringement of rights.",
+      "section4": "4. Users shall use the Service at their own judgment and responsibility, and the Developer shall not be liable for any damage (including all disadvantages such as mental distress or other monetary loss) caused to Users due to the use of the Service, except in cases where the Developer has intent or gross negligence."
+    },
+    "article9": {
+      "title": "Article 9 (Changes, Additions, or Discontinuation of Service Content)",
+      "section1": "1. The Developer may change, add, or discontinue the content of the Service at any time without notice to Users.",
+      "section2": "2. The Developer shall not be liable for any damage caused to Users due to changes in the Service content."
+    },
+    "article10": {
+      "title": "Article 10 (Changes to the Terms of Service)",
+      "section1": "1. The Developer may change these Terms at any time without obtaining individual consent from Users if it deems it necessary.",
+      "section2": "2. The revised Terms shall take effect from the time they are displayed on the Service, unless the Developer specifies otherwise.",
+      "section3": "3. If Users use the Service after these Terms are changed, Users shall be deemed to have agreed to the revised Terms. If you do not agree with the changes, please refrain from using the Service. The Developer will strive to provide advance notice for important changes."
+    },
+    "article11": {
+      "title": "Article 11 (Handling of Personal Information)",
+      "content": "The Developer shall appropriately handle Users' personal information obtained through the use of the Service in accordance with the separately established \"Privacy Policy.\" Users must review and agree to the Privacy Policy before using the Service."
+    },
+    "article12": {
+      "title": "Article 12 (Prohibition of Assignment of Rights and Obligations)",
+      "content": "Users may not assign their position under the usage contract or rights or obligations under these Terms to a third party or provide them as security without the Developer's prior written consent."
+    },
+    "article13": {
+      "title": "Article 13 (Severability)",
+      "content": "Even if any provision of these Terms or any part thereof is determined to be invalid or unenforceable under the Consumer Contract Act or other laws and regulations, the remaining provisions of these Terms and the remaining parts of provisions determined to be partially invalid or unenforceable shall continue to be fully effective."
+    },
+    "article14": {
+      "title": "Article 14 (Governing Law and Jurisdiction)",
+      "section1": "1. These Terms shall be governed by and construed in accordance with the laws of Japan.",
+      "section2": "2. In the event of any dispute arising in connection with the Service, the district court or summary court having jurisdiction over the location of the Developer shall be the exclusive court of first instance."
+    }
+  },
+  "credits": {
+    "title": "Kreditet",
+    "linkText": "Kreditet",
+    "intro": "SafeBrawl is powered by the following technologies and services.",
+    "services": {
+      "frontend": "Next.js, React, TypeScript, Tailwind CSS, Radix UI",
+      "backend": "Ruby on Rails 8 and PostgreSQL",
+      "infrastructure": "AWS (Lightsail, S3, CloudFront, Route53)",
+      "tools": "Docker, GitHub Actions, SolidQueue",
+      "apiPrefix": "Official ",
+      "apiAnd": " and ",
+      "community": "And supported by many open source communities."
+    }
+  },
+  "privacyPolicy": {
+    "title": "Politika e privatësisë",
+    "linkText": "Politika e privatësisë",
+    "effectiveDate": "Effective Date: November 1, 2025",
+    "lastUpdated": "Last Updated: November 1, 2025",
+    "intro": "The developer of SafeBrawl (hereinafter referred to as \"the Service\") (hereinafter referred to as \"the Developer\") establishes this Privacy Policy (hereinafter referred to as \"this Policy\") regarding the handling of information of users of the Service. This Policy explains what information the Developer collects, how it is used and shared, and how users can manage their information.",
+    "article1": {
+      "title": "Article 1 (Information We Collect)",
+      "section1": "In providing the Service, the Developer may collect the following information:",
+      "section1a": "1. Information provided by users",
+      "section2": "• Information provided during account registration (optional): Player tags and other information determined by the Developer.",
+      "section2a": "2. Information automatically collected when using the Service",
+      "section2b": "• Cookies and similar technologies: The Service uses cookies to improve convenience, manage sessions (such as maintaining login status), and understand access status.",
+      "section2b1": "• Access logs: When users use the Service, the following information is automatically generated and recorded as access logs:",
+      "section2b2": "• IP address",
+      "section2b3": "• User agent information (browser type and version, operating system type and version, etc.)",
+      "section2b4": "• Request date and time",
+      "section2b5": "• URL of accessed pages and resources",
+      "section2b6": "• Referrer information",
+      "section2c": "• Device information: Information such as the type of device used by users may be collected for analyzing Service usage."
+    },
+    "article2": {
+      "title": "Article 2 (Purpose of Using Information)",
+      "intro": "The Developer uses the collected information for the following purposes:",
+      "item1": "1. To provide, maintain, protect, and improve the Service (including account authentication, battle record display, and information provision)",
+      "item2": "2. To respond to inquiries from users (including identity verification)",
+      "item3": "3. To analyze Service usage, improve the Service, and develop new services",
+      "item4": "4. To prevent and respond to acts that violate the Terms of Service or use the Service for illegal or improper purposes",
+      "item5": "5. To allow users to view their own registration information",
+      "item6": "6. To deliver advertisements tailored to users' interests",
+      "item7": "7. To provide necessary communications such as important notices regarding the Service",
+      "item8": "8. For purposes incidental to the above purposes"
+    },
+    "article3": {
+      "title": "Article 3 (Provision of Information to Third Parties)",
+      "intro": "The Developer will not provide personal information (as defined in Article 2, Paragraph 1 of the Act on the Protection of Personal Information; the same shall apply hereinafter) to third parties without prior consent from users, except in the following cases. However, this excludes cases permitted by the Personal Information Protection Act and other laws:",
+      "item1": "1. When based on laws and regulations",
+      "item2": "2. When it is necessary for the protection of the life, body, or property of a person and it is difficult to obtain the consent of the person",
+      "item3": "3. When it is particularly necessary to improve public health or promote the sound growth of children and it is difficult to obtain the consent of the person",
+      "item4": "4. When it is necessary to cooperate with a national agency, local government, or a person entrusted by them in performing affairs prescribed by laws and regulations, and obtaining the consent of the person may interfere with the performance of such affairs"
+    },
+    "article4": {
+      "title": "Article 4 (Use of Access Analysis Tools)",
+      "section1": "1. The Service uses \"Google Analytics\" provided by Google Inc. to understand Service usage and improve the Service.",
+      "section2": "2. Google Analytics uses cookies to collect user traffic data. This traffic data is collected anonymously and does not identify individuals.",
+      "section3": "3. Users can refuse this information collection by disabling cookies in their browser settings. However, some features of the Service may not be available in that case.",
+      "section4Prefix": "4. For details on Google Analytics terms, please see",
+      "section4Link1": "here",
+      "section4Middle": ", and for details on Google's privacy policy, please see",
+      "section4Link2": "here",
+      "section4Suffix": "."
+    },
+    "article5": {
+      "title": "Article 5 (Advertising Distribution)",
+      "section1": "1. The Service uses third-party advertising services (such as Google AdSense).",
+      "section2": "2. Such advertising distributors may use information (cookies) about access to the Service and other sites to display advertisements for products and services according to users' interests. This does not include names, addresses, email addresses, or phone numbers.",
+      "section3Prefix": "3. Users can disable personalized advertising from",
+      "section3Link1": "Google Ad Settings",
+      "section3Middle": ". You can also visit",
+      "section3Link2": "www.aboutads.info",
+      "section3Suffix": " to disable cookies used for personalized advertising by third-party distributors.",
+      "section4": "4. Advertising opt-out using advertising identifiers can be done from the OS settings of your device. Please check the official information for each OS for setting methods."
+    },
+    "article6": {
+      "title": "Article 6 (Joint Use of Information)",
+      "content": "At present, the Developer does not jointly use collected personal information with specific parties. If joint use is to be conducted in the future, the items of information to be jointly used, the scope of joint users, the purpose of use, and the person responsible for management will be notified in advance or published in this Policy, etc."
+    },
+    "article7": {
+      "title": "Article 7 (Security Management Measures for Information)",
+      "content": "The Developer shall take necessary and appropriate measures for the security management of the information handled, including preventing leakage, loss, or damage of information. Specifically, measures such as unauthorized access prevention and access control will be implemented."
+    },
+    "article8": {
+      "title": "Article 8 (Cookie Management)",
+      "section1": "1. Most browsers are set to accept cookies by default. Users can disable cookies or display warnings when cookies are sent by changing browser settings.",
+      "section2": "2. Please note that if cookies are disabled, some features of the Service may not be available.",
+      "section3": "3. For information on how to change cookie settings, please refer to the official support site of each browser."
+    },
+    "article9": {
+      "title": "Article 9 (Information Retention Period)",
+      "content": "The Developer will retain collected information for an appropriate period within the scope necessary to achieve the purpose of use and in accordance with relevant laws and regulations."
+    },
+    "article10": {
+      "title": "Article 10 (User Rights: Disclosure, Correction, Deletion, Suspension of Use, etc. of Personal Information)",
+      "section1": "1. Users may request disclosure, correction, addition, deletion, suspension of use, or erasure (hereinafter referred to as \"disclosure, etc.\") of their personal information held by the Developer in accordance with the Personal Information Protection Act.",
+      "section2": "2. Requests for disclosure, etc. should be made to the contact point specified in Article 12. After confirming that the request is from the user, the Developer will respond without delay in accordance with laws and regulations.",
+      "section3": "3. Registered account users can view and correct their registration information from the settings screen within the Service. Account deletion can also be done from within the Service.",
+      "section4": "4. Please note that a fee of up to 1,000 yen per case may be charged for disclosure of personal information."
+    },
+    "article11": {
+      "title": "Article 11 (Changes to the Privacy Policy)",
+      "section1": "1. The Developer may change the contents of this Policy as necessary due to amendments to laws and regulations, changes in business content, user requests, etc.",
+      "section2": "2. The revised Policy shall take effect when posted on the Service. However, if user consent is required by law for changes to the content, the Developer shall obtain user consent in a manner determined by the Developer.",
+      "section3": "3. The Developer will strive to clearly announce important changes to this Policy, including the content of changes and the effective date."
+    },
+    "article12": {
+      "title": "Article 12 (Contact)",
+      "section1": "For comments, questions, or other inquiries regarding the handling of user information related to this Policy, please contact the following:",
+      "section2": "• Email: neco3coffee+brawl@gmail.com"
+    }
+  },
+  "faq": {
+    "title": "Pyetje të shpeshta",
+    "items": {
+      "whatIsSafeBrawl": {
+        "question": "What is SafeBrawl?",
+        "answer": "SafeBrawl is an information viewing and ranked battle support tool for Brawl Stars players. By searching with a player name and current rank, you can find out if that player has engaged in griefing or feeding behavior. If the player has engaged in griefing or feeding, you can avoid them by disconnecting from the match at the pick screen. Users can report players from recent battle history through this site (login required). You can view a player's past name change history, recent matches (25 matches), current ranked battle rank, available Power 11 characters, and match-by-match performance."
+      },
+      "isFree": {
+        "question": "Is it free to use?",
+        "answer": "Yes, all basic features are available for free."
+      },
+      "mobileSupport": {
+        "question": "Can I use it on mobile?",
+        "answer": "Yes. It works on browsers such as Safari and Chrome. Accessible on iPhone and Android."
+      },
+      "cannotSearchByName": {
+        "question": "What if I can't search by player name?",
+        "answer": "The name may have been changed. Use the \"Old Name Search\" function (press the clock icon on the left to enable it in blue) to find matches with past names. Tag search is also recommended (example: #ABCD123)."
+      },
+      "updateFrequency": {
+        "question": "How often is data updated?",
+        "answer": "Rank and battle records are automatically updated every few hours. If the latest data is not reflected, cache may remain."
+      },
+      "wrongNameDisplayed": {
+        "question": "The name is displayed incorrectly",
+        "answer": "We refer to the latest data from the official Brawl Stars API. Please wait a while and try reloading."
+      },
+      "reportFeature": {
+        "question": "What is the \"report\" feature?",
+        "answer": "It's a mechanism for uploading videos of suspected cheating or \"match-fixing\" for moderator review. Once approved, they are shared on SafeBrawl."
+      },
+      "appealReport": {
+        "question": "Can I appeal if I have been reported?",
+        "answer": "Yes, you can. Reported players can log in, open the report tab, select the report they want to appeal, and submit an appeal by entering the reason for it."
+      },
+      "reportReviewTime": {
+        "question": "How long does it take to review a report?",
+        "answer": "Reviews are usually completed within a few hours to a few days. However, it may take longer if there are a large number of reports."
+      },
+      "howLongDataStored": {
+        "question": "How long are report data and videos stored?",
+        "answer": "Report data and videos are stored for 90 days from the date of the report. After that, they are scheduled to be automatically deleted. (This takes into account cases such as when a player reforms and stops engaging in unfair behavior, or when accounts are transferred between players.)"
+      },
+      "videoStorage": {
+        "question": "Where are videos stored?",
+        "answer": "Videos are securely stored in S3 (AWS), and only approved ones are published via CloudFront."
+      },
+      "videoNotDisplayed": {
+        "question": "I uploaded a video but it's not displayed",
+        "answer": "The status may be \"waiting for review\" or \"upload incomplete\". Please reload after a few minutes to check."
+      },
+      "dataSource": {
+        "question": "What is SafeBrawl's data source?",
+        "answer": "All player data uses the official Brawl Stars API (https://developer.brawlstars.com)."
+      },
+      "adsDisplayed": {
+        "question": "Are ads displayed?",
+        "answer": "Yes, we display some ads to cover site operating costs. They are placed in a way that does not detract from the gaming experience."
+      },
+      "deletePlayerData": {
+        "question": "Can I delete my player data?",
+        "answer": "Data on the Brawl Stars API cannot be deleted, but you can request deletion of specific reports or uploaded videos on SafeBrawl."
+      },
+      "contact": {
+        "question": "How do I contact you?",
+        "answer": "Please send a DM to @neco3desu on X (formerly Twitter)."
+      },
+      "siteNotLoading": {
+        "question": "The site won't load / An error occurs",
+        "answer": "Please try clearing your cache and reloading. If it still doesn't work, please report the bug."
+      }
+    },
+    "linkText": "Pyetje të shpeshta"
+  }
+}
