@@ -27,7 +27,8 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install --force
+        run: npm ci --force
+        working-directory: frontend
 
       - name: Run biome check
         run: npm run lint
