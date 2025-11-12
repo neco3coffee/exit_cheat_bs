@@ -68,7 +68,7 @@ export default async function ReportedBattleLogSoloRanked({
   const starPlayerTag = battleLog?.battle?.starPlayer?.tag;
   const mode =
     battleLog?.event?.mode !== "unknown"
-      ? battleLog?.event?.mode
+      ? battleLog?.event.mode
       : classifyModeByMapName(battleLog?.event?.map);
   const mapId = battleLog?.event?.id;
   const mythic1 = 12; // diamond1 = 9,mythic1 = 12, legendary1 = 15, master1 = 18, pro = 21
