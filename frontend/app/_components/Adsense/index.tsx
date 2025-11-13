@@ -22,7 +22,7 @@ export default function Adsense() {
   // biome-ignore-start lint/correctness/useExhaustiveDependencies: xxx
   useEffect(() => {
     // AdSenseスクリプトが読み込まれているか確認してからpush
-    if (window.adsbygoogle && Array.isArray(window.adsbygoogle)) {
+    if (window.adsbygoogle) {
       window.adsbygoogle.push({});
     }
   }, [pathname]);
