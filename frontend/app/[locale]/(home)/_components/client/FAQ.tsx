@@ -55,7 +55,9 @@ export default function FAQ() {
               padding: "8px",
             }}
           >
-            <AccordionTrigger style={{ color: "var(--white)" }}>
+            <AccordionTrigger
+              style={{ color: "var(--white)", textAlign: "left" }}
+            >
               {t(`items.${item}.question`)}
             </AccordionTrigger>
             <AccordionContent

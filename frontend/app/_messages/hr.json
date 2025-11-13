@@ -6,408 +6,408 @@
   },
   "ranked": {
     "login": "Prijava",
-    "unauthenticated": "You need to be logged in to access this page",
+    "unauthenticated": "Morate biti prijavljeni za pristup ovoj stranici",
     "error": "Došlo je do pogreške. Molimo pokušajte ponovno kasnije.",
     "tabs": {
-      "review": "Review",
-      "battleLog": "Battle Log",
-      "report": "Report"
+      "review": "Pregled",
+      "battleLog": "Zapis bitke",
+      "report": "Prijava"
     },
     "review": {
-      "noReport": "No reports waiting for review.",
-      "onlyModerators": "Only moderator can review, approve, reject reports!"
+      "noReport": "Nema prijava koje čekaju pregled.",
+      "onlyModerators": "Samo moderator može pregledati, odobriti ili odbiti prijave!"
     },
-    "noBattleLog": "No recent ranked battle log available.",
-    "noReport": "No reports available.",
-    "created": "Waiting for video upload",
-    "signed_url_generated": "Waiting for video upload",
-    "info_and_video_updated": "AI checking",
-    "video_optimized": "Waiting for review",
-    "waiting_review": "Waiting for review",
-    "approved": "Approved",
-    "rejected": "Rejected",
-    "replay": "Replay",
-    "reject": "Serious Play",
-    "approve": "Griefing / Feeding / Trolling",
+    "noBattleLog": "Nema nedavnih zapisa rangiranih bitki.",
+    "noReport": "Nema dostupnih prijava.",
+    "created": "Čeka se prijenos videa",
+    "signed_url_generated": "Čeka se prijenos videa",
+    "info_and_video_updated": "AI provjera",
+    "video_optimized": "Čeka se pregled",
+    "waiting_review": "Čeka se pregled",
+    "approved": "Odobreno",
+    "rejected": "Odbijeno",
+    "replay": "Ponovi",
+    "reject": "Ozbiljna igra",
+    "approve": "Namjerno ometanje / hranjenje / trolanje",
     "defeat": "Poraz",
     "victory": "Pobjeda",
     "draw": "Neriješeno",
-    "ongoing": "Ongoing",
+    "ongoing": "U tijeku",
     "report": "Prijavi",
-    "reported": "Reported",
-    "reportPlayer": "Report {name}?",
+    "reported": "Prijavljen",
+    "reportPlayer": "Prijaviti igrača {name}?",
     "reportType": {
-      "badRandom": "BAD RANDOM",
-      "griefPlay": "GRIEF PLAY",
-      "cheating": "CHEATING"
+      "badRandom": "LOŠ NASUMIČNI IGRAČ",
+      "griefPlay": "NAMJERNO OMETANJE",
+      "cheating": "VARANJE"
     },
     "reportReason": {
-      "badRandom": "No aim, no skill, no coordination",
-      "griefPlay": "Standing still, not attacking, team sabotage or giving up",
-      "cheating": "Using hacks, bots, exploits, or takedown trading"
+      "badRandom": "Bez cilja, bez vještine, bez koordinacije",
+      "griefPlay": "Stoji na mjestu, ne napada, sabotira tim ili odustaje",
+      "cheating": "Korištenje hakova, botova, iskorištavanje grešaka ili dogovoreno predavanje"
     },
-    "pleaseUploadVideo": "Please Upload Battle Replay Video to report this player",
-    "successUploadVideo": "Successfully uploaded video. You can now report this player.",
-    "reportReasonText": "Report Reason",
-    "reportReasonPlaceholder": "Please briefly describe the situation (optional)",
-    "reportButton": "Report Player",
-    "cancelReportButton": "Cancel",
-    "mainVideoDescription": "Recently Reported Player",
-    "failedReport": "Failed to report the player",
-    "failedGenerateSignedUrl": "Failed to generate signed URL",
-    "failedUploadVideo": "Failed to upload video",
-    "successReport": "Player reported, thanks!",
-    "reportIdMissing": "Report ID is missing.",
-    "reportRejected": "Report rejected successfully.",
-    "failedReject": "Failed to reject the report.",
-    "errorReject": "An error occurred while rejecting the report.",
-    "reportApproved": "Report approved successfully.",
-    "failedApprove": "Failed to approve the report.",
-    "errorApprove": "An error occurred while approving the report.",
-    "failedCreateReport": "Failed to create report.",
-    "successCreateReport": "Report created successfully.",
-    "noRecentReport": "No recently reported players.",
-    "selectPlayer": "Player",
-    "selectReportType": "Reason",
-    "replayVideo": "Replay",
-    "reportComplete": "Complete",
-    "reportCompleteDescription": "Report submitted🎉.\n A moderator will review it shortly🧑‍⚖️."
+    "pleaseUploadVideo": "Molimo prenesite video snimku bitke za prijavu ovog igrača",
+    "successUploadVideo": "Video je uspješno prenesen. Sada možete prijaviti ovog igrača.",
+    "reportReasonText": "Razlog prijave",
+    "reportReasonPlaceholder": "Molimo ukratko opišite situaciju (nije obavezno)",
+    "reportButton": "Prijavi igrača",
+    "cancelReportButton": "Odustani",
+    "mainVideoDescription": "Nedavno prijavljeni igrač",
+    "failedReport": "Prijava igrača nije uspjela",
+    "failedGenerateSignedUrl": "Nije uspjelo generiranje potpisanog URL-a",
+    "failedUploadVideo": "Prijenos videa nije uspio",
+    "successReport": "Igrač je prijavljen, hvala!",
+    "reportIdMissing": "Nedostaje ID prijave.",
+    "reportRejected": "Prijava je uspješno odbijena.",
+    "failedReject": "Odbijanje prijave nije uspjelo.",
+    "errorReject": "Došlo je do pogreške pri odbijanju prijave.",
+    "reportApproved": "Prijava je uspješno odobrena.",
+    "failedApprove": "Odobravanje prijave nije uspjelo.",
+    "errorApprove": "Došlo je do pogreške pri odobravanju prijave.",
+    "failedCreateReport": "Izrada prijave nije uspjela.",
+    "successCreateReport": "Prijava je uspješno izrađena.",
+    "noRecentReport": "Nema nedavno prijavljenih igrača.",
+    "selectPlayer": "Igrač",
+    "selectReportType": "Razlog",
+    "replayVideo": "Ponovi",
+    "reportComplete": "Završeno",
+    "reportCompleteDescription": "Prijava je poslana🎉.\n Moderator će je uskoro pregledati🧑‍⚖️."
   },
   "reportDetail": {
-    "aiCheck": "AI Checking",
-    "waitingReview": "Waiting Review",
-    "reviewed": "Reviewed",
-    "videoDescription": "Reported Player's Replay Video"
+    "aiCheck": "AI provjera",
+    "waitingReview": "Čeka se pregled",
+    "reviewed": "Pregledano",
+    "videoDescription": "Video snimka prijavljenog igrača"
   },
   "account": {
-    "checkLogin": "Confirming your login...",
-    "login": "Login",
-    "switchAccountDescription": "Please switch your profile icon to this one",
-    "switchAccount": "Tap this button after I’ve Changed My Icon",
-    "checkIconChange": "Confirming your icon change...",
-    "checkIconChangeDescription": "This may take up to 90 seconds.",
-    "loginFailed": "Login failed. Please try again.",
-    "retry": "Retry",
-    "loginSuccess": "You’re logged in!",
-    "autoReload": "This page will automatically refresh in 5 seconds.",
-    "loginStatus": "Currently logged in as",
-    "logout": "Logout"
+    "checkLogin": "Provjeravam vašu prijavu...",
+    "login": "Prijava",
+    "switchAccountDescription": "Molimo promijenite svoju profilnu ikonu na ovu",
+    "switchAccount": "Pritisnite ovaj gumb nakon što ste promijenili ikonu",
+    "checkIconChange": "Provjeravam promjenu ikone...",
+    "checkIconChangeDescription": "Ovo može potrajati do 90 sekundi.",
+    "loginFailed": "Prijava nije uspjela. Pokušajte ponovno.",
+    "retry": "Pokušaj ponovno",
+    "loginSuccess": "Uspješno ste prijavljeni!",
+    "autoReload": "Stranica će se automatski osvježiti za 5 sekundi.",
+    "loginStatus": "Trenutno ste prijavljeni kao",
+    "logout": "Odjava"
   },
   "players": {
-    "seasonHigh": "SEASON HIGH",
-    "allTimeHigh": "ALL TIME HIGH",
-    "3vs3Victories": "3VS3 VICTORIES",
-    "victories": "VICTORIES",
-    "notInClub": "Not in a Club",
-    "battleLog": "BATTLE LOG",
-    "defeat": "Defeat",
-    "victory": "Victory",
-    "draw": "Draw",
-    "ongoing": "Ongoing",
-    "rank": "RANK {rank}",
-    "challengeCleared": "CHALLENGE: {level} CLEARED!",
-    "Normal": "NORMAL",
-    "Hard": "HARD",
-    "Expert": "EXPERT",
-    "Master": "MASTER",
-    "Insane": "INSANE",
-    "Impossible": "IMPOSSIBLE",
-    "undefined": "UNDEFINED BATTLE TYPE"
+    "seasonHigh": "SEZONSKI MAKSIMUM",
+    "allTimeHigh": "SVEVREMENSKI MAKSIMUM",
+    "3vs3Victories": "POBJEDE 3VS3",
+    "victories": "POBJEDE",
+    "notInClub": "Nije u klubu",
+    "battleLog": "ZAPIS BITKE",
+    "defeat": "Poraz",
+    "victory": "Pobjeda",
+    "draw": "Neriješeno",
+    "ongoing": "U tijeku",
+    "rank": "RANG {rank}",
+    "challengeCleared": "IZAZOV: {level} RIJEŠEN!",
+    "Normal": "NORMALNO",
+    "Hard": "TEŠKO",
+    "Expert": "STRUČNJAK",
+    "Master": "MAJSTOR",
+    "Insane": "LUĐAK",
+    "Impossible": "NEMOGUĆE",
+    "undefined": "NEDEFINIRANA VRSTA BITKE"
   },
   "termsOfService": {
     "title": "Uvjeti pružanja usluge",
     "linkText": "Uvjeti pružanja usluge",
-    "effectiveDate": "Effective Date: November 1, 2025",
-    "lastUpdated": "Last Updated: November 1, 2025",
-    "intro": "These Terms of Service (hereinafter referred to as \"these Terms\") set forth the conditions for the use of SafeBrawl (hereinafter referred to as \"the Service\"). All users of the Service (hereinafter referred to as \"Users\") shall use the Service in accordance with these Terms.",
+    "effectiveDate": "Datum stupanja na snagu: 1. studenog 2025.",
+    "lastUpdated": "Zadnje ažuriranje: 1. studenog 2025.",
+    "intro": "Ovi Uvjeti pružanja usluge (u daljnjem tekstu: 'Uvjeti') određuju uvjete korištenja SafeBrawl-a (u daljnjem tekstu: 'Usluga'). Svi korisnici Usluge (u daljnjem tekstu: 'Korisnici') dužni su koristiti Uslugu u skladu s ovim Uvjetima.",
     "article1": {
-      "title": "Article 1 (Agreement to and Scope of Application of these Terms)",
-      "section1": "1. These Terms shall apply to all relationships between Users and the developer of the Service (hereinafter referred to as \"the Developer\") regarding the use of the Service. The Service includes all websites, application software, and services incidental thereto provided by the Developer.",
-      "section2": "2. By using the Service, Users shall be deemed to have agreed to all the contents of these Terms.",
-      "section3": "3. The rules regarding the use of the Service posted by the Developer on the Service shall constitute a part of these Terms.",
-      "section4": "4. In the event of any discrepancy between the contents of these Terms and the rules in the preceding paragraph or other descriptions of the Service outside of these Terms, the provisions of these Terms shall prevail.",
-      "section5": "5. Even if these Terms are provided in a language other than Japanese, the Japanese version of these Terms shall apply as the authentic text. The translated version is provided for reference only."
+      "title": "Članak 1 (Prihvaćanje i primjena ovih Uvjeta)",
+      "section1": "1. Ovi Uvjeti primjenjuju se na sve odnose između Korisnika i programera Usluge (u daljnjem tekstu: 'Programer') vezano uz korištenje Usluge. Usluga uključuje sve web stranice, aplikacijski softver i povezane usluge koje pruža Programer.",
+      "section2": "2. Korištenjem Usluge, Korisnici se smatraju da su prihvatili sve odredbe ovih Uvjeta.",
+      "section3": "3. Pravila korištenja Usluge koja Programer objavi na Usluzi čine dio ovih Uvjeta.",
+      "section4": "4. U slučaju neslaganja između sadržaja ovih Uvjeta i pravila iz prethodnog stavka ili drugih opisa Usluge izvan ovih Uvjeta, prednost imaju odredbe ovih Uvjeta.",
+      "section5": "5. Ako su ovi Uvjeti dostupni na jeziku koji nije japanski, japanska verzija Uvjeta smatra se izvornim tekstom. Prijevod je samo informativan."
     },
     "article2": {
-      "title": "Article 2 (Account Registration)",
-      "section1": "1. Account registration may be required to use some features of the Service. Account registration is not mandatory.",
-      "section2": "2. Those who wish to register an account (hereinafter referred to as \"Registration Applicants\") may apply for account registration to the Developer by agreeing to these Terms and providing certain information determined by the Developer in the manner determined by the Developer.",
-      "section3": "3. The Developer may refuse to approve an application for account registration if it determines that the Registration Applicant has any of the following reasons, and shall have no obligation to disclose the reasons for such refusal:",
-      "section3a": "(1) If all or part of the registration information provided to the Developer is false, incorrect, or incomplete",
-      "section3b": "(2) If the application is from a person who has violated these Terms in the past",
-      "section3c": "(3) If the Developer otherwise determines that the account registration is inappropriate",
-      "section4": "4. Users shall appropriately manage their username and password for the Service at their own responsibility.",
-      "section5": "5. Users may not, under any circumstances, transfer, lend, or share their username and password with a third party. The Developer shall deem that the use of a username and password combination that matches the registered information is by the User who registered the username.",
-      "section6": "6. The Developer shall not be liable for any damage caused by the use of a username and password by a third party, except in cases where the Developer has intent or gross negligence.",
-      "section7": "7. Users may delete their accounts at any time by following the procedures determined by the Developer."
+      "title": "Članak 2 (Registracija računa)",
+      "section1": "1. Registracija računa može biti potrebna za korištenje nekih funkcija Usluge. Registracija računa nije obavezna.",
+      "section2": "2. Osobe koje žele registrirati račun (u daljnjem tekstu: 'Podnositelji zahtjeva za registraciju') mogu podnijeti zahtjev Programeru prihvaćanjem ovih Uvjeta i davanjem određenih informacija na način koji odredi Programer.",
+      "section3": "3. Programer može odbiti odobriti zahtjev za registraciju računa ako utvrdi da Podnositelj zahtjeva ima neki od sljedećih razloga, bez obveze obrazloženja:",
+      "section3a": "(1) Ako su svi ili dio podataka za registraciju netočni, neispravni ili nepotpuni",
+      "section3b": "(2) Ako je zahtjev podnio netko tko je ranije prekršio ove Uvjete",
+      "section3c": "(3) Ako Programer na drugi način utvrdi da je registracija računa neprikladna",
+      "section4": "4. Korisnici su dužni odgovorno upravljati svojim korisničkim imenom i lozinkom za Uslugu.",
+      "section5": "5. Korisnici ne smiju, ni pod kojim uvjetima, prenijeti, posuditi ili dijeliti svoje korisničko ime i lozinku s trećom osobom. Programer smatra da je korištenje kombinacije korisničkog imena i lozinke koja odgovara registriranim podacima od strane korisnika koji je registrirao korisničko ime.",
+      "section6": "6. Programer ne odgovara za štetu nastalu korištenjem korisničkog imena i lozinke od strane treće osobe, osim u slučajevima namjere ili grube nepažnje Programera.",
+      "section7": "7. Korisnici mogu izbrisati svoj račun u bilo kojem trenutku prema postupku koji odredi Programer."
     },
     "article3": {
-      "title": "Article 3 (Prohibited Acts)",
-      "intro": "Users shall not engage in any of the following acts or acts that the Developer determines to fall under any of the following when using the Service:",
-      "item1": "1. Acts that violate laws or public order and morals",
-      "item2": "2. Acts related to criminal activities",
-      "item3": "3. Acts that destroy or interfere with the functions of the Service's servers or networks",
-      "item4": "4. Acts that may interfere with the operation of the Service",
-      "item5": "5. Acts of unauthorized access or attempts to do so",
-      "item6": "6. Acts of collecting or accumulating personal information about other Users",
-      "item7": "7. Acts of using the Service for illegal purposes",
-      "item8": "8. Acts that cause disadvantage, damage, or discomfort to other Users of the Service or other third parties",
-      "item9": "9. Acts of impersonating other Users",
-      "item10": "10. Advertising, publicity, solicitation, or business activities on the Service without the Developer's permission",
-      "item11": "11. Acts of commercially using the Service's content (as defined in the next article) beyond the scope of personal use without the Developer's prior permission (including but not limited to reproduction, sale, and publication)",
-      "item12": "12. Acts of directly or indirectly providing benefits to antisocial forces in connection with the Service",
-      "item13": "13. Acts that infringe upon the intellectual property rights, portrait rights, privacy, honor, or other rights or interests of the Service or third parties",
-      "item14": "14. Acts of posting or transmitting expressions that contain excessively violent expressions, explicit sexual expressions, expressions that lead to discrimination based on race, nationality, creed, gender, social status, family origin, etc., expressions that induce or encourage suicide, self-harm, or drug abuse, or other antisocial content that causes discomfort to others (if the Service has a posting function)",
-      "item15": "15. Other acts that the Developer deems inappropriate"
+      "title": "Članak 3 (Zabranjene radnje)",
+      "intro": "Korisnici ne smiju poduzimati sljedeće radnje niti radnje za koje Programer smatra da spadaju u sljedeće prilikom korištenja Usluge:",
+      "item1": "1. Radnje koje krše zakone ili javni red i moral",
+      "item2": "2. Radnje povezane s kriminalnim aktivnostima",
+      "item3": "3. Radnje koje uništavaju ili ometaju funkcije servera ili mreže Usluge",
+      "item4": "4. Radnje koje mogu ometati rad Usluge",
+      "item5": "5. Neovlašteni pristup ili pokušaji takvog pristupa",
+      "item6": "6. Prikupljanje ili akumulacija osobnih podataka drugih korisnika",
+      "item7": "7. Korištenje Usluge u nezakonite svrhe",
+      "item8": "8. Radnje koje uzrokuju štetu, neugodnosti ili nevolje drugim korisnicima Usluge ili trećim osobama",
+      "item9": "9. Lažno predstavljanje kao drugi korisnici",
+      "item10": "10. Oglašavanje, promocija, traženje ili poslovne aktivnosti na Usluzi bez dopuštenja Programera",
+      "item11": "11. Komercijalno korištenje sadržaja Usluge (kako je definirano u sljedećem članku) izvan okvira osobne upotrebe bez prethodnog dopuštenja Programera (uključujući, ali ne ograničavajući se na reprodukciju, prodaju i objavljivanje)",
+      "item12": "12. Izravno ili neizravno pružanje koristi antisocijalnim skupinama u vezi s Uslugom",
+      "item13": "13. Povreda prava intelektualnog vlasništva, prava na sliku, privatnosti, časti ili drugih prava ili interesa Usluge ili trećih osoba",
+      "item14": "14. Objavljivanje ili prijenos izraza koji sadrže pretjerano nasilne izraze, eksplicitne seksualne izraze, izraze koji dovode do diskriminacije na temelju rase, nacionalnosti, vjere, spola, društvenog statusa, obiteljskog podrijetla itd., izraze koji potiču ili ohrabruju samoubojstvo, samoozljeđivanje ili zlouporabu droga, ili drugi antisocijalni sadržaj koji uzrokuje neugodnosti drugima (ako Usluga ima funkciju objavljivanja)",
+      "item15": "15. Druge radnje koje Programer smatra neprikladnima"
     },
     "article4": {
-      "title": "Article 4 (Intellectual Property Rights)",
-      "section1": "1. All copyrights and other intellectual property rights concerning the Service and all information related to the Service belong to the Developer or rights holders who have permitted the Developer to use them.",
-      "section2": "2. Users may not use information or content provided through the Service (including but not limited to game statistics, images, text, design, and programs; hereinafter referred to as \"the Content\") beyond the scope of private use permitted by copyright law, including reproduction, adaptation, public transmission, or any other form of use."
+      "title": "Članak 4 (Prava intelektualnog vlasništva)",
+      "section1": "1. Sva autorska prava i druga prava intelektualnog vlasništva vezana uz Uslugu i sve informacije povezane s Uslugom pripadaju Programeru ili nositeljima prava koji su Programeru dali dopuštenje za korištenje.",
+      "section2": "2. Korisnici ne smiju koristiti informacije ili sadržaj pružen putem Usluge (uključujući, ali ne ograničavajući se na statistiku igre, slike, tekst, dizajn i programe; u daljnjem tekstu: 'Sadržaj') izvan okvira privatne upotrebe dopuštene zakonom o autorskim pravima, uključujući reprodukciju, prilagodbu, javno prenošenje ili bilo koji drugi oblik korištenja."
     },
     "article5": {
-      "title": "Article 5 (Use of External Services)",
-      "section1": "1. The Service uses one or more external APIs provided by third parties (hereinafter collectively referred to as \"External APIs\"), including the Brawl Stars API provided by Supercell, for the purpose of providing information.",
-      "section2": "2. Users shall comply with the terms of service and other conditions (hereinafter referred to as \"External API Terms\") established by the providers of each External API (hereinafter collectively referred to as \"API Providers\") regarding the use of External APIs. In the event of any conflict between these Terms and the External API Terms, the External API Terms shall prevail with respect to the use of External APIs.",
-      "section3": "3. All or part of the Service may become unavailable due to changes in the specifications of External APIs, suspension of provision, or other circumstances of the API Providers. The Developer shall not be liable for any damage caused to Users as a result."
+      "title": "Članak 5 (Korištenje vanjskih usluga)",
+      "section1": "1. Usluga koristi jedan ili više vanjskih API-ja koje pružaju treće strane (u daljnjem tekstu: 'Vanjski API-ji'), uključujući Brawl Stars API koji pruža Supercell, radi pružanja informacija.",
+      "section2": "2. Korisnici su dužni poštovati uvjete korištenja i druge uvjete (u daljnjem tekstu: 'Uvjeti vanjskog API-ja') koje su odredili pružatelji svakog vanjskog API-ja (u daljnjem tekstu: 'Pružatelji API-ja') u vezi s korištenjem vanjskih API-ja. U slučaju sukoba između ovih Uvjeta i Uvjeta vanjskog API-ja, Uvjeti vanjskog API-ja imaju prednost u vezi s korištenjem vanjskih API-ja.",
+      "section3": "3. Cijela ili dio Usluge može postati nedostupna zbog promjena u specifikacijama vanjskih API-ja, obustave pružanja ili drugih okolnosti Pružatelja API-ja. Programer ne odgovara za štetu nastalu korisnicima kao rezultat toga."
     },
     "article6": {
-      "title": "Article 6 (Suspension or Interruption of Service Provision)",
-      "section1": "1. The Developer may suspend or interrupt the provision of all or part of the Service without prior notice to Users if it determines that any of the following reasons exist:",
-      "section1a": "(1) When performing maintenance or updates to the computer system related to the Service",
-      "section1b": "(2) When provision of the Service becomes difficult due to force majeure such as earthquakes, lightning, fires, power outages, or natural disasters",
-      "section1c": "(3) When computers or communication lines, etc. stop due to accidents",
-      "section1d": "(4) When the Developer otherwise determines that provision of the Service is difficult",
-      "section2": "2. The Developer shall not be liable for any disadvantage or damage suffered by Users or third parties due to the suspension or interruption of the Service, except in cases where the Developer has intent or gross negligence."
+      "title": "Članak 6 (Obustava ili prekid pružanja usluge)",
+      "section1": "1. Programer može obustaviti ili prekinuti pružanje cijele ili dijela Usluge bez prethodne obavijesti korisnicima ako utvrdi da postoji neki od sljedećih razloga:",
+      "section1a": "(1) Prilikom održavanja ili ažuriranja računalnog sustava povezanog s Uslugom",
+      "section1b": "(2) Kada pružanje Usluge postane teško zbog više sile kao što su potresi, munje, požari, nestanci struje ili prirodne katastrofe",
+      "section1c": "(3) Kada računala ili komunikacijske linije prestanu raditi zbog nesreća",
+      "section1d": "(4) Kada Programer na drugi način utvrdi da je pružanje Usluge teško",
+      "section2": "2. Programer ne odgovara za bilo kakvu štetu ili neugodnosti koje pretrpe korisnici ili treće strane zbog obustave ili prekida Usluge, osim u slučajevima namjere ili grube nepažnje Programera."
     },
     "article7": {
-      "title": "Article 7 (Restriction of Use and Account Deletion)",
-      "section1": "1. The Developer may, without prior notice, restrict the use of all or part of the Service for Users or delete their account registration if the User falls under any of the following:",
-      "section1a": "(1) If the User violates any provision of these Terms",
-      "section1b": "(2) If it is found that there is false information in the registration information",
-      "section1c": "(3) If the Developer otherwise determines that the use of the Service is inappropriate",
-      "section2": "2. The Developer shall not be liable for any damage caused to Users by actions taken by the Developer under this Article."
+      "title": "Članak 7 (Ograničenje korištenja i brisanje računa)",
+      "section1": "1. Programer može, bez prethodne obavijesti, ograničiti korištenje cijele ili dijela Usluge za korisnike ili izbrisati njihovu registraciju računa ako korisnik spada pod neki od sljedećih slučajeva:",
+      "section1a": "(1) Ako korisnik prekrši bilo koju odredbu ovih Uvjeta",
+      "section1b": "(2) Ako se utvrdi da postoje netočni podaci u registraciji",
+      "section1c": "(3) Ako Programer na drugi način utvrdi da je korištenje Usluge neprikladno",
+      "section2": "2. Programer ne odgovara za štetu nastalu korisnicima zbog radnji poduzetih od strane Programera prema ovom članku."
     },
     "article8": {
-      "title": "Article 8 (Disclaimer and Limitation of Liability)",
-      "section1": "1. The Service is an unofficial tool that provides game records and statistical information, and has no relationship whatsoever with API Providers or game developers/operators.",
-      "section2": "2. The Developer does not warrant that the Service will meet Users' specific purposes, have expected functions, commercial value, accuracy, or usefulness, that Users' use of the Service will comply with laws or industry group internal rules applicable to Users, or that defects will not occur.",
-      "section3": "3. The Developer does not explicitly or implicitly guarantee that any information or content on the Service is free from defects in safety, reliability, accuracy, completeness, effectiveness, suitability for a specific purpose, security, errors or bugs, or infringement of rights.",
-      "section4": "4. Users shall use the Service at their own judgment and responsibility, and the Developer shall not be liable for any damage (including all disadvantages such as mental distress or other monetary loss) caused to Users due to the use of the Service, except in cases where the Developer has intent or gross negligence."
+      "title": "Članak 8 (Odricanje odgovornosti i ograničenje odgovornosti)",
+      "section1": "1. Usluga je neslužbeni alat koji pruža zapise o igri i statističke informacije te nema nikakvu vezu s pružateljima API-ja ili programerima/operatorima igre.",
+      "section2": "2. Programer ne jamči da će Usluga zadovoljiti posebne svrhe korisnika, imati očekivane funkcije, komercijalnu vrijednost, točnost ili korisnost, da će korištenje Usluge od strane korisnika biti u skladu sa zakonima ili internim pravilima industrijskih grupa primjenjivim na korisnike, niti da neće biti nedostataka.",
+      "section3": "3. Programer ne jamči izričito niti implicitno da su bilo koje informacije ili sadržaj na Usluzi bez nedostataka u sigurnosti, pouzdanosti, točnosti, potpunosti, učinkovitosti, prikladnosti za određenu svrhu, sigurnosti, pogrešaka ili bugova, ili povrede prava.",
+      "section4": "4. Korisnici koriste Uslugu na vlastitu procjenu i odgovornost, a Programer ne odgovara za bilo kakvu štetu (uključujući sve neugodnosti kao što su duševna bol ili drugi novčani gubitak) nastalu korisnicima zbog korištenja Usluge, osim u slučajevima namjere ili grube nepažnje Programera."
     },
     "article9": {
-      "title": "Article 9 (Changes, Additions, or Discontinuation of Service Content)",
-      "section1": "1. The Developer may change, add, or discontinue the content of the Service at any time without notice to Users.",
-      "section2": "2. The Developer shall not be liable for any damage caused to Users due to changes in the Service content."
+      "title": "Članak 9 (Promjene, dodaci ili prekid sadržaja usluge)",
+      "section1": "1. Programer može u bilo kojem trenutku promijeniti, dodati ili prekinuti sadržaj Usluge bez obavijesti korisnicima.",
+      "section2": "2. Programer ne odgovara za štetu nastalu korisnicima zbog promjena sadržaja Usluge."
     },
     "article10": {
-      "title": "Article 10 (Changes to the Terms of Service)",
-      "section1": "1. The Developer may change these Terms at any time without obtaining individual consent from Users if it deems it necessary.",
-      "section2": "2. The revised Terms shall take effect from the time they are displayed on the Service, unless the Developer specifies otherwise.",
-      "section3": "3. If Users use the Service after these Terms are changed, Users shall be deemed to have agreed to the revised Terms. If you do not agree with the changes, please refrain from using the Service. The Developer will strive to provide advance notice for important changes."
+      "title": "Članak 10 (Promjene uvjeta korištenja)",
+      "section1": "1. Programer može promijeniti ove Uvjete u bilo kojem trenutku bez dobivanja pojedinačne suglasnosti korisnika ako to smatra potrebnim.",
+      "section2": "2. Revidirani Uvjeti stupaju na snagu od trenutka kada se prikažu na Usluzi, osim ako Programer ne odredi drugačije.",
+      "section3": "3. Ako korisnici koriste Uslugu nakon promjene ovih Uvjeta, smatra se da su pristali na revidirane Uvjete. Ako se ne slažete s promjenama, molimo vas da ne koristite Uslugu. Programer će nastojati unaprijed obavijestiti o važnim promjenama."
     },
     "article11": {
-      "title": "Article 11 (Handling of Personal Information)",
-      "content": "The Developer shall appropriately handle Users' personal information obtained through the use of the Service in accordance with the separately established \"Privacy Policy.\" Users must review and agree to the Privacy Policy before using the Service."
+      "title": "Članak 11 (Rukovanje osobnim podacima)",
+      "content": "Programer će odgovarajuće rukovati osobnim podacima korisnika dobivenim korištenjem Usluge u skladu s zasebno utvrđenom 'Politikom privatnosti'. Korisnici moraju pregledati i pristati na Politiku privatnosti prije korištenja Usluge."
     },
     "article12": {
-      "title": "Article 12 (Prohibition of Assignment of Rights and Obligations)",
-      "content": "Users may not assign their position under the usage contract or rights or obligations under these Terms to a third party or provide them as security without the Developer's prior written consent."
+      "title": "Članak 12 (Zabrana prijenosa prava i obveza)",
+      "content": "Korisnici ne smiju prenijeti svoj položaj prema ugovoru o korištenju ili prava i obveze prema ovim Uvjetima na treću osobu niti ih dati kao osiguranje bez prethodnog pisanog pristanka Programera."
     },
     "article13": {
-      "title": "Article 13 (Severability)",
-      "content": "Even if any provision of these Terms or any part thereof is determined to be invalid or unenforceable under the Consumer Contract Act or other laws and regulations, the remaining provisions of these Terms and the remaining parts of provisions determined to be partially invalid or unenforceable shall continue to be fully effective."
+      "title": "Članak 13 (Djelomična ništavost)",
+      "content": "Čak i ako se neka odredba ovih Uvjeta ili njezin dio utvrdi kao nevažeća ili neprovediva prema Zakonu o zaštiti potrošača ili drugim zakonima i propisima, preostale odredbe ovih Uvjeta i preostali dijelovi odredbi za koje se utvrdi da su djelomično nevažeći ili neprovedivi i dalje će biti u potpunosti na snazi."
     },
     "article14": {
-      "title": "Article 14 (Governing Law and Jurisdiction)",
-      "section1": "1. These Terms shall be governed by and construed in accordance with the laws of Japan.",
-      "section2": "2. In the event of any dispute arising in connection with the Service, the district court or summary court having jurisdiction over the location of the Developer shall be the exclusive court of first instance."
+      "title": "Članak 14 (Mjerodavno pravo i nadležnost)",
+      "section1": "1. Ovi Uvjeti podliježu i tumače se u skladu sa zakonima Japana.",
+      "section2": "2. U slučaju bilo kakvog spora u vezi s Uslugom, isključivo nadležan sud prvog stupnja bit će okružni ili prekršajni sud nadležan za lokaciju Programera."
     }
   },
   "credits": {
     "title": "Zasluge",
     "linkText": "Zasluge",
-    "intro": "SafeBrawl is powered by the following technologies and services.",
+    "intro": "SafeBrawl pokreću sljedeće tehnologije i usluge.",
     "services": {
       "frontend": "Next.js, React, TypeScript, Tailwind CSS, Radix UI",
-      "backend": "Ruby on Rails 8 and PostgreSQL",
+      "backend": "Ruby on Rails 8 i PostgreSQL",
       "infrastructure": "AWS (Lightsail, S3, CloudFront, Route53)",
       "tools": "Docker, GitHub Actions, SolidQueue",
-      "apiPrefix": "Official ",
-      "apiAnd": " and ",
-      "community": "And supported by many open source communities."
+      "apiPrefix": "Službeni ",
+      "apiAnd": " i ",
+      "community": "Uz podršku mnogih open source zajednica."
     }
   },
   "privacyPolicy": {
     "title": "Politika privatnosti",
     "linkText": "Politika privatnosti",
-    "effectiveDate": "Effective Date: November 1, 2025",
-    "lastUpdated": "Last Updated: November 1, 2025",
-    "intro": "The developer of SafeBrawl (hereinafter referred to as \"the Service\") (hereinafter referred to as \"the Developer\") establishes this Privacy Policy (hereinafter referred to as \"this Policy\") regarding the handling of information of users of the Service. This Policy explains what information the Developer collects, how it is used and shared, and how users can manage their information.",
+    "effectiveDate": "Datum stupanja na snagu: 1. studenog 2025.",
+    "lastUpdated": "Zadnje ažuriranje: 1. studenog 2025.",
+    "intro": "Programer SafeBrawl-a (u daljnjem tekstu: 'Usluga') (u daljnjem tekstu: 'Programer') donosi ovu Politiku privatnosti (u daljnjem tekstu: 'Politika') o načinu postupanja s podacima korisnika Usluge. Ova Politika objašnjava koje podatke Programer prikuplja, kako ih koristi i dijeli te kako korisnici mogu upravljati svojim podacima.",
     "article1": {
-      "title": "Article 1 (Information We Collect)",
-      "section1": "In providing the Service, the Developer may collect the following information:",
-      "section1a": "1. Information provided by users",
-      "section2": "• Information provided during account registration (optional): Player tags and other information determined by the Developer.",
-      "section2a": "2. Information automatically collected when using the Service",
-      "section2b": "• Cookies and similar technologies: The Service uses cookies to improve convenience, manage sessions (such as maintaining login status), and understand access status.",
-      "section2b1": "• Access logs: When users use the Service, the following information is automatically generated and recorded as access logs:",
-      "section2b2": "• IP address",
-      "section2b3": "• User agent information (browser type and version, operating system type and version, etc.)",
-      "section2b4": "• Request date and time",
-      "section2b5": "• URL of accessed pages and resources",
-      "section2b6": "• Referrer information",
-      "section2c": "• Device information: Information such as the type of device used by users may be collected for analyzing Service usage."
+      "title": "Članak 1 (Podaci koje prikupljamo)",
+      "section1": "Pri korištenju Usluge, Programer može prikupljati sljedeće podatke:",
+      "section1a": "1. Podaci koje korisnici sami daju",
+      "section2": "• Podaci uneseni prilikom registracije računa (opcionalno): Oznake igrača i druge informacije koje odredi Programer.",
+      "section2a": "2. Podaci koji se automatski prikupljaju korištenjem Usluge",
+      "section2b": "• Kolačići i slične tehnologije: Usluga koristi kolačiće radi poboljšanja praktičnosti, upravljanja sesijama (npr. održavanje prijave) i praćenja pristupa.",
+      "section2b1": "• Pristupni zapisi: Kada korisnici koriste Uslugu, automatski se generiraju i bilježe sljedeći podaci:",
+      "section2b2": "• IP adresa",
+      "section2b3": "• Podaci o korisničkom agentu (vrsta i verzija preglednika, vrsta i verzija operativnog sustava itd.)",
+      "section2b4": "• Datum i vrijeme zahtjeva",
+      "section2b5": "• URL pristupljenih stranica i resursa",
+      "section2b6": "• Podaci o refereru",
+      "section2c": "• Podaci o uređaju: Informacije poput vrste uređaja koji korisnici koriste mogu se prikupljati radi analize korištenja Usluge."
     },
     "article2": {
-      "title": "Article 2 (Purpose of Using Information)",
-      "intro": "The Developer uses the collected information for the following purposes:",
-      "item1": "1. To provide, maintain, protect, and improve the Service (including account authentication, battle record display, and information provision)",
-      "item2": "2. To respond to inquiries from users (including identity verification)",
-      "item3": "3. To analyze Service usage, improve the Service, and develop new services",
-      "item4": "4. To prevent and respond to acts that violate the Terms of Service or use the Service for illegal or improper purposes",
-      "item5": "5. To allow users to view their own registration information",
-      "item6": "6. To deliver advertisements tailored to users' interests",
-      "item7": "7. To provide necessary communications such as important notices regarding the Service",
-      "item8": "8. For purposes incidental to the above purposes"
+      "title": "Članak 2 (Svrha korištenja podataka)",
+      "intro": "Programer koristi prikupljene podatke u sljedeće svrhe:",
+      "item1": "1. Za pružanje, održavanje, zaštitu i poboljšanje Usluge (uključujući autentifikaciju računa, prikaz zapisa bitki i pružanje informacija)",
+      "item2": "2. Za odgovaranje na upite korisnika (uključujući provjeru identiteta)",
+      "item3": "3. Za analizu korištenja Usluge, poboljšanje Usluge i razvoj novih usluga",
+      "item4": "4. Za sprječavanje i reagiranje na radnje koje krše Uvjete korištenja ili korištenje Usluge u nezakonite ili neprikladne svrhe",
+      "item5": "5. Za omogućavanje korisnicima da pregledaju vlastite podatke o registraciji",
+      "item6": "6. Za prikazivanje oglasa prilagođenih interesima korisnika",
+      "item7": "7. Za pružanje potrebnih obavijesti kao što su važne informacije o Usluzi",
+      "item8": "8. Za svrhe povezane s gore navedenim svrhama"
     },
     "article3": {
-      "title": "Article 3 (Provision of Information to Third Parties)",
-      "intro": "The Developer will not provide personal information (as defined in Article 2, Paragraph 1 of the Act on the Protection of Personal Information; the same shall apply hereinafter) to third parties without prior consent from users, except in the following cases. However, this excludes cases permitted by the Personal Information Protection Act and other laws:",
-      "item1": "1. When based on laws and regulations",
-      "item2": "2. When it is necessary for the protection of the life, body, or property of a person and it is difficult to obtain the consent of the person",
-      "item3": "3. When it is particularly necessary to improve public health or promote the sound growth of children and it is difficult to obtain the consent of the person",
-      "item4": "4. When it is necessary to cooperate with a national agency, local government, or a person entrusted by them in performing affairs prescribed by laws and regulations, and obtaining the consent of the person may interfere with the performance of such affairs"
+      "title": "Članak 3 (Davanje podataka trećim osobama)",
+      "intro": "Programer neće davati osobne podatke (kako je definirano u članku 2. stavku 1. Zakona o zaštiti osobnih podataka; isto se primjenjuje i dalje) trećim osobama bez prethodnog pristanka korisnika, osim u sljedećim slučajevima. Ovo ne uključuje slučajeve dopuštene Zakonom o zaštiti osobnih podataka i drugim zakonima:",
+      "item1": "1. Kada je to propisano zakonima i propisima",
+      "item2": "2. Kada je potrebno radi zaštite života, tijela ili imovine osobe i teško je dobiti pristanak te osobe",
+      "item3": "3. Kada je osobito potrebno za poboljšanje javnog zdravlja ili promicanje zdravog razvoja djece i teško je dobiti pristanak te osobe",
+      "item4": "4. Kada je potrebno surađivati s državnim tijelom, lokalnom samoupravom ili osobom koju su oni ovlastili u obavljanju poslova propisanih zakonima i propisima, a dobivanje pristanka osobe može ometati obavljanje tih poslova"
     },
     "article4": {
-      "title": "Article 4 (Use of Access Analysis Tools)",
-      "section1": "1. The Service uses \"Google Analytics\" provided by Google Inc. to understand Service usage and improve the Service.",
-      "section2": "2. Google Analytics uses cookies to collect user traffic data. This traffic data is collected anonymously and does not identify individuals.",
-      "section3": "3. Users can refuse this information collection by disabling cookies in their browser settings. However, some features of the Service may not be available in that case.",
-      "section4Prefix": "4. For details on Google Analytics terms, please see",
-      "section4Link1": "here",
-      "section4Middle": ", and for details on Google's privacy policy, please see",
-      "section4Link2": "here",
+      "title": "Članak 4 (Korištenje alata za analizu pristupa)",
+      "section1": "1. Usluga koristi 'Google Analytics' koji pruža Google Inc. radi razumijevanja korištenja Usluge i njenog poboljšanja.",
+      "section2": "2. Google Analytics koristi kolačiće za prikupljanje podataka o prometu korisnika. Ti podaci se prikupljaju anonimno i ne identificiraju pojedince.",
+      "section3": "3. Korisnici mogu odbiti prikupljanje tih podataka onemogućavanjem kolačića u postavkama preglednika. Međutim, neke funkcije Usluge tada možda neće biti dostupne.",
+      "section4Prefix": "4. Detalje o uvjetima Google Analyticsa pogledajte",
+      "section4Link1": "ovdje",
+      "section4Middle": ", a detalje o Googleovoj politici privatnosti pogledajte",
+      "section4Link2": "ovdje",
       "section4Suffix": "."
     },
     "article5": {
-      "title": "Article 5 (Advertising Distribution)",
-      "section1": "1. The Service uses third-party advertising services (such as Google AdSense).",
-      "section2": "2. Such advertising distributors may use information (cookies) about access to the Service and other sites to display advertisements for products and services according to users' interests. This does not include names, addresses, email addresses, or phone numbers.",
-      "section3Prefix": "3. Users can disable personalized advertising from",
-      "section3Link1": "Google Ad Settings",
-      "section3Middle": ". You can also visit",
+      "title": "Članak 5 (Prikazivanje oglasa)",
+      "section1": "1. Usluga koristi oglasne usluge trećih strana (npr. Google AdSense).",
+      "section2": "2. Takvi distributeri oglasa mogu koristiti podatke (kolačiće) o pristupu Usluzi i drugim stranicama za prikazivanje oglasa za proizvode i usluge prema interesima korisnika. To ne uključuje imena, adrese, e-mail adrese ili telefonske brojeve.",
+      "section3Prefix": "3. Korisnici mogu onemogućiti personalizirane oglase putem",
+      "section3Link1": "Google postavki oglasa",
+      "section3Middle": ". Također možete posjetiti",
       "section3Link2": "www.aboutads.info",
-      "section3Suffix": " to disable cookies used for personalized advertising by third-party distributors.",
-      "section4": "4. Advertising opt-out using advertising identifiers can be done from the OS settings of your device. Please check the official information for each OS for setting methods."
+      "section3Suffix": " za onemogućavanje kolačića koje koriste distributeri oglasa trećih strana za personalizirane oglase.",
+      "section4": "4. Onemogućavanje oglasa putem identifikatora oglasa može se postaviti u postavkama operativnog sustava vašeg uređaja. Provjerite službene informacije za svaki OS o načinu postavljanja."
     },
     "article6": {
-      "title": "Article 6 (Joint Use of Information)",
-      "content": "At present, the Developer does not jointly use collected personal information with specific parties. If joint use is to be conducted in the future, the items of information to be jointly used, the scope of joint users, the purpose of use, and the person responsible for management will be notified in advance or published in this Policy, etc."
+      "title": "Članak 6 (Zajedničko korištenje podataka)",
+      "content": "Trenutno Programer ne koristi prikupljene osobne podatke zajedno s određenim stranama. Ako se u budućnosti provede zajedničko korištenje, stavke podataka koje će se zajednički koristiti, opseg zajedničkih korisnika, svrha korištenja i osoba odgovorna za upravljanje bit će unaprijed obaviješteni ili objavljeni u ovoj Politici itd."
     },
     "article7": {
-      "title": "Article 7 (Security Management Measures for Information)",
-      "content": "The Developer shall take necessary and appropriate measures for the security management of the information handled, including preventing leakage, loss, or damage of information. Specifically, measures such as unauthorized access prevention and access control will be implemented."
+      "title": "Članak 7 (Mjere sigurnosnog upravljanja podacima)",
+      "content": "Programer će poduzeti potrebne i odgovarajuće mjere za sigurnosno upravljanje podacima, uključujući sprječavanje curenja, gubitka ili oštećenja podataka. Konkretno, provodit će se mjere poput sprječavanja neovlaštenog pristupa i kontrole pristupa."
     },
     "article8": {
-      "title": "Article 8 (Cookie Management)",
-      "section1": "1. Most browsers are set to accept cookies by default. Users can disable cookies or display warnings when cookies are sent by changing browser settings.",
-      "section2": "2. Please note that if cookies are disabled, some features of the Service may not be available.",
-      "section3": "3. For information on how to change cookie settings, please refer to the official support site of each browser."
+      "title": "Članak 8 (Upravljanje kolačićima)",
+      "section1": "1. Većina preglednika je postavljena da prihvaća kolačiće prema zadanim postavkama. Korisnici mogu onemogućiti kolačiće ili prikazivati upozorenja kada se kolačići šalju promjenom postavki preglednika.",
+      "section2": "2. Imajte na umu da ako su kolačići onemogućeni, neke funkcije Usluge možda neće biti dostupne.",
+      "section3": "3. Informacije o promjeni postavki kolačića potražite na službenoj stranici podrške svakog preglednika."
     },
     "article9": {
-      "title": "Article 9 (Information Retention Period)",
-      "content": "The Developer will retain collected information for an appropriate period within the scope necessary to achieve the purpose of use and in accordance with relevant laws and regulations."
+      "title": "Članak 9 (Razdoblje čuvanja podataka)",
+      "content": "Programer će čuvati prikupljene podatke tijekom odgovarajućeg razdoblja unutar okvira potrebnog za ostvarenje svrhe korištenja i u skladu s relevantnim zakonima i propisima."
     },
     "article10": {
-      "title": "Article 10 (User Rights: Disclosure, Correction, Deletion, Suspension of Use, etc. of Personal Information)",
-      "section1": "1. Users may request disclosure, correction, addition, deletion, suspension of use, or erasure (hereinafter referred to as \"disclosure, etc.\") of their personal information held by the Developer in accordance with the Personal Information Protection Act.",
-      "section2": "2. Requests for disclosure, etc. should be made to the contact point specified in Article 12. After confirming that the request is from the user, the Developer will respond without delay in accordance with laws and regulations.",
-      "section3": "3. Registered account users can view and correct their registration information from the settings screen within the Service. Account deletion can also be done from within the Service.",
-      "section4": "4. Please note that a fee of up to 1,000 yen per case may be charged for disclosure of personal information."
+      "title": "Članak 10 (Prava korisnika: uvid, ispravak, brisanje, obustava korištenja osobnih podataka itd.)",
+      "section1": "1. Korisnici mogu zatražiti uvid, ispravak, dopunu, brisanje, obustavu korištenja ili brisanje (u daljnjem tekstu: 'uvid itd.') svojih osobnih podataka koje Programer posjeduje, u skladu sa Zakonom o zaštiti osobnih podataka.",
+      "section2": "2. Zahtjevi za uvid itd. podnose se kontaktu navedenom u članku 12. Nakon potvrde da je zahtjev podnio korisnik, Programer će odgovoriti bez odgađanja u skladu sa zakonima i propisima.",
+      "section3": "3. Korisnici s registriranim računom mogu pregledati i ispraviti podatke o registraciji putem postavki unutar Usluge. Brisanje računa također je moguće putem Usluge.",
+      "section4": "4. Imajte na umu da se za uvid u osobne podatke može naplatiti naknada do 1.000 jena po zahtjevu."
     },
     "article11": {
-      "title": "Article 11 (Changes to the Privacy Policy)",
-      "section1": "1. The Developer may change the contents of this Policy as necessary due to amendments to laws and regulations, changes in business content, user requests, etc.",
-      "section2": "2. The revised Policy shall take effect when posted on the Service. However, if user consent is required by law for changes to the content, the Developer shall obtain user consent in a manner determined by the Developer.",
-      "section3": "3. The Developer will strive to clearly announce important changes to this Policy, including the content of changes and the effective date."
+      "title": "Članak 11 (Promjene politike privatnosti)",
+      "section1": "1. Programer može mijenjati sadržaj ove Politike prema potrebi zbog izmjena zakona i propisa, promjena poslovanja, zahtjeva korisnika itd.",
+      "section2": "2. Revidirana Politika stupa na snagu kada se objavi na Usluzi. Međutim, ako je za promjene sadržaja zakonom potrebna suglasnost korisnika, Programer će je pribaviti na način koji sam odredi.",
+      "section3": "3. Programer će nastojati jasno najaviti važne promjene ove Politike, uključujući sadržaj promjena i datum stupanja na snagu."
     },
     "article12": {
-      "title": "Article 12 (Contact)",
-      "section1": "For comments, questions, or other inquiries regarding the handling of user information related to this Policy, please contact the following:",
-      "section2": "• Email: neco3coffee+brawl@gmail.com"
+      "title": "Članak 12 (Kontakt)",
+      "section1": "Za komentare, pitanja ili druge upite vezane uz postupanje s korisničkim podacima prema ovoj Politici, kontaktirajte:",
+      "section2": "• E-mail: neco3coffee+brawl@gmail.com"
     }
   },
   "faq": {
     "title": "Često postavljena pitanja",
     "items": {
       "whatIsSafeBrawl": {
-        "question": "What is SafeBrawl?",
-        "answer": "SafeBrawl is an information viewing and ranked battle support tool for Brawl Stars players. By searching with a player name and current rank, you can find out if that player has engaged in griefing or feeding behavior. If the player has engaged in griefing or feeding, you can avoid them by disconnecting from the match at the pick screen. Users can report players from recent battle history through this site (login required). You can view a player's past name change history, recent matches (25 matches), current ranked battle rank, available Power 11 characters, and match-by-match performance."
+        "question": "Što je SafeBrawl?",
+        "answer": "SafeBrawl je alat za pregled informacija i podršku za rangirane bitke za igrače Brawl Starsa. Pretraživanjem po imenu igrača i trenutnom rangu možete saznati je li taj igrač sudjelovao u griefanju ili feeding ponašanju. Ako je igrač sudjelovao u takvom ponašanju, možete ga izbjeći prekidom veze na ekranu za odabir. Korisnici mogu prijaviti igrače iz nedavne povijesti bitki putem ove stranice (potrebna prijava). Možete vidjeti povijest promjena imena igrača, nedavne mečeve (25 mečeva), trenutni rang u rangiranim bitkama, dostupne Power 11 likove i učinak po meču."
       },
       "isFree": {
-        "question": "Is it free to use?",
-        "answer": "Yes, all basic features are available for free."
+        "question": "Je li korištenje besplatno?",
+        "answer": "Da, sve osnovne funkcije su besplatne."
       },
       "mobileSupport": {
-        "question": "Can I use it on mobile?",
-        "answer": "Yes. It works on browsers such as Safari and Chrome. Accessible on iPhone and Android."
+        "question": "Mogu li koristiti na mobitelu?",
+        "answer": "Da. Radi na preglednicima kao što su Safari i Chrome. Dostupno na iPhoneu i Androidu."
       },
       "cannotSearchByName": {
-        "question": "What if I can't search by player name?",
-        "answer": "The name may have been changed. Use the \"Old Name Search\" function (press the clock icon on the left to enable it in blue) to find matches with past names. Tag search is also recommended (example: #ABCD123)."
+        "question": "Što ako ne mogu pretraživati po imenu igrača?",
+        "answer": "Ime je možda promijenjeno. Koristite funkciju 'Pretraga starog imena' (pritisnite ikonu sata s lijeve strane da je uključite u plavo) za pronalaženje podudaranja s prošlim imenima. Preporučuje se i pretraga po tagu (npr. #ABCD123)."
       },
       "updateFrequency": {
-        "question": "How often is data updated?",
-        "answer": "Rank and battle records are automatically updated every few hours. If the latest data is not reflected, cache may remain."
+        "question": "Koliko često se podaci ažuriraju?",
+        "answer": "Rang i zapisi bitki automatski se ažuriraju svakih nekoliko sati. Ako najnoviji podaci nisu prikazani, možda je ostala predmemorija."
       },
       "wrongNameDisplayed": {
-        "question": "The name is displayed incorrectly",
-        "answer": "We refer to the latest data from the official Brawl Stars API. Please wait a while and try reloading."
+        "question": "Ime je prikazano netočno",
+        "answer": "Koristimo najnovije podatke iz službenog Brawl Stars API-ja. Pričekajte malo i pokušajte ponovno učitati stranicu."
       },
       "reportFeature": {
-        "question": "What is the \"report\" feature?",
-        "answer": "It's a mechanism for uploading videos of suspected cheating or \"match-fixing\" for moderator review. Once approved, they are shared on SafeBrawl."
+        "question": "Što je funkcija 'prijava'?",
+        "answer": "To je mehanizam za učitavanje videozapisa sumnjivog varanja ili 'namještanja mečeva' na pregled moderatoru. Nakon odobrenja, dijele se na SafeBrawl-u."
       },
       "appealReport": {
-        "question": "Can I appeal if I have been reported?",
-        "answer": "Yes, you can. Reported players can log in, open the report tab, select the report they want to appeal, and submit an appeal by entering the reason for it."
+        "question": "Mogu li se žaliti ako sam prijavljen?",
+        "answer": "Da, možete. Prijavljeni igrači mogu se prijaviti, otvoriti karticu prijava, odabrati prijavu na koju se žele žaliti i poslati žalbu unosom razloga."
       },
       "reportReviewTime": {
-        "question": "How long does it take to review a report?",
-        "answer": "Reviews are usually completed within a few hours to a few days. However, it may take longer if there are a large number of reports."
+        "question": "Koliko traje pregled prijave?",
+        "answer": "Pregledi se obično dovršavaju u roku od nekoliko sati do nekoliko dana. Međutim, može potrajati dulje ako ima puno prijava."
       },
       "howLongDataStored": {
-        "question": "How long are report data and videos stored?",
-        "answer": "Report data and videos are stored for 90 days from the date of the report. After that, they are scheduled to be automatically deleted. (This takes into account cases such as when a player reforms and stops engaging in unfair behavior, or when accounts are transferred between players.)"
+        "question": "Koliko dugo se čuvaju podaci prijava i videozapisi?",
+        "answer": "Podaci prijava i videozapisi čuvaju se 90 dana od datuma prijave. Nakon toga se planiraju automatski izbrisati. (Ovo uzima u obzir slučajeve kada se igrač popravi i prestane s nepoštenim ponašanjem ili kada se računi prenose između igrača.)"
       },
       "videoStorage": {
-        "question": "Where are videos stored?",
-        "answer": "Videos are securely stored in S3 (AWS), and only approved ones are published via CloudFront."
+        "question": "Gdje se pohranjuju videozapisi?",
+        "answer": "Videozapisi se sigurno pohranjuju na S3 (AWS), a samo odobreni se objavljuju putem CloudFronta."
       },
       "videoNotDisplayed": {
-        "question": "I uploaded a video but it's not displayed",
-        "answer": "The status may be \"waiting for review\" or \"upload incomplete\". Please reload after a few minutes to check."
+        "question": "Učitao sam video, ali nije prikazan",
+        "answer": "Status može biti 'čeka pregled' ili 'učitavanje nije dovršeno'. Pokušajte ponovno učitati nakon nekoliko minuta."
       },
       "dataSource": {
-        "question": "What is SafeBrawl's data source?",
-        "answer": "All player data uses the official Brawl Stars API (https://developer.brawlstars.com)."
+        "question": "Koji je izvor podataka za SafeBrawl?",
+        "answer": "Svi podaci o igračima koriste službeni Brawl Stars API (https://developer.brawlstars.com)."
       },
       "adsDisplayed": {
-        "question": "Are ads displayed?",
-        "answer": "Yes, we display some ads to cover site operating costs. They are placed in a way that does not detract from the gaming experience."
+        "question": "Prikazuju li se oglasi?",
+        "answer": "Da, prikazujemo neke oglase radi pokrivanja troškova rada stranice. Postavljeni su tako da ne ometaju iskustvo igranja."
       },
       "deletePlayerData": {
-        "question": "Can I delete my player data?",
-        "answer": "Data on the Brawl Stars API cannot be deleted, but you can request deletion of specific reports or uploaded videos on SafeBrawl."
+        "question": "Mogu li izbrisati podatke o svom igraču?",
+        "answer": "Podaci na Brawl Stars API-ju ne mogu se izbrisati, ali možete zatražiti brisanje određenih prijava ili učitanih videozapisa na SafeBrawl-u."
       },
       "contact": {
-        "question": "How do I contact you?",
-        "answer": "Please send a DM to @neco3desu on X (formerly Twitter)."
+        "question": "Kako vas mogu kontaktirati?",
+        "answer": "Pošaljite DM na @neco3desu na X-u (bivši Twitter)."
       },
       "siteNotLoading": {
-        "question": "The site won't load / An error occurs",
-        "answer": "Please try clearing your cache and reloading. If it still doesn't work, please report the bug."
+        "question": "Stranica se ne učitava / Pojavljuje se greška",
+        "answer": "Pokušajte očistiti predmemoriju i ponovno učitati. Ako i dalje ne radi, prijavite bug."
       }
     },
     "linkText": "Često postavljena pitanja"
