@@ -35,7 +35,7 @@ export default async function LandingPage() {
 
   return (
     <div className={styles.landingPage}>
-      <AdsenseWrapper maxHeight={200} />
+      <AdsenseWrapper />
 
       {/* Hero Section */}
       <section className={styles.hero}>
