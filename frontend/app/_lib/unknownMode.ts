@@ -36,6 +36,7 @@ const bossMapNameList = [
   "Headless Tickman",
   "Carreta Spike",
   "Spirit Frank",
+  "Vecna",
 ];
 
 const showdownPlusMapNameList = ["Kroket"];
