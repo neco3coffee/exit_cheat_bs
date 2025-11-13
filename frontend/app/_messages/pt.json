@@ -409,7 +409,6 @@
         "question": "O site não carrega / ocorre um erro",
         "answer": "Tente limpar o cache e recarregar. Se ainda não funcionar, relate o bug."
       }
-    },
-    "linkText": "Perguntas Frequentes"
+    }
   }
 }
