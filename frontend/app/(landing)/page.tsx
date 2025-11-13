@@ -1,6 +1,7 @@
 import { cacheLife } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
+import AdsenseWrapper from "../_components/AdsenseWrapper";
 import styles from "./landing.module.scss";
 
 const apiUrl = "http://app:3000";
@@ -34,6 +35,8 @@ export default async function LandingPage() {
 
   return (
     <div className={styles.landingPage}>
+      <AdsenseWrapper />
+
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>

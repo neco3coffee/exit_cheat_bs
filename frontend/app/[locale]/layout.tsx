@@ -123,12 +123,14 @@ export default async function RootLayout({
           href="/manifest.webmanifest"
           crossOrigin="use-credentials"
         />
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3651729056445822"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        ></Script>
+        {process.env.NODE_ENV === "production" && process.env.CI !== "true" && (
+          <Script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3651729056445822"
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        )}
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Header params={params} />
