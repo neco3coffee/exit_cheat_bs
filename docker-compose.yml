@@ -12,6 +12,7 @@ services:
       NEXT_PUBLIC_GA_ID: ${NEXT_PUBLIC_GA_ID}
       SITE_URL: ${SITE_URL}
       LAMBDA_API_KEY: ${LAMBDA_API_KEY}
+      CI: ${CI:-false}
     networks:
       - safebrawl_net
   bot:

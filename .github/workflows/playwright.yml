@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ENV: ${{ secrets.ENV }}
+      CI: true
       DB_HOST: db
       RAILS_ENV: ${{ secrets.ENV }}
       POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
