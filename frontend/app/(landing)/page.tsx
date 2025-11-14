@@ -36,14 +36,14 @@ export default async function LandingPage() {
 
   return (
     <>
-      {process.env.NODE_ENV === "production" && process.env.CI !== "true" && (
+      {/* {process.env.NODE_ENV === "production" && process.env.CI !== "true" && (
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3651729056445822"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-      )}
+      )} */}
 
       <div className={styles.landingPage}>
         {/* Hero Section */}
@@ -244,7 +244,7 @@ export default async function LandingPage() {
           </div>
         </section>
 
-        <AdsenseWrapper />
+        {/* <AdsenseWrapper /> */}
 
         {/* Footer */}
         <footer className={styles.footer}>
