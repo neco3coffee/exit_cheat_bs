@@ -1,8 +1,10 @@
 import { Rocket } from "lucide-react";
 import Image from "next/image";
+import Script from "next/script";
 // import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
+import AdsenseWrapper from "@/app/_components/AdsenseWrapper";
 import Record from "@/app/_components/Record";
 import ClubName from "@/app/_lib/ClubName";
 import { appendToEightDigits } from "@/app/_lib/common";
@@ -93,6 +95,14 @@ async function PlayerPage({
 
   return (
     <>
+      {process.env.NODE_ENV === "production" && process.env.CI !== "true" && (
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3651729056445822"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      )}
       <LocalStorage playerTag={player.tag} playerName={player.name} />
       <Telemetry />
       <div className={styles.container}>
@@ -184,6 +194,8 @@ async function PlayerPage({
             />
           </div>
         </div>
+
+        <AdsenseWrapper />
 
         {/* バトル履歴 */}
         <div className={styles.battlelogContainer}>
