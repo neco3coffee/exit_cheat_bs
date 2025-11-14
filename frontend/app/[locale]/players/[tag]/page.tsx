@@ -146,17 +146,8 @@ async function PlayerPage({
                       sizes="60px"
                       style={{ height: "60px", width: "auto" }}
                     />
-                    <Rocket className={styles.icon} />
                   </>
                 )}
-                <Image
-                  src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player.currentRank!)}.png`}
-                  alt="rank"
-                  height={60}
-                  width={60}
-                  sizes="60px"
-                  style={{ height: "60px", width: "auto" }}
-                />
               </div>
             )}
           </div>
