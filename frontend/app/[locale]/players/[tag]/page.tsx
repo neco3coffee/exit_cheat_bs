@@ -297,6 +297,18 @@ async function PlayerPage({
                       ownTag={tag}
                     />
                   );
+                } else if (
+                  battleLog.battle.type === "friendly" &&
+                  battleLog.battle.teams &&
+                  battleLog.battle.teams.length === 2
+                ) {
+                  return (
+                    <BattleLog3vs3
+                      key={`${battleLog?.battleTime}-${index}`}
+                      battleLog={battleLog}
+                      ownTag={tag}
+                    />
+                  );
                 } else {
                   return (
                     <div key={`${battleLog?.battleTime}-${index}`}>
