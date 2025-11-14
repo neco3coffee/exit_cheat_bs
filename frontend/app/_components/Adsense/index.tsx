@@ -1,5 +1,4 @@
 "use client";
-import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 declare global {
@@ -7,9 +6,6 @@ declare global {
 }
 
 export default function Adsense() {
-  const pathname = usePathname();
-
-  // biome-ignore-start lint/correctness/useExhaustiveDependencies: xxx
   useEffect(() => {
     if (
       typeof window !== "undefined" &&
@@ -19,8 +15,7 @@ export default function Adsense() {
     ) {
       window.adsbygoogle.push({});
     }
-  }, [pathname]);
-  // biome-ignore-end lint/correctness/useExhaustiveDependencies: xxx
+  }, []);
 
   if (
     typeof window === "undefined" ||
