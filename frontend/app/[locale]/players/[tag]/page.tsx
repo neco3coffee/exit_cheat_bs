@@ -299,6 +299,7 @@ async function PlayerPage({
                   );
                 } else if (
                   battleLog.battle.type === "friendly" &&
+                  battleLog.battle.teams &&
                   battleLog.battle.teams.length === 2
                 ) {
                   return (
