@@ -23,6 +23,14 @@ import BattleLogLastStand from "./_components/BattleLogLastStand";
 import LocalStorage from "./_components/LocalStorage";
 import styles from "./page.module.scss";
 
+const examplePlayerTags = ["Y2YPGCGC" /* neco3 */];
+
+export async function generateStaticParams() {
+  return examplePlayerTags.map((tag) => ({
+    tag: tag,
+  }));
+}
+
 type Player = {
   tag: string;
   name: string;
