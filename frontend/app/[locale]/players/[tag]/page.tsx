@@ -195,8 +195,6 @@ async function PlayerPage({
           </div>
         </div>
 
-        <AdsenseWrapper />
-
         {/* バトル履歴 */}
         <div className={styles.battlelogContainer}>
           <h2>{t("battleLog")}</h2>
@@ -302,6 +300,7 @@ async function PlayerPage({
             </ServerLocaleMessageProviderWrapper>
           </Suspense>
         </div>
+        <AdsenseWrapper />
       </div>
     </>
   );
