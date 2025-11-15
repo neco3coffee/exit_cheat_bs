@@ -113,7 +113,7 @@ export default function TagInput() {
                 <DropdownMenuItem
                   key={item.tag}
                   onSelect={(event) => {
-                    router.push(`/players/${item.tag}`);
+                    window.location.replace(`/players/${item.tag}`);
                   }}
                   className={styles.dropdownMenuItem}
                 >
