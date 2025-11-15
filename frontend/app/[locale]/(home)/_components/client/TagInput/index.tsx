@@ -2,7 +2,7 @@
 
 import { sendGAEvent } from "@next/third-parties/google";
 import { History } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "@/app/_messages/i18n/navigation";
 import {
   DropdownMenu,
@@ -30,6 +30,7 @@ export default function TagInput() {
           name: string;
         }[])
       : [];
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleTagSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -91,7 +92,7 @@ export default function TagInput() {
         onKeyDown={handleTagSearch}
       />
       <InputGroupAddon align="inline-end">
-        <DropdownMenu>
+        <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
           <DropdownMenuTrigger asChild className={styles.DropdownMenuTrigger}>
             <InputGroupButton variant="ghost" style={{ marginRight: "15px" }}>
               <History
@@ -113,6 +114,7 @@ export default function TagInput() {
                 <DropdownMenuItem
                   key={item.tag}
                   onClick={() => {
+                    setIsOpen(false);
                     router.push(`/players/${item.tag}`);
                   }}
                   className={styles.dropdownMenuItem}
