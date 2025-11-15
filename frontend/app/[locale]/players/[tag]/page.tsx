@@ -1,4 +1,6 @@
 import { Rocket } from "lucide-react";
+import { cacheLife, cacheTag } from "next/cache";
+import { cookies } from "next/headers";
 import Image from "next/image";
 import Script from "next/script";
 // import { useTranslations } from "next-intl";
@@ -19,9 +21,31 @@ import BattleLogSolo from "@/app/[locale]/players/[tag]/_components/BattleLogSol
 import BattleLogSoloRanked from "@/app/[locale]/players/[tag]/_components/BattleLogSoloRanked";
 import BattleLogTrio from "@/app/[locale]/players/[tag]/_components/BattleLogTrio";
 import { Telemetry } from "@/app/[locale]/players/[tag]/_components/Telemetry.tsx";
+import BattleLogAutoSaveIconToggle from "./_components/BattleLogAutoSaveIconToggle";
 import BattleLogLastStand from "./_components/BattleLogLastStand";
 import LocalStorage from "./_components/LocalStorage";
 import styles from "./page.module.scss";
+
+const apiUrl = "http://app:3000";
+
+async function getPlayerData(sessionToken: string) {
+  "use cache";
+  cacheLife("minutes");
+  cacheTag("playerData");
+
+  const res = await fetch(`${apiUrl}/api/v1/auth/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: `session_token=${sessionToken}`,
+    },
+    credentials: "include",
+  });
+  if (!res.ok) {
+    return null;
+  }
+  return res.json();
+}
 
 const examplePlayerTags = ["Y2YPGCGC" /* neco3 */];
 
@@ -46,6 +70,8 @@ type Player = {
     name: string;
     badgeId: number;
   };
+  auto_save_enabled?: boolean | null;
+  auto_save_expires_at?: string | null;
   battlelog: any;
   error?: any;
 };
@@ -76,8 +102,11 @@ async function PlayerPage({
   );
   const player: Player = await res.json();
   const battleLogs = formatBattleLog(player.battlelog?.items || []);
-  console.log("club: ", JSON.stringify(player?.club, null, 2));
-  console.log("player: ", JSON.stringify(player, null, 2));
+
+  // adminのみ他のプレイヤーのauto_saveをオンにできるようにするための処理
+  const sessionToken = (await cookies()).get("session_token")?.value || null;
+  const playerData = await (sessionToken ? getPlayerData(sessionToken) : null);
+  const isAdmin = playerData?.player?.role === "admin" || false;
 
   const t = await getTranslations({ locale, namespace: "players" });
   const notInClubText = t("notInClub");
@@ -152,6 +181,14 @@ async function PlayerPage({
             )}
           </div>
         </div>
+        {isAdmin && (
+          <BattleLogAutoSaveIconToggle
+            expiresAt={player.auto_save_expires_at || null}
+            defaultEnabled={player.auto_save_enabled || false}
+            tag={tag}
+            sessionToken={sessionToken}
+          />
+        )}
         <div className={styles.recordsContainer}>
           <Record
             label={t("seasonHigh")}
