@@ -186,7 +186,6 @@ async function PlayerPage({
             expiresAt={player.auto_save_expires_at || null}
             defaultEnabled={player.auto_save_enabled || false}
             tag={tag}
-            sessionToken={sessionToken}
           />
         )}
         <div className={styles.recordsContainer}>
