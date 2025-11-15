@@ -178,7 +178,7 @@ RSpec.describe BattleAutoSaveJob, type: :job do
         '20251115T120000.000Z',
         '20251115T121500.000Z'
       ])
-      expect(battle.result).to eq('defeat')
+      expect(battle.result).to eq('ongoing')
     end
 
     it 'appends new rounds without duplicating existing ones when re-run' do
@@ -195,6 +195,7 @@ RSpec.describe BattleAutoSaveJob, type: :job do
         '20251115T121500.000Z'
       ])
       expect(battle.battle_id).to eq("#{signature}-2025-11-15T12:00:00Z")
+      expect(battle.result).to eq('victory')
     end
 
     it 'creates a new battle when the time gap exceeds fifteen minutes' do
@@ -217,6 +218,33 @@ RSpec.describe BattleAutoSaveJob, type: :job do
       ])
       expect(first_battle.battle_id).to eq("#{signature}-2025-11-15T12:00:00Z")
       expect(second_battle.battle_id).to eq("#{signature}-2025-11-15T12:40:00Z")
+      expect(first_battle.result).to eq('ongoing')
+      expect(second_battle.result).to eq('ongoing')
+    end
+
+    it 'persists defeat when at least two rounds are defeats' do
+      defeat_heavy_data = battlelog_data.deep_dup
+      defeat_heavy_data['items'] << {
+        'battleTime' => '20251115T122500.000Z',
+        'event' => {
+          'mode' => 'bounty',
+          'map' => 'Excel'
+        },
+        'battle' => {
+          'mode' => 'bounty',
+          'type' => 'soloRanked',
+          'result' => 'defeat',
+          'duration' => 115,
+          'teams' => battlelog_data.dig('items', 0, 'battle', 'teams')
+        }
+      }
+      allow(fetcher_double).to receive(:fetch_battlelog).and_return(defeat_heavy_data)
+
+      described_class.perform_now(player.id)
+
+      battle = player.reload.battles.first
+      expect(battle.rounds.size).to eq(3)
+      expect(battle.result).to eq('defeat')
     end
 
     it 'ignores non-soloRanked battles when mixed in the response' do

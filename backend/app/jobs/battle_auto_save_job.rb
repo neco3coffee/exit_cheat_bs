@@ -34,15 +34,15 @@ class BattleAutoSaveJob < ApplicationJob
   private
 
   def process_battle_item(player, item)
-  battle = item["battle"]
-  return unless battle
-  return unless battle["type"] == "soloRanked"
+    battle = item["battle"]
+    return unless battle
+    return unless battle["type"] == "soloRanked"
 
     battle_time = parse_battle_time(item["battleTime"])
     return unless battle_time
 
-  battle_signature = build_battle_signature(battle)
-  existing_record = find_existing_battle(player, battle_signature, battle_time, item)
+    battle_signature = build_battle_signature(battle)
+    existing_record = find_existing_battle(player, battle_signature, battle_time, item)
 
     if existing_record
       battle_id = existing_record.battle_id
@@ -75,13 +75,15 @@ class BattleAutoSaveJob < ApplicationJob
     record.battle_time = [ record.battle_time, battle_time ].compact.max
     record.mode = battle["mode"] || item.dig("event", "mode")
     record.type = battle["type"]
-    record.result = battle["result"]
     record.map = item.dig("event", "map") || battle["map"]
     record.teams = battle["teams"] || battle["players"]
     record.raw_data = item
 
     new_rounds = merge_rounds(Array.wrap(record.rounds), build_round_entry(item))
+    calculated_result = calculate_result_from_rounds(new_rounds) || battle["result"] || record.result
+
     record.rounds = new_rounds unless new_rounds == record.rounds
+    record.result = calculated_result if calculated_result.present?
 
     record.battle_id = determine_battle_id(battle_signature, Array.wrap(record.rounds), record.battle_id)
   end
@@ -107,6 +109,25 @@ class BattleAutoSaveJob < ApplicationJob
       "result" => battle["result"],
       "duration" => battle["duration"]
     }.compact
+  end
+
+  def calculate_result_from_rounds(rounds)
+    return if rounds.blank?
+
+    victory_count = rounds.count { |round| round_result(round) == "victory" }
+    defeat_count = rounds.count { |round| round_result(round) == "defeat" }
+
+    return "victory" if victory_count >= 2
+    return "defeat" if defeat_count >= 2
+    return "ongoing" if rounds.size < 3
+
+    "draw"
+  end
+
+  def round_result(round)
+    return unless round.respond_to?(:[])
+
+    round["result"] || round[:result]
   end
 
   def auto_save_active?(player)
