@@ -88,6 +88,30 @@ services:
     #   - production  # 開発環境でも使用するためコメントアウト
     networks:
       - safebrawl_net
+  scheduler:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/app
+    environment:
+      DB_HOST: db
+      RAILS_ENV: ${ENV:-development}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      BRAWL_STARS_API_TOKEN1: ${BRAWL_STARS_API_TOKEN1}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      RAILS_LOG_TO_STDOUT: true
+      http_proxy: ${API_PROXY_URL}
+      https_proxy: ${API_PROXY_URL}
+      no_proxy: "localhost,127.0.0.1,db,app,web" # プロキシを経由しないホスト
+    command: bash -lc "bundle exec whenever --update-crontab && cron -f"
+    restart: unless-stopped
+    networks:
+      - safebrawl_net
   db:
     image: postgres:16
     ports:

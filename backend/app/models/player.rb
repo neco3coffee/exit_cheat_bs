@@ -1,6 +1,7 @@
 class Player < ApplicationRecord
   has_many :player_name_histories, dependent: :destroy
   has_many :sessions, dependent: :destroy
+  has_many :battles, dependent: :destroy
 
   # reporter/reportedとしてのreports関連
   has_many :reported_reports, class_name: "Report", foreign_key: :reported_tag, primary_key: :tag

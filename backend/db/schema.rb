@@ -10,12 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_15_050946) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_15_091518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
   enable_extension "unaccent"
+
+  create_table "battles", force: :cascade do |t|
+    t.bigint "player_id", null: false
+    t.integer "rank", null: false
+    t.string "battle_id", null: false
+    t.datetime "battle_time", null: false
+    t.string "mode"
+    t.string "type"
+    t.string "result"
+    t.string "map"
+    t.jsonb "teams"
+    t.jsonb "rounds"
+    t.jsonb "raw_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["battle_id"], name: "index_battles_on_battle_id"
+    t.index ["battle_time"], name: "index_battles_on_battle_time"
+    t.index ["map"], name: "index_battles_on_map"
+    t.index ["mode"], name: "index_battles_on_mode"
+    t.index ["player_id", "battle_id"], name: "index_battles_on_player_id_and_battle_id", unique: true
+    t.index ["player_id"], name: "index_battles_on_player_id"
+    t.index ["result"], name: "index_battles_on_result"
+    t.index ["teams"], name: "index_battles_on_teams", using: :gin
+    t.index ["type"], name: "index_battles_on_type"
+  end
 
   create_table "duplicate_players_backup", id: false, force: :cascade do |t|
     t.bigint "id"
@@ -223,6 +248,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_15_050946) do
     t.check_constraint "char_length(name::text) <= 15", name: "check_name_length"
   end
 
+  add_foreign_key "battles", "players"
   add_foreign_key "player_name_histories", "players"
   add_foreign_key "sessions", "players"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
