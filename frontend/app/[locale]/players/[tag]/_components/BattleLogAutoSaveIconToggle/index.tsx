@@ -18,7 +18,9 @@ export default function BattleLogAutoSaveIconToggle({
 }) {
   const [enabled, setEnabled] = useState(defaultEnabled);
   const [remaining, setRemaining] = useState<string>("");
-  const [expireTime, setExpireTime] = useState<string | null>(expiresAt);
+  const [expireTime, setExpireTime] = useState<string | null | undefined>(
+    expiresAt,
+  );
 
   const toggleEnabled = async (newEnabled: boolean) => {
     try {
@@ -26,7 +28,6 @@ export default function BattleLogAutoSaveIconToggle({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Cookie: sessionToken ? `session_token=${sessionToken}` : "",
         },
         body: JSON.stringify({ enabled: newEnabled }),
         credentials: "include",
