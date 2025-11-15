@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get "players/search", to: "players#search"
+      post "players/:tag/auto_save", to: "players#toggle_player_auto_save"
       get "players/:tag", to: "players#show"
       get "players/:tag/ranked", to: "players#ranked"
       get "players/:tag/reports", to: "players#reports"

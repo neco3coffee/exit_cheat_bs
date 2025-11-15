@@ -10,7 +10,6 @@ import styles from "./index.module.scss";
 
 const BattleLog3vs3 = ({ battleLog, ownTag }: any) => {
   const tag = ownTag.trim().toUpperCase().replace(/O/g, "0");
-  console.log("tag: ", tag);
   const ownTeam = battleLog?.battle?.teams.find((team: any) => {
     return team.some((player: any) => player.tag === `#${tag}`);
   });

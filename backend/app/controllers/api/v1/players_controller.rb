@@ -72,6 +72,8 @@ module Api
             }
           end
           response_data[:nameHistories] = name_histories
+          response_data[:auto_save_enabled] = db_player.auto_save_enabled
+          response_data[:auto_save_expires_at] = db_player.auto_save_expires_at&.iso8601
         else
           response_data[:nameHistories] = []
         end
@@ -218,6 +220,59 @@ module Api
         render json: {
           auto_save_enabled: player.auto_save_enabled,
           auto_save_expires_at: player.auto_save_expires_at
+        }
+      end
+
+      def toggle_player_auto_save
+        session_token = cookies[:session_token]
+
+        if session_token.blank?
+          render json: { error: "session token required" }, status: :unauthorized
+          return
+        end
+
+        session = Session.includes(:player).find_by(session_token: session_token)
+
+        if session.nil? || session.expired?
+          render json: { error: "Invalid or expired session" }, status: :unauthorized
+          return
+        end
+
+        player = session.player
+        tag = params[:tag].to_s.upcase.strip
+        tag = tag.gsub("O", "0")
+        tag = "##{tag}" unless tag.start_with?("#")
+        is_admin = player.role == "admin"
+
+        if !is_admin
+          render json: { error: "Forbidden" }, status: :forbidden
+          return
+        end
+
+        if tag.blank?
+          render json: { error: "tag parameter is required" }, status: :bad_request
+          return
+        end
+
+        target_player = Player.find_by(tag: tag)
+
+        if target_player.nil?
+          render json: { error: "Player not found" }, status: :not_found
+          return
+        end
+
+        enabled = params[:enabled]
+
+        if enabled
+          expires_at = 30.days.from_now
+        else
+          expires_at = nil
+        end
+
+        target_player.update(auto_save_enabled: enabled, auto_save_expires_at: expires_at)
+        render json: {
+          auto_save_enabled: target_player.auto_save_enabled,
+          auto_save_expires_at: target_player.auto_save_expires_at
         }
       end
 
