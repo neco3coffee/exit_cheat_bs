@@ -1,0 +1,28 @@
+class BattleAutoSaveEnqueueJob < ApplicationJob
+  queue_as :default
+
+  BATCH_SIZE = 100
+
+  def perform
+    eligible_players.find_in_batches(batch_size: BATCH_SIZE) do |players|
+      players.each do |player|
+        enqueue_player_job(player)
+      end
+    end
+  rescue StandardError => e
+    Rails.logger.error("BattleAutoSaveEnqueueJob failed: #{e.message}")
+    Rails.logger.error(e.backtrace.join("\n"))
+    raise e
+  end
+
+  private
+
+  def eligible_players
+    Player.where(auto_save_enabled: true)
+          .where("auto_save_expires_at IS NULL OR auto_save_expires_at > ?", Time.current)
+  end
+
+  def enqueue_player_job(player)
+    BattleAutoSaveJob.perform_later(player.id)
+  end
+end

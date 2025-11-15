@@ -8,3 +8,6 @@ npm run build || exit 1
 # backend lint
 cd ../backend || exit 1
 bundle exec rubocop -A || exit 1
+
+cd .. || exit 1
+git add .

@@ -190,6 +190,37 @@ module Api
         render json: reports.as_json(only: [ :id, :reporter_tag, :reported_tag, :report_type, :status, :reason, :battle_data, :video_url, :result_url, :created_at, :updated_at ])
       end
 
+      def toggle_battle_log_auto_save
+        session_token = cookies[:session_token]
+
+        if session_token.blank?
+          render json: { error: "session token required" }, status: :unauthorized
+          return
+        end
+
+        session = Session.includes(:player).find_by(session_token: session_token)
+
+        if session.nil? || session.expired?
+          render json: { error: "Invalid or expired session" }, status: :unauthorized
+          return
+        end
+
+        player = session.player
+        enabled = params[:enabled]
+        # enabledがtrueの場合はexpires_atを12時間後に設定、falseの場合はnilに設定
+        if enabled
+          expires_at = 12.hours.from_now
+        else
+          expires_at = nil
+        end
+
+        player.update(auto_save_enabled: enabled, auto_save_expires_at: expires_at)
+        render json: {
+          auto_save_enabled: player.auto_save_enabled,
+          auto_save_expires_at: player.auto_save_expires_at
+        }
+      end
+
       private
       # TODO: api tokenが制限に達した場合に備える
 
