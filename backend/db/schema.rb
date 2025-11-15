@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_08_065547) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_15_050946) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pg_catalog.plpgsql"
@@ -52,6 +52,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_08_065547) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "role", default: "user", null: false
+    t.boolean "auto_save_enabled"
+    t.datetime "auto_save_expires_at"
+    t.index ["auto_save_enabled", "auto_save_expires_at"], name: "index_players_on_auto_save_enabled_and_auto_save_expires_at"
     t.index ["name"], name: "index_players_on_name"
     t.index ["rank"], name: "index_players_on_rank"
     t.index ["tag"], name: "index_players_on_tag", unique: true
