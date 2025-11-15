@@ -15,15 +15,19 @@ interface Player {
   current_icon: string;
   rank: number;
   role?: string;
+  auto_save_enabled?: boolean | null;
+  auto_save_expires_at?: string | null;
 }
 
 export default async function RankedPage({
   locale,
+  player,
   recentReportComponent,
   battleLogsTabContent,
   reportsTabContent,
 }: {
   locale: string;
+  player: Player;
   recentReportComponent: React.ReactNode;
   battleLogsTabContent: React.ReactNode;
   reportsTabContent: React.ReactNode;
@@ -34,7 +38,10 @@ export default async function RankedPage({
     <div className={styles.container}>
       <Suspense fallback={<Loading />}>{recentReportComponent}</Suspense>
       {/* auto save radar icon and expire time */}
-      <BattleLogAutoSaveIconToggle expiresAt={"2025-11-15T16:24:16.035Z"} />
+      <BattleLogAutoSaveIconToggle
+        expiresAt={player.auto_save_expires_at || null}
+        defaultEnabled={player.auto_save_enabled || false}
+      />
 
       <Tabs className="w-full" defaultValue="battleLogs">
         <TabsList className={styles.tabsList}>

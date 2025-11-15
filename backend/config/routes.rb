@@ -28,6 +28,8 @@ Rails.application.routes.draw do
       post "update_video", to: "reports#update_video"
       post "reports/:id/voted", to: "reports#voted"
 
+      post "ranked/battle_logs/auto_save", to: "players#toggle_battle_log_auto_save"
+
 
       get "stats", to: "stats#index"
     end

@@ -164,7 +164,9 @@ module Api
               trophies: player.trophies,
               current_icon: player.icon_id&.to_s,
               rank: player.rank,
-              role: player.role
+              role: player.role,
+              auto_save_enabled: player.auto_save_enabled,
+              auto_save_expires_at: player.auto_save_expires_at
             }
           }
         end

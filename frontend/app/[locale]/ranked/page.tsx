@@ -15,7 +15,8 @@ const apiUrl = "http://app:3000";
 
 async function getPlayerData(sessionToken: string) {
   "use cache";
-  cacheLife("weeks");
+  cacheLife("minutes");
+  cacheTag("playerData");
 
   const res = await fetch(`${apiUrl}/api/v1/auth/me`, {
     method: "GET",
@@ -144,6 +145,7 @@ export default async function Page({
     <ServerLocaleMessageProviderWrapper params={params}>
       <RankedPage
         locale={locale}
+        player={player}
         recentReportComponent={
           <RecentVideoComponent locale={locale} recentReport={recentReport} />
         }
