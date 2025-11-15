@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Switch } from "@/components/ui/switch";
 
 export default function BattleLogAutoSaveIconToggle({
-  expiresAt = addHours(new Date(), 12).toISOString(),
+  expiresAt,
   defaultEnabled = false,
   tag,
   sessionToken,
