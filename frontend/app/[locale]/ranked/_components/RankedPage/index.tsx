@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
+import { Link } from "@/app/_messages/i18n/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Loading from "../../loading";
 import styles from "./index.module.scss";
@@ -33,11 +34,14 @@ export default async function RankedPage({
       <Suspense fallback={<Loading />}>{recentReportComponent}</Suspense>
       <Tabs className="w-full" defaultValue="battleLogs">
         <TabsList className={styles.tabsList}>
+          <Link href={`/ranked/stats`} className={styles.tabTrigger}>
+            📊
+          </Link>
           <TabsTrigger value="battleLogs" className={styles.tabTrigger}>
-            {t("tabs.battleLog")}
+            ⚔️
           </TabsTrigger>
           <TabsTrigger value="reports" className={styles.tabTrigger}>
-            {t("tabs.report")}
+            ⚠️
           </TabsTrigger>
         </TabsList>
         <TabsContent value="battleLogs">
