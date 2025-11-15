@@ -27,17 +27,61 @@
 
 
 
-.dropdownMenuContent {
+.historyDropdown {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 260px;
+}
+
+.dropdownPanel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 20;
+  width: 100%;
+  max-width: 240px;
   background-color: var(--blue-black);
   color: var(--white);
-  border: none;
+  border: 1px solid var(--black-border);
+  border-radius: 12px;
+  padding: 6px 0;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
 
-  .dropdownMenuItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 4px 8px;
-    border: solid 1px var(--black-border);
-    cursor: pointer;
+.dropdownScroll {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.dropdownMenuItem {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  &:hover,
+  &:focus {
+    background-color: rgba(255, 255, 255, 0.08);
+    outline: none;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+    border-bottom: none;
   }
 }

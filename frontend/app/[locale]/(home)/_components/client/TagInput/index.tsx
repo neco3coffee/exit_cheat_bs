@@ -2,14 +2,8 @@
 
 import { sendGAEvent } from "@next/third-parties/google";
 import { History } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "@/app/_messages/i18n/navigation";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import {
   InputGroup,
   InputGroupAddon,
@@ -17,12 +11,13 @@ import {
   InputGroupInput,
   InputGroupText,
 } from "@/components/ui/input-group";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import styles from "./index.module.scss";
 
 export default function TagInput() {
   const router = useRouter();
   const tagInputRef = useRef<HTMLInputElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
   const searchLogList: { tag: string; name: string }[] =
     typeof window !== "undefined"
       ? (JSON.parse(localStorage.getItem("searchLogList") || "[]") as {
@@ -30,6 +25,29 @@ export default function TagInput() {
           name: string;
         }[])
       : [];
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [isOpen]);
 
   const handleTagSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -77,54 +95,63 @@ export default function TagInput() {
   };
 
   return (
-    <InputGroup className={styles.inputGroup}>
-      <InputGroupAddon>
-        <InputGroupText className={styles.inputGroupText}>#</InputGroupText>
-      </InputGroupAddon>
-      <InputGroupInput
-        ref={tagInputRef}
-        placeholder="Y2YPGCGC"
-        type="search"
-        enterKeyHint="search"
-        className={styles.inputGroupInput}
-        maxLength={10}
-        onKeyDown={handleTagSearch}
-      />
-      <InputGroupAddon align="inline-end">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild className={styles.DropdownMenuTrigger}>
-            <InputGroupButton variant="ghost" style={{ marginRight: "15px" }}>
-              <History
-                style={{ width: "20px", height: "20px", fontSize: "20px" }}
-              />
-            </InputGroupButton>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            align="end"
-            className={styles.dropdownMenuContent}
+    <div className={styles.historyDropdown} ref={dropdownRef}>
+      <InputGroup className={styles.inputGroup}>
+        <InputGroupAddon>
+          <InputGroupText className={styles.inputGroupText}>#</InputGroupText>
+        </InputGroupAddon>
+        <InputGroupInput
+          ref={tagInputRef}
+          placeholder="Y2YPGCGC"
+          type="search"
+          enterKeyHint="search"
+          className={styles.inputGroupInput}
+          maxLength={10}
+          onKeyDown={handleTagSearch}
+        />
+        <InputGroupAddon align="inline-end">
+          <InputGroupButton
+            variant="ghost"
+            style={{ marginRight: "15px" }}
+            aria-label="Search history"
+            aria-expanded={isOpen}
+            onClick={() => setIsOpen((prev) => !prev)}
           >
-            <ScrollArea className="max-h-[250px] w-[15rem]">
-              {searchLogList.length === 0 && (
-                <DropdownMenuItem className="cursor-default">
-                  No History
-                </DropdownMenuItem>
-              )}
-              {searchLogList.map((item) => (
-                <DropdownMenuItem
-                  key={item.tag}
-                  onSelect={(event) => {
-                    router.push(`/players/${item.tag}`);
-                  }}
-                  className={styles.dropdownMenuItem}
-                >
-                  #{item.tag}
-                  {item.name && ` ${item.name}`}
-                </DropdownMenuItem>
-              ))}
-            </ScrollArea>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </InputGroupAddon>
-    </InputGroup>
+            <History
+              style={{ width: "20px", height: "20px", fontSize: "20px" }}
+            />
+          </InputGroupButton>
+        </InputGroupAddon>
+      </InputGroup>
+      {isOpen && (
+        <div className={styles.dropdownPanel} role="menu">
+          <div className={styles.dropdownScroll}>
+            {searchLogList.length === 0 && (
+              <button
+                type="button"
+                className={styles.dropdownMenuItem}
+                disabled
+              >
+                No History
+              </button>
+            )}
+            {searchLogList.map((item) => (
+              <button
+                key={item.tag}
+                type="button"
+                className={styles.dropdownMenuItem}
+                onClick={() => {
+                  setIsOpen(false);
+                  router.push(`/players/${item.tag}`);
+                }}
+              >
+                #{item.tag}
+                {item.name && ` ${item.name}`}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
