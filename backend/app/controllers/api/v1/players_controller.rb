@@ -244,7 +244,7 @@ module Api
         tag = "##{tag}" unless tag.start_with?("#")
         is_admin = player.role == "admin"
 
-        if !is_admin
+        unless is_admin
           render json: { error: "Forbidden" }, status: :forbidden
           return
         end
