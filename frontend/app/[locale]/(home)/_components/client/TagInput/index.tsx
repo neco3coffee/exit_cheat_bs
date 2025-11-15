@@ -113,7 +113,8 @@ export default function TagInput() {
               {searchLogList.map((item) => (
                 <DropdownMenuItem
                   key={item.tag}
-                  onClick={() => {
+                  onSelect={(event) => {
+                    event.preventDefault();
                     setIsOpen(false);
                     router.push(`/players/${item.tag}`);
                   }}
