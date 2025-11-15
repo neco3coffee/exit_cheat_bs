@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Link } from "@/app/_messages/i18n/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Loading from "../../loading";
+import BattleLogAutoSaveIconToggle from "../client/BattleLogAutoSaveToggle";
 import styles from "./index.module.scss";
 
 interface Player {
@@ -32,6 +33,9 @@ export default async function RankedPage({
   return (
     <div className={styles.container}>
       <Suspense fallback={<Loading />}>{recentReportComponent}</Suspense>
+      {/* auto save radar icon and expire time */}
+      <BattleLogAutoSaveIconToggle expiresAt={"2025-11-15T16:24:16.035Z"} />
+
       <Tabs className="w-full" defaultValue="battleLogs">
         <TabsList className={styles.tabsList}>
           <Link href={`/ranked/stats`} className={styles.tabTrigger}>
