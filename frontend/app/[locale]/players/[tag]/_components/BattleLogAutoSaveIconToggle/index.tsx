@@ -110,7 +110,6 @@ export default function BattleLogAutoSaveIconToggle({
       <Switch
         checked={enabled}
         onCheckedChange={(v) => {
-          setEnabled(v);
           toggleEnabled(v);
         }}
         className={`scale-150 pl-2 data-[state=checked]:bg-blue-500 bg-gray-400`}
