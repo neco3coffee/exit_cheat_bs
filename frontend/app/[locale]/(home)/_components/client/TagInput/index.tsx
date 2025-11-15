@@ -30,7 +30,6 @@ export default function TagInput() {
           name: string;
         }[])
       : [];
-  const [isOpen, setIsOpen] = useState(false);
 
   const handleTagSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -92,7 +91,7 @@ export default function TagInput() {
         onKeyDown={handleTagSearch}
       />
       <InputGroupAddon align="inline-end">
-        <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+        <DropdownMenu>
           <DropdownMenuTrigger asChild className={styles.DropdownMenuTrigger}>
             <InputGroupButton variant="ghost" style={{ marginRight: "15px" }}>
               <History
@@ -114,8 +113,6 @@ export default function TagInput() {
                 <DropdownMenuItem
                   key={item.tag}
                   onSelect={(event) => {
-                    event.preventDefault();
-                    setIsOpen(false);
                     router.push(`/players/${item.tag}`);
                   }}
                   className={styles.dropdownMenuItem}
