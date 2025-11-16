@@ -17,7 +17,8 @@ RSpec.describe BattleAutoSaveJob, type: :job do
           'battleTime' => '20251115T120000.000Z',
           'event' => {
             'mode' => 'bounty',
-            'map' => 'Excel'
+            'map' => 'Excel',
+            'id' => 123_456
           },
           'battle' => {
             'mode' => 'bounty',
@@ -54,7 +55,8 @@ RSpec.describe BattleAutoSaveJob, type: :job do
           'battleTime' => '20251115T121500.000Z',
           'event' => {
             'mode' => 'bounty',
-            'map' => 'Excel'
+            'map' => 'Excel',
+            'id' => 123_456
           },
           'battle' => {
             'mode' => 'bounty',
@@ -96,7 +98,8 @@ RSpec.describe BattleAutoSaveJob, type: :job do
       'battleTime' => '20251115T115000.000Z',
       'event' => {
         'mode' => 'knockout',
-        'map' => 'Some Map'
+        'map' => 'Some Map',
+        'id' => 654_321
       },
       'battle' => {
         'mode' => 'knockout',
@@ -124,7 +127,8 @@ RSpec.describe BattleAutoSaveJob, type: :job do
         'battleTime' => '20251115T120800.000Z',
         'event' => {
           'mode' => 'bounty',
-          'map' => 'Excel'
+          'map' => 'Excel',
+          'id' => 123_456
         },
         'battle' => {
           'mode' => 'bounty',
@@ -143,7 +147,8 @@ RSpec.describe BattleAutoSaveJob, type: :job do
         'battleTime' => '20251115T124000.000Z',
         'event' => {
           'mode' => 'bounty',
-          'map' => 'Excel'
+          'map' => 'Excel',
+          'id' => 123_456
         },
         'battle' => {
           'mode' => 'bounty',
@@ -179,6 +184,7 @@ RSpec.describe BattleAutoSaveJob, type: :job do
         '20251115T121500.000Z'
       ])
       expect(battle.result).to eq('ongoing')
+      expect(battle.map_id).to eq(123_456)
     end
 
     it 'appends new rounds without duplicating existing ones when re-run' do
@@ -196,6 +202,7 @@ RSpec.describe BattleAutoSaveJob, type: :job do
       ])
       expect(battle.battle_id).to eq("#{signature}-2025-11-15T12:00:00Z")
       expect(battle.result).to eq('victory')
+      expect(battle.map_id).to eq(123_456)
     end
 
     it 'creates a new battle when the time gap exceeds fifteen minutes' do
@@ -220,6 +227,8 @@ RSpec.describe BattleAutoSaveJob, type: :job do
       expect(second_battle.battle_id).to eq("#{signature}-2025-11-15T12:40:00Z")
       expect(first_battle.result).to eq('ongoing')
       expect(second_battle.result).to eq('ongoing')
+  expect(first_battle.map_id).to eq(123_456)
+  expect(second_battle.map_id).to eq(123_456)
     end
 
     it 'persists defeat when at least two rounds are defeats' do
@@ -228,7 +237,8 @@ RSpec.describe BattleAutoSaveJob, type: :job do
         'battleTime' => '20251115T122500.000Z',
         'event' => {
           'mode' => 'bounty',
-          'map' => 'Excel'
+          'map' => 'Excel',
+          'id' => 123_456
         },
         'battle' => {
           'mode' => 'bounty',
@@ -245,6 +255,7 @@ RSpec.describe BattleAutoSaveJob, type: :job do
       battle = player.reload.battles.first
       expect(battle.rounds.size).to eq(3)
       expect(battle.result).to eq('defeat')
+  expect(battle.map_id).to eq(123_456)
     end
 
     it 'ignores non-soloRanked battles when mixed in the response' do

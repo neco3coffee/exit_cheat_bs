@@ -91,6 +91,8 @@ export default function TagInput() {
         sessionStorage.setItem("last_source", "home_screen");
       }
       router.push(`/players/${inputTag.toUpperCase()}`);
+      // Clear input field
+      e.currentTarget.value = "";
     }
   };
 
