@@ -32,6 +32,9 @@ Rails.application.routes.draw do
       post "ranked/battle_logs/auto_save", to: "players#toggle_battle_log_auto_save"
 
 
+      get "maps/:id/brawler_pick_rate", to: "battles#map_brawler_pick_rate"
+
+
       get "stats", to: "stats#index"
     end
   end
