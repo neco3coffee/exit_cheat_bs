@@ -1,15 +1,106 @@
 .container {
   width: 100%;
-  height: calc(100vh - 150px);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
   .mapImage {
     // aspect-ratio: 21 / 33;
     max-width: 90%;
-    max-height: 90%;
     border-radius: 0px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.notice {
+  margin-top: 16px;
+  width: 90%;
+  text-align: center;
+  color: var(--gray-400, rgba(255, 255, 255, 0.6));
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.pickRateList {
+  margin-top: 20px;
+  width: 90%;
+}
+.pickRateItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--black-border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .brawlerIcon {
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.12), transparent 70%);
+  }
+
+  .pickRateContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .pickRateBarRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .pickRateBarTrack {
+    flex: 1;
+    position: relative;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+  }
+
+  .pickRateBarFill {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #ff9f1c 0%, #ff4e50 100%);
+    border-radius: inherit;
+    transition: width 0.3s ease;
+  }
+
+  .pickRateValue {
+    min-width: 48px;
+    text-align: right;
+    color: var(--white);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .pickRateMeta {
+    display: flex;
+    gap: 12px;
+    font-size: 0.9rem;
+  }
+
+  .winRate {
+    color: var(--accent-500, #ffd447);
+    font-weight: bold;
+  }
+
+  .winRateVictory {
+    color: var(--success-500, #4cd964);
+  }
+
+  .winRateDefeat {
+    color: var(--danger-500, #ff5f5f);
+  }
+
+  .battleCount {
+    color: var(--gray-400, #b0b0b0);
+    font-size: 0.85rem;
   }
 }

@@ -73,9 +73,10 @@ class BattleAutoSaveJob < ApplicationJob
     candidate_ranks = [ extract_player_rank(battle, player.tag), record.rank, player.rank ].compact
     record.rank = candidate_ranks.max || 0
     record.battle_time = [ record.battle_time, battle_time ].compact.max
-    record.mode = battle["mode"] || item.dig("event", "mode")
-    record.type = battle["type"]
-    record.map = item.dig("event", "map") || battle["map"]
+  record.mode = battle["mode"] || item.dig("event", "mode")
+  record.type = battle["type"]
+  record.map = item.dig("event", "map") || battle["map"]
+  record.map_id = extract_map_id(item) || record.map_id
     record.teams = battle["teams"] || battle["players"]
     record.raw_data = item
 
@@ -241,5 +242,18 @@ class BattleAutoSaveJob < ApplicationJob
     normalized = tag.to_s.upcase.strip
     normalized = normalized.gsub("O", "0")
     normalized.start_with?("#") ? normalized : "##{normalized}"
+  end
+
+  def extract_map_id(item)
+    raw_value = item.dig("event", "id")
+    return if raw_value.blank?
+
+    case raw_value
+    when Integer
+      raw_value
+    when String
+      value = raw_value.strip
+      value.to_i if value.match?(/\A\d+\z/)
+    end
   end
 end

@@ -4,6 +4,9 @@
     "linkText": "首页",
     "operator": "运营者"
   },
+  "maps": {
+    "masterNotice": "数据基于大师II及以上的对战汇总。"
+  },
   "ranked": {
     "login": "登录",
     "unauthenticated": "您需要登录才能访问此页面",

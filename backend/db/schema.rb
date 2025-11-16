@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_15_091518) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_16_094000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pg_catalog.plpgsql"
@@ -31,9 +31,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_15_091518) do
     t.jsonb "raw_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "map_id"
     t.index ["battle_id"], name: "index_battles_on_battle_id"
     t.index ["battle_time"], name: "index_battles_on_battle_time"
     t.index ["map"], name: "index_battles_on_map"
+    t.index ["map_id"], name: "index_battles_on_map_id"
     t.index ["mode"], name: "index_battles_on_mode"
     t.index ["player_id", "battle_id"], name: "index_battles_on_player_id_and_battle_id", unique: true
     t.index ["player_id"], name: "index_battles_on_player_id"

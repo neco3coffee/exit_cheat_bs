@@ -107,11 +107,9 @@ export async function generateStaticParams() {
 export default async function RootLayout({
   children,
   params,
-  modal,
 }: Readonly<{
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
-  modal: React.ReactNode;
 }>) {
   const { locale } = await params;
 
@@ -127,8 +125,6 @@ export default async function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Header params={params} />
         <main>{children}</main>
-        <div key="modal">{modal}</div>
-        <div id="modal-root" />
         <Footer params={params} />
         <Suspense fallback={null}>
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />

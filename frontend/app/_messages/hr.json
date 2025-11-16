@@ -4,6 +4,9 @@
     "linkText": "Početna",
     "operator": "Operator"
   },
+  "maps": {
+    "masterNotice": "Podaci su agregirani iz borbi ranga Master II i viših."
+  },
   "ranked": {
     "login": "Prijava",
     "unauthenticated": "Morate biti prijavljeni za pristup ovoj stranici",

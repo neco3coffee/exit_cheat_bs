@@ -8,6 +8,7 @@ FactoryBot.define do
     type { "soloRanked" }
     result { "victory" }
     map { "Excel" }
+    map_id { 15000007 }
     teams { [] }
     rounds { [] }
     raw_data { {} }

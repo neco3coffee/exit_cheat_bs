@@ -4,6 +4,9 @@
     "linkText": "Accueil",
     "operator": "Opérateur"
   },
+  "maps": {
+    "masterNotice": "Données agrégées à partir des combats Master II et plus."
+  },
   "ranked": {
     "login": "Connexion",
     "unauthenticated": "Vous devez être connecté pour accéder à cette page",
