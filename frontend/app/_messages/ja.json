@@ -70,6 +70,9 @@
       "copyright": "© SafeBrawl 2025 — Powered by Brawlify API, AWS, etc."
     }
   },
+  "maps": {
+    "masterNotice": "マスター2以上のバトルをもとに集計しています。"
+  },
   "home": {
     "placeholder": "プレイヤー名",
     "linkText": "ホーム",

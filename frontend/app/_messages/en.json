@@ -4,6 +4,9 @@
     "linkText": "Home",
     "operator": "Operator"
   },
+  "maps": {
+    "masterNotice": "Aggregated from Master II battles or higher."
+  },
   "ranked": {
     "login": "Login",
     "unauthenticated": "You need to be logged in to access this page",

@@ -42,6 +42,7 @@ class Battle < ApplicationRecord
 
         {
           brawler_id: brawler_id,
+          battle_count: values[:picks],
           pick_rate: pick_rate.round(4),
           win_rate: win_rate.round(4)
         }

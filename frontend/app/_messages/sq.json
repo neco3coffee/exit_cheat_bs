@@ -4,6 +4,9 @@
     "linkText": "Ballina",
     "operator": "Operator"
   },
+  "maps": {
+    "masterNotice": "Të dhënat janë përmbledhur nga betejat Master II ose më të larta."
+  },
   "ranked": {
     "login": "Hyr",
     "unauthenticated": "Duhet të jeni të kyçur për të hyrë në këtë faqe",

@@ -4,6 +4,9 @@
     "linkText": "Domů",
     "operator": "Operátor"
   },
+  "maps": {
+    "masterNotice": "Agregováno z bitev na úrovni Master II a vyšší."
+  },
   "ranked": {
     "login": "Přihlásit se",
     "unauthenticated": "Pro přístup na tuto stránku musíte být přihlášeni",

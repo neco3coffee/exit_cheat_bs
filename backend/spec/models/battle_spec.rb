@@ -63,15 +63,19 @@ RSpec.describe Battle, type: :model do
 
       expect(brawler_player[:pick_rate]).to eq(1.0) # appears in both qualifying battles (2 picks / 2 battles)
       expect(brawler_player[:win_rate]).to eq(0.5)  # one victory, one defeat
+      expect(brawler_player[:battle_count]).to eq(2)
 
       expect(brawler_teammate[:pick_rate]).to eq(0.5) # only in the victory battle
       expect(brawler_teammate[:win_rate]).to eq(1.0)
+  expect(brawler_teammate[:battle_count]).to eq(1)
 
       expect(brawler_opponent_loss[:pick_rate]).to eq(0.5)
       expect(brawler_opponent_loss[:win_rate]).to eq(0.0)
+  expect(brawler_opponent_loss[:battle_count]).to eq(1)
 
       expect(brawler_opponent_win[:pick_rate]).to eq(0.5)
       expect(brawler_opponent_win[:win_rate]).to eq(1.0)
+  expect(brawler_opponent_win[:battle_count]).to eq(1)
     end
   end
 end

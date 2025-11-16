@@ -4,6 +4,9 @@
     "linkText": "Início",
     "operator": "Operador"
   },
+  "maps": {
+    "masterNotice": "Dados agregados a partir de batalhas Mestre II ou superiores."
+  },
   "ranked": {
     "login": "Entrar",
     "unauthenticated": "Você precisa estar logado para acessar esta página",
