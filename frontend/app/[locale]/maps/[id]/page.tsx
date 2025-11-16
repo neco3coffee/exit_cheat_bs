@@ -8,7 +8,7 @@ const apiUrl = "http://app:3000";
 
 export async function getBrawlerPickRateByMap(mapId: number) {
   "use cache";
-  cacheLife("hours");
+  cacheLife("minutes");
 
   const res = await fetch(`${apiUrl}/api/v1/maps/${mapId}/brawler_pick_rate`, {
     method: "GET",
