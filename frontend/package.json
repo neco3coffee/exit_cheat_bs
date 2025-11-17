@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "postbuild": "next-sitemap",
-    "lint": "biome check --write --max-diagnostics=1000",
-    "ci": "biome ci",
+    "lint": "node ./scripts/run-biome.mjs check --write --max-diagnostics=1000",
+    "ci": "node ./scripts/run-biome.mjs ci",
     "typecheck": "tsc --noEmit",
     "checkBuild": "next build --debug-prerender"
   },
@@ -50,6 +50,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.2",
+    "@biomejs/wasm-nodejs": "^2.3.6",
     "@types/node": "^20",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
