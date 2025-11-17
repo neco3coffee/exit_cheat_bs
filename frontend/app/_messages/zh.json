@@ -117,6 +117,14 @@
     "Impossible": "不可能",
     "undefined": "未定义的战斗类型"
   },
+  "playerStats": {
+    "playerNotFound": "未找到玩家。请再次确认标签。",
+    "seasonCountdown": {
+      "inSeason": "距离赛季结束：",
+      "downtime": "距离下个赛季开始：",
+      "unavailable": "当前无法获取赛季信息。"
+    }
+  },
   "termsOfService": {
     "title": "服务条款",
     "linkText": "服务条款",

@@ -117,6 +117,14 @@
     "Impossible": "E PAMUNDUR",
     "undefined": "TIPI I BETEJËS I PAPËRCAKTUAR"
   },
+  "playerStats": {
+    "playerNotFound": "Lojtari nuk u gjet. Ju lutem kontrolloni tag-un.",
+    "seasonCountdown": {
+      "inSeason": "Koha deri në fundin e sezonit:",
+      "downtime": "Koha deri në sezonin e ardhshëm:",
+      "unavailable": "Informacioni i sezonit nuk është i disponueshëm tani."
+    }
+  },
   "termsOfService": {
     "title": "Kushtet e Shërbimit",
     "linkText": "Kushtet e Shërbimit",

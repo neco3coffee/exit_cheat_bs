@@ -117,6 +117,14 @@
     "Impossible": "IMPROVÁVEL",
     "undefined": "TIPO DE BATALHA INDEFINIDO"
   },
+  "playerStats": {
+    "playerNotFound": "Jogador não encontrado. Verifique a tag.",
+    "seasonCountdown": {
+      "inSeason": "Tempo restante para o fim da temporada:",
+      "downtime": "Tempo para a próxima temporada:",
+      "unavailable": "As informações da temporada não estão disponíveis no momento."
+    }
+  },
   "termsOfService": {
     "title": "Termos de Serviço",
     "linkText": "Termos de Serviço",

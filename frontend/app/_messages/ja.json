@@ -188,6 +188,14 @@
     "Impossible": "インポッシブル",
     "undefined": "不明なバトル形式"
   },
+  "playerStats": {
+    "playerNotFound": "プレイヤーが見つかりません。タグを確認してください。",
+    "seasonCountdown": {
+      "inSeason": "シーズン終了まで：",
+      "downtime": "次のシーズンまで：",
+      "unavailable": "シーズン情報を取得できませんでした。"
+    }
+  },
   "termsOfService": {
     "title": "利用規約",
     "linkText": "利用規約",

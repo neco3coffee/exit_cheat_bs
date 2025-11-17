@@ -276,6 +276,75 @@ module Api
         }
       end
 
+      def stats
+        tag = params[:tag].to_s.upcase.strip
+        tag = tag.gsub("O", "0")
+        tag = "##{tag}" unless tag.start_with?("#")
+        Rails.logger.info("fetching stats for tag: #{tag}")
+
+        player = Player.find_by(tag: tag)
+        if player.nil?
+          render json: { error: "Player not found" }, status: 404 and return
+        end
+
+        # ここで必要な統計情報を計算・取得
+
+
+        # render json:
+        # render json: {
+        #   player: {},
+        #   season: {
+        #     battle_count: 0,
+        #     win_rate: 0.0,
+        #     highest_rank: 0
+        #   },
+        #   brawler_stats: [
+        #     {
+        #       id: 0,
+        #       gadget: [],
+        #       star_power: [],
+        #       gear: [],
+        #       pick_rate: 0.0,
+        #       win_rate: 0.0,
+        #       battle_count: 0
+        #     }, ...
+        #   ],
+        #   mode_stats: {
+        #     knockout: { battle_count: 0, win_rate: 0.0 },
+        #     gemGrab: { battle_count: 0, win_rate: 0.0 },
+        #     heist: { battle_count: 0, win_rate: 0.0 },
+        #     brawlBall: { battle_count: 0, win_rate: 0.0 },
+        #     hotZone: { battle_count: 0, win_rate: 0.0 },
+        #     bounty: { battle_count: 0, win_rate: 0.0 },
+        #   },
+        #   high_win_rate_team_mates: [
+        #     {
+        #       tag: "",
+        #       name: "",
+        #       icon_id: 0,
+        #       rank: 0,
+        #       battle_count: 0,
+        #       win_rate: 0.0
+        #     }, ...
+        #   ],
+        #   most_defeated_enemies: [
+        #     {
+        #       tag: "",
+        #       name: "",
+        #       icon_id: 0,
+        #       rank: 0,
+        #       battle_count: 0,
+        #       win_rate: 0.0
+        #     }
+        #   ],
+        #   battles: []
+        # }
+      rescue StandardError => e
+        Rails.logger.error("Stats exception occurred: #{e.message}")
+        Rails.logger.error(e.backtrace.join("\n"))
+        render json: { error: "An error occurred while processing your request" }, status: 500
+      end
+
       private
       # TODO: api tokenが制限に達した場合に備える
 

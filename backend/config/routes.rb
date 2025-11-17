@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get "players/search", to: "players#search"
       post "players/:tag/auto_save", to: "players#toggle_player_auto_save"
+      get "players/:tag/stats", to: "players#stats"
       get "players/:tag", to: "players#show"
       get "players/:tag/ranked", to: "players#ranked"
       get "players/:tag/reports", to: "players#reports"
@@ -33,6 +34,8 @@ Rails.application.routes.draw do
 
 
       get "maps/:id/brawler_pick_rate", to: "battles#map_brawler_pick_rate"
+
+      get "seasons/current", to: "seasons#current"
 
 
       get "stats", to: "stats#index"

@@ -117,6 +117,14 @@
     "Impossible": "NEMOŽNÉ",
     "undefined": "NEDEFINOVANÝ TYP BITVY"
   },
+  "playerStats": {
+    "playerNotFound": "Hráč nenalezen. Zkontrolujte prosím tag.",
+    "seasonCountdown": {
+      "inSeason": "Čas do konce sezóny:",
+      "downtime": "Čas do další sezóny:",
+      "unavailable": "Informace o sezóně momentálně nejsou k dispozici."
+    }
+  },
   "termsOfService": {
     "title": "Podmínky služby",
     "linkText": "Podmínky služby",

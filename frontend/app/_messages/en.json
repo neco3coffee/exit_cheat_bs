@@ -117,6 +117,14 @@
     "Impossible": "IMPOSSIBLE",
     "undefined": "UNDEFINED BATTLE TYPE"
   },
+  "playerStats": {
+    "playerNotFound": "Player not found. Please double-check the tag.",
+    "seasonCountdown": {
+      "inSeason": "Time until season ends:",
+      "downtime": "Time until next season:",
+      "unavailable": "Season info is unavailable right now."
+    }
+  },
   "termsOfService": {
     "title": "Terms of Service",
     "linkText": "Terms of Service",
