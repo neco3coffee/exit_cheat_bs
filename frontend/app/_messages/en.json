@@ -119,10 +119,61 @@
   },
   "playerStats": {
     "playerNotFound": "Player not found. Please double-check the tag.",
+    "statsUnavailable": "We couldn’t load ranked stats for this player. Please try again later.",
+    "playerSubtitle": "Seasonal solo ranked snapshot.",
+    "rankUnknown": "Unranked",
     "seasonCountdown": {
       "inSeason": "Time until season ends:",
       "downtime": "Time until next season:",
       "unavailable": "Season info is unavailable right now."
+    },
+    "seasonSummary": {
+      "battleCount": "Battles",
+      "battleCountCaption": "Solo ranked battles tracked",
+      "winRate": "Win Rate",
+      "winRateCaption": "Wins ÷ total battles",
+      "highestRank": "Highest Rank",
+      "highestRankCaption": "Peak this season"
+    },
+    "brawlerStats": {
+      "title": "Top Brawler Picks",
+      "pickRate": "Pick Rate",
+      "winRate": "Win Rate",
+      "battleCount": "Battles",
+      "gadgets": "Gadgets",
+      "starPowers": "Star Powers",
+      "gears": "Gears",
+      "empty": "There’s no brawler data yet."
+    },
+    "modeRadar": {
+      "title": "Mode Performance",
+      "tooltipWinRate": "Win rate",
+      "tooltipBattleCount": "Battles",
+      "empty": "No mode data available.",
+      "labels": {
+        "knockout": "Knockout",
+        "gemGrab": "Gem Grab",
+        "bounty": "Bounty",
+        "heist": "Heist",
+        "brawlBall": "Brawl Ball",
+        "hotZone": "Hot Zone"
+      }
+    },
+    "person": {
+      "winRate": "Win rate",
+      "battleCount": "Battles"
+    },
+    "teammates": {
+      "title": "High win-rate teammates",
+      "empty": "We haven’t found reliable teammates yet."
+    },
+    "enemies": {
+      "title": "Most defeated opponents",
+      "empty": "No repeated rival victories yet."
+    },
+    "battles": {
+      "title": "Solo ranked battles",
+      "empty": "No solo ranked battles recorded this season."
     }
   },
   "termsOfService": {

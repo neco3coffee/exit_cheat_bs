@@ -190,10 +190,61 @@
   },
   "playerStats": {
     "playerNotFound": "プレイヤーが見つかりません。タグを確認してください。",
+    "statsUnavailable": "統計データを取得できませんでした。少し時間を置いて再度お試しください。",
+    "playerSubtitle": "現在シーズンのソロランク統計を表示しています。",
+    "rankUnknown": "未到達",
     "seasonCountdown": {
       "inSeason": "シーズン終了まで：",
       "downtime": "次のシーズンまで：",
       "unavailable": "シーズン情報を取得できませんでした。"
+    },
+    "seasonSummary": {
+      "battleCount": "バトル数",
+      "battleCountCaption": "ソロランクの集計対象バトル",
+      "winRate": "勝率",
+      "winRateCaption": "勝利 ÷ 総バトル",
+      "highestRank": "最高到達ランク",
+      "highestRankCaption": "シーズン中の最高ランク"
+    },
+    "brawlerStats": {
+      "title": "ピック率の高いブロスタ",
+      "pickRate": "ピック率",
+      "winRate": "勝率",
+      "battleCount": "バトル数",
+      "gadgets": "ガジェット",
+      "starPowers": "スターパワー",
+      "gears": "ギア",
+      "empty": "表示できるデータがありません。"
+    },
+    "modeRadar": {
+      "title": "モード別勝率",
+      "tooltipWinRate": "勝率",
+      "tooltipBattleCount": "バトル数",
+      "empty": "データが不足しています。",
+      "labels": {
+        "knockout": "ノックアウト",
+        "gemGrab": "エメラルドハント",
+        "bounty": "バウンティ",
+        "heist": "強奪",
+        "brawlBall": "ブロストライカー",
+        "hotZone": "ホットゾーン"
+      }
+    },
+    "person": {
+      "winRate": "勝率",
+      "battleCount": "バトル数"
+    },
+    "teammates": {
+      "title": "勝率の高い味方",
+      "empty": "まだ相性の良い味方データがありません。"
+    },
+    "enemies": {
+      "title": "最も勝利した相手",
+      "empty": "まだ勝利データがありません。"
+    },
+    "battles": {
+      "title": "ソロランクのバトル履歴",
+      "empty": "今シーズンのソロランクバトルはまだありません。"
     }
   },
   "termsOfService": {

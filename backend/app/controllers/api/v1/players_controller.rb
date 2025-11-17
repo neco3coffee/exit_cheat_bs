@@ -288,57 +288,42 @@ module Api
         end
 
         # ここで必要な統計情報を計算・取得
+        start_time, end_time = SeasonCalendar.current_period_in_utc
 
+        battles = Battle.where(player_id: player.id).where("battle_time >= ? AND battle_time < ?", start_time, end_time)
 
-        # render json:
-        # render json: {
-        #   player: {},
-        #   season: {
-        #     battle_count: 0,
-        #     win_rate: 0.0,
-        #     highest_rank: 0
-        #   },
-        #   brawler_stats: [
-        #     {
-        #       id: 0,
-        #       gadget: [],
-        #       star_power: [],
-        #       gear: [],
-        #       pick_rate: 0.0,
-        #       win_rate: 0.0,
-        #       battle_count: 0
-        #     }, ...
-        #   ],
-        #   mode_stats: {
-        #     knockout: { battle_count: 0, win_rate: 0.0 },
-        #     gemGrab: { battle_count: 0, win_rate: 0.0 },
-        #     heist: { battle_count: 0, win_rate: 0.0 },
-        #     brawlBall: { battle_count: 0, win_rate: 0.0 },
-        #     hotZone: { battle_count: 0, win_rate: 0.0 },
-        #     bounty: { battle_count: 0, win_rate: 0.0 },
-        #   },
-        #   high_win_rate_team_mates: [
-        #     {
-        #       tag: "",
-        #       name: "",
-        #       icon_id: 0,
-        #       rank: 0,
-        #       battle_count: 0,
-        #       win_rate: 0.0
-        #     }, ...
-        #   ],
-        #   most_defeated_enemies: [
-        #     {
-        #       tag: "",
-        #       name: "",
-        #       icon_id: 0,
-        #       rank: 0,
-        #       battle_count: 0,
-        #       win_rate: 0.0
-        #     }
-        #   ],
-        #   battles: []
-        # }
+        win_rate = if battles.count.positive?
+                     battles.where(result: "victory").count.to_f / battles.count
+        else
+                     0.0
+        end
+
+        highest_rank = battles.maximum(:rank) || 0
+
+        #
+        brawler_stats = Battle.calculate_brawler_stats(battles)
+        mode_stats = Battle.calculate_mode_stats(battles)
+        high_win_rate_teammates = Battle.calculate_high_win_rate_teammates(player, battles)
+        most_defeated_enemies = Battle.calculate_most_defeated_enemies(player, battles)
+
+        render json: {
+          player: {
+            tag: player.tag,
+            name: player.name,
+            icon_id: player.icon_id,
+            rank: player.rank
+          },
+          season: {
+            battle_count: battles.count,
+            win_rate: win_rate.round(4),
+            highest_rank: highest_rank
+          },
+          brawler_stats: brawler_stats,
+          mode_stats: mode_stats,
+          high_win_rate_teammates: high_win_rate_teammates,
+          most_defeated_enemies: most_defeated_enemies,
+          battles: battles.as_json
+        }
       rescue StandardError => e
         Rails.logger.error("Stats exception occurred: #{e.message}")
         Rails.logger.error(e.backtrace.join("\n"))

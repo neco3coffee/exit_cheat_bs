@@ -41,11 +41,16 @@ export function SeasonCountdown({
 }: SeasonCountdownProps) {
   const seasonStart = useMemo(() => new Date(startDateTime), [startDateTime]);
   const seasonEnd = useMemo(() => new Date(endDateTime), [endDateTime]);
-  const [now, setNow] = useState(() => new Date());
+  const [now, setNow] = useState<number | null>(null);
 
   useEffect(() => {
+    const tick = () => {
+      setNow(Date.now());
+    };
+    tick();
+
     const timer = window.setInterval(() => {
-      setNow(new Date());
+      tick();
     }, 1000);
 
     return () => window.clearInterval(timer);
@@ -62,10 +67,16 @@ export function SeasonCountdown({
     );
   }
 
-  const isDowntime = now < seasonStart;
+  const isDowntime = now !== null ? now < seasonStart.getTime() : false;
   const target = isDowntime ? seasonStart : seasonEnd;
-  const label = isDowntime ? labels.downtime : labels.inSeason;
-  const countdown = formatDuration(target.getTime() - now.getTime());
+  const label =
+    now !== null
+      ? isDowntime
+        ? labels.downtime
+        : labels.inSeason
+      : labels.inSeason;
+  const countdown =
+    now !== null ? formatDuration(target.getTime() - now) : "--";
 
   return (
     <div className={styles.container}>
