@@ -287,12 +287,12 @@ module Api
           render json: { error: "Player not found" }, status: 404 and return
         end
 
-        # ここで必要な統計情報を計算・取得
-        start_time, end_time = SeasonCalendar.current_period_in_utc
+    # ここで必要な統計情報を計算・取得
+    start_time, end_time = SeasonCalendar.current_period_in_utc
 
-  battles = Battle.where(player_id: player.id)
-      .where("battle_time >= ? AND battle_time < ?", start_time, end_time)
-      .order(battle_time: :desc)
+    battles = Battle.where(player_id: player.id)
+            .where("battle_time >= ? AND battle_time < ?", start_time, end_time)
+            .order(battle_time: :desc)
 
         win_rate = if battles.count.positive?
                      battles.where(result: "victory").count.to_f / battles.count
