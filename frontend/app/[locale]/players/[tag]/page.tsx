@@ -1,4 +1,3 @@
-import { Rocket } from "lucide-react";
 import { cacheLife, cacheTag } from "next/cache";
 import { cookies } from "next/headers";
 import Image from "next/image";
@@ -72,8 +71,10 @@ type Player = {
   };
   auto_save_enabled?: boolean | null;
   auto_save_expires_at?: string | null;
-  battlelog: any;
-  error?: any;
+  battlelog?: {
+    items?: unknown[];
+  } | null;
+  error?: unknown;
 };
 
 export default function Page({
@@ -165,21 +166,32 @@ async function PlayerPage({
             </h1>
             {player.currentRank >= 0 && (
               <div className={styles.rankContainer}>
-                {player.currentRank! > 0 && (
-                  <>
-                    <Image
-                      src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player.currentRank! - 1)}.png`}
-                      alt="rank"
-                      height={60}
-                      width={60}
-                      sizes="60px"
-                      style={{ height: "60px", width: "auto" }}
-                    />
-                  </>
+                {player.currentRank > 0 && (
+                  <Image
+                    src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player.currentRank - 1)}.png`}
+                    alt="rank"
+                    height={60}
+                    width={60}
+                    sizes="60px"
+                    style={{ height: "60px", width: "auto" }}
+                  />
                 )}
               </div>
             )}
           </div>
+          <Link
+            href={`/players/${tag}/stats`}
+            className={styles.statsLink}
+            aria-label={`View ranked stats for ${player.name}`}
+            title={`View ranked stats for ${player.name}`}
+          >
+            <span className={styles.statsLinkGlow} aria-hidden="true" />
+            <span className={styles.statsLinkContent} aria-hidden="true">
+              <span className={styles.statsLinkIcon}>⚔️</span>
+              <span className={styles.statsLinkDivider} />
+              <span className={styles.statsLinkIcon}>📊</span>
+            </span>
+          </Link>
         </div>
         {isAdmin && (
           <BattleLogAutoSaveIconToggle
