@@ -282,6 +282,18 @@ export async function PlayerStatsPage({
     gears: Array.isArray(stat.gears) ? stat.gears : [],
   }));
 
+  const topBrawlersForOverview = brawlerStats
+    .filter((stat) => (stat.battleCount ?? 0) > 0)
+    .sort((a, b) => (b.battleCount ?? 0) - (a.battleCount ?? 0))
+    .slice(0, 5)
+    .map((stat) => ({
+      id: stat.id,
+      name: stat.name,
+      pickRate: stat.pickRate ?? 0,
+      winRate: stat.winRate ?? 0,
+      battleCount: stat.battleCount ?? 0,
+    }));
+
   const modeRadarData = MODE_KEYS.map((modeKey) => {
     const stat = playerStats.mode_stats?.[modeKey] ?? {
       win_rate: 0,
@@ -376,6 +388,7 @@ export async function PlayerStatsPage({
           <PlayerOverview
             player={overviewPlayer}
             stats={overviewStats}
+            brawlers={topBrawlersForOverview}
             subtitle={overviewSubtitle}
           />
         </div>

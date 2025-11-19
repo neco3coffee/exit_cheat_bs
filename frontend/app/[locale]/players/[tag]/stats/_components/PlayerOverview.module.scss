@@ -52,13 +52,13 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
   min-width: 0;
   align-items: flex-start;
 }
 
 .name {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   margin: 0;
   text-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
@@ -138,6 +138,97 @@
   gap: 16px;
 }
 
+.brawlersContainer {
+  width: 100%;
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.pickRateList {
+  margin: 10px auto 0;
+  width: 90%;
+}
+
+.pickRateItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0px;
+  border-bottom: 1px solid var(--black-border);
+}
+
+.pickRateItem:last-child {
+  border-bottom: none;
+}
+
+.brawlerIcon {
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.12), transparent 70%);
+}
+
+.pickRateContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pickRateBarRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pickRateBarTrack {
+  flex: 1;
+  position: relative;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.pickRateBarFill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff9f1c 0%, #ff4e50 100%);
+  transition: width 0.3s ease;
+}
+
+.pickRateValue {
+  min-width: 48px;
+  text-align: right;
+  color: var(--white);
+  font-variant-numeric: tabular-nums;
+}
+
+.pickRateMeta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.9rem;
+}
+
+.winRate {
+  color: var(--accent-500, #ffd447);
+  font-weight: bold;
+}
+
+.winRateVictory {
+  color: var(--success-500, #4cd964);
+}
+
+.winRateDefeat {
+  color: var(--danger-500, #ff5f5f);
+}
+
+.battleCount {
+  color: var(--gray-400, #b0b0b0);
+  font-size: 0.85rem;
+}
+
 @media (max-width: 880px) {
   .content {
     align-items: center;
@@ -151,5 +242,23 @@
 
   .metric {
     justify-content: center;
+  }
+
+  .pickRateItem {
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pickRateBarRow {
+    width: 100%;
+  }
+
+  .pickRateValue {
+    min-width: 0;
+  }
+
+  .pickRateMeta {
+    flex-direction: row;
+    gap: 6px;
   }
 }
