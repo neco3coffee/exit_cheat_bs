@@ -187,8 +187,6 @@ async function PlayerPage({
           >
             <span className={styles.statsLinkGlow} aria-hidden="true" />
             <span className={styles.statsLinkContent} aria-hidden="true">
-              <span className={styles.statsLinkIcon}>⚔️</span>
-              <span className={styles.statsLinkDivider} />
               <span className={styles.statsLinkIcon}>📊</span>
             </span>
           </Link>

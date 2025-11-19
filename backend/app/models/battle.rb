@@ -119,7 +119,10 @@ class Battle < ApplicationRecord
         end
       end
 
-      build_person_stats(stats, limit)
+      filtered_stats = stats.select { |_tag, data| data[:battle_count] >= 3 }
+      return [] if filtered_stats.empty?
+
+      build_person_stats(filtered_stats, limit)
     end
 
     def calculate_most_defeated_enemies(player, battles, limit: 5)
@@ -153,7 +156,10 @@ class Battle < ApplicationRecord
         end
       end
 
-      build_person_stats(stats, limit)
+      filtered_stats = stats.select { |_tag, data| data[:battle_count] >= 3 }
+      return [] if filtered_stats.empty?
+
+      build_person_stats(filtered_stats, limit)
     end
 
     def brawler_pick_rate_by_map(map_id:)

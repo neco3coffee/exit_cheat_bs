@@ -25,6 +25,7 @@
   .iconContainer {
     display: flex;
     flex-direction: column;
+    width: 20%;
 
     h3 {
       font-size: 12px;
@@ -34,7 +35,7 @@
 
   .nameAndRankContainer {
     height: 100%;
-    width: 100%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -62,12 +63,12 @@
   }
 
   .statsLink {
+    width: 20%;
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    min-width: 100px;
     padding: 12px 24px;
     margin-left: auto;
     border-radius: 999px;
