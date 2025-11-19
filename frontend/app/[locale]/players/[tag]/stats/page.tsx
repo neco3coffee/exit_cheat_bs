@@ -146,6 +146,36 @@ async function getPlayerStats(tag: string) {
 const toPercent = (value: number) =>
   Math.max(0, Number.isFinite(value) ? value * 100 : 0);
 
+const formatSeasonRange = (
+  startDateTime?: string,
+  endDateTime?: string,
+): string | null => {
+  if (!startDateTime || !endDateTime) {
+    return null;
+  }
+
+  const start = new Date(startDateTime);
+  const end = new Date(endDateTime);
+
+  if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
+    return null;
+  }
+
+  const startYear = start.getUTCFullYear();
+  const endYear = end.getUTCFullYear();
+  const startMonth = start.getUTCMonth() + 1;
+  const endMonth = end.getUTCMonth() + 1;
+
+  if (startYear === endYear) {
+    if (startMonth === endMonth) {
+      return `${startYear}/${startMonth}`;
+    }
+    return `${startYear}/${startMonth}-${endMonth}`;
+  }
+
+  return `${startYear}/${startMonth}-${endYear}/${endMonth}`;
+};
+
 function normalizeBattleRecord(battle: any) {
   if (!battle) return null;
 
@@ -325,6 +355,10 @@ export async function PlayerStatsPage({
     },
   };
 
+  const overviewSubtitle =
+    formatSeasonRange(seasonData?.startDateTime, seasonData?.endDateTime) ??
+    t("playerSubtitle");
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -342,7 +376,7 @@ export async function PlayerStatsPage({
           <PlayerOverview
             player={overviewPlayer}
             stats={overviewStats}
-            subtitle={t("playerSubtitle")}
+            subtitle={overviewSubtitle}
           />
         </div>
 

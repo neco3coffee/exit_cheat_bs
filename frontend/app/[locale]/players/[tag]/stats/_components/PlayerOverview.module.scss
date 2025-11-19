@@ -71,13 +71,13 @@
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 24px;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .rankBadge {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   min-width: 90px;
 }
 
