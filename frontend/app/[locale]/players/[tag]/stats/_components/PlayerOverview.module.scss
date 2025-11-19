@@ -1,69 +1,155 @@
 .container {
   width: 100%;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 20px;
-  align-items: center;
-  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
   border-radius: 24px;
   background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.22), rgba(30, 64, 175, 0.12));
   border: 1px solid rgba(96, 165, 250, 0.22);
   box-shadow: 0 20px 60px rgba(15, 23, 42, 0.3);
 }
 
+.subtitle {
+  font-size: 0.95rem;
+  color: rgba(226, 232, 240, 0.9);
+  letter-spacing: 0.02em;
+  margin: 0;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.avatarBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
 .avatarWrapper {
-  width: 96px;
-  height: 96px;
-  border-radius: 24px;
+  width: 75px;
+  height: 75px;
   overflow: hidden;
   background: rgba(15, 23, 42, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.meta {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  box-shadow: 0 12px 30px rgba(30, 64, 175, 0.35);
 }
 
 .tag {
-  font-size: 0.85rem;
+  font-size: 0.65rem;
   letter-spacing: 0.1em;
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
 }
 
+.meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  align-items: flex-start;
+}
+
 .name {
-  font-size: 1.8rem;
+  font-size: 1rem;
   font-weight: 700;
   margin: 0;
   text-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.subtitle {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.75);
+.detailsRow {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 24px;
+  align-items: center;
 }
 
 .rankBadge {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 90px;
 }
 
-@media (max-width: 768px) {
-  .container {
-    grid-template-columns: 1fr;
+.rankFallback {
+  font-size: 0.95rem;
+  color: rgba(226, 232, 240, 0.85);
+}
+
+.metrics {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.metric {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 1.1rem;
+  color: rgba(226, 232, 240, 0.95);
+}
+
+.metricEmoji {
+  font-size: 1.1rem;
+}
+
+.metricValue {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+.metricValueNeutral {
+  color: var(--accent-500, #ffd447);
+}
+
+.metricValueVictory {
+  color: var(--success-500, #4cd964);
+}
+
+.metricValueDefeat {
+  color: var(--danger-500, #ff5f5f);
+}
+
+.metricLabel {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(148, 163, 184, 0.9);
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  gap: 16px;
+}
+
+@media (max-width: 880px) {
+  .content {
+    align-items: center;
     text-align: center;
   }
 
-  .rankBadge {
-    justify-content: center;
+  .detailsRow {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
-  .meta {
-    align-items: center;
+  .metric {
+    justify-content: center;
   }
 }

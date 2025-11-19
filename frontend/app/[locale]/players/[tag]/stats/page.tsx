@@ -8,7 +8,6 @@ import { ModeRadarChart } from "./_components/ModeRadarChart";
 import { PersonList } from "./_components/PersonList";
 import { PlayerOverview } from "./_components/PlayerOverview";
 import { SeasonCountdown } from "./_components/SeasonCountdown";
-import { SeasonSummary } from "./_components/SeasonSummary";
 import styles from "./page.module.scss";
 
 const apiUrl = "http://app:3000";
@@ -242,27 +241,6 @@ export async function PlayerStatsPage({
     maximumFractionDigits: 1,
   });
 
-  const seasonSummaryItems = [
-    {
-      label: t("seasonSummary.battleCount"),
-      value: numberFormatter.format(playerStats.season.battle_count),
-      caption: t("seasonSummary.battleCountCaption"),
-    },
-    {
-      label: t("seasonSummary.winRate"),
-      value: percentFormatter.format(playerStats.season.win_rate ?? 0),
-      caption: t("seasonSummary.winRateCaption"),
-    },
-    {
-      label: t("seasonSummary.highestRank"),
-      value:
-        playerStats.season.highest_rank > 0
-          ? tPlayers("rank", { rank: playerStats.season.highest_rank })
-          : t("rankUnknown"),
-      caption: t("seasonSummary.highestRankCaption"),
-    },
-  ];
-
   const brawlerStats = (playerStats.brawler_stats ?? []).map((stat) => ({
     id: stat.id,
     name: stat.name,
@@ -321,7 +299,30 @@ export async function PlayerStatsPage({
     tag: playerData.tag,
     iconId: playerData.iconId ?? playerStats.player.icon_id,
     nameColor: playerData.nameColor,
-    currentRank: playerData.currentRank ?? playerStats.player.rank,
+  };
+
+  const overviewStats = {
+    battleCount: {
+      label: t("overview.battleCount"),
+      value: numberFormatter.format(playerStats.season.battle_count ?? 0),
+    },
+    winRate: {
+      label: t("overview.winRate"),
+      value: percentFormatter.format(playerStats.season.win_rate ?? 0),
+      percentage: Math.max(
+        0,
+        Number.isFinite(playerStats.season.win_rate)
+          ? (playerStats.season.win_rate ?? 0) * 100
+          : 0,
+      ),
+    },
+    highestRank: {
+      rank: playerStats.season.highest_rank ?? null,
+      alt:
+        (playerStats.season.highest_rank ?? 0) > 0
+          ? tPlayers("rank", { rank: playerStats.season.highest_rank })
+          : t("rankUnknown"),
+    },
   };
 
   return (
@@ -340,9 +341,9 @@ export async function PlayerStatsPage({
         <div className={styles.sectionGroup}>
           <PlayerOverview
             player={overviewPlayer}
+            stats={overviewStats}
             subtitle={t("playerSubtitle")}
           />
-          <SeasonSummary items={seasonSummaryItems} />
         </div>
 
         <div className={styles.dualColumn}>

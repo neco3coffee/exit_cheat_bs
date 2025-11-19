@@ -121,6 +121,11 @@
     "playerNotFound": "Player not found. Please double-check the tag.",
     "statsUnavailable": "We couldn’t load ranked stats for this player. Please try again later.",
     "playerSubtitle": "Seasonal solo ranked snapshot.",
+    "overview": {
+      "battleCount": "Battles played",
+      "winRate": "Win rate",
+      "highestRank": "Peak rank"
+    },
     "rankUnknown": "Unranked",
     "seasonCountdown": {
       "inSeason": "Time until season ends:",

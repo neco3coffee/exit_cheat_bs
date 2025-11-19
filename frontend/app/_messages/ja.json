@@ -192,6 +192,11 @@
     "playerNotFound": "プレイヤーが見つかりません。タグを確認してください。",
     "statsUnavailable": "統計データを取得できませんでした。少し時間を置いて再度お試しください。",
     "playerSubtitle": "現在シーズンのソロランク統計を表示しています。",
+    "overview": {
+      "battleCount": "バトル数",
+      "winRate": "勝率",
+      "highestRank": "最高到達ランク"
+    },
     "rankUnknown": "未到達",
     "seasonCountdown": {
       "inSeason": "シーズン終了まで：",
