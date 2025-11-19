@@ -117,6 +117,50 @@
     "Impossible": "IMPOSSIBLE",
     "undefined": "TYPE DE COMBAT NON DÉFINI"
   },
+  "playerStats": {
+    "playerNotFound": "Joueur introuvable. Veuillez vérifier le tag.",
+    "rankUnknown": "Non atteint",
+    "seasonCountdown": {
+      "inSeason": "Temps restant avant la fin de la saison :",
+      "downtime": "Temps avant la prochaine saison :",
+      "unavailable": "Les informations de saison ne sont pas disponibles pour le moment."
+    },
+    "overview": {
+      "battleCount": "Nombre de combats",
+      "winRate": "Taux de victoire",
+      "highestRank": "Rang le plus élevé"
+    },
+    "teammates": {
+      "title": "Alliés à forte synergie",
+      "empty": "Nous n'avons pas encore trouvé d'alliés à forte synergie."
+    },
+    "enemies": {
+      "title": "Adversaires favorables",
+      "empty": "Pas encore de données sur les adversaires favorables."
+    },
+    "person": {
+      "winRate": "Taux de victoire",
+      "battleCount": "Combats"
+    },
+    "modeRadar": {
+      "title": "Performance par mode",
+      "tooltipWinRate": "Taux de victoire",
+      "tooltipBattleCount": "Parties",
+      "empty": "Aucune donnée de mode disponible.",
+      "labels": {
+        "knockout": "Knockout",
+        "gemGrab": "Razzia de Gemmes",
+        "bounty": "Prime",
+        "heist": "Braquage",
+        "brawlBall": "Brawl Ball",
+        "hotZone": "Zone Réservée"
+      }
+    },
+    "battles": {
+      "title": "Batailles classées",
+      "empty": "Aucune bataille classée enregistrée cette saison."
+    }
+  },
   "termsOfService": {
     "title": "Conditions d'utilisation",
     "linkText": "Conditions d'utilisation",

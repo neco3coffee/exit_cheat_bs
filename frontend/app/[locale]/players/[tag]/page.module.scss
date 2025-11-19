@@ -60,6 +60,143 @@
       }
     }
   }
+
+  .statsLink {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-width: 100px;
+    padding: 12px 24px;
+    margin-left: auto;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #fb923c 0%, #f97316 40%, #ef4444 100%);
+    color: var(--white, #ffffff);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow: 0 16px 38px -20px rgba(249, 115, 22, 0.9);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+    animation: statsLinkPulse 3.4s ease-in-out infinite;
+
+    &:before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0.55) 0%,
+        rgba(255, 255, 255, 0) 60%
+      );
+      transform: translateX(-120%);
+      animation: statsLinkShimmer 4.5s linear infinite;
+      opacity: 0;
+    }
+
+    &:hover,
+    &:focus-visible {
+      transform: translateY(-2px) scale(1.015);
+      box-shadow: 0 22px 44px -20px rgba(249, 115, 22, 0.9);
+    }
+
+    &:hover:before,
+    &:focus-visible:before {
+      opacity: 1;
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow:
+        0 0 0 3px rgba(255, 255, 255, 0.35),
+        0 22px 44px -20px rgba(249, 115, 22, 0.9);
+    }
+
+    &:active {
+      transform: scale(0.97);
+      box-shadow: 0 12px 28px -20px rgba(249, 115, 22, 0.75);
+    }
+
+    .statsLinkGlow {
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(
+        circle at 25% 25%,
+        rgba(255, 255, 255, 0.35),
+        rgba(255, 255, 255, 0) 55%
+      );
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    &:hover .statsLinkGlow,
+    &:focus-visible .statsLinkGlow {
+      opacity: 1;
+    }
+
+    .statsLinkContent {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .statsLinkIcon {
+      font-size: 22px;
+      filter: drop-shadow(0 3px 6px rgba(15, 23, 42, 0.35));
+      animation: statsLinkIconBounce 2.6s ease-in-out infinite;
+    }
+
+    .statsLinkIcon:last-child {
+      animation-delay: 1.3s;
+    }
+
+    .statsLinkDivider {
+      position: relative;
+      width: 16px;
+      height: 2px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.4);
+      overflow: hidden;
+    }
+
+    .statsLinkDivider:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: rgba(255, 255, 255, 0.95);
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: statsLinkDividerPulse 2.4s ease-in-out infinite;
+    }
+
+    .statsLinkText {
+      position: relative;
+      z-index: 1;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      font-weight: 700;
+      opacity: 0.85;
+    }
+
+    @media (max-width: 480px) {
+      gap: 8px;
+      padding: 10px 18px;
+      font-size: 14px;
+
+      .statsLinkText {
+        letter-spacing: 0.18em;
+      }
+    }
+  }
 }
 
 .recordsContainer {
@@ -117,5 +254,49 @@
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 24px;
+  }
+}
+
+@keyframes statsLinkPulse {
+  0%,
+  100% {
+    box-shadow: 0 16px 38px -20px rgba(249, 115, 22, 0.7);
+  }
+  50% {
+    box-shadow: 0 20px 46px -18px rgba(249, 115, 22, 0.9);
+  }
+}
+
+@keyframes statsLinkShimmer {
+  0% {
+    transform: translateX(-140%);
+  }
+  55% {
+    transform: translateX(140%);
+  }
+  100% {
+    transform: translateX(140%);
+  }
+}
+
+@keyframes statsLinkIconBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes statsLinkDividerPulse {
+  0%,
+  100% {
+    transform: scaleX(0);
+    opacity: 0.2;
+  }
+  40% {
+    transform: scaleX(1);
+    opacity: 1;
   }
 }

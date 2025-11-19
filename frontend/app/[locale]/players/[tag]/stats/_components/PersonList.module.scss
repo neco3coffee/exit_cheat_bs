@@ -1,0 +1,188 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.wrapper h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.empty {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: rgba(17, 24, 39, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.16);
+}
+
+.itemRight {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.identityRight {
+  flex-direction: row-reverse;
+  gap: 16px;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 70%);
+  flex-shrink: 0;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.metaRight {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.name {
+  font-weight: 600;
+  text-decoration: none;
+  color: #f8fafc;
+  font-size: 1rem;
+}
+
+.name:hover {
+  text-decoration: underline;
+}
+
+.subline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+}
+
+.sublineRight {
+  justify-content: flex-end;
+}
+
+.tag {
+  font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rankText {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: right;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  align-items: flex-end;
+}
+
+.statsRight {
+  text-align: left;
+  align-items: flex-start;
+}
+
+.stats span {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  justify-content: flex-end;
+}
+
+.statsRight span {
+  justify-content: flex-start;
+}
+
+.stats strong {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #f8fafc;
+}
+
+.winRate strong {
+  color: #38bdf8;
+}
+
+@media (max-width: 720px) {
+  .item,
+  .itemRight {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .identity,
+  .identityRight {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    margin-left: 0;
+  }
+
+  .metaRight {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .sublineRight {
+    justify-content: flex-start;
+  }
+
+  .stats,
+  .statsRight {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .stats span,
+  .statsRight span {
+    justify-content: flex-start;
+  }
+}

@@ -117,6 +117,70 @@
     "Impossible": "IMPOSSIBLE",
     "undefined": "UNDEFINED BATTLE TYPE"
   },
+  "playerStats": {
+    "playerNotFound": "Player not found. Please double-check the tag.",
+    "statsUnavailable": "We couldn’t load ranked stats for this player. Please try again later.",
+    "playerSubtitle": "Seasonal ranked snapshot.",
+    "overview": {
+      "battleCount": "Battles played",
+      "winRate": "Win rate",
+      "highestRank": "Peak rank"
+    },
+    "rankUnknown": "Unranked",
+    "seasonCountdown": {
+      "inSeason": "Time until season ends:",
+      "downtime": "Time until next season:",
+      "unavailable": "Season info is unavailable right now."
+    },
+    "seasonSummary": {
+      "battleCount": "Battles",
+      "battleCountCaption": "ranked battles tracked",
+      "winRate": "Win Rate",
+      "winRateCaption": "Wins ÷ total battles",
+      "highestRank": "Highest Rank",
+      "highestRankCaption": "Peak this season"
+    },
+    "brawlerStats": {
+      "title": "Top Brawler Picks",
+      "pickRate": "Pick Rate",
+      "winRate": "Win Rate",
+      "battleCount": "Battles",
+      "gadgets": "Gadgets",
+      "starPowers": "Star Powers",
+      "gears": "Gears",
+      "empty": "There’s no brawler data yet."
+    },
+    "modeRadar": {
+      "title": "Mode Performance",
+      "tooltipWinRate": "Win rate",
+      "tooltipBattleCount": "Battles",
+      "empty": "No mode data available.",
+      "labels": {
+        "knockout": "Knockout",
+        "gemGrab": "Gem Grab",
+        "bounty": "Bounty",
+        "heist": "Heist",
+        "brawlBall": "Brawl Ball",
+        "hotZone": "Hot Zone"
+      }
+    },
+    "person": {
+      "winRate": "Win rate",
+      "battleCount": "Battles"
+    },
+    "teammates": {
+      "title": "High-synergy teammates",
+      "empty": "We haven’t found high-synergy teammates yet."
+    },
+    "enemies": {
+      "title": "Favorable opponents",
+      "empty": "No favorable opponent data yet."
+    },
+    "battles": {
+      "title": "ranked battles",
+      "empty": "No ranked battles recorded this season."
+    }
+  },
   "termsOfService": {
     "title": "Terms of Service",
     "linkText": "Terms of Service",

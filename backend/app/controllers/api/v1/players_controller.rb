@@ -276,6 +276,60 @@ module Api
         }
       end
 
+      def stats
+        tag = params[:tag].to_s.upcase.strip
+        tag = tag.gsub("O", "0")
+        tag = "##{tag}" unless tag.start_with?("#")
+        Rails.logger.info("fetching stats for tag: #{tag}")
+
+        player = Player.find_by(tag: tag)
+        if player.nil?
+          render json: { error: "Player not found" }, status: 404 and return
+        end
+
+        # ここで必要な統計情報を計算・取得
+        start_time, end_time = SeasonCalendar.current_period_in_utc
+
+        battles = Battle.where(player_id: player.id).where("battle_time >= ? AND battle_time < ?", start_time, end_time)
+
+        win_rate = if battles.count.positive?
+                     battles.where(result: "victory").count.to_f / battles.count
+        else
+                     0.0
+        end
+
+        highest_rank = battles.maximum(:rank) || 0
+
+        #
+        brawler_stats = Battle.calculate_brawler_stats(battles)
+        mode_stats = Battle.calculate_mode_stats(battles)
+        high_win_rate_teammates = Battle.calculate_high_win_rate_teammates(player, battles)
+        most_defeated_enemies = Battle.calculate_most_defeated_enemies(player, battles)
+
+        render json: {
+          player: {
+            tag: player.tag,
+            name: player.name,
+            icon_id: player.icon_id,
+            rank: player.rank
+          },
+          season: {
+            battle_count: battles.count,
+            win_rate: win_rate.round(4),
+            highest_rank: highest_rank
+          },
+          brawler_stats: brawler_stats,
+          mode_stats: mode_stats,
+          high_win_rate_teammates: high_win_rate_teammates,
+          most_defeated_enemies: most_defeated_enemies,
+          battles: battles.as_json
+        }
+      rescue StandardError => e
+        Rails.logger.error("Stats exception occurred: #{e.message}")
+        Rails.logger.error(e.backtrace.join("\n"))
+        render json: { error: "An error occurred while processing your request" }, status: 500
+      end
+
       private
       # TODO: api tokenが制限に達した場合に備える
 

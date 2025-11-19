@@ -117,6 +117,50 @@
     "Impossible": "不可能",
     "undefined": "未定义的战斗类型"
   },
+  "playerStats": {
+    "playerNotFound": "未找到玩家。请再次确认标签。",
+    "rankUnknown": "尚未达到",
+    "seasonCountdown": {
+      "inSeason": "距离赛季结束：",
+      "downtime": "距离下个赛季开始：",
+      "unavailable": "当前无法获取赛季信息。"
+    },
+    "overview": {
+      "battleCount": "战斗次数",
+      "winRate": "胜率",
+      "highestRank": "最高段位"
+    },
+    "teammates": {
+      "title": "配合默契的队友",
+      "empty": "暂时还没有配合默契的队友数据。"
+    },
+    "enemies": {
+      "title": "相对有利的对手",
+      "empty": "暂时还没有相对有利的对手数据。"
+    },
+    "person": {
+      "winRate": "胜率",
+      "battleCount": "战斗次数"
+    },
+    "modeRadar": {
+      "title": "模式表现",
+      "tooltipWinRate": "胜率",
+      "tooltipBattleCount": "战斗次数",
+      "empty": "暂无模式数据。",
+      "labels": {
+        "knockout": "淘汰赛",
+        "gemGrab": "宝石争霸",
+        "bounty": "赏金猎人",
+        "heist": "金库攻防",
+        "brawlBall": "乱斗足球",
+        "hotZone": "热点区域"
+      }
+    },
+    "battles": {
+      "title": "排位赛战斗",
+      "empty": "本赛季尚无排位赛战斗记录。"
+    }
+  },
   "termsOfService": {
     "title": "服务条款",
     "linkText": "服务条款",

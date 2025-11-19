@@ -1,0 +1,264 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  border-radius: 24px;
+  background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.22), rgba(30, 64, 175, 0.12));
+  border: 1px solid rgba(96, 165, 250, 0.22);
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.3);
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: rgba(226, 232, 240, 0.9);
+  letter-spacing: 0.02em;
+  margin: 0;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.avatarBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.avatarWrapper {
+  width: 75px;
+  height: 75px;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 30px rgba(30, 64, 175, 0.35);
+}
+
+.tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+}
+
+.meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  align-items: flex-start;
+}
+
+.name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.detailsRow {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.rankBadge {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 90px;
+}
+
+.rankFallback {
+  font-size: 0.95rem;
+  color: rgba(226, 232, 240, 0.85);
+}
+
+.metrics {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.metric {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 1.1rem;
+  color: rgba(226, 232, 240, 0.95);
+}
+
+.metricEmoji {
+  font-size: 1.1rem;
+}
+
+.metricValue {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+.metricValueNeutral {
+  color: var(--accent-500, #ffd447);
+}
+
+.metricValueVictory {
+  color: var(--success-500, #4cd964);
+}
+
+.metricValueDefeat {
+  color: var(--danger-500, #ff5f5f);
+}
+
+.metricLabel {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(148, 163, 184, 0.9);
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  gap: 16px;
+}
+
+.brawlersContainer {
+  width: 100%;
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.pickRateList {
+  margin: 10px auto 0;
+  width: 90%;
+}
+
+.pickRateItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0px;
+  border-bottom: 1px solid var(--black-border);
+}
+
+.pickRateItem:last-child {
+  border-bottom: none;
+}
+
+.brawlerIcon {
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.12), transparent 70%);
+}
+
+.pickRateContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pickRateBarRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pickRateBarTrack {
+  flex: 1;
+  position: relative;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.pickRateBarFill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff9f1c 0%, #ff4e50 100%);
+  transition: width 0.3s ease;
+}
+
+.pickRateValue {
+  min-width: 48px;
+  text-align: right;
+  color: var(--white);
+  font-variant-numeric: tabular-nums;
+}
+
+.pickRateMeta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.9rem;
+}
+
+.winRate {
+  color: var(--accent-500, #ffd447);
+  font-weight: bold;
+}
+
+.winRateVictory {
+  color: var(--success-500, #4cd964);
+}
+
+.winRateDefeat {
+  color: var(--danger-500, #ff5f5f);
+}
+
+.battleCount {
+  color: var(--gray-400, #b0b0b0);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 880px) {
+  .content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .detailsRow {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .metric {
+    justify-content: center;
+  }
+
+  .pickRateItem {
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pickRateBarRow {
+    width: 100%;
+  }
+
+  .pickRateValue {
+    min-width: 0;
+  }
+
+  .pickRateMeta {
+    flex-direction: row;
+    gap: 6px;
+  }
+}
