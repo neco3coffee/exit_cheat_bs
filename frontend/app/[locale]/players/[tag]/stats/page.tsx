@@ -395,21 +395,6 @@ export async function PlayerStatsPage({
 
         <div className={styles.dualColumn}>
           <div className={styles.sectionCard}>
-            <BrawlerStatsSection
-              stats={brawlerStats}
-              labels={{
-                title: t("brawlerStats.title"),
-                pickRate: t("brawlerStats.pickRate"),
-                winRate: t("brawlerStats.winRate"),
-                battleCount: t("brawlerStats.battleCount"),
-                gadgets: t("brawlerStats.gadgets"),
-                starPowers: t("brawlerStats.starPowers"),
-                gears: t("brawlerStats.gears"),
-                empty: t("brawlerStats.empty"),
-              }}
-            />
-          </div>
-          <div className={styles.sectionCard}>
             <h2 className={styles.sectionTitle}>{t("modeRadar.title")}</h2>
             <ModeRadarChart
               data={modeRadarData}
