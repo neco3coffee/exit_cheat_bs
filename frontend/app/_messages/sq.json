@@ -119,10 +119,16 @@
   },
   "playerStats": {
     "playerNotFound": "Lojtari nuk u gjet. Ju lutem kontrolloni tag-un.",
+    "rankUnknown": "Ende nuk është arritur",
     "seasonCountdown": {
       "inSeason": "Koha deri në fundin e sezonit:",
       "downtime": "Koha deri në sezonin e ardhshëm:",
       "unavailable": "Informacioni i sezonit nuk është i disponueshëm tani."
+    },
+    "overview": {
+      "battleCount": "Numri i betejave",
+      "winRate": "Përqindja e fitoreve",
+      "highestRank": "Rangu më i lartë i arritur"
     },
     "teammates": {
       "title": "Bashkëlojtarë me sinergji të mirë",
@@ -131,6 +137,28 @@
     "enemies": {
       "title": "Kundërshtarë të favorshëm",
       "empty": "Ende nuk ka të dhëna për kundërshtarët e favorshëm."
+    },
+    "person": {
+      "winRate": "Përqindja e fitoreve",
+      "battleCount": "Beteja"
+    },
+    "modeRadar": {
+      "title": "Performanca sipas modit",
+      "tooltipWinRate": "Përqindja e fitoreve",
+      "tooltipBattleCount": "Numri i betejave",
+      "empty": "Nuk ka të dhëna të modit të disponueshme.",
+      "labels": {
+        "knockout": "Knockout",
+        "gemGrab": "Gem Grab",
+        "bounty": "Bounty",
+        "heist": "Heist",
+        "brawlBall": "Brawl Ball",
+        "hotZone": "Hot Zone"
+      }
+    },
+    "battles": {
+      "title": "Betejat e renditura",
+      "empty": "Nuk ka ende beteja të renditura këtë sezon."
     }
   },
   "termsOfService": {

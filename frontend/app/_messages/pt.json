@@ -119,10 +119,16 @@
   },
   "playerStats": {
     "playerNotFound": "Jogador não encontrado. Verifique a tag.",
+    "rankUnknown": "Ainda não alcançado",
     "seasonCountdown": {
       "inSeason": "Tempo restante para o fim da temporada:",
       "downtime": "Tempo para a próxima temporada:",
       "unavailable": "As informações da temporada não estão disponíveis no momento."
+    },
+    "overview": {
+      "battleCount": "Batalhas",
+      "winRate": "Taxa de vitória",
+      "highestRank": "Maior ranque alcançado"
     },
     "teammates": {
       "title": "Aliados com boa sinergia",
@@ -131,6 +137,28 @@
     "enemies": {
       "title": "Oponentes favoráveis",
       "empty": "Ainda não há dados de oponentes favoráveis."
+    },
+    "person": {
+      "winRate": "Taxa de vitória",
+      "battleCount": "Batalhas"
+    },
+    "modeRadar": {
+      "title": "Desempenho por modo",
+      "tooltipWinRate": "Taxa de vitória",
+      "tooltipBattleCount": "Batalhas",
+      "empty": "Nenhum dado de modo disponível.",
+      "labels": {
+        "knockout": "Knockout",
+        "gemGrab": "Gem Grab",
+        "bounty": "Bounty",
+        "heist": "Heist",
+        "brawlBall": "Brawl Ball",
+        "hotZone": "Hot Zone"
+      }
+    },
+    "battles": {
+      "title": "Batalhas ranqueadas",
+      "empty": "Nenhuma batalha ranqueada registrada nesta temporada."
     }
   },
   "termsOfService": {

@@ -119,10 +119,16 @@
   },
   "playerStats": {
     "playerNotFound": "Igrač nije pronađen. Provjerite oznaku.",
+    "rankUnknown": "Nije dosegnuto",
     "seasonCountdown": {
       "inSeason": "Vrijeme do kraja sezone:",
       "downtime": "Vrijeme do sljedeće sezone:",
       "unavailable": "Podaci o sezoni trenutno nisu dostupni."
+    },
+    "overview": {
+      "battleCount": "Broj bitaka",
+      "winRate": "Postotak pobjeda",
+      "highestRank": "Najviši postignuti rang"
     },
     "teammates": {
       "title": "Suigrači s dobrom sinergijom",
@@ -131,6 +137,28 @@
     "enemies": {
       "title": "Povoljni protivnici",
       "empty": "Još nema podataka o povoljnim protivnicima."
+    },
+    "person": {
+      "winRate": "Postotak pobjeda",
+      "battleCount": "Broj bitaka"
+    },
+    "modeRadar": {
+      "title": "Učinkovitost po modu",
+      "tooltipWinRate": "Postotak pobjeda",
+      "tooltipBattleCount": "Broj bitaka",
+      "empty": "Nema dostupnih podataka za modove.",
+      "labels": {
+        "knockout": "Knockout",
+        "gemGrab": "Gem Grab",
+        "bounty": "Bounty",
+        "heist": "Heist",
+        "brawlBall": "Brawl Ball",
+        "hotZone": "Hot Zone"
+      }
+    },
+    "battles": {
+      "title": "Rangirane bitke",
+      "empty": "U ovoj sezoni još nema zabilježenih rangiranih bitaka."
     }
   },
   "termsOfService": {

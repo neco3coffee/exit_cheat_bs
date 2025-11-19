@@ -119,10 +119,16 @@
   },
   "playerStats": {
     "playerNotFound": "Hráč nenalezen. Zkontrolujte prosím tag.",
+    "rankUnknown": "Nedosaženo",
     "seasonCountdown": {
       "inSeason": "Čas do konce sezóny:",
       "downtime": "Čas do další sezóny:",
       "unavailable": "Informace o sezóně momentálně nejsou k dispozici."
+    },
+    "overview": {
+      "battleCount": "Počet bitev",
+      "winRate": "Výhernost",
+      "highestRank": "Nejvyšší dosažený rank"
     },
     "teammates": {
       "title": "Spoluhráči s dobrou synergií",
@@ -131,6 +137,28 @@
     "enemies": {
       "title": "Přízniví soupeři",
       "empty": "Zatím nejsou k dispozici údaje o příznivých soupeřích."
+    },
+    "person": {
+      "winRate": "Výhernost",
+      "battleCount": "Počet bitev"
+    },
+    "modeRadar": {
+      "title": "Výkon podle módu",
+      "tooltipWinRate": "Výhernost",
+      "tooltipBattleCount": "Počet bitev",
+      "empty": "Nejsou k dispozici žádná data pro módy.",
+      "labels": {
+        "knockout": "Knockout",
+        "gemGrab": "Gem Grab",
+        "bounty": "Bounty",
+        "heist": "Heist",
+        "brawlBall": "Brawl Ball",
+        "hotZone": "Hot Zone"
+      }
+    },
+    "battles": {
+      "title": "Hodnocené bitvy",
+      "empty": "V této sezóně zatím nebyly zaznamenány žádné hodnocené bitvy."
     }
   },
   "termsOfService": {
