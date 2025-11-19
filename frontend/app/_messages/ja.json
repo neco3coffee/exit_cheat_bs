@@ -191,7 +191,7 @@
   "playerStats": {
     "playerNotFound": "プレイヤーが見つかりません。タグを確認してください。",
     "statsUnavailable": "統計データを取得できませんでした。少し時間を置いて再度お試しください。",
-    "playerSubtitle": "現在シーズンのソロランク統計を表示しています。",
+    "playerSubtitle": "現在シーズンのランク統計を表示しています。",
     "overview": {
       "battleCount": "バトル数",
       "winRate": "勝率",
@@ -205,14 +205,14 @@
     },
     "seasonSummary": {
       "battleCount": "バトル数",
-      "battleCountCaption": "ソロランクの集計対象バトル",
+      "battleCountCaption": "ランクの集計対象バトル",
       "winRate": "勝率",
       "winRateCaption": "勝利 ÷ 総バトル",
       "highestRank": "最高到達ランク",
       "highestRankCaption": "シーズン中の最高ランク"
     },
     "brawlerStats": {
-      "title": "ピック率の高いブロスタ",
+      "title": "ピック率の高いブロウラー",
       "pickRate": "ピック率",
       "winRate": "勝率",
       "battleCount": "バトル数",
@@ -240,16 +240,16 @@
       "battleCount": "バトル数"
     },
     "teammates": {
-      "title": "勝率の高い味方",
-      "empty": "まだ相性の良い味方データがありません。"
+      "title": "相性のいい味方",
+      "empty": "まだ相性のいい味方データがありません。"
     },
     "enemies": {
-      "title": "最も勝利した相手",
-      "empty": "まだ勝利データがありません。"
+      "title": "相性のいい相手",
+      "empty": "まだ相性のいい相手データがありません。"
     },
     "battles": {
-      "title": "ソロランクのバトル履歴",
-      "empty": "今シーズンのソロランクバトルはまだありません。"
+      "title": "バトル履歴",
+      "empty": "今シーズンのガチバトルはまだありません。"
     }
   },
   "termsOfService": {

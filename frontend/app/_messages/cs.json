@@ -123,6 +123,14 @@
       "inSeason": "Čas do konce sezóny:",
       "downtime": "Čas do další sezóny:",
       "unavailable": "Informace o sezóně momentálně nejsou k dispozici."
+    },
+    "teammates": {
+      "title": "Spoluhráči s dobrou synergií",
+      "empty": "Zatím jsme nenašli spoluhráče s dobrou synergií."
+    },
+    "enemies": {
+      "title": "Přízniví soupeři",
+      "empty": "Zatím nejsou k dispozici údaje o příznivých soupeřích."
     }
   },
   "termsOfService": {

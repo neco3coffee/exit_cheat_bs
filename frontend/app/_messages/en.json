@@ -120,7 +120,7 @@
   "playerStats": {
     "playerNotFound": "Player not found. Please double-check the tag.",
     "statsUnavailable": "We couldn’t load ranked stats for this player. Please try again later.",
-    "playerSubtitle": "Seasonal solo ranked snapshot.",
+    "playerSubtitle": "Seasonal ranked snapshot.",
     "overview": {
       "battleCount": "Battles played",
       "winRate": "Win rate",
@@ -134,7 +134,7 @@
     },
     "seasonSummary": {
       "battleCount": "Battles",
-      "battleCountCaption": "Solo ranked battles tracked",
+      "battleCountCaption": "ranked battles tracked",
       "winRate": "Win Rate",
       "winRateCaption": "Wins ÷ total battles",
       "highestRank": "Highest Rank",
@@ -169,16 +169,16 @@
       "battleCount": "Battles"
     },
     "teammates": {
-      "title": "High win-rate teammates",
-      "empty": "We haven’t found reliable teammates yet."
+      "title": "High-synergy teammates",
+      "empty": "We haven’t found high-synergy teammates yet."
     },
     "enemies": {
-      "title": "Most defeated opponents",
-      "empty": "No repeated rival victories yet."
+      "title": "Favorable opponents",
+      "empty": "No favorable opponent data yet."
     },
     "battles": {
-      "title": "Solo ranked battles",
-      "empty": "No solo ranked battles recorded this season."
+      "title": "ranked battles",
+      "empty": "No ranked battles recorded this season."
     }
   },
   "termsOfService": {

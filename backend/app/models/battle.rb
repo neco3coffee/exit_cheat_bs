@@ -11,6 +11,7 @@ class Battle < ApplicationRecord
   validates :battle_id, uniqueness: { scope: :player_id }
 
   before_validation :ensure_rounds_array
+  after_commit :enqueue_missing_player_records, on: :create
 
   class << self
     def calculate_brawler_stats(battles)
@@ -407,6 +408,32 @@ class Battle < ApplicationRecord
   end
 
   private
+
+  def enqueue_missing_player_records
+    tags = participant_tags_for_player_fetch
+    return if tags.empty?
+
+    EnsurePlayersJob.perform_later(tags)
+  rescue StandardError => e
+    Rails.logger.error("Failed to enqueue EnsurePlayersJob for battle #{id}: #{e.message}")
+  end
+
+  def participant_tags_for_player_fetch
+    tags = []
+
+    participant_groups = self.class.send(:groups_for_battle, self)
+    participant_groups.each do |group|
+      Array.wrap(group).each do |member|
+        next unless member.is_a?(Hash)
+
+        tag = member["tag"] || member[:tag]
+        tags << tag if tag.present?
+      end
+    end
+
+    tags << player&.tag if player&.tag.present?
+    tags.compact.uniq
+  end
 
   def ensure_rounds_array
     self.rounds ||= []

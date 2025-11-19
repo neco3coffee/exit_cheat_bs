@@ -242,6 +242,11 @@ export async function PlayerStatsPage({
   }
   const playerStats: PlayerStats | null = await getPlayerStats(tag);
 
+  console.log(
+    "playerStats.high_win_rate_teammates",
+    playerStats?.high_win_rate_teammates,
+  );
+
   if (!playerStats) {
     return (
       <div className={styles.container}>
@@ -422,6 +427,7 @@ export async function PlayerStatsPage({
               title={t("enemies.title")}
               people={playerStats.most_defeated_enemies ?? []}
               labels={enemyLabels}
+              align="right"
             />
           </div>
         </div>

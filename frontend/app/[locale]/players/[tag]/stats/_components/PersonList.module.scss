@@ -25,15 +25,32 @@
 }
 
 .item {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 16px;
+  width: 100%;
+  display: flex;
   align-items: center;
+  gap: 18px;
   padding: 14px 18px;
   border-radius: 16px;
   background: rgba(17, 24, 39, 0.7);
   border: 1px solid rgba(148, 163, 184, 0.2);
   box-shadow: 0 10px 28px rgba(15, 23, 42, 0.16);
+}
+
+.itemRight {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.identityRight {
+  flex-direction: row-reverse;
+  gap: 16px;
 }
 
 .avatar {
@@ -42,12 +59,19 @@
   border-radius: 16px;
   overflow: hidden;
   background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 70%);
+  flex-shrink: 0;
 }
 
 .meta {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
+}
+
+.metaRight {
+  align-items: flex-end;
+  text-align: right;
 }
 
 .name {
@@ -67,6 +91,10 @@
   gap: 12px;
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.85rem;
+}
+
+.sublineRight {
+  justify-content: flex-end;
 }
 
 .tag {
@@ -92,6 +120,12 @@
   text-align: right;
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.7);
+  align-items: flex-end;
+}
+
+.statsRight {
+  text-align: left;
+  align-items: flex-start;
 }
 
 .stats span {
@@ -99,6 +133,10 @@
   gap: 6px;
   align-items: baseline;
   justify-content: flex-end;
+}
+
+.statsRight span {
+  justify-content: flex-start;
 }
 
 .stats strong {
@@ -112,13 +150,39 @@
 }
 
 @media (max-width: 720px) {
-  .item {
-    grid-template-columns: 1fr;
+  .item,
+  .itemRight {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .identity,
+  .identityRight {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    margin-left: 0;
+  }
+
+  .metaRight {
+    align-items: flex-start;
     text-align: left;
   }
 
-  .stats {
+  .sublineRight {
+    justify-content: flex-start;
+  }
+
+  .stats,
+  .statsRight {
     text-align: left;
     align-items: flex-start;
+  }
+
+  .stats span,
+  .statsRight span {
+    justify-content: flex-start;
   }
 }

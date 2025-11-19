@@ -1,6 +1,34 @@
 require "rails_helper"
 
 RSpec.describe Battle, type: :model do
+  describe "callbacks" do
+    let(:player) { create(:player, tag: "#PLAYER0") }
+
+    before do
+      clear_enqueued_jobs
+    end
+
+    after do
+      clear_enqueued_jobs
+    end
+
+    it "enqueues EnsurePlayersJob with participant tags on create" do
+      teams = [
+        [
+          { "tag" => player.tag },
+          { "tag" => "#ALLY1" }
+        ],
+        [
+          { "tag" => "#ENEMY1" }
+        ]
+      ]
+
+      expect do
+        create(:battle, player: player, teams: teams)
+      end.to have_enqueued_job(EnsurePlayersJob).with(array_including("#PLAYER0", "#ALLY1", "#ENEMY1"))
+    end
+  end
+
   describe ".brawler_pick_rate_by_map" do
     let(:player) { create(:player, tag: "#PLAYERA") }
     let(:map_id) { 15000007 }

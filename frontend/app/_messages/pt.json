@@ -123,6 +123,14 @@
       "inSeason": "Tempo restante para o fim da temporada:",
       "downtime": "Tempo para a próxima temporada:",
       "unavailable": "As informações da temporada não estão disponíveis no momento."
+    },
+    "teammates": {
+      "title": "Aliados com boa sinergia",
+      "empty": "Ainda não encontramos aliados com boa sinergia."
+    },
+    "enemies": {
+      "title": "Oponentes favoráveis",
+      "empty": "Ainda não há dados de oponentes favoráveis."
     }
   },
   "termsOfService": {

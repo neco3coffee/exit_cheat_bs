@@ -123,6 +123,14 @@
       "inSeason": "Vrijeme do kraja sezone:",
       "downtime": "Vrijeme do sljedeće sezone:",
       "unavailable": "Podaci o sezoni trenutno nisu dostupni."
+    },
+    "teammates": {
+      "title": "Suigrači s dobrom sinergijom",
+      "empty": "Još nismo pronašli suigrače s dobrom sinergijom."
+    },
+    "enemies": {
+      "title": "Povoljni protivnici",
+      "empty": "Još nema podataka o povoljnim protivnicima."
     }
   },
   "termsOfService": {

@@ -123,6 +123,14 @@
       "inSeason": "Koha deri në fundin e sezonit:",
       "downtime": "Koha deri në sezonin e ardhshëm:",
       "unavailable": "Informacioni i sezonit nuk është i disponueshëm tani."
+    },
+    "teammates": {
+      "title": "Bashkëlojtarë me sinergji të mirë",
+      "empty": "Ende nuk kemi gjetur bashkëlojtarë me sinergji të mirë."
+    },
+    "enemies": {
+      "title": "Kundërshtarë të favorshëm",
+      "empty": "Ende nuk ka të dhëna për kundërshtarët e favorshëm."
     }
   },
   "termsOfService": {

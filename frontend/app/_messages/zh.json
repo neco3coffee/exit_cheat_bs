@@ -123,6 +123,14 @@
       "inSeason": "距离赛季结束：",
       "downtime": "距离下个赛季开始：",
       "unavailable": "当前无法获取赛季信息。"
+    },
+    "teammates": {
+      "title": "配合默契的队友",
+      "empty": "暂时还没有配合默契的队友数据。"
+    },
+    "enemies": {
+      "title": "相对有利的对手",
+      "empty": "暂时还没有相对有利的对手数据。"
     }
   },
   "termsOfService": {
