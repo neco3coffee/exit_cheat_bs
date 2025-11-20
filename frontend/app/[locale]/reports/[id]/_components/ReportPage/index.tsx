@@ -30,7 +30,7 @@ const StatusIcon = {
   rejected: <CircleX className={styles.statusIconRejected} />,
 };
 
-const apiUrl = "http://app:3000";
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://app:3000";
 
 export default async function ReportPage({
   params,

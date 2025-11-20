@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://app:3000";
+
 export async function GET() {
-  const res = await fetch("http://app:3000/api/v1/reports/latest", {
+  const res = await fetch(`${apiUrl}/api/v1/reports/latest`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

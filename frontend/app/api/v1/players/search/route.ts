@@ -1,5 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://app:3000";
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
@@ -16,7 +18,7 @@ export async function GET(request: NextRequest) {
 
     // バックエンドサービスにリクエスト
     const response = await fetch(
-      `http://app:3000/api/v1/players/search?name=${encodeURIComponent(
+      `${apiUrl}/api/v1/players/search?name=${encodeURIComponent(
         name,
       )}&history=${history === "true"}&rank=${rank || "0"}`,
       {

@@ -1,10 +1,9 @@
 import { type NextRequest, NextResponse } from "next/server";
 
+const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://app:3000";
+
 export async function GET(_request: NextRequest) {
   try {
-    // Docker Compose環境ではapp:3000を使用
-    const backendUrl = "http://app:3000";
-
     const response = await fetch(`${backendUrl}/api/v1/auth/logout`, {
       method: "GET",
       headers: {

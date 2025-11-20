@@ -25,7 +25,9 @@ import BattleLogLastStand from "./_components/BattleLogLastStand";
 import LocalStorage from "./_components/LocalStorage";
 import styles from "./page.module.scss";
 
-const apiUrl = "http://app:3000";
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://app:3000";
+const isProduction = process.env.NEXT_PUBLIC_NODE_ENV === "production";
+const isCi = (process.env.NEXT_PUBLIC_CI ?? "false") === "true";
 
 async function getPlayerData(sessionToken: string) {
   "use cache";
@@ -98,7 +100,7 @@ async function PlayerPage({
 }) {
   const { locale, tag } = await params;
   const res = await fetch(
-    `http://app:3000/api/v1/players/${encodeURIComponent(tag)}`,
+    `${apiUrl}/api/v1/players/${encodeURIComponent(tag)}`,
     { next: { revalidate: 60 } },
   );
   const player: Player = await res.json();
@@ -133,7 +135,7 @@ async function PlayerPage({
 
   return (
     <>
-      {process.env.NODE_ENV === "production" && process.env.CI !== "true" && (
+      {isProduction && !isCi && (
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3651729056445822"

@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import styles from "./page.module.scss";
 
-const apiUrl = "http://app:3000";
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://app:3000";
 
 export async function getBrawlerPickRateByMap(mapId: number) {
   "use cache";
