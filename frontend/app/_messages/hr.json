@@ -346,7 +346,12 @@
       "section3Middle": ". Također možete posjetiti",
       "section3Link2": "www.aboutads.info",
       "section3Suffix": " za onemogućavanje kolačića koje koriste distributeri oglasa trećih strana za personalizirane oglase.",
-      "section4": "4. Onemogućavanje oglasa putem identifikatora oglasa može se postaviti u postavkama operativnog sustava vašeg uređaja. Provjerite službene informacije za svaki OS o načinu postavljanja."
+      "section4": "4. Onemogućavanje oglasa putem identifikatora oglasa može se postaviti u postavkama operativnog sustava vašeg uređaja. Provjerite službene informacije za svaki OS o načinu postavljanja.",
+      "section5Prefix": "5. Usluga koristi tehnologiju optimizacije oglasa koju pruža",
+      "section5Link1": "Ezoic Inc.",
+      "section5Middle": " kako bi prikazivala i analizirala personalizirane oglase. Kada posjetite Uslugu, Ezoic može prikupljati podatke poput vaše IP adrese, informacija o uređaju i metrika korištenja u te svrhe. Za više detalja pogledajte",
+      "section5Link2": "politiku privatnosti tvrtke Ezoic",
+      "section5Suffix": "."
     },
     "article6": {
       "title": "Članak 6 (Zajedničko korištenje podataka)",

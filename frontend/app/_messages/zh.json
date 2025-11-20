@@ -346,7 +346,12 @@
       "section3Middle": "中关闭个性化广告。也可访问",
       "section3Link2": "www.aboutads.info",
       "section3Suffix": "以关闭第三方分发方用于个性化广告的Cookies。",
-      "section4": "4. 可在设备操作系统设置中通过广告标识符关闭广告。具体设置方法请查阅各操作系统官方信息。"
+      "section4": "4. 可在设备操作系统设置中通过广告标识符关闭广告。具体设置方法请查阅各操作系统官方信息。",
+      "section5Prefix": "5. 本服务使用",
+      "section5Link1": "Ezoic Inc.",
+      "section5Middle": "提供的广告优化技术，以投放并分析个性化广告。用户访问本服务时，Ezoic 可能会为此收集您的 IP 地址、设备信息及使用指标等数据。详情请参阅",
+      "section5Link2": "Ezoic 的隐私政策",
+      "section5Suffix": "。"
     },
     "article6": {
       "title": "第六条（信息的共同使用）",

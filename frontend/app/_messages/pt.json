@@ -346,7 +346,12 @@
       "section3Middle": ". Também é possível acessar",
       "section3Link2": "www.aboutads.info",
       "section3Suffix": " para desativar cookies usados por anunciantes de terceiros.",
-      "section4": "4. A desativação de anúncios personalizados por identificadores pode ser feita nas configurações do sistema operacional do seu dispositivo. Consulte o site oficial do seu sistema para saber como configurar."
+      "section4": "4. A desativação de anúncios personalizados por identificadores pode ser feita nas configurações do sistema operacional do seu dispositivo. Consulte o site oficial do seu sistema para saber como configurar.",
+      "section5Prefix": "5. O Serviço utiliza a tecnologia de otimização de anúncios fornecida pela",
+      "section5Link1": "Ezoic Inc.",
+      "section5Middle": " para veicular e analisar anúncios personalizados. Ao acessar o Serviço, a Ezoic pode coletar dados como endereço IP, informações do dispositivo e métricas de uso para essa finalidade. Para mais detalhes, consulte",
+      "section5Link2": "a política de privacidade da Ezoic",
+      "section5Suffix": "."
     },
     "article6": {
       "title": "Artigo 6 (Uso Compartilhado de Informações)",
