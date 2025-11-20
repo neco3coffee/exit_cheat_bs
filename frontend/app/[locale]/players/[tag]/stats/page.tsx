@@ -254,6 +254,7 @@ export async function PlayerStatsPage({
           <SeasonCountdown
             startDateTime={seasonData?.startDateTime ?? ""}
             endDateTime={seasonData?.endDateTime ?? ""}
+            nextStartDateTime={seasonData?.nextStartDateTime ?? ""}
             labels={{
               inSeason: t("seasonCountdown.inSeason"),
               downtime: t("seasonCountdown.downtime"),
@@ -382,6 +383,7 @@ export async function PlayerStatsPage({
         <SeasonCountdown
           startDateTime={seasonData?.startDateTime ?? ""}
           endDateTime={seasonData?.endDateTime ?? ""}
+          nextStartDateTime={seasonData?.nextStartDateTime ?? ""}
           labels={{
             inSeason: t("seasonCountdown.inSeason"),
             downtime: t("seasonCountdown.downtime"),
