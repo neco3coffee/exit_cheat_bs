@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         ></Script>
         <Script
           strategy="beforeInteractive"
-          src="//www.ezojs.com/ezoic/sa.min.js"
+          src="https//www.ezojs.com/ezoic/sa.min.js"
         ></Script>
         <Script strategy="beforeInteractive">
           window.ezstandalone = window.ezstandalone || {}; ezstandalone.cmd =
