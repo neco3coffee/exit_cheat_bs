@@ -5,29 +5,24 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
       <head>
-        {process.env.NEXT_PUBLIC_NODE_ENV === "production" &&
-          process.env.NEXT_PUBLIC_CI !== "true" && (
-            <>
-              <Script
-                strategy="beforeInteractive"
-                src="https://cmp.gatekeeperconsent.com/min.js"
-                data-cfasync="false"
-              ></Script>
-              <Script
-                strategy="beforeInteractive"
-                src="https://the.gatekeeperconsent.com/cmp.min.js"
-                data-cfasync="false"
-              ></Script>
-              <Script
-                strategy="beforeInteractive"
-                src="//www.ezojs.com/ezoic/sa.min.js"
-              ></Script>
-              <Script strategy="beforeInteractive">
-                window.ezstandalone = window.ezstandalone || {};
-                ezstandalone.cmd = ezstandalone.cmd || [];
-              </Script>
-            </>
-          )}
+        <Script
+          strategy="beforeInteractive"
+          src="https://cmp.gatekeeperconsent.com/min.js"
+          data-cfasync="false"
+        ></Script>
+        <Script
+          strategy="beforeInteractive"
+          src="https://the.gatekeeperconsent.com/cmp.min.js"
+          data-cfasync="false"
+        ></Script>
+        <Script
+          strategy="beforeInteractive"
+          src="//www.ezojs.com/ezoic/sa.min.js"
+        ></Script>
+        <Script strategy="beforeInteractive">
+          window.ezstandalone = window.ezstandalone || {}; ezstandalone.cmd =
+          ezstandalone.cmd || [];
+        </Script>
         <link
           rel="manifest"
           href="/manifest.webmanifest"
