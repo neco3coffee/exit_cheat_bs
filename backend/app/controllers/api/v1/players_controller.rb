@@ -207,11 +207,14 @@ module Api
           return
         end
 
+        # season終了まで有効な設定にする
+        _start_time, end_time, _next_start_time = SeasonCalendar.current_period_in_utc
+
         player = session.player
         enabled = params[:enabled]
         # enabledがtrueの場合はexpires_atを12時間後に設定、falseの場合はnilに設定
         if enabled
-          expires_at = 12.hours.from_now
+          expires_at = end_time
         else
           expires_at = nil
         end
