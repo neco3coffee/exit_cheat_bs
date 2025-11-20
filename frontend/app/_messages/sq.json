@@ -346,7 +346,12 @@
       "section3Middle": ". Mund të vizitoni edhe",
       "section3Link2": "www.aboutads.info",
       "section3Suffix": " për të çaktivizuar cookies të përdorura për reklamim të personalizuar nga shpërndarës të palëve të treta.",
-      "section4": "4. Çaktivizimi i reklamave duke përdorur identifikues reklamash mund të bëhet nga cilësimet e OS të pajisjes suaj. Ju lutemi kontrolloni informacionin zyrtar për secilin OS për mënyrën e konfigurimit."
+      "section4": "4. Çaktivizimi i reklamave duke përdorur identifikues reklamash mund të bëhet nga cilësimet e OS të pajisjes suaj. Ju lutemi kontrolloni informacionin zyrtar për secilin OS për mënyrën e konfigurimit.",
+      "section5Prefix": "5. Shërbimi përdor teknologjinë e optimizimit të reklamave të ofruar nga",
+      "section5Link1": "Ezoic Inc.",
+      "section5Middle": " për të shfaqur dhe analizuar reklama të personalizuara. Kur vizitoni Shërbimin, Ezoic mund të mbledhë të dhëna si adresa juaj IP, informacioni i pajisjes dhe metrikat e përdorimit për këtë qëllim. Për më shumë detaje, ju lutemi konsultoni",
+      "section5Link2": "politikën e privatësisë së Ezoic",
+      "section5Suffix": "."
     },
     "article6": {
       "title": "Neni 6 (Përdorimi i Përbashkët i Informacionit)",

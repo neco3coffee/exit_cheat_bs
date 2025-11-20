@@ -187,6 +187,29 @@ export default async function PrivacyPolicyPage({
                 {t("article5.section3Suffix")}
               </p>
               <p>{t("article5.section4")}</p>
+              <p style={{ color: "var(--white)" }}>
+                {t("article5.section5Prefix")}{" "}
+                <a
+                  href="https://www.ezoic.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-gray-300"
+                  style={{ color: "var(--on-blue)" }}
+                >
+                  {t("article5.section5Link1")}
+                </a>
+                {t("article5.section5Middle")}{" "}
+                <a
+                  href="https://www.ezoic.com/privacy-policy/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-gray-300"
+                  style={{ color: "var(--on-blue)" }}
+                >
+                  {t("article5.section5Link2")}
+                </a>
+                {t("article5.section5Suffix")}
+              </p>
             </div>
           </section>
 

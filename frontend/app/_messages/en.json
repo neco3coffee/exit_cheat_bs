@@ -366,7 +366,12 @@
       "section3Middle": ". You can also visit",
       "section3Link2": "www.aboutads.info",
       "section3Suffix": " to disable cookies used for personalized advertising by third-party distributors.",
-      "section4": "4. Advertising opt-out using advertising identifiers can be done from the OS settings of your device. Please check the official information for each OS for setting methods."
+      "section4": "4. Advertising opt-out using advertising identifiers can be done from the OS settings of your device. Please check the official information for each OS for setting methods.",
+      "section5Prefix": "5. This service uses advertising optimization technology provided by",
+      "section5Link1": "Ezoic Inc.",
+      "section5Middle": " to deliver and analyze personalized advertisements. When you visit this service, Ezoic may collect data such as your IP address, device information, and usage metrics for this purpose. For more details, please review",
+      "section5Link2": "Ezoic's privacy policy",
+      "section5Suffix": "."
     },
     "article6": {
       "title": "Article 6 (Joint Use of Information)",

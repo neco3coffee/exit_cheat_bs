@@ -346,7 +346,12 @@
       "section3Middle": ". Vous pouvez également visiter",
       "section3Link2": "www.aboutads.info",
       "section3Suffix": " pour désactiver les cookies utilisés pour la publicité personnalisée par des distributeurs tiers.",
-      "section4": "4. La désactivation de la publicité via les identifiants publicitaires peut être effectuée depuis les paramètres du système d'exploitation de votre appareil. Veuillez consulter les informations officielles de chaque OS pour les méthodes de paramétrage."
+      "section4": "4. La désactivation de la publicité via les identifiants publicitaires peut être effectuée depuis les paramètres du système d'exploitation de votre appareil. Veuillez consulter les informations officielles de chaque OS pour les méthodes de paramétrage.",
+      "section5Prefix": "5. Le Service utilise la technologie d'optimisation publicitaire fournie par",
+      "section5Link1": "Ezoic Inc.",
+      "section5Middle": " afin de diffuser et d'analyser des publicités personnalisées. Lors de votre visite, Ezoic peut collecter des données telles que votre adresse IP, les informations sur votre appareil et les mesures d'utilisation à cette fin. Pour en savoir plus, veuillez consulter",
+      "section5Link2": "la politique de confidentialité d'Ezoic",
+      "section5Suffix": "."
     },
     "article6": {
       "title": "Article 6 (Utilisation conjointe des informations)",

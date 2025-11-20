@@ -346,7 +346,12 @@
       "section3Middle": ". Můžete také navštívit",
       "section3Link2": "www.aboutads.info",
       "section3Suffix": " a zakázat cookies používané pro personalizovanou reklamu třetích stran.",
-      "section4": "4. Odhlášení z reklam pomocí reklamních identifikátorů lze provést v nastavení OS vašeho zařízení. Informace o způsobu nastavení naleznete v oficiálních informacích pro každý OS."
+      "section4": "4. Odhlášení z reklam pomocí reklamních identifikátorů lze provést v nastavení OS vašeho zařízení. Informace o způsobu nastavení naleznete v oficiálních informacích pro každý OS.",
+      "section5Prefix": "5. Služba využívá technologii optimalizace reklamy poskytovanou společností",
+      "section5Link1": "Ezoic Inc.",
+      "section5Middle": " k doručování a analýze personalizovaných reklam. Při návštěvě Služby může Ezoic za tímto účelem shromažďovat údaje, jako je vaše IP adresa, informace o zařízení a údaje o používání. Podrobnosti naleznete v",
+      "section5Link2": "zásadách ochrany osobních údajů společnosti Ezoic",
+      "section5Suffix": "."
     },
     "article6": {
       "title": "Článek 6 (Společné využívání informací)",
