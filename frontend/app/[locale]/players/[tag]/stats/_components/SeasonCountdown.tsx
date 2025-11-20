@@ -6,6 +6,7 @@ import styles from "./SeasonCountdown.module.scss";
 type SeasonCountdownProps = {
   startDateTime: string;
   endDateTime: string;
+  nextStartDateTime: string;
   labels: {
     inSeason: string;
     downtime: string;
@@ -37,10 +38,15 @@ const formatDuration = (milliseconds: number): string => {
 export function SeasonCountdown({
   startDateTime,
   endDateTime,
+  nextStartDateTime,
   labels,
 }: SeasonCountdownProps) {
   const seasonStart = useMemo(() => new Date(startDateTime), [startDateTime]);
   const seasonEnd = useMemo(() => new Date(endDateTime), [endDateTime]);
+  const nextSeasonStart = useMemo(
+    () => new Date(nextStartDateTime),
+    [nextStartDateTime],
+  );
   const [now, setNow] = useState<number | null>(null);
 
   useEffect(() => {
@@ -58,7 +64,8 @@ export function SeasonCountdown({
 
   if (
     Number.isNaN(seasonStart.getTime()) ||
-    Number.isNaN(seasonEnd.getTime())
+    Number.isNaN(seasonEnd.getTime()) ||
+    Number.isNaN(nextSeasonStart.getTime())
   ) {
     return (
       <div className={styles.container}>
@@ -67,8 +74,15 @@ export function SeasonCountdown({
     );
   }
 
-  const isDowntime = now !== null ? now < seasonStart.getTime() : false;
-  const target = isDowntime ? seasonStart : seasonEnd;
+  const isBeforeSeason = now !== null ? now < seasonStart.getTime() : false;
+  const isAfterSeason = now !== null ? now >= seasonEnd.getTime() : false;
+  const isDowntime = isBeforeSeason || isAfterSeason;
+
+  const target = isBeforeSeason
+    ? seasonStart
+    : isAfterSeason
+      ? nextSeasonStart
+      : seasonEnd;
   const label =
     now !== null
       ? isDowntime

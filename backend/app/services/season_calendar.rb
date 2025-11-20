@@ -13,8 +13,8 @@ class SeasonCalendar
     end
 
     def current_period_in_utc(reference_time = Time.zone.now)
-      start_time, end_time = current_period(reference_time)
-      [ start_time.utc, end_time.utc ]
+      start_time, end_time, next_start_time = current_period(reference_time)
+      [ start_time.utc, end_time.utc, next_start_time.utc ]
     end
   end
 
@@ -30,15 +30,15 @@ class SeasonCalendar
       start_time = season_start_for(previous.year, previous.month)
     end
 
-    end_time = season_end_for(start_time.year, start_time.month)
-
-    if @reference_time >= end_time
-      next_month = start_time.advance(months: 1)
-      start_time = season_start_for(next_month.year, next_month.month)
+    loop do
       end_time = season_end_for(start_time.year, start_time.month)
-    end
+      next_month = start_time.advance(months: 1)
+      next_start_time = season_start_for(next_month.year, next_month.month)
 
-    [ start_time, end_time ]
+      return [ start_time, end_time, next_start_time ] if @reference_time < next_start_time
+
+      start_time = next_start_time
+    end
   end
 
   private
