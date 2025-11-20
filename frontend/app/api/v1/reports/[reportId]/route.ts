@@ -1,6 +1,8 @@
 import { cookies } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
 
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://app:3000";
+
 export async function PUT(
   req: NextRequest,
   { params }: { params: Promise<{ reportId: string }> },
@@ -13,7 +15,7 @@ export async function PUT(
   }
   const body = await req.json();
   const { reportId } = await params;
-  const res = await fetch(`http://app:3000/api/v1/reports/${reportId}`, {
+  const res = await fetch(`${apiUrl}/api/v1/reports/${reportId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -39,7 +41,7 @@ export async function GET(
   }
 
   const { reportId } = await params;
-  const res = await fetch(`http://app:3000/api/v1/reports/${reportId}`, {
+  const res = await fetch(`${apiUrl}/api/v1/reports/${reportId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

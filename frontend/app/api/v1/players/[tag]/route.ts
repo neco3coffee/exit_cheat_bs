@@ -1,5 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://app:3000";
+
 export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ tag: string }> },
@@ -9,7 +11,7 @@ export async function GET(
 
     // バックエンドサービスにリクエスト
     const response = await fetch(
-      `http://app:3000/api/v1/players/${encodeURIComponent(tag)}`,
+      `${apiUrl}/api/v1/players/${encodeURIComponent(tag)}`,
       {
         method: "GET",
         headers: {

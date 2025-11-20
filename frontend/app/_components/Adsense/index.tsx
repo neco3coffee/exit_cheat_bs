@@ -6,22 +6,21 @@ declare global {
 }
 
 export default function Adsense() {
+  const isProduction = process.env.NEXT_PUBLIC_NODE_ENV === "production";
+  const isCi = (process.env.NEXT_PUBLIC_CI ?? "false") === "true";
+
   useEffect(() => {
     if (
       typeof window !== "undefined" &&
-      process.env.NODE_ENV === "production" &&
-      process.env.CI !== "true" &&
+      isProduction &&
+      !isCi &&
       window.adsbygoogle
     ) {
       window.adsbygoogle.push({});
     }
-  }, []);
+  }, [isProduction, isCi]);
 
-  if (
-    typeof window === "undefined" ||
-    process.env.NODE_ENV !== "production" ||
-    process.env.CI === "true"
-  ) {
+  if (typeof window === "undefined" || !isProduction || isCi) {
     return (
       <div
         style={{

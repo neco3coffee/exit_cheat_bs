@@ -1,6 +1,8 @@
 import { cookies } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
 
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://app:3000";
+
 export async function POST(req: NextRequest) {
   const cookieStore = await cookies();
   const sessionCookie = cookieStore.get("session_token");
@@ -12,7 +14,7 @@ export async function POST(req: NextRequest) {
   const tag = req.nextUrl.pathname.split("/")[4];
 
   const body = await req.json();
-  const res = await fetch(`http://app:3000/api/v1/players/${tag}/auto_save`, {
+  const res = await fetch(`${apiUrl}/api/v1/players/${tag}/auto_save`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
