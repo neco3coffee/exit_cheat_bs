@@ -62,7 +62,7 @@ type Player = {
   tag: string;
   name: string;
   nameColor: string;
-  name_histories?: Array<{
+  nameHistories?: Array<{
     id: number;
     name: string;
     icon_id: string | null;
@@ -171,7 +171,7 @@ async function PlayerPage({
             <PlayerName
               name={player.name}
               nameColor={player?.nameColor}
-              nameHistories={player?.name_histories}
+              nameHistories={player?.nameHistories}
             />
             {player.currentRank >= 0 && (
               <div className={styles.rankContainer}>
