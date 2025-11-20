@@ -200,7 +200,7 @@ export default async function PrivacyPolicyPage({
                 </a>
                 {t("article5.section5Middle")}{" "}
                 <a
-                  href="https://www.ezoic.com/privacy-policy/"
+                  href="https://g.ezoic.net/privacy/safebrawl.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline hover:text-gray-300"
