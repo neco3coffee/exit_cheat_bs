@@ -5,7 +5,7 @@ class SeasonCalendar
   NTH_OF_MONTH = 3
   START_WEEKDAY = 4 # Thursday
   END_WEEKDAY = 3   # Wednesday
-  TRANSITION_HOUR = 18
+  TRANSITION_HOUR = 17
 
   class << self
     def current_period(reference_time = Time.zone.now)
