@@ -54,11 +54,14 @@ export default function BattleLogAutoSaveIconToggle({
         return;
       }
 
+      const days = Math.floor(diffSec / 86400);
       const hours = Math.floor(diffSec / 3600);
       const minutes = Math.floor((diffSec % 3600) / 60);
       const seconds = diffSec % 60;
 
-      if (hours > 0) {
+      if (days > 0) {
+        setRemaining(`${days}d${hours}h${minutes}m`);
+      } else if (hours > 0) {
         setRemaining(`${hours}h${minutes}m${seconds}s`);
       } else {
         setRemaining(`${minutes}m${seconds}s`);
@@ -73,7 +76,7 @@ export default function BattleLogAutoSaveIconToggle({
 
   return (
     <div
-      className="flex items-center gap-5 justify-center mt-3! border px-3 py-2! w-[270px]"
+      className="flex items-center gap-5 justify-center mt-3! border px-3 py-2! w-[320px]"
       style={{
         borderColor: "var(--black-border)",
         backgroundColor: "var(--black)",
