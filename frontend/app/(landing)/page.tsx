@@ -220,7 +220,7 @@ export default async function LandingPage() {
               X (Twitter)
             </a>
             <a
-              href="https://discord.gg/rUfH4bAt"
+              href="https://discord.gg/BnjBCYFT"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.socialButton}
