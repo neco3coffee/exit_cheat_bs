@@ -11,8 +11,8 @@ RSpec.describe "Seasons", type: :request do
         expect(response).to have_http_status(:ok)
         json = JSON.parse(response.body)
 
-        expect(json["startDateTime"]).to eq(zone.local(2025, 12, 18, 18).utc.iso8601)
-        expect(json["endDateTime"]).to eq(zone.local(2026, 1, 21, 18).utc.iso8601)
+        expect(json["startDateTime"]).to eq(zone.local(2025, 12, 18, 17).utc.iso8601)
+        expect(json["endDateTime"]).to eq(zone.local(2026, 1, 21, 17).utc.iso8601)
       end
     end
 
@@ -23,8 +23,8 @@ RSpec.describe "Seasons", type: :request do
         expect(response).to have_http_status(:ok)
         json = JSON.parse(response.body)
 
-        expect(json["startDateTime"]).to eq(zone.local(2026, 1, 15, 18).utc.iso8601)
-        expect(json["endDateTime"]).to eq(zone.local(2026, 2, 18, 18).utc.iso8601)
+        expect(json["startDateTime"]).to eq(zone.local(2026, 1, 15, 17).utc.iso8601)
+        expect(json["endDateTime"]).to eq(zone.local(2026, 2, 18, 17).utc.iso8601)
       end
     end
   end
