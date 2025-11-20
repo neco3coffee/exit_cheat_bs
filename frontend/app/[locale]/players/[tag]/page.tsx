@@ -22,6 +22,7 @@ import BattleLogTrio from "@/app/[locale]/players/[tag]/_components/BattleLogTri
 import { Telemetry } from "@/app/[locale]/players/[tag]/_components/Telemetry.tsx";
 import BattleLogAutoSaveIconToggle from "./_components/BattleLogAutoSaveIconToggle";
 import BattleLogLastStand from "./_components/BattleLogLastStand";
+import Brawlers from "./_components/Brawlers";
 import LocalStorage from "./_components/LocalStorage";
 import styles from "./page.module.scss";
 
@@ -71,6 +72,7 @@ type Player = {
     name: string;
     badgeId: number;
   };
+  brawlers: any[];
   auto_save_enabled?: boolean | null;
   auto_save_expires_at?: string | null;
   battlelog?: {
@@ -181,17 +183,20 @@ async function PlayerPage({
               </div>
             )}
           </div>
-          <Link
-            href={`/players/${tag}/stats`}
-            className={styles.statsLink}
-            aria-label={`View ranked stats for ${player.name}`}
-            title={`View ranked stats for ${player.name}`}
-          >
-            <span className={styles.statsLinkGlow} aria-hidden="true" />
-            <span className={styles.statsLinkContent} aria-hidden="true">
-              <span className={styles.statsLinkIcon}>📊</span>
-            </span>
-          </Link>
+          <div className={styles.statsAndBrawlersContainer}>
+            <Link
+              href={`/players/${tag}/stats`}
+              className={styles.statsLink}
+              aria-label={`View ranked stats for ${player.name}`}
+              title={`View ranked stats for ${player.name}`}
+            >
+              <span className={styles.statsLinkGlow} aria-hidden="true" />
+              <span className={styles.statsLinkContent} aria-hidden="true">
+                <span className={styles.statsLinkIcon}>📊</span>
+              </span>
+            </Link>
+            <Brawlers player={player} />
+          </div>
         </div>
         {isAdmin && (
           <BattleLogAutoSaveIconToggle
