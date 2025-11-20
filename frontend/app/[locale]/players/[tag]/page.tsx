@@ -24,6 +24,7 @@ import BattleLogAutoSaveIconToggle from "./_components/BattleLogAutoSaveIconTogg
 import BattleLogLastStand from "./_components/BattleLogLastStand";
 import Brawlers from "./_components/Brawlers";
 import LocalStorage from "./_components/LocalStorage";
+import PlayerName from "./_components/PlayerName";
 import styles from "./page.module.scss";
 
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://app:3000";
@@ -61,6 +62,12 @@ type Player = {
   tag: string;
   name: string;
   nameColor: string;
+  name_histories?: Array<{
+    id: number;
+    name: string;
+    icon_id: string | null;
+    changed_at: string;
+  }>;
   iconId: number;
   currentRank: number;
   trophies: number;
@@ -161,13 +168,11 @@ async function PlayerPage({
             <h3>{player.tag}</h3>
           </div>
           <div className={styles.nameAndRankContainer}>
-            <h1
-              style={{
-                color: `#${player?.nameColor?.replace(/^0x/, "").slice(2)}`,
-              }}
-            >
-              {player.name}
-            </h1>
+            <PlayerName
+              name={player.name}
+              nameColor={player?.nameColor}
+              nameHistories={player?.name_histories}
+            />
             {player.currentRank >= 0 && (
               <div className={styles.rankContainer}>
                 {player.currentRank > 0 && (
