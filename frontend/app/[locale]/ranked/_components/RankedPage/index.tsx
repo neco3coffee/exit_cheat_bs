@@ -25,12 +25,14 @@ export default async function RankedPage({
   recentReportComponent,
   battleLogsTabContent,
   reportsTabContent,
+  reportedPlayersTabContent,
 }: {
   locale: string;
   player: Player;
   recentReportComponent: React.ReactNode;
   battleLogsTabContent: React.ReactNode;
   reportsTabContent: React.ReactNode;
+  reportedPlayersTabContent: React.ReactNode | null;
 }) {
   const t = await getTranslations({ locale, namespace: "ranked" });
   const tag = player?.tag?.startsWith("#")
@@ -48,9 +50,12 @@ export default async function RankedPage({
 
       <Tabs className="w-full" defaultValue="battleLogs">
         <TabsList className={styles.tabsList}>
-          <Link href={`/players/${tag}/stats`} className={styles.tabTrigger}>
+          {/* <Link href={`/players/${tag}/stats`} className={styles.tabTrigger}>
             📊
-          </Link>
+          </Link> */}
+          <TabsTrigger value="reportedPlayers" className={styles.tabTrigger}>
+            🤡
+          </TabsTrigger>
           <TabsTrigger value="battleLogs" className={styles.tabTrigger}>
             ⚔️
           </TabsTrigger>

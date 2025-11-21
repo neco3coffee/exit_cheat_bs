@@ -41,6 +41,9 @@
 .historyContent {
   width: 280px;
   padding: 8px 0;
+  background: rgba(15, 17, 20, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--white);
 }
 
 .scrollArea {
@@ -65,7 +68,7 @@
   transition: background 0.2s ease;
 
   &:hover {
-    background: rgba(148, 163, 184, 0.1);
+    background: rgba(255, 255, 255, 0.08);
   }
 }
 
@@ -76,12 +79,12 @@
   flex-shrink: 0;
   border-radius: 10px;
   overflow: hidden;
-  background: rgba(15, 23, 42, 0.5);
+  background: rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
-  color: rgba(226, 232, 240, 0.8);
+  color: var(--white);
 }
 
 .text {
@@ -93,10 +96,10 @@
 .historyName {
   font-size: 14px;
   font-weight: 600;
-  color: rgba(226, 232, 240, 0.95);
+  color: var(--white);
 }
 
 .historyDate {
   font-size: 12px;
-  color: rgba(148, 163, 184, 0.85);
+  color: var(--white);
 }
