@@ -35,6 +35,7 @@ Rails.application.routes.draw do
 
 
       get "maps/:id/brawler_pick_rate", to: "battles#map_brawler_pick_rate"
+      get "maps", to: "battles#maps"
 
       get "seasons/current", to: "seasons#current"
 

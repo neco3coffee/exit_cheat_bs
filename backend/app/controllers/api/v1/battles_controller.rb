@@ -26,6 +26,19 @@ module Api
           render json: { error: e.message }, status: :internal_server_error
         end
       end
+
+      def maps
+        # seasonの開始と終了の日付を取得
+        start_time, end_time, _next_start_time = SeasonCalendar.current_period_in_utc
+
+        # start_timeとend_timeを使って、該当するマップのデータを取得
+        maps = Battle.where(created_at: start_time..end_time).where(type: "soloRanked").distinct.pluck(:map_id)
+
+        render json: { maps: maps }, status: :ok
+        # render json: { maps: ["15000082","15000703","15000703","15000703"]}
+      rescue => e
+        render json: { error: e.message }, status: :internal_server_error
+      end
     end
   end
 end

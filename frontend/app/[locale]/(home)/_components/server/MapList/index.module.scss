@@ -1,0 +1,24 @@
+.container {
+  margin-top: 30px;
+  padding: 32px;
+  width: 100% !important;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  .mapLink {
+    text-decoration: none;
+    width: calc(50% - 6px);
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    .mapImage {
+      width: 100% !important;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+  }
+}
