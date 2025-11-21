@@ -13,7 +13,7 @@ const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3000";
 
 async function getMaps() {
   "use cache";
-  cacheLife("days");
+  cacheLife("minutes");
 
   if (process.env.NEXT_PHASE === "phase-production-build") {
     return { maps: [] };
