@@ -2,7 +2,6 @@ import { cacheLife } from "next/cache";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
-import { isBuildPhase } from "@/lib/is-build-phase";
 import styles from "./page.module.scss";
 
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3000";
@@ -10,10 +9,6 @@ const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3000";
 export async function getBrawlerPickRateByMap(mapId: number) {
   "use cache";
   cacheLife("minutes");
-
-  if (isBuildPhase()) {
-    return null;
-  }
 
   const res = await fetch(`${apiUrl}/api/v1/maps/${mapId}/brawler_pick_rate`, {
     method: "GET",

@@ -24,7 +24,6 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY . .
-ENV IS_BUILD=true
 RUN npm run build && ls -la /app && ls -la /app/.next
 
 

@@ -1,7 +1,6 @@
 import { cacheLife } from "next/cache";
 import { Suspense } from "react";
 import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
-import { isBuildPhase } from "@/lib/is-build-phase";
 import Loading from "../ranked/loading";
 import FAQ from "./_components/client/FAQ";
 import InstallPrompt from "./_components/client/InstallPrompt";
@@ -16,26 +15,31 @@ async function getMaps() {
   "use cache";
   cacheLife("minutes");
 
-  if (isBuildPhase()) {
+  try {
+    const response = await fetch(`${apiUrl}/api/v1/maps`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      console.error("Failed to fetch maps:", response.statusText);
+      return { maps: [] };
+    }
+    const data = await response.json();
+    if (
+      !data ||
+      typeof data !== "object" ||
+      !Array.isArray((data as any).maps)
+    ) {
+      console.warn("Unexpected maps payload", data);
+      return { maps: [] };
+    }
+    return data as { maps: string[] };
+  } catch (error) {
+    console.error("Error fetching maps:", error);
     return { maps: [] };
   }
-
-  const response = await fetch(`${apiUrl}/api/v1/maps`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  if (!response.ok) {
-    console.error("Failed to fetch maps:", response.statusText);
-    return { maps: [] };
-  }
-  const data = await response.json();
-  if (!data || typeof data !== "object" || !Array.isArray((data as any).maps)) {
-    console.warn("Unexpected maps payload", data);
-    return { maps: [] };
-  }
-  return data as { maps: string[] };
 }
 
 export default async function Page({
