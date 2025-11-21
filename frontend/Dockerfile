@@ -19,6 +19,8 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --force
 
+# appサービスがないとapp:3000二接続できなくてビルドできない問題の対策
+ENV NEXT_PUBLIC_BACKEND_URL http://localhost:3000
 # ビルドステップ
 FROM base AS builder
 WORKDIR /app
