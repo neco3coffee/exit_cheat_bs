@@ -55,7 +55,7 @@ export default function BattleLogAutoSaveIconToggle({
       }
 
       const days = Math.floor(diffSec / 86400);
-      const hours = Math.floor(diffSec / 3600);
+      const hours = Math.floor((diffSec % 86400) / 3600);
       const minutes = Math.floor((diffSec % 3600) / 60);
       const seconds = diffSec % 60;
 
