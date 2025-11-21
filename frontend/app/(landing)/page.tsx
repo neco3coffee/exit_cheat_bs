@@ -5,7 +5,7 @@ import Script from "next/script";
 import AdsenseWrapper from "../_components/AdsenseWrapper";
 import styles from "./landing.module.scss";
 
-const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://app:3000";
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3000";
 
 async function getStats() {
   "use cache";

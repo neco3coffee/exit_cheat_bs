@@ -14,7 +14,7 @@ services:
       LAMBDA_API_KEY: ${LAMBDA_API_KEY}
       NEXT_PUBLIC_CI: ${CI:-false}
       NEXT_PUBLIC_NODE_ENV: ${ENV:-development}
-      NEXT_PUBLIC_BACKEND_URL: ${BACKEND_URL:-http://localhost:3000}
+      NEXT_PUBLIC_BACKEND_URL: ${BACKEND_URL:-http://app:3000}
     networks:
       - safebrawl_net
   bot:

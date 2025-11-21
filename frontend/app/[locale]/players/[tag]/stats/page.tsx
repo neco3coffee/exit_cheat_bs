@@ -11,7 +11,7 @@ import { PlayerOverview } from "./_components/PlayerOverview";
 import { SeasonCountdown } from "./_components/SeasonCountdown";
 import styles from "./page.module.scss";
 
-const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://app:3000";
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3000";
 
 const MODE_KEYS = [
   "knockout",
