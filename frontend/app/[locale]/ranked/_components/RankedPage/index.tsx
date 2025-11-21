@@ -63,6 +63,11 @@ export default async function RankedPage({
             ⚠️
           </TabsTrigger>
         </TabsList>
+        <TabsContent value="reportedPlayers">
+          <Suspense fallback={<Loading />}>
+            {reportedPlayersTabContent}
+          </Suspense>
+        </TabsContent>
         <TabsContent value="battleLogs">
           <Suspense fallback={<Loading />}>{battleLogsTabContent}</Suspense>
         </TabsContent>

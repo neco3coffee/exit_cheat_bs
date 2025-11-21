@@ -21,6 +21,7 @@
       "onlyModerators": "Pouze moderátor může kontrolovat, schvalovat nebo zamítat hlášení!"
     },
     "noBattleLog": "Žádný nedávný záznam hodnocené bitvy není k dispozici.",
+    "noReportedPlayers": "Žádní nahlášení hráči nejsou k dispozici.",
     "noReport": "Žádná hlášení nejsou k dispozici.",
     "created": "Čeká se na nahrání videa",
     "signed_url_generated": "Čeká se na nahrání videa",

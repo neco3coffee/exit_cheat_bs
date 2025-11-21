@@ -10,6 +10,7 @@ class Report < ApplicationRecord
   after_update :handle_status_change, if: :saved_change_to_status?
 
   before_create :set_uuid
+  after_create :ensure_reported_player_exists
 
   enum :status, {
     created: "created",
@@ -60,6 +61,27 @@ class Report < ApplicationRecord
 
     if status == "approved"
       increment_approved_reports_count
+    end
+  end
+
+  # reported_tagのプレイヤーがdbに存在しない場合は作成する
+  def ensure_reported_player_exists
+    return if reported.present?
+
+    fetcher = PlayerFetcher.new
+    player_data = fetcher.fetch_player(reported_tag)
+    if player_data.present?
+      reported_player = Player.create(
+        tag: player_data["tag"],
+        name: player_data["name"],
+        club_name: player_data.dig("club", "name"),
+        trophies: player_data["trophies"],
+        icon_id: player_data.dig("icon", "id").to_s
+      )
+      self.reported = reported_player
+      save!
+    else
+      Rails.logger.error("Failed to fetch player data for tag: #{reported_tag}")
     end
   end
 end

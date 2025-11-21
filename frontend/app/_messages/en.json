@@ -21,6 +21,7 @@
       "onlyModerators": "Only moderator can review, approve, reject reports!"
     },
     "noBattleLog": "No recent ranked battle log available.",
+    "noReportedPlayers": "No reported players available.",
     "noReport": "No reports available.",
     "created": "Waiting for video upload",
     "signed_url_generated": "Waiting for video upload",

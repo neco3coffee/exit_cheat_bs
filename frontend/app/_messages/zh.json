@@ -21,6 +21,7 @@
       "onlyModerators": "只有管理员可以审核、批准、拒绝举报！"
     },
     "noBattleLog": "没有最近的排位战记录。",
+    "noReportedPlayers": "没有被举报的玩家。",
     "noReport": "没有举报记录。",
     "created": "等待视频上传",
     "signed_url_generated": "等待视频上传",

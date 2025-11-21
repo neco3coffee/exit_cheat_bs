@@ -9,6 +9,8 @@ import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMess
 import RankedPage from "@/app/[locale]/ranked/_components/RankedPage";
 import BattleLogSoloRanked from "./_components/BattleLogSoloRanked";
 import ReportedBattleLogSoloRanked from "./_components/ReportedBattleLogSoloRanked";
+import ReportedPlayersList from "./_components/ReportedPlayersList";
+import type { ReportedPlayer } from "./_components/ReportedPlayersList/types";
 import styles from "./page.module.scss";
 
 const apiUrl = "http://app:3000";
@@ -96,6 +98,30 @@ async function getRecentReport() {
   return reports[0];
 }
 
+async function getReportedPlayers(playerTag: string, sessionToken: string) {
+  "use cache";
+  cacheLife("minutes");
+  cacheTag("reportedPlayers");
+
+  const res = await fetch(
+    `${apiUrl}/api/v1/players/${encodeURIComponent(
+      playerTag,
+    )}/reported_players`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `session_token=${sessionToken}`,
+      },
+      credentials: "include",
+    },
+  );
+  if (!res.ok) {
+    return [];
+  }
+  return res.json();
+}
+
 export default async function Page({
   params,
 }: {
@@ -140,6 +166,8 @@ export default async function Page({
   const battleLogs = playerTag ? await getBattleLogs(playerTag) : null;
   const reports = playerTag ? await getReports(playerTag, sessionToken) : null;
   const recentReport = await getRecentReport();
+  const reportedPlayers = await getReportedPlayers(playerTag, sessionToken);
+  console.log("reportedPlayers", JSON.stringify(reportedPlayers, null, 2));
 
   return (
     <ServerLocaleMessageProviderWrapper params={params}>
@@ -160,6 +188,12 @@ export default async function Page({
         }
         reportsTabContent={
           <ReportsTabContent locale={locale} reports={reports || []} />
+        }
+        reportedPlayersTabContent={
+          <ReportedPlayersTabContent
+            locale={locale}
+            reportedPlayers={reportedPlayers}
+          />
         }
       />
     </ServerLocaleMessageProviderWrapper>
@@ -232,6 +266,27 @@ export async function RecentVideoComponent({
         </p>
       </div>
     </div>
+  );
+}
+
+async function ReportedPlayersTabContent({
+  locale,
+  reportedPlayers,
+}: {
+  locale: string;
+  reportedPlayers: ReportedPlayer[] | [];
+}) {
+  "use cache";
+  cacheLife("minutes");
+
+  const t = await getTranslations({ locale, namespace: "ranked" });
+
+  return (
+    <ReportedPlayersList
+      locale={locale}
+      players={reportedPlayers}
+      emptyMessage={t("noReportedPlayers")}
+    />
   );
 }
 

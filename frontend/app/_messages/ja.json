@@ -92,6 +92,7 @@
       "onlyModerators": "レビュー、承認、拒否できるのはモデレーターのみです！"
     },
     "noBattleLog": "直近のガチバトル履歴はありません。",
+    "noReportedPlayers": "報告されたプレイヤーはいません。",
     "noReport": "報告はありません。",
     "created": "動画アップ待ち",
     "signed_url_generated": "動画アップ待ち",

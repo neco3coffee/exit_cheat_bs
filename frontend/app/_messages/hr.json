@@ -21,6 +21,7 @@
       "onlyModerators": "Samo moderator može pregledati, odobriti ili odbiti prijave!"
     },
     "noBattleLog": "Nema nedavnih zapisa rangiranih bitki.",
+    "noReportedPlayers": "Nema prijavljenih igrača.",
     "noReport": "Nema dostupnih prijava.",
     "created": "Čeka se prijenos videa",
     "signed_url_generated": "Čeka se prijenos videa",

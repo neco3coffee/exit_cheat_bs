@@ -1,41 +1,4 @@
 .container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-
-  .inner {
-    margin-top: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 23px;
-    font-weight: bold;
-    font-size: 14px;
-  }
-
-  .login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 0px 23px 8px 23px;
-}
-
-.reportsContainer {
-  margin-top: 15px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 0px 23px 8px 23px;
-}
-
-.reportedPlayersContainer {
   margin-top: 15px;
   width: 100%;
   display: flex;
@@ -43,16 +6,16 @@
   align-items: stretch;
   gap: 12px;
   padding: 0 23px 12px 23px;
-
-  h5 {
-    color: var(--white);
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-  }
 }
 
-.reportedPlayerCard {
+.emptyMessage {
+  color: var(--white);
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.card {
   background: rgba(15, 23, 42, 0.65);
   border: 1px solid rgba(148, 163, 184, 0.2);
   border-radius: 12px;
@@ -65,20 +28,13 @@
   max-height: 100px;
 }
 
-.reportedPlayerTopRow {
+.topRow {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.reportedPlayerNameWrapper {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-}
-
-.reportedPlayerAvatar {
+.avatar {
   width: 50px;
   height: 50px;
   border-radius: 12px;
@@ -87,15 +43,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
 }
 
-.reportedPlayerAvatarFallback {
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatarFallback {
   width: 100%;
   height: 100%;
   display: flex;
@@ -105,7 +61,14 @@
   color: rgba(226, 232, 240, 0.75);
 }
 
-.reportedPlayerBottomRow {
+.nameWrapper {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.bottomRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -114,32 +77,31 @@
   font-size: 14px;
 }
 
-.reportedPlayerTag {
+.tag {
   font-family: var(--font-mono, monospace);
   letter-spacing: 0.5px;
 }
 
-.reportedPlayerRank {
+.rank {
   display: flex;
   align-items: center;
   justify-content: center;
   min-width: 40px;
-
-  img {
-    height: 32px;
-    width: auto;
-  }
 }
 
-.reportedPlayerRankFallback {
+.rank img {
+  height: 32px;
+  width: auto;
+}
+
+.rankFallback {
   font-size: 16px;
   font-weight: 600;
   color: rgba(226, 232, 240, 0.65);
 }
 
-.reportedPlayerReportedAt {
+.reportedAt {
   font-size: 12px;
   color: rgba(226, 232, 240, 0.8);
   white-space: nowrap;
-}
 }

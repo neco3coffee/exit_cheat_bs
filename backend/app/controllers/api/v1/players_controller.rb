@@ -290,10 +290,10 @@ module Api
           render json: { error: "Player not found" }, status: 404 and return
         end
 
-  # ここで必要な統計情報を計算・取得
-  start_time, end_time, _next_start_time = SeasonCalendar.current_period_in_utc
+        # ここで必要な統計情報を計算・取得
+        start_time, end_time, _next_start_time = SeasonCalendar.current_period_in_utc
 
-    battles = Battle.where(player_id: player.id)
+        battles = Battle.where(player_id: player.id)
             .where("battle_time >= ? AND battle_time < ?", start_time, end_time)
             .order(battle_time: :desc)
 
@@ -331,6 +331,65 @@ module Api
         }
       rescue StandardError => e
         Rails.logger.error("Stats exception occurred: #{e.message}")
+        Rails.logger.error(e.backtrace.join("\n"))
+        render json: { error: "An error occurred while processing your request" }, status: 500
+      end
+
+      def reported_players
+        tag = params[:tag].to_s.upcase.strip
+        tag = tag.gsub("O", "0")
+        tag = "##{tag}" unless tag.start_with?("#")
+        Rails.logger.info("fetching reported players for tag: #{tag}")
+
+        session_token = cookies[:session_token]
+        session = Session.includes(:player).find_by(session_token: session_token)
+        if session.nil? || session.expired?
+          render json: { error: "Invalid or expired session" }, status: :unauthorized
+          return
+        end
+
+        player = session.player
+
+        if player.tag != tag
+          render json: { error: "Forbidden" }, status: :forbidden
+          return
+        end
+
+        reports = Report.where(reporter_tag: tag)
+         .select("DISTINCT ON (reports.reported_tag) reports.reported_tag, reports.created_at")
+         .order("reports.reported_tag, reports.created_at DESC")
+
+        reported_players = reports.map do |report|
+          reported_player = Player.find_by(tag: report.reported_tag)
+          next unless reported_player
+          name_histories = reported_player.player_name_histories
+                            .order(changed_at: :desc)
+                            .map do |history|
+              {
+                id: history.id,
+                name: history.name,
+                icon_id: history.icon_id,
+                changed_at: history.changed_at.iso8601
+              }
+          end
+
+          {
+            tag: reported_player.tag,
+            name: reported_player.name,
+            nameHistories: name_histories,
+            icon_id: reported_player.icon_id,
+            rank: reported_player.rank,
+            trophies: reported_player.trophies,
+            approved_reports_count: reported_player.approved_reports_count,
+            reportedAt: report.created_at&.iso8601
+          }
+        end.compact
+
+        Rails.logger.info("reported_players: #{reported_players}")
+
+        render json: reported_players
+      rescue StandardError => e
+        Rails.logger.error("Reported players exception occurred: #{e.message}")
         Rails.logger.error(e.backtrace.join("\n"))
         render json: { error: "An error occurred while processing your request" }, status: 500
       end
