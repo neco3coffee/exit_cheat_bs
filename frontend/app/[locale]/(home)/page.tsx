@@ -1,6 +1,7 @@
 import { cacheLife } from "next/cache";
 import { Suspense } from "react";
 import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
+import { isBuildPhase } from "@/lib/is-build-phase";
 import Loading from "../ranked/loading";
 import FAQ from "./_components/client/FAQ";
 import InstallPrompt from "./_components/client/InstallPrompt";
@@ -15,7 +16,7 @@ async function getMaps() {
   "use cache";
   cacheLife("minutes");
 
-  if (process.env.NEXT_PHASE === "phase-production-build") {
+  if (isBuildPhase()) {
     return { maps: [] };
   }
 

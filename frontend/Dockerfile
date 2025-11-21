@@ -23,9 +23,11 @@ RUN npm ci --force
 ENV NEXT_PUBLIC_BACKEND_URL http://localhost:3000
 # ビルドステップ
 FROM base AS builder
+ARG IS_BUILD=false
 WORKDIR /app
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY . .
+ENV IS_BUILD=${IS_BUILD}
 RUN npm run build && ls -la /app && ls -la /app/.next
 
 
@@ -33,6 +35,7 @@ RUN npm run build && ls -la /app && ls -la /app/.next
 # 本番用イメージ
 FROM base AS production
 ENV NODE_ENV production
+ENV IS_BUILD false
 
 WORKDIR /app
 

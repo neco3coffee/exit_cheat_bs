@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
 import BattleLogSoloRanked from "@/app/[locale]/players/[tag]/_components/BattleLogSoloRanked";
 import Loading from "@/app/[locale]/ranked/loading";
+import { isBuildPhase } from "@/lib/is-build-phase";
 import { BrawlerStatsSection } from "./_components/BrawlerStatsSection";
 import { ModeRadarChart } from "./_components/ModeRadarChart";
 import { PersonList } from "./_components/PersonList";
@@ -40,6 +41,10 @@ async function getPlayerData(tag: string): Promise<PlayerResponse | null> {
   "use cache";
   cacheLife("minutes");
 
+  if (isBuildPhase()) {
+    return null;
+  }
+
   const res = await fetch(
     `${apiUrl}/api/v1/players/${encodeURIComponent(tag)}`,
     {
@@ -69,6 +74,10 @@ async function getPlayerData(tag: string): Promise<PlayerResponse | null> {
 async function getSeasonData() {
   "use cache";
   cacheLife("minutes");
+
+  if (isBuildPhase()) {
+    return null;
+  }
 
   const res = await fetch(`${apiUrl}/api/v1/seasons/current`, {
     method: "GET",
@@ -128,6 +137,10 @@ interface PlayerStats {
 async function getPlayerStats(tag: string) {
   "use cache";
   cacheLife("hours");
+
+  if (isBuildPhase()) {
+    return null;
+  }
 
   const res = await fetch(
     `${apiUrl}/api/v1/players/${encodeURIComponent(tag)}/stats`,
@@ -231,6 +244,16 @@ export async function PlayerStatsPage({
 }: {
   promiseParams: Promise<{ locale: string; tag: string }>;
 }) {
+  if (isBuildPhase()) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <p>Player stats are unavailable during the build process.</p>
+        </div>
+      </div>
+    );
+  }
+
   const { locale, tag } = await promiseParams;
   const t = await getTranslations({ locale, namespace: "playerStats" });
   const tPlayers = await getTranslations({ locale, namespace: "players" });

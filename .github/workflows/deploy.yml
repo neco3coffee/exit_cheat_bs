@@ -42,7 +42,7 @@ jobs:
             cd /home/ec2-user/exit_cheat_bs
             git pull origin main
             docker-compose down
-            ENV=production docker-compose -f docker-compose.yml up -d --build
+            IS_BUILD=phase-production-build ENV=production docker-compose -f docker-compose.yml up -d --build
             # PostgreSQLでデータベースを作成 (既に存在する場合はスキップ)
             docker-compose exec -T app rails db:create || true
             docker-compose exec -T app sh -c 'yes | rails solid_queue:install' || true

@@ -4,6 +4,8 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       target: ${ENV:-development}
+      args:
+        IS_BUILD: ${IS_BUILD:-false}
     ports:
       - "3001:3000"
     depends_on:

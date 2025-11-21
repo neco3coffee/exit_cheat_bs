@@ -20,6 +20,7 @@ import BattleLogSolo from "@/app/[locale]/players/[tag]/_components/BattleLogSol
 import BattleLogSoloRanked from "@/app/[locale]/players/[tag]/_components/BattleLogSoloRanked";
 import BattleLogTrio from "@/app/[locale]/players/[tag]/_components/BattleLogTrio";
 import { Telemetry } from "@/app/[locale]/players/[tag]/_components/Telemetry.tsx";
+import { isBuildPhase } from "@/lib/is-build-phase";
 import Loading from "../../ranked/loading";
 import BattleLogAutoSaveIconToggle from "./_components/BattleLogAutoSaveIconToggle";
 import BattleLogLastStand from "./_components/BattleLogLastStand";
@@ -36,6 +37,10 @@ async function getPlayerData(sessionToken: string) {
   "use cache";
   cacheLife("minutes");
   cacheTag("playerData");
+
+  if (isBuildPhase()) {
+    return null;
+  }
 
   const res = await fetch(`${apiUrl}/api/v1/auth/me`, {
     method: "GET",
@@ -108,6 +113,14 @@ async function PlayerPage({
 }: {
   params: Promise<{ locale: string; tag: string }>;
 }) {
+  if (isBuildPhase()) {
+    return (
+      <div className={styles.container}>
+        <p>Player page is unavailable during the build process.</p>
+      </div>
+    );
+  }
+
   const { locale, tag } = await params;
   const res = await fetch(
     `${apiUrl}/api/v1/players/${encodeURIComponent(tag)}`,

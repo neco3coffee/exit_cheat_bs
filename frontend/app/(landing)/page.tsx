@@ -2,6 +2,7 @@ import { cacheLife } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
+import { isBuildPhase } from "@/lib/is-build-phase";
 import AdsenseWrapper from "../_components/AdsenseWrapper";
 import styles from "./landing.module.scss";
 
@@ -10,6 +11,13 @@ const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3000";
 async function getStats() {
   "use cache";
   cacheLife("minutes");
+  if (isBuildPhase()) {
+    return {
+      totalReportsCount: 0,
+      totalPlayersCount: 0,
+      totalSessionsCount: 0,
+    };
+  }
   try {
     const res = await fetch(`${apiUrl}/api/v1/stats`);
     if (!res.ok) {
