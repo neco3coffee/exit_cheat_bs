@@ -15,6 +15,9 @@ async function getMaps() {
   "use cache";
   cacheLife("minutes");
 
+  if (process.env.NODE_PHASE === "phase-production-build") {
+    return { maps: [] };
+  }
   try {
     const response = await fetch(`${apiUrl}/api/v1/maps`, {
       method: "GET",
