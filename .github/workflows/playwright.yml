@@ -35,7 +35,6 @@ jobs:
          https://api.brawlstars.com/v1/brawlers
     - name: Build and Start services
       run: |
-        docker compose -f docker-compose.yml up app -d --build
         ENV=production docker compose -f docker-compose.yml up -d --build
     # 必要ならサービスの起動待ち
     - name: Wait for web service
