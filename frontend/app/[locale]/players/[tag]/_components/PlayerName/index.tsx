@@ -56,9 +56,9 @@ export default function PlayerName({
 
   return (
     <div className={styles.container}>
-      <span className={styles.name} style={color ? { color } : undefined}>
+      <h1 className={styles.name} style={color ? { color } : undefined}>
         {name}
-      </span>
+      </h1>
       {hasHistories && (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
