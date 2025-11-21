@@ -1,6 +1,7 @@
 import { cacheLife } from "next/cache";
 import { Suspense } from "react";
 import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
+import Loading from "../ranked/loading";
 import FAQ from "./_components/client/FAQ";
 import InstallPrompt from "./_components/client/InstallPrompt";
 import NameInput from "./_components/client/NameInput";
@@ -8,7 +9,7 @@ import TagInput from "./_components/client/TagInput";
 import MapList from "./_components/server/MapList";
 import styles from "./page.module.scss";
 
-const apiUrl = "http://app:3000";
+const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3000";
 
 async function getMaps() {
   "use cache";
@@ -32,14 +33,22 @@ async function getMaps() {
   return data as { maps: string[] };
 }
 
-export default async function Home({
+export default async function Page({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
+  return (
+    <Suspense fallback={<Loading />}>
+      <HomePage params={params} />
+    </Suspense>
+  );
+}
+
+async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const { maps } = await getMaps();
-  console.log("Fetched maps:", maps);
+  console.log("maps:", maps);
 
   return (
     <>
