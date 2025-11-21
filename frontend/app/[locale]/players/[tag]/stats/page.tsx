@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
 import BattleLogSoloRanked from "@/app/[locale]/players/[tag]/_components/BattleLogSoloRanked";
+import Loading from "@/app/[locale]/ranked/loading";
 import { BrawlerStatsSection } from "./_components/BrawlerStatsSection";
 import { ModeRadarChart } from "./_components/ModeRadarChart";
 import { PersonList } from "./_components/PersonList";
@@ -464,7 +465,7 @@ export default async function Page({
   params: Promise<{ locale: string; tag: string }>;
 }) {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<Loading />}>
       <PlayerStatsPage promiseParams={params} />
     </Suspense>
   );

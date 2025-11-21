@@ -20,6 +20,7 @@ import BattleLogSolo from "@/app/[locale]/players/[tag]/_components/BattleLogSol
 import BattleLogSoloRanked from "@/app/[locale]/players/[tag]/_components/BattleLogSoloRanked";
 import BattleLogTrio from "@/app/[locale]/players/[tag]/_components/BattleLogTrio";
 import { Telemetry } from "@/app/[locale]/players/[tag]/_components/Telemetry.tsx";
+import Loading from "../../ranked/loading";
 import BattleLogAutoSaveIconToggle from "./_components/BattleLogAutoSaveIconToggle";
 import BattleLogLastStand from "./_components/BattleLogLastStand";
 import Brawlers from "./_components/Brawlers";
@@ -94,7 +95,7 @@ export default function Page({
   params: Promise<{ locale: string; tag: string }>;
 }) {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<Loading />}>
       <ServerLocaleMessageProviderWrapper params={params}>
         <PlayerPage params={params} />
       </ServerLocaleMessageProviderWrapper>
