@@ -19,6 +19,7 @@ export default function BackButton() {
       }}
       onClick={() => router.back()}
       type="button"
+      aria-label="Go back"
     >
       <ArrowLeft />
     </button>
