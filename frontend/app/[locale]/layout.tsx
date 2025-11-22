@@ -7,6 +7,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { cacheLife } from "next/cache";
 import Script from "next/script";
 import { Suspense } from "react";
+import Back from "@/app/_components/Back";
 import Reload from "@/app/_components/Reload";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "../analytics";
@@ -137,6 +138,9 @@ export default async function RootLayout({
         </Suspense>
         <Suspense fallback={null}>
           <Reload />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Back />
         </Suspense>
       </body>
     </html>
