@@ -20,7 +20,7 @@ class BattleAutoSaveJob < ApplicationJob
       return
     end
 
-    battlelog_data["items"].each do |item|
+    battlelog_data["items"].reverse.each do |item|
       process_battle_item(player, item)
     end
 
@@ -78,6 +78,7 @@ class BattleAutoSaveJob < ApplicationJob
   record.map = item.dig("event", "map") || battle["map"]
   record.map_id = extract_map_id(item) || record.map_id
     record.teams = battle["teams"] || battle["players"]
+    record.star_player = battle["starPlayer"]
     record.raw_data = item
 
     new_rounds = merge_rounds(Array.wrap(record.rounds), build_round_entry(item))

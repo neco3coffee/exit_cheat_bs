@@ -3,6 +3,8 @@ require "set"
 class Battle < ApplicationRecord
   belongs_to :player
 
+  # star_player: APIのstarPlayer情報を保存するjsonb属性
+
   self.inheritance_column = :_type_disabled
 
   validates :battle_id, presence: true

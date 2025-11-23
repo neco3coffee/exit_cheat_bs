@@ -32,6 +32,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_16_094000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "map_id"
+    t.jsonb "star_player"
     t.index ["battle_id"], name: "index_battles_on_battle_id"
     t.index ["battle_time"], name: "index_battles_on_battle_time"
     t.index ["map"], name: "index_battles_on_map"
