@@ -2,7 +2,16 @@
   "home": {
     "placeholder": "Ime igrača",
     "linkText": "Početna",
-    "operator": "Operator"
+    "operator": "Operator",
+    "season_ranking_list": {
+      "title": "Sezonski poredak Ranked",
+      "description": "※Poredak postotka pobjeda za igrače u Master rangu koji su odigrali 30 ili više Master mečeva.",
+      "no_data": "Trenutno nema dostupnih podataka za poredak."
+    },
+    "map": {
+      "title": "Sezonske mape Ranked",
+      "description": "※Ovo su mape koje su se stvarno igrale u Ranked ovoj sezoni."
+    }
   },
   "maps": {
     "masterNotice": "Podaci su agregirani iz borbi ranga Master II i viših."

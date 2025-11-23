@@ -1,16 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import styles from "./index.module.scss";
 
-export default function MapList({
+export default async function MapList({
   locale,
   maps,
 }: {
   locale: string;
   maps: string[];
 }) {
+  const t = await getTranslations({ locale, namespace: "home" });
+
   return (
     <div className={styles.container}>
+      <h3 className={styles.title}>{t("map.title")}</h3>
+      <span className={styles.description}>{t("map.description")}</span>
       {maps.map((mapId, _index) => {
         return (
           <Link

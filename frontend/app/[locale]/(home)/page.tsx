@@ -7,6 +7,7 @@ import InstallPrompt from "./_components/client/InstallPrompt";
 import NameInput from "./_components/client/NameInput";
 import TagInput from "./_components/client/TagInput";
 import MapList from "./_components/server/MapList";
+import SeasonRankingList from "./_components/server/SeasonRankingList";
 import styles from "./page.module.scss";
 
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3000";
@@ -45,6 +46,40 @@ async function getMaps() {
   }
 }
 
+interface SeasonRanking {
+  ranking: number;
+  tag: string;
+  name: string;
+  iconId: number;
+  rank: number;
+  battlesCount: number;
+  winRate: number;
+}
+
+async function getSeasonRankings() {
+  "use cache";
+  cacheLife("minutes");
+
+  try {
+    const response = await fetch(`${apiUrl}/api/v1/seasons/current/rankings`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      console.error("Failed to fetch season rankings:", response.statusText);
+      return [];
+    }
+    const data = await response.json();
+    console.log("season rankings data:", data);
+    return data as SeasonRanking[];
+  } catch (error) {
+    console.error("Error fetching season rankings:", error);
+    return [];
+  }
+}
+
 export default async function Page({
   params,
 }: {
@@ -60,7 +95,10 @@ export default async function Page({
 async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const { maps } = await getMaps();
+  const seasonRankings = await getSeasonRankings();
   console.log("maps:", maps);
+  console.log("seasonRankings", seasonRankings);
+  console.log("apiUrl", apiUrl);
 
   return (
     <>
@@ -76,6 +114,7 @@ async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
           <NameInput />
         </ServerLocaleMessageProviderWrapper>
       </Suspense>
+      <SeasonRankingList locale={locale} seasonRankings={seasonRankings} />
       <MapList locale={locale} maps={maps} />
       <Suspense fallback={null}>
         <ServerLocaleMessageProviderWrapper params={params}>

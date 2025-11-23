@@ -76,7 +76,16 @@
   "home": {
     "placeholder": "プレイヤー名",
     "linkText": "ホーム",
-    "operator": "運営者"
+    "operator": "運営者",
+    "season_ranking_list": {
+      "title": "ガチバトルシーズンランキング",
+      "description": "※マスター以上のバトルを30回以上プレイしたプレイヤーのマスター帯の勝率ランキングです。",
+      "no_data": "現在、ランキングデータはありません。"
+    },
+    "map": {
+      "title": "ガチバトルシーズンマップ",
+      "description": "※今シーズンのガチバトルで実際にプレイされたマップを表示しています。"
+    }
   },
   "ranked": {
     "login": "ログイン",

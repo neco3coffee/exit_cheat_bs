@@ -2,7 +2,16 @@
   "home": {
     "placeholder": "Nom du joueur",
     "linkText": "Accueil",
-    "operator": "Opérateur"
+    "operator": "Opérateur",
+    "season_ranking_list": {
+      "title": "Classement de la saison Ranked",
+      "description": "※Classement du taux de victoire des joueurs de rang Maître ayant joué au moins 30 matchs en rang Maître.",
+      "no_data": "Aucune donnée de classement disponible pour le moment."
+    },
+    "map": {
+      "title": "Cartes de la saison Ranked",
+      "description": "※Ces cartes correspondent à celles réellement jouées dans la Ranked cette saison."
+    }
   },
   "maps": {
     "masterNotice": "Données agrégées à partir des combats Master II et supérieurs."

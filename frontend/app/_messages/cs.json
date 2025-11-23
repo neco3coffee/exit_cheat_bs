@@ -2,7 +2,16 @@
   "home": {
     "placeholder": "Jméno hráče",
     "linkText": "Domů",
-    "operator": "Operátor"
+    "operator": "Operátor",
+    "season_ranking_list": {
+      "title": "Sezónní žebříček Ranked",
+      "description": "※Žebříček podle winratu hráčů na úrovni Master, kteří odehráli alespoň 30 zápasů na úrovni Master.",
+      "no_data": "Momentálně nejsou k dispozici žádná data žebříčku."
+    },
+    "map": {
+      "title": "Sezónní mapy Ranked",
+      "description": "※Zde jsou zobrazeny mapy, které se v této sezóně v Ranked skutečně hrály."
+    }
   },
   "maps": {
     "masterNotice": "Agregováno z bitev na úrovni Master II a vyšší."

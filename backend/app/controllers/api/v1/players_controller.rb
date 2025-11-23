@@ -394,6 +394,47 @@ module Api
         render json: { error: "An error occurred while processing your request" }, status: 500
       end
 
+
+      def season_rankings
+        start_time, end_time, _next_start_time = SeasonCalendar.current_period_in_utc
+
+        # 現在のシーズンでrank18以上のバトルを30回以上行ったプレイヤーを対象にランキングを作成
+        # rank18以上のバトルの勝率が高い順に並び替えて、上位10名を取得
+        top_players = Player.joins(:battles)
+                .where(battles: { battle_time: start_time...end_time })
+                .where("battles.rank >= ?", 18)
+                .group("players.id")
+                .having("COUNT(battles.id) >= ?", 30)
+                .select("players.*, SUM(CASE WHEN battles.result = 'victory' THEN 1 ELSE 0 END) AS wins_count, COUNT(battles.id) AS battles_count")
+                .order(Arel.sql("SUM(CASE WHEN battles.result = 'victory' THEN 1 ELSE 0 END)::float / COUNT(battles.id) DESC"))
+                .limit(10)
+
+        # dummy top_players
+        # top_players = Player.limit(10)
+
+        rankings = top_players.map.with_index(1) do |player, index|
+          battles_count = player.read_attribute(:battles_count) || 0
+          wins_count = player.read_attribute(:wins_count) || 0
+          win_rate = battles_count > 0 ? (wins_count.to_f / battles_count).round(3) : 0.0
+
+          {
+            ranking: index,
+            tag: player.tag,
+            name: player.name,
+            iconId: player.icon_id,
+            rank: player.rank,
+            battlesCount: battles_count,
+            winRate: win_rate
+          }
+        end
+
+        render json: rankings
+      rescue StandardError => e
+        Rails.logger.error("Season rankings exception occurred: #{e.message}")
+        Rails.logger.error(e.backtrace.join("\n"))
+        render json: { error: "An error occurred while processing your request" }, status: 500
+      end
+
       private
       # TODO: api tokenが制限に達した場合に備える
 

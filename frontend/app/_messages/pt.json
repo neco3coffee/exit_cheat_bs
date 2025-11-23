@@ -2,7 +2,16 @@
   "home": {
     "placeholder": "Nome do Jogador",
     "linkText": "Início",
-    "operator": "Operador"
+    "operator": "Operador",
+    "season_ranking_list": {
+      "title": "Ranking da Temporada da Power League",
+      "description": "※Ranking de taxa de vitória para jogadores do nível Mestre que disputaram 30 ou mais partidas no nível Mestre.",
+      "no_data": "No momento, não há dados de ranking disponíveis."
+    },
+    "map": {
+      "title": "Mapas da Temporada da Ranked",
+      "description": "※Estes são os mapas que foram realmente jogados na Ranked nesta temporada."
+    }
   },
   "maps": {
     "masterNotice": "Dados agregados a partir de batalhas Mestre II ou superiores."

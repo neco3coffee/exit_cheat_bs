@@ -2,7 +2,16 @@
   "home": {
     "placeholder": "玩家名称",
     "linkText": "首页",
-    "operator": "运营者"
+    "operator": "运营者",
+    "season_ranking_list": {
+      "title": "冠军联赛赛季排行榜",
+      "description": "※此排行榜基于进行过30场以上大师段位对战的玩家胜率统计。",
+      "no_data": "目前暂无排行榜数据。"
+    },
+    "map": {
+      "title": "冠军联赛赛季地图",
+      "description": "※此处显示的是本赛季冠军联赛实际进行过的地图。"
+    }
   },
   "maps": {
     "masterNotice": "数据基于大师II及以上的对战汇总。"

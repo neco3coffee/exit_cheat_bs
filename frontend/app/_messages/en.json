@@ -2,7 +2,16 @@
   "home": {
     "placeholder": "Player Name",
     "linkText": "Home",
-    "operator": "Operator"
+    "operator": "Operator",
+    "season_ranking_list": {
+      "title": "Ranked Season Ranking",
+      "description": "※This is a win-rate ranking for Master-tier players who have played 30 or more Master-level matches.",
+      "no_data": "Currently, there is no ranking data available."
+    },
+    "map": {
+      "title": "Ranked Season Maps",
+      "description": "※These are the maps that were actually played in Ranked this season."
+    }
   },
   "maps": {
     "masterNotice": "Aggregated from Master II battles or higher."

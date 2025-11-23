@@ -1,0 +1,144 @@
+.cardList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+ .playerCard {
+  background: #23272f;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  padding: 1.2rem;
+  min-width: 320px;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+  transition: box-shadow 0.2s;
+}
+.playerCard:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.32);
+}
+
+.rankingBar {
+  position: absolute;
+  top: -18px;
+  left: 16px;
+  background: #eab308;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 0.3rem 1.2rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 0.7rem;
+}
+.icon {
+  border-radius: 50%;
+  background: #f7f7f7;
+  border: 2px solid #eab308;
+}
+.nameBattleCount {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.playerName {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+.battlesCount {
+  font-size: 0.98rem;
+  color: #555;
+}
+.bottomRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 0.5rem;
+}
+.tag {
+  font-size: 0.95rem;
+  color: #fff;
+  font-weight: 500;
+  background: #27272a;
+  padding: 0.2rem 0.7rem;
+  border-radius: 6px;
+  letter-spacing: 0.03em;
+}
+.playerRank {
+  font-size: 0.95rem;
+  color: #555;
+}
+.winRate {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-left: 0.2rem;
+}
+.winRateGreen {
+  color: #16a34a;
+}
+.winRateYellow {
+  color: #eab308;
+}
+.winRateRed {
+  color: #dc2626;
+}
+
+.ranking {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #eab308;
+}
+
+
+.container {
+  margin-top: 30px;
+  padding: 32px;
+  width: 100% !important;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--white);
+    text-align: center;
+  }
+  .description {
+    font-size: 14px;
+    color: var(--white);
+    text-align: center;
+  }
+
+  .listContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .emptyMessage {
+      margin-top: 16px;
+      color: var(--white);
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .playerItem {
+
+    }
+  }
+}

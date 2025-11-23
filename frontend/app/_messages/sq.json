@@ -2,7 +2,16 @@
   "home": {
     "placeholder": "Emri i lojtarit",
     "linkText": "Ballina",
-    "operator": "Operator"
+    "operator": "Operator",
+    "season_ranking_list": {
+      "title": "Renditja e sezonit të Ranked",
+      "description": "※Renditje e përqindjes së fitoreve për lojtarët e rangut Master që kanë luajtur 30 ose më shumë ndeshje në rang Master.",
+      "no_data": "Aktualisht nuk ka të dhëna për renditje."
+    },
+    "map": {
+      "title": "Hartat e sezonit të Ranked",
+      "description": "※Këto janë hartat që janë luajtur realisht në Ranked këtë sezon."
+    }
   },
   "maps": {
     "masterNotice": "Të dhënat janë përmbledhur nga betejat Master II ose më të larta."
