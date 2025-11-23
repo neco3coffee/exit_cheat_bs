@@ -47,12 +47,12 @@ module Api
 
             unless Player.exists?(tag: other_tag)
               Rails.logger.info("Enqueueing SavePlayerJob for tag: #{other_tag}")
-              SavePlayerJob.perform_later(other_tag)
+              SavePlayerJob.perform_later(other_tag, priority: 50)
             end
           end
 
           # 7. soloRankedバトルに参加したプレイヤーのランクを非同期で更新
-          UpdateSoloRankedRanksJob.perform_later(battlelog_data)
+          UpdateSoloRankedRanksJob.perform_later(battlelog_data, priority: 60)
         end
 
         # 8. レスポンスを構築（改名履歴を含める）

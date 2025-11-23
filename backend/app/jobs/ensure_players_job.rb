@@ -12,7 +12,7 @@ class EnsurePlayersJob < ApplicationJob
     return if missing_tags.empty?
 
     missing_tags.each do |tag|
-      SavePlayerJob.perform_later(tag)
+      SavePlayerJob.perform_later(tag, priority: 50)
     end
   end
 

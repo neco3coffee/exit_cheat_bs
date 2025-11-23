@@ -404,7 +404,7 @@ RSpec.describe UpdateSoloRankedRanksJob, type: :job do
   describe 'job execution' do
     it 'can be enqueued' do
       expect {
-        UpdateSoloRankedRanksJob.perform_later(battlelog_data)
+        UpdateSoloRankedRanksJob.perform_later(battlelog_data, priority: 60)
       }.to have_enqueued_job(UpdateSoloRankedRanksJob).with(battlelog_data)
     end
   end
