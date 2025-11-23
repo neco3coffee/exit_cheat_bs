@@ -7,6 +7,7 @@
   text-align: center;
 
   .inner {
+    width: 100%;
     margin-top: 100px;
     display: flex;
     flex-direction: column;
@@ -15,15 +16,20 @@
     padding: 23px;
     font-weight: bold;
     font-size: 14px;
+
+    .login {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 8px 23px 8px 23px;
+      margin-top: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: var(--on-blue)
+    }
   }
 
-  .login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 0px 23px 8px 23px;
-}
 
 .reportsContainer {
   margin-top: 15px;
