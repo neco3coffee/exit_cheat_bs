@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { appendToEightDigits } from "@/app/_lib/common";
 import styles from "./index.module.scss";
@@ -36,12 +37,12 @@ export default async function SeasonRankingList({
         ) : (
           <div className={styles.cardList}>
             {seasonRankings.map((player) => {
-              let winRateColor = styles.winRateYellow;
-              if (player.winRate >= 60) winRateColor = styles.winRateGreen;
-              else if (player.winRate < 40) winRateColor = styles.winRateRed;
-
               return (
-                <div key={player.tag} className={styles.playerCard}>
+                <Link
+                  key={player.tag}
+                  className={styles.playerCard}
+                  href={`/players/${encodeURIComponent(player.tag)}/stats`}
+                >
                   <div className={styles.rankingBar}>#{player.ranking}</div>
                   <div className={styles.topRow}>
                     <Image
@@ -77,7 +78,7 @@ export default async function SeasonRankingList({
                       🏆 {player.winRate * 100}%
                     </span>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>

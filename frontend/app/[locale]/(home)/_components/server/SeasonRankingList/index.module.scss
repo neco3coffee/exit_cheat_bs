@@ -18,6 +18,7 @@
   align-items: stretch;
   position: relative;
   transition: box-shadow 0.2s;
+  text-decoration: none;
 }
 .playerCard:hover {
   box-shadow: 0 4px 16px rgba(0,0,0,0.32);
