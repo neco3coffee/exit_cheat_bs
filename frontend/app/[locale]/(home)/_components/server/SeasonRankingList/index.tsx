@@ -37,11 +37,14 @@ export default async function SeasonRankingList({
         ) : (
           <div className={styles.cardList}>
             {seasonRankings.map((player) => {
+              const tag = player.tag.startsWith("#")
+                ? player.tag.substring(1)
+                : player.tag;
               return (
                 <Link
                   key={player.tag}
                   className={styles.playerCard}
-                  href={`/players/${encodeURIComponent(player.tag)}/stats`}
+                  href={`/${locale}/players/${encodeURIComponent(tag)}/stats`}
                 >
                   <div className={styles.rankingBar}>#{player.ranking}</div>
                   <div className={styles.topRow}>
