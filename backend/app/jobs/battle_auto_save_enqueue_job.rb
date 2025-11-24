@@ -23,6 +23,6 @@ class BattleAutoSaveEnqueueJob < ApplicationJob
   end
 
   def enqueue_player_job(player)
-    BattleAutoSaveJob.perform_later(player.id, priority: 100)
+    BattleAutoSaveJob.set(priority: 1).perform_later(player.id)
   end
 end

@@ -421,7 +421,7 @@ class Battle < ApplicationRecord
     tags = participant_tags_for_player_fetch
     return if tags.empty?
 
-    EnsurePlayersJob.perform_later(tags, priority: 50)
+    EnsurePlayersJob.set(priority: 10).perform_later(tags)
   rescue StandardError => e
     Rails.logger.error("Failed to enqueue EnsurePlayersJob for battle #{id}: #{e.message}")
   end
