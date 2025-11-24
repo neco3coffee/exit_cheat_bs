@@ -78,7 +78,7 @@ export default async function SeasonRankingList({
                     <span
                       className={`${styles.winRate} ${(player.winRate * 100) >= 60 ? styles.winRateGreen : player.winRate * 100 < 40 ? styles.winRateRed : styles.winRateYellow}`}
                     >
-                      🏆 {player.winRate * 100}%
+                      🏆 {(player.winRate * 100).toFixed(1)}%
                     </span>
                   </div>
                 </Link>
