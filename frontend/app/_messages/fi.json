@@ -1,0 +1,496 @@
+{
+  "home": {
+    "placeholder": "Pelaajan nimi",
+    "linkText": "Koti",
+    "operator": "Ylläpitäjä",
+    "season_ranking_list": {
+      "title": "Rangattujen kausien ranking",
+      "description": "※ Tämä on voittoprosenttiranking pelaajille, jotka ovat pelanneet vähintään 30 Master-tason ottelua.",
+      "no_data": "Ranking-tietoja ei ole tällä hetkellä saatavilla."
+    },
+    "map": {
+      "title": "Rangattujen kausien kartat",
+      "description": "※ Nämä ovat kartat, joita pelattiin tämän kauden Ranked-otteluissa."
+    }
+  },
+  "maps": {
+    "masterNotice": "Koottu Master II -tason tai sitä korkeammista otteluista."
+  },
+  "ranked": {
+    "login": "Kirjaudu sisään",
+    "unauthenticated": "Sinun täytyy kirjautua sisään päästäksesi tälle sivulle",
+    "error": "Virhe tapahtui. Yritä myöhemmin uudelleen.",
+    "tabs": {
+      "review": "Arviointi",
+      "battleLog": "Otteluloki",
+      "report": "Ilmoita"
+    },
+    "review": {
+      "noReport": "Ei arvioitavia ilmoituksia.",
+      "onlyModerators": "Vain moderaattorit voivat arvioida, hyväksyä ja hylätä raportteja!"
+    },
+    "noBattleLog": "Ei viimeaikaisia Ranked-ottelulokeja.",
+    "noReportedPlayers": "Ei ilmoitettuja pelaajia.",
+    "noReport": "Ei raportteja.",
+    "created": "Videon latausta odotetaan",
+    "signed_url_generated": "Videon latausta odotetaan",
+    "info_and_video_updated": "AI tarkistaa",
+    "video_optimized": "Arviointia odotetaan",
+    "waiting_review": "Arviointia odotetaan",
+    "approved": "Hyväksytty",
+    "rejected": "Hylätty",
+    "replay": "Uusinta",
+    "reject": "Reilu peli",
+    "approve": "Griefing / Feeding / Trolling",
+    "defeat": "Tappio",
+    "victory": "Voitto",
+    "draw": "Tasapeli",
+    "ongoing": "Käynnissä",
+    "report": "Ilmoita",
+    "reported": "Ilmoitettu",
+    "reportPlayer": "Ilmoitetaanko pelaaja {name}?",
+    "reportType": {
+      "badRandom": "BAD RANDOM",
+      "griefPlay": "GRIEF PLAY",
+      "cheating": "CHEATING"
+    },
+    "reportReason": {
+      "badRandom": "Huono tähtäys, heikko taito, ei yhteistyötä",
+      "griefPlay": "Paikallaan seisominen, ei hyökkää, sabotointi tai luovuttaminen",
+      "cheating": "Huijausohjelmat, botit, exploitit tai tarkoituksellinen takedown-kaupankäynti"
+    },
+    "pleaseUploadVideo": "Lataa ottelun uusintavideo ilmoittaaksesi tämän pelaajan",
+    "successUploadVideo": "Video ladattu onnistuneesti! Voit nyt ilmoittaa pelaajan.",
+    "reportReasonText": "Ilmoituksen syy",
+    "reportReasonPlaceholder": "Kuvaile tilanne lyhyesti (valinnainen)",
+    "reportButton": "Ilmoita pelaaja",
+    "cancelReportButton": "Peruuta",
+    "mainVideoDescription": "Äskettäin ilmoitettu pelaaja",
+    "failedReport": "Ilmoituksen lähetys epäonnistui.",
+    "failedGenerateSignedUrl": "Allekirjoitetun URL-osoitteen luonti epäonnistui.",
+    "failedUploadVideo": "Videon lataus epäonnistui.",
+    "successReport": "Ilmoitus lähetetty, kiitos!",
+    "reportIdMissing": "Raportin ID puuttuu.",
+    "reportRejected": "Raportti hylätty onnistuneesti.",
+    "failedReject": "Raportin hylkääminen epäonnistui.",
+    "errorReject": "Virhe raporttia hylättäessä.",
+    "reportApproved": "Raportti hyväksytty onnistuneesti.",
+    "failedApprove": "Raportin hyväksyminen epäonnistui.",
+    "errorApprove": "Virhe raporttia hyväksyttäessä.",
+    "failedCreateReport": "Raportin luonti epäonnistui.",
+    "successCreateReport": "Raportti luotu onnistuneesti.",
+    "noRecentReport": "Ei äskettäin ilmoitettuja pelaajia.",
+    "selectPlayer": "Pelaaja",
+    "selectReportType": "Syy",
+    "replayVideo": "Uusinta",
+    "reportComplete": "Valmis",
+    "reportCompleteDescription": "Ilmoitus lähetetty 🎉\nModeraattori arvioi sen pian 🧑‍⚖️."
+  },
+  "reportDetail": {
+    "aiCheck": "AI tarkistaa",
+    "waitingReview": "Arviointia odotetaan",
+    "reviewed": "Arvioitu",
+    "videoDescription": "Ilmoitetun pelaajan uusintavideo"
+  },
+  "account": {
+    "checkLogin": "Tarkistetaan kirjautumista...",
+    "login": "Kirjaudu sisään",
+    "switchAccountDescription": "Vaihda profiilikuvasi tähän kuvakkeeseen",
+    "switchAccount": "Paina tätä, kun olet vaihtanut kuvakkeen",
+    "checkIconChange": "Tarkistetaan kuvakkeen vaihtoa...",
+    "checkIconChangeDescription": "Tämä voi kestää jopa 90 sekuntia.",
+    "loginFailed": "Kirjautuminen epäonnistui. Yritä uudelleen.",
+    "retry": "Yritä uudelleen",
+    "loginSuccess": "Olet kirjautunut sisään!",
+    "autoReload": "Sivu päivittyy automaattisesti 5 sekunnissa.",
+    "loginStatus": "Kirjautuneena:",
+    "logout": "Kirjaudu ulos"
+  },
+  "players": {
+    "seasonHigh": "KAUDEN ENNÄTYS",
+    "allTimeHigh": "KAIKKIEN AIKOJEN ENNÄTYS",
+    "3vs3Victories": "3v3-VOITOT",
+    "victories": "VOITOT",
+    "notInClub": "Ei klubissa",
+    "battleLog": "OTTELULOKI",
+    "defeat": "Tappio",
+    "victory": "Voitto",
+    "draw": "Tasapeli",
+    "ongoing": "Käynnissä",
+    "rank": "RANKI {rank}",
+    "challengeCleared": "HAASTE: {level} SUORITETTU!",
+    "Normal": "NORMAALI",
+    "Hard": "VAIKEA",
+    "Expert": "ASIANTUNTIJA",
+    "Master": "MESTARI",
+    "Insane": "HULLU",
+    "Impossible": "MAHDOTON",
+    "undefined": "MÄÄRITTELEMÄTÖN TAISTELUTYYPPI"
+  },
+  "playerStats": {
+    "playerNotFound": "Pelaajaa ei löytynyt. Tarkista tagi.",
+    "statsUnavailable": "Emme voineet ladata tämän pelaajan Ranked-tilastoja. Yritä myöhemmin uudelleen.",
+    "playerSubtitle": "Kausikohtainen Ranked-yhteenveto.",
+    "overview": {
+      "battleCount": "Pelatut ottelut",
+      "winRate": "Voittoprosentti",
+      "highestRank": "Korkein ranki"
+    },
+    "rankUnknown": "Rankiton",
+    "seasonCountdown": {
+      "inSeason": "Aikaa kauden loppuun:",
+      "downtime": "Aikaa seuraavan kauden alkuun:",
+      "unavailable": "Kausitietoja ei ole saatavilla."
+    },
+    "seasonSummary": {
+      "battleCount": "Ottelut",
+      "battleCountCaption": "seuratut Ranked-ottelut",
+      "winRate": "Voittoprosentti",
+      "winRateCaption": "Voitot ÷ kaikki ottelut",
+      "highestRank": "Korkein ranki",
+      "highestRankCaption": "Kauden huippusijoitus"
+    },
+    "brawlerStats": {
+      "title": "Suosituimmat Brawlerin valinnat",
+      "pickRate": "Valintaprosentti",
+      "winRate": "Voittoprosentti",
+      "battleCount": "Ottelut",
+      "gadgets": "Gadgetit",
+      "starPowers": "Star Powerit",
+      "gears": "Gearit",
+      "empty": "Ei vielä Brawler-dataa."
+    },
+    "modeRadar": {
+      "title": "Pelimuotojen suorituskyky",
+      "tooltipWinRate": "Voittoprosentti",
+      "tooltipBattleCount": "Ottelut",
+      "empty": "Ei pelimuototietoja.",
+      "labels": {
+        "knockout": "Knockout",
+        "gemGrab": "Gem Grab",
+        "bounty": "Bounty",
+        "heist": "Heist",
+        "brawlBall": "Brawl Ball",
+        "hotZone": "Hot Zone"
+      }
+    },
+    "person": {
+      "winRate": "Voittoprosentti",
+      "battleCount": "Ottelut"
+    },
+    "teammates": {
+      "title": "Hyvät synergiatiimikaverit",
+      "empty": "Emme ole vielä löytäneet hyviä synergiatiimikavereita."
+    },
+    "enemies": {
+      "title": "Edulliset vastustajat",
+      "empty": "Ei vielä edullisten vastustajien dataa."
+    },
+    "battles": {
+      "title": "Ranked-ottelut",
+      "empty": "Tällä kaudella ei ole kirjattuja Ranked-otteluita."
+    }
+  },
+  "termsOfService": {
+    "title": "Käyttöehdot",
+    "linkText": "Käyttöehdot",
+    "effectiveDate": "Voimaantulopäivä: 1. marraskuuta 2025",
+    "lastUpdated": "Viimeksi päivitetty: 1. marraskuuta 2025",
+    "intro": "Nämä käyttöehdot (jäljempänä \"ehdot\") määrittävät SafeBrawlin (jäljempänä \"palvelu\") käytön ehdot. Kaikkien palvelun käyttäjien (jäljempänä \"käyttäjä\") tulee käyttää palvelua näiden ehtojen mukaisesti.",
+    "article1": {
+      "title": "1 § (Ehtojen hyväksyminen ja soveltamisala)",
+      "section1": "1. Nämä ehdot koskevat kaikkia suhteita palvelun kehittäjän (jäljempänä \"kehittäjä\") ja käyttäjän välillä palvelun käyttämisen yhteydessä. Palvelu sisältää kehittäjän tarjoamat verkkosivustot, sovellukset ja muut siihen liittyvät palvelut.",
+      "section2": "2. Käyttämällä palvelua käyttäjän katsotaan hyväksyneen nämä ehdot.",
+      "section3": "3. Palvelussa kehittäjän julkaisemista säännöistä tulee osa näitä ehtoja.",
+      "section4": "4. Mikäli näiden ehtojen ja palvelussa julkaistujen sääntöjen välillä on ristiriita, nämä ehdot ovat etusijalla.",
+      "section5": "5. Vaikka nämä ehdot tarjotaan muulla kielellä kuin japaniksi, japaninkielinen versio on alkuperäinen ja soveltuva versio. Käännökset ovat vain viitteellisiä."
+    },
+    "article2": {
+      "title": "2 § (Tilin rekisteröinti)",
+      "section1": "1. Joidenkin palvelun ominaisuuksien käyttö voi edellyttää tilin rekisteröintiä. Rekisteröinti ei ole pakollista.",
+      "section2": "2. Tilin rekisteröintiä haluava henkilö (\"hakija\") voi hakea tilin luomista hyväksymällä ehdot ja antamalla kehittäjän määrittämät tiedot.",
+      "section3": "3. Kehittäjä voi hylätä rekisteröintihakemuksen seuraavista syistä eikä ole velvollinen ilmoittamaan perustetta:",
+      "section3a": "(1) Annetut tiedot ovat vääriä, puutteellisia tai virheellisiä",
+      "section3b": "(2) Hakija on aiemmin rikkonut näitä ehtoja",
+      "section3c": "(3) Kehittäjä katsoo rekisteröinnin muuten sopimattomaksi",
+      "section4": "4. Käyttäjä on vastuussa käyttäjätunnuksensa ja salasanansa asianmukaisesta hallinnasta.",
+      "section5": "5. Käyttäjä ei saa missään olosuhteissa luovuttaa tai lainata käyttäjätunnusta tai salasanaa kolmannelle osapuolelle. Kehittäjä pitää kirjautumista kyseisen käyttäjän tekemänä, jos kirjautumistiedot täsmäävät rekisterissä oleviin tietoihin.",
+      "section6": "6. Kehittäjä ei vastaa käyttäjätunnuksen tai salasanan luvattoman käytön aiheuttamista vahingoista, ellei kyseessä ole tahallisuus tai törkeä huolimattomuus.",
+      "section7": "7. Käyttäjä voi poistaa tilinsä milloin tahansa kehittäjän määrittämillä tavoilla."
+    },
+    "article3": {
+      "title": "3 § (Kielletyt teot)",
+      "intro": "Käyttäjä ei saa palvelua käyttäessään tehdä seuraavia tai kehittäjän sopimattomiksi katsomia tekoja:",
+      "item1": "1. Lain tai hyvän tavan vastaiset teot",
+      "item2": "2. Rikollinen toiminta tai siihen liittyvät teot",
+      "item3": "3. Palvelun palvelimien tai verkkojen tuhoaminen tai häiritseminen",
+      "item4": "4. Teot, jotka voivat häiritä palvelun toimintaa",
+      "item5": "5. Luvaton pääsy tai sen yritys",
+      "item6": "6. Toisten käyttäjien henkilötietojen kerääminen",
+      "item7": "7. Palvelun käyttäminen laittomiin tarkoituksiin",
+      "item8": "8. Toisten käyttäjien tai kolmansien osapuolten vahingoittaminen tai häiritseminen",
+      "item9": "9. Toisen käyttäjän esittäminen",
+      "item10": "10. Mainonta tai kaupallinen toiminta ilman kehittäjän lupaa",
+      "item11": "11. Palvelun sisällön kaupallinen käyttö ilman kehittäjän lupaa",
+      "item12": "12. Antisocialisten ryhmien tukeminen",
+      "item13": "13. Immateriaalioikeuksien, henkilön oikeuksien tai yksityisyyden loukkaaminen",
+      "item14": "14. Väkivaltaisten, seksuaalisten, syrjivien tai muuten vastenmielisten ilmaisujen julkaiseminen",
+      "item15": "15. Muut kehittäjän sopimattomiksi katsomat teot"
+    },
+    "article4": {
+      "title": "4 § (Immateriaalioikeudet)",
+      "section1": "1. Kaikki palveluun liittyvät tekijänoikeudet ja immateriaalioikeudet kuuluvat kehittäjälle tai kehittäjän käyttölisenssin antaneelle taholle.",
+      "section2": "2. Käyttäjä ei saa käyttää palvelun sisältöä tekijänoikeuslain salliman yksityiskäytön ulkopuolella ilman lupaa."
+    },
+    "article5": {
+      "title": "5 § (Ulkopuoliset palvelut)",
+      "section1": "1. Palvelu käyttää ulkopuolisia API-rajapintoja, kuten Supercellin Brawl Stars API:ta.",
+      "section2": "2. Käyttäjän on noudatettava API-palveluntarjoajien ehtoja. Mikäli nämä ehdot ovat ristiriidassa ulkopuolisten API-ehdot kanssa, API-ehdot ovat etusijalla.",
+      "section3": "3. Ulkopuolisten API-rajapintojen muutokset voivat estää palvelun toiminnan. Kehittäjä ei vastaa aiheutuneista vahingoista."
+    },
+    "article6": {
+      "title": "6 § (Palvelun keskeyttäminen)",
+      "section1": "1. Kehittäjä voi keskeyttää palvelun ilman ennakkoilmoitusta seuraavista syistä:",
+      "section1a": "(1) Järjestelmän ylläpito",
+      "section1b": "(2) Luonnonkatastrofit tai muut force majeure -tilanteet",
+      "section1c": "(3) Tietokone- tai viestintävirheet",
+      "section1d": "(4) Muut kehittäjän määrittämät syyt",
+      "section2": "2. Kehittäjä ei vastaa palvelun keskeytymisestä aiheutuneista vahingoista, ellei kyse ole tahallisuudesta tai törkeästä huolimattomuudesta."
+    },
+    "article7": {
+      "title": "7 § (Käytön rajoittaminen ja tilin poistaminen)",
+      "section1": "1. Kehittäjä voi rajoittaa palvelun käyttöä tai poistaa käyttäjän tilin ilman ennakkoilmoitusta, jos:",
+      "section1a": "(1) Käyttäjä rikkoo näitä ehtoja",
+      "section1b": "(2) Rekisteröintitiedot ovat virheellisiä",
+      "section1c": "(3) Käyttö katsotaan muusta syystä sopimattomaksi",
+      "section2": "2. Kehittäjä ei vastaa rajoituksesta aiheutuneista vahingoista."
+    },
+    "article8": {
+      "title": "8 § (Vastuunrajoitus)",
+      "section1": "1. Palvelu on epävirallinen työkalu eikä liity API-palveluntarjoajiin tai pelin kehittäjään/ylläpitäjään.",
+      "section2": "2. Kehittäjä ei takaa palvelun toimivuutta, tarkkuutta tai virheettömyyttä.",
+      "section3": "3. Kehittäjä ei takaa sisällön turvallisuutta, oikeellisuutta tai täydellisyyttä.",
+      "section4": "4. Käyttäjä käyttää palvelua omalla vastuullaan. Kehittäjä ei vastaa vahingoista, ellei kyseessä ole tahallisuus tai törkeä huolimattomuus."
+    },
+    "article9": {
+      "title": "9 § (Palvelun muutokset)",
+      "section1": "1. Kehittäjä voi muuttaa tai lopettaa palvelun sisällön ilman ilmoitusta.",
+      "section2": "2. Kehittäjä ei vastaa muutoksista aiheutuvista vahingoista."
+    },
+    "article10": {
+      "title": "10 § (Ehtojen muuttaminen)",
+      "section1": "1. Kehittäjä voi muuttaa ehtoja tarpeen mukaan.",
+      "section2": "2. Muutetut ehdot tulevat voimaan, kun ne julkaistaan palvelussa.",
+      "section3": "3. Palvelun käytön jatkaminen katsotaan ehtojen hyväksymiseksi."
+    },
+    "article11": {
+      "title": "11 § (Henkilötietojen käsittely)",
+      "content": "Kehittäjä käsittelee käyttäjän henkilötietoja erillisen \"Tietosuojakäytännön\" mukaisesti. Käyttäjän tulee hyväksyä tietosuojakäytäntö ennen palvelun käyttöä."
+    },
+    "article12": {
+      "title": "12 § (Oikeuksien ja velvollisuuksien luovutuskielto)",
+      "content": "Käyttäjä ei saa luovuttaa sopimuksen mukaista asemaansa tai oikeuksiaan ilman kehittäjän kirjallista lupaa."
+    },
+    "article13": {
+      "title": "13 § (Ehdon pätemättömyys)",
+      "content": "Jos jokin ehto todetaan pätemättömäksi, muut ehdot pysyvät voimassa."
+    },
+    "article14": {
+      "title": "14 § (Sovellettava laki ja toimivalta)",
+      "section1": "1. Näihin ehtoihin sovelletaan Japanin lakia.",
+      "section2": "2. Riitatilanteissa toimivaltainen tuomioistuin on kehittäjän sijaintipaikan tuomioistuin."
+    }
+  },
+  "credits": {
+    "title": "Tekijät",
+    "linkText": "Tekijät",
+    "intro": "SafeBrawl toimii seuraavien teknologioiden ja palveluiden avulla.",
+    "services": {
+      "frontend": "Next.js, React, TypeScript, Tailwind CSS, Radix UI",
+      "backend": "Ruby on Rails 8 ja PostgreSQL",
+      "infrastructure": "AWS (Lightsail, S3, CloudFront, Route53)",
+      "tools": "Docker, GitHub Actions, SolidQueue",
+      "apiPrefix": "Virallinen ",
+      "apiAnd": " ja ",
+      "community": "Ja hyötyy monien avoimen lähdekoodin yhteisöjen tuesta."
+    }
+  },
+  "privacyPolicy": {
+    "title": "Tietosuojakäytäntö",
+    "linkText": "Tietosuojakäytäntö",
+    "effectiveDate": "Voimaantulopäivä: 1. marraskuuta 2025",
+    "lastUpdated": "Viimeksi päivitetty: 1. marraskuuta 2025",
+    "intro": "SafeBrawlin kehittäjä (jäljempänä \"kehittäjä\") laatii tämän tietosuojakäytännön (jäljempänä \"käytäntö\") palvelun käyttäjien tietojen käsittelyä varten. Tässä käytännössä selitetään, mitä tietoja kerätään, miten niitä käytetään ja jaetaan, sekä miten käyttäjä voi hallita omia tietojaan.",
+    "article1": {
+      "title": "1 § (Kerättävät tiedot)",
+      "section1": "Palvelua tarjotessaan kehittäjä voi kerätä seuraavia tietoja:",
+      "section1a": "1. Käyttäjän antamat tiedot",
+      "section2": "• Tilin rekisteröinnin yhteydessä annetut tiedot (valinnainen): pelaajatunnisteet ja muut kehittäjän määrittämät tiedot",
+      "section2a": "2. Automaattisesti kerättävät tiedot",
+      "section2b": "• Evästeet ja vastaavat tekniikat: evästeitä käytetään mm. istuntojen hallintaan ja käytön analysointiin",
+      "section2b1": "• Käyttölokit: palvelun käytön yhteydessä tallentuu seuraavaa tietoa:",
+      "section2b2": "• IP-osoite",
+      "section2b3": "• User-agent -tiedot (selaintyyppi ja versio, käyttöjärjestelmä jne.)",
+      "section2b4": "• Pyyntöjen päivämäärä ja kellonaika",
+      "section2b5": "• Käytettyjen sivujen ja resurssien URL-osoitteet",
+      "section2b6": "• Viittaustiedot (referrer)",
+      "section2c": "• Laitetiedot: esimerkiksi päätelaitteen tyyppi voidaan kerätä palvelun käytön analysoimiseksi."
+    },
+    "article2": {
+      "title": "2 § (Tietojen käyttötarkoitus)",
+      "intro": "Kehittäjä käyttää kerättyjä tietoja seuraaviin tarkoituksiin:",
+      "item1": "1. Palvelun tarjoaminen, ylläpito ja kehittäminen (tilin varmistus, ottelutiedot jne.)",
+      "item2": "2. Käyttäjän yhteydenottoihin vastaaminen (henkilöllisyyden varmistus mukaan lukien)",
+      "item3": "3. Palvelun käytön analysointi, parannukset ja uusien palveluiden kehitys",
+      "item4": "4. Ehtojen rikkomisen tai väärinkäytön estäminen ja käsittely",
+      "item5": "5. Käyttäjän mahdollisuus tarkastella omia rekisteröintitietojaan",
+      "item6": "6. Käyttäjän kiinnostuksen kohteisiin perustuvien mainosten näyttäminen",
+      "item7": "7. Tärkeiden palvelutiedotteiden toimittaminen",
+      "item8": "8. Muut edellä mainittuihin tarkoituksiin liittyvät käyttötarkoitukset"
+    },
+    "article3": {
+      "title": "3 § (Tietojen luovuttaminen kolmansille osapuolille)",
+      "intro": "Kehittäjä ei luovuta käyttäjien henkilötietoja kolmansille osapuolille ilman käyttäjän etukäteissuostumusta, paitsi seuraavissa tapauksissa:",
+      "item1": "1. Lakiin perustuva vaatimus",
+      "item2": "2. Henkilön hengen, terveyden tai omaisuuden suojelemiseksi, kun suostumuksen saaminen on vaikeaa",
+      "item3": "3. Julkisen terveyden tai lasten hyvinvoinnin edistämiseksi, kun suostumusta ei voida saada",
+      "item4": "4. Viranomaisen pyytäessä ja suostumuksen saaminen voi haitata viranomaistehtävää"
+    },
+    "article4": {
+      "title": "4 § (Käyttöanalytiikka)",
+      "section1": "1. Palvelu käyttää Google Inc.:n tarjoamaa Google Analyticsiä käytön analysoimiseksi.",
+      "section2": "2. Google Analytics käyttää evästeitä liikennetietojen keräämiseen anonyymisti.",
+      "section3": "3. Käyttäjä voi estää evästeiden käytön selaimen asetuksista, mutta osa palvelusta ei välttämättä toimi.",
+      "section4Prefix": "4. Google Analyticsin käyttöehdot löytyvät ",
+      "section4Link1": "täältä",
+      "section4Middle": ", ja Googlen tietosuojakäytäntö löytyy ",
+      "section4Link2": "täältä",
+      "section4Suffix": "."
+    },
+    "article5": {
+      "title": "5 § (Mainokset ja optimointiteknologia)",
+      "section1": "1. Palvelu käyttää kolmansien osapuolien mainosjärjestelmiä (esim. Google AdSense).",
+      "section2": "2. Mainostarjoajat voivat käyttää evästeitä näyttääkseen kiinnostuksen kohteisiin perustuvia mainoksia ilman henkilökohtaisia tietoja, kuten nimeä tai sähköpostia.",
+      "section3Prefix": "3. Googlen personoidut mainokset voi poistaa käytöstä ",
+      "section3Link1": "Google-mainosasetuksista",
+      "section3Middle": ". Voit myös vierailla sivulla ",
+      "section3Link2": "www.aboutads.info",
+      "section3Suffix": " poistaaksesi kolmansien osapuolien evästeitä.",
+      "section4": "4. Mainosten personointi voidaan estää myös laitteen käyttöjärjestelmän asetuksista.",
+      "section5Prefix": "5. Palvelu käyttää ",
+      "section5Link1": "Ezoic Inc.",
+      "section5Middle": " -yrityksen tarjoamaa mainosten optimointiteknologiaa. Ezoic voi kerätä tietoja, kuten IP-osoitteen ja laitetiedot. Lisätietoja löydät ",
+      "section5Link2": "Ezoicin tietosuojakäytännöstä",
+      "section5Suffix": "."
+    },
+    "article6": {
+      "title": "6 § (Tietojen yhteiskäyttö)",
+      "content": "Tällä hetkellä kehittäjä ei jaa käyttäjätietoja yhteiskäyttöön kolmansien osapuolten kanssa. Mikäli yhteiskäyttö aloitetaan tulevaisuudessa, kehittäjä ilmoittaa tiedot, osapuolet, tarkoitukset ja vastuuhenkilöt etukäteen."
+    },
+    "article7": {
+      "title": "7 § (Tietoturvatoimenpiteet)",
+      "content": "Kehittäjä toteuttaa asianmukaiset toimet tietojen suojaamiseksi luvattomalta käytöltä, kadolta ja vahingoittumiselta. Näihin sisältyvät esimerkiksi pääsynvalvonta ja estotoimet."
+    },
+    "article8": {
+      "title": "8 § (Evästeiden hallinta)",
+      "section1": "1. Useimmat selaimet hyväksyvät evästeet oletuksena. Käyttäjä voi estää evästeet tai näyttää varoituksen niiden käytöstä selaimen asetuksista.",
+      "section2": "2. Jos evästeet poistetaan käytöstä, osa palvelun toiminnoista ei välttämättä toimi.",
+      "section3": "3. Ohjeet evästeasetusten muuttamiseen löytyvät selaimen virallisilta tukisivuilta."
+    },
+    "article9": {
+      "title": "9 § (Tietojen säilytysaika)",
+      "content": "Kehittäjä säilyttää kerättyjä tietoja vain niin kauan kuin on tarpeellista lakien ja käyttötarkoitusten mukaisesti."
+    },
+    "article10": {
+      "title": "10 § (Käyttäjän oikeudet)",
+      "section1": "1. Käyttäjällä on oikeus pyytää omien henkilötietojensa tarkastusta, korjaamista, poistamista tai käsittelyn rajoittamista.",
+      "section2": "2. Pyynnöt tulee lähettää 12 §:ssä mainittuun osoitteeseen. Kehittäjä vastaa laillisten menettelyjen mukaisesti.",
+      "section3": "3. Rekisteröityneet käyttäjät voivat tarkastella ja muokata tietojaan palvelun asetuksissa. Tilin voi myös poistaa.",
+      "section4": "4. Tietojen tarkastuspyyntö voi maksaa enintään 1000 jeniä."
+    },
+    "article11": {
+      "title": "11 § (Tietosuojakäytännön muutokset)",
+      "section1": "1. Käytäntöä voidaan muuttaa lakimuutosten, palvelumuutosten tai käyttäjävaatimusten vuoksi.",
+      "section2": "2. Muutokset tulevat voimaan, kun ne julkaistaan palvelussa.",
+      "section3": "3. Merkittävistä muutoksista ilmoitetaan selkeästi."
+    },
+    "article12": {
+      "title": "12 § (Yhteystiedot)",
+      "section1": "Kyselyt tästä käytännöstä tai tietojen käsittelystä tulee lähettää osoitteeseen:",
+      "section2": "• Sähköposti: neco3coffee+brawl@gmail.com"
+    }
+  },
+  "faq": {
+    "title": "Usein kysytyt kysymykset",
+    "items": {
+      "whatIsSafeBrawl": {
+        "question": "Mikä on SafeBrawl?",
+        "answer": "SafeBrawl on Brawl Stars -pelaajille tarkoitettu tiedonhakutyökalu ja Ranked-otteluiden tuki. Voit etsiä pelaajia nimellä tai rankilla ja tarkistaa, onko heillä griefing- tai feeding-historiaa. Voit välttää heitä poistumalla ottelusta valintaruudussa. Voit myös ilmoittaa pelaajia viimeisimmistä otteluista (kirjautuminen vaaditaan), sekä nähdä nimi­historian, viimeiset 25 ottelua, nykyisen rankin, Power 11 -hahmot ja ottelukohtaiset suoritukset."
+      },
+      "isFree": {
+        "question": "Onko palvelu ilmainen?",
+        "answer": "Kyllä, kaikki perustoiminnot ovat ilmaisia."
+      },
+      "mobileSupport": {
+        "question": "Toimiiko palvelu mobiilissa?",
+        "answer": "Kyllä. Se toimii Safari-, Chrome- ja muilla mobiiliselaimilla. Saatavilla iPhonella ja Androidilla."
+      },
+      "cannotSearchByName": {
+        "question": "Mitä tehdä, jos pelaajaa ei löydy nimellä?",
+        "answer": "Pelaajan nimi voi olla vaihtunut. Käytä \"Vanhan nimen haku\" -toimintoa (kellokuvake vasemmalla) tai hae tagilla (esim. #ABCD123)."
+      },
+      "updateFrequency": {
+        "question": "Kuinka usein tiedot päivittyvät?",
+        "answer": "Rankit ja ottelut päivittyvät automaattisesti muutaman tunnin välein. Jos tiedot eivät päivity, kyse voi olla välimuistista."
+      },
+      "wrongNameDisplayed": {
+        "question": "Nimi näkyy vääränä",
+        "answer": "Data perustuu viralliseen Brawl Stars API -tietoon. Odota hetki ja päivitä sivu."
+      },
+      "reportFeature": {
+        "question": "Mikä on \"Ilmoita\"-toiminto?",
+        "answer": "Se on järjestelmä, jossa epäilyttävistä tai vilpillisistä otteluista voi lähettää videon moderaattoreiden tarkastettavaksi. Hyväksytyt videot julkaistaan SafeBrawlissa."
+      },
+      "appealReport": {
+        "question": "Voinko valittaa, jos minusta on tehty ilmoitus?",
+        "answer": "Kyllä. Voit kirjautua sisään, avata ilmoitukset ja lähettää valituksen syineen."
+      },
+      "reportReviewTime": {
+        "question": "Kuinka kauan raportin tarkistus kestää?",
+        "answer": "Tarkistus tehdään yleensä muutamassa tunnissa tai päivässä. Ruuhkatilanteissa kauemmin."
+      },
+      "howLongDataStored": {
+        "question": "Kuinka kauan raportit ja videot säilytetään?",
+        "answer": "Raportit ja videot säilytetään 90 päivää, jonka jälkeen ne poistetaan automaattisesti."
+      },
+      "videoStorage": {
+        "question": "Minne videot tallennetaan?",
+        "answer": "Videot tallennetaan turvallisesti AWS S3:een, ja vain hyväksytyt videot julkaistaan CloudFrontin kautta."
+      },
+      "videoNotDisplayed": {
+        "question": "Latasin videon, mutta se ei näy",
+        "answer": "Se voi olla tilassa \"arviointia odotetaan\" tai \"lataus kesken\". Päivitä sivu muutaman minuutin kuluttua."
+      },
+      "dataSource": {
+        "question": "Mistä SafeBrawlin tiedot tulevat?",
+        "answer": "Kaikki pelaajatiedot ovat peräisin virallisesta Brawl Stars API:sta (https://developer.brawlstars.com)."
+      },
+      "adsDisplayed": {
+        "question": "Näkyykö palvelussa mainoksia?",
+        "answer": "Kyllä, osa käyttö­kustannuksista katetaan mainoksilla. Mainokset on sijoitettu niin, että ne häiritsevät mahdollisimman vähän."
+      },
+      "deletePlayerData": {
+        "question": "Voinko poistaa pelaajatietoni?",
+        "answer": "Brawl Stars API:n tietoja ei voi poistaa, mutta SafeBrawlin raportit ja videot voi pyytää poistettavaksi."
+      },
+      "contact": {
+        "question": "Miten otan yhteyttä?",
+        "answer": "Lähetä viesti X-palvelussa (entinen Twitter) käyttäjälle @neco3desu."
+      },
+      "siteNotLoading": {
+        "question": "Sivusto ei lataudu / Virhe ilmestyy",
+        "answer": "Tyhjennä välimuisti ja lataa sivu uudelleen. Jos ongelma jatkuu, ilmoita siitä."
+      }
+    }
+  }
+}

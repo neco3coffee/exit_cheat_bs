@@ -9,6 +9,7 @@ export default function LocaleBoxContent() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const locale = pathname.split("/")[1] as
+    | "fi"
     | "en"
     | "ja"
     | "zh"
@@ -22,9 +23,20 @@ export default function LocaleBoxContent() {
   const leftPath = pathname.split("/").slice(2).join("/");
 
   const nationalFlags: Record<
-    "en" | "ja" | "zh" | "ko" | "cs" | "fr" | "sq" | "pt" | "fr-ca" | "hr",
+    | "fi"
+    | "en"
+    | "ja"
+    | "zh"
+    | "ko"
+    | "cs"
+    | "fr"
+    | "sq"
+    | "pt"
+    | "fr-ca"
+    | "hr",
     string
   > = {
+    fi: "🇫🇮",
     en: "🇺🇸",
     ja: "🇯🇵",
     zh: "🇨🇳",
@@ -37,8 +49,18 @@ export default function LocaleBoxContent() {
     hr: "🇭🇷",
   };
   const locales: Array<
-    "en" | "ja" | "zh" | "ko" | "cs" | "fr" | "sq" | "pt" | "fr-ca" | "hr"
-  > = ["en", "ja", "zh", "ko", "cs", "fr", "sq", "pt", "fr-ca", "hr"];
+    | "fi"
+    | "en"
+    | "ja"
+    | "zh"
+    | "ko"
+    | "cs"
+    | "fr"
+    | "sq"
+    | "pt"
+    | "fr-ca"
+    | "hr"
+  > = ["fi", "en", "ja", "zh", "ko", "cs", "fr", "sq", "pt", "fr-ca", "hr"];
 
   const menuRef = useRef<HTMLDivElement>(null);
 
