@@ -18,8 +18,23 @@ class BattleAutoSaveEnqueueJob < ApplicationJob
   private
 
   def eligible_players
-    Player.where(auto_save_enabled: true)
-          .where("auto_save_expires_at IS NULL OR auto_save_expires_at > ?", Time.current)
+    # 自動記録のプレイヤー
+    # Player.where(auto_save_enabled: true)
+    #       .where("auto_save_expires_at IS NULL OR auto_save_expires_at > ?", Time.current)
+
+    # 自動記録のプレイヤー + 報告されたことのあるプレイヤー
+    Player
+    .where(auto_save_enabled: true)
+    .where("auto_save_expires_at IS NULL OR auto_save_expires_at > ?", Time.current)
+    .or(
+      Player.where(
+        "EXISTS (
+           SELECT 1
+           FROM reports
+           WHERE reports.reported_tag = players.tag
+         )"
+      )
+    )
   end
 
   def enqueue_player_job(player)
