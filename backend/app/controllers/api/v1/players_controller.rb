@@ -386,6 +386,10 @@ module Api
           }
         end.compact
 
+        reported_players = reported_players.sort_by do |player|
+          player[:lastActiveAt] ? Time.iso8601(player[:lastActiveAt]) : Time.at(0)
+        end.reverse
+
         Rails.logger.info("reported_players: #{reported_players}")
 
         render json: reported_players
