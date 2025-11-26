@@ -381,7 +381,8 @@ module Api
             rank: reported_player.rank,
             trophies: reported_player.trophies,
             approved_reports_count: reported_player.approved_reports_count,
-            reportedAt: report.created_at&.iso8601
+            reportedAt: report.created_at&.iso8601,
+            lastActiveAt: reported_player.last_active_at ? reported_player.last_active_at&.iso8601 : nil
           }
         end.compact
 

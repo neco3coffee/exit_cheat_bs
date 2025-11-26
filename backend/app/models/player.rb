@@ -16,6 +16,14 @@ class Player < ApplicationRecord
   # タグの正規化（先頭に#を追加）
   before_validation :normalize_tag
 
+  # DBでの実行(一覧用)
+  scope :active, -> { where("last_active_at > ?", 35.minutes.ago) }
+
+  # Serverでの実行(詳細用)
+  def active?
+    last_active_at && last_active_at > 35.minutes.ago
+  end
+
   # SQLエスケープメソッド
   def self.sanitize_sql_like(string)
     string.gsub(/[\\%_]/) { |match| "\\#{match}" }

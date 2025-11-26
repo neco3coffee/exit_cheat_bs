@@ -68,6 +68,14 @@
   align-items: center;
 }
 
+.lastActiveAt {
+  font-size: 12px;
+  color: rgba(226, 232, 240, 0.8);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
 .bottomRow {
   display: flex;
   align-items: center;
