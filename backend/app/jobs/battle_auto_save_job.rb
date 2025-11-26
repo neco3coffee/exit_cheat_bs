@@ -8,10 +8,10 @@ class BattleAutoSaveJob < ApplicationJob
       return
     end
 
-    unless auto_save_active?(player)
-      Rails.logger.info("BattleAutoSaveJob: Auto save disabled or expired for player #{player.tag}")
-      return
-    end
+    # unless auto_save_active?(player)
+    #   Rails.logger.info("BattleAutoSaveJob: Auto save disabled or expired for player #{player.tag}")
+    #   return
+    # end
 
     battlelog_data = PlayerFetcher.new.fetch_battlelog(player.tag)
 
