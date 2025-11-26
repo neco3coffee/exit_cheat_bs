@@ -125,6 +125,8 @@
     "Master": "MISTR",
     "Insane": "ŠÍLENÉ",
     "Impossible": "NEMOŽNÉ",
+    "Impossible II": "NEMOŽNÉ II",
+    "Impossible III": "NEMOŽNÉ III",
     "undefined": "NEDEFINOVANÝ TYP BITVY"
   },
   "playerStats": {

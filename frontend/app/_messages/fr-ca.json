@@ -125,6 +125,8 @@
     "Master": "MAÎTRE",
     "Insane": "FOU",
     "Impossible": "IMPOSSIBLE",
+    "Impossible II": "IMPOSSIBLE II",
+    "Impossible III": "IMPOSSIBLE III",
     "undefined": "TYPE DE COMBAT NON DÉFINI"
   },
   "playerStats": {

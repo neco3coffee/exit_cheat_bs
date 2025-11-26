@@ -125,6 +125,8 @@
     "Master": "마스터",
     "Insane": "인세인",
     "Impossible": "임파서블",
+    "Impossible II": "임파서블 II",
+    "Impossible III": "임파서블 III",
     "undefined": "정의되지 않은 배틀 타입"
   },
   "playerStats": {

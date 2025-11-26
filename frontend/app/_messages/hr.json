@@ -125,6 +125,8 @@
     "Master": "MAJSTOR",
     "Insane": "LUĐAK",
     "Impossible": "NEMOGUĆE",
+    "Impossible II": "NEMOGUĆE II",
+    "Impossible III": "NEMOGUĆE III",
     "undefined": "NEDEFINIRANA VRSTA BITKE"
   },
   "playerStats": {
