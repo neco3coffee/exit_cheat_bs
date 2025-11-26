@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Searching from "@/app/_components/Searching";
 import { appendToEightDigits, shortenPlayerName } from "@/app/_lib/common";
 import { Link } from "@/app/_messages/i18n/navigation";
@@ -23,6 +23,12 @@ const PlayerComponent = ({
   // Tags with less than 4 characters are bots, so link to home
   const isBot = hashRemovedPlayerTag && hashRemovedPlayerTag.length < 4;
   const href = isBot ? "/" : `/players/${hashRemovedPlayerTag}`;
+
+  // biome-ignore-start lint/correctness/useExhaustiveDependencies: ソフトナビゲーションではloading状態が残って、戻るボタンで再度このプレイヤーのページに戻った時にloadingがtrueのままでSearchingコンポーネントが表示され続けてしまうため、このようにしています。
+  useEffect(() => {
+    setLoading(false);
+  }, [player?.tag]);
+  // biome-ignore-end lint/correctness/useExhaustiveDependencies: xxx
 
   return (
     <Link
