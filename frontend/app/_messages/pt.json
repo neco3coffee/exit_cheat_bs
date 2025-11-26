@@ -125,6 +125,8 @@
     "Master": "MESTRE",
     "Insane": "INSANO",
     "Impossible": "IMPROVÁVEL",
+    "Impossible II": "IMPROVÁVEL II",
+    "Impossible III": "IMPROVÁVEL III",
     "undefined": "TIPO DE BATALHA INDEFINIDO"
   },
   "playerStats": {

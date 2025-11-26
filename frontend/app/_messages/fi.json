@@ -125,6 +125,8 @@
     "Master": "MESTARI",
     "Insane": "HULLU",
     "Impossible": "MAHDOTON",
+    "Impossible II": "MAHDOTON II",
+    "Impossible III": "MAHDOTON III",
     "undefined": "MÄÄRITTELEMÄTÖN TAISTELUTYYPPI"
   },
   "playerStats": {

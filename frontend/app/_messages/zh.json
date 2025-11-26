@@ -125,6 +125,8 @@
     "Master": "大师",
     "Insane": "疯狂",
     "Impossible": "不可能",
+    "Impossible II": "不可能 II",
+    "Impossible III": "不可能 III",
     "undefined": "未定义的战斗类型"
   },
   "playerStats": {

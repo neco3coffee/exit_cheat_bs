@@ -125,6 +125,8 @@
     "Master": "MASTER",
     "Insane": "INSANE",
     "Impossible": "IMPOSSIBLE",
+    "Impossible II": "IMPOSSIBLE II",
+    "Impossible III": "IMPOSSIBLE III",
     "undefined": "UNDEFINED BATTLE TYPE"
   },
   "playerStats": {
