@@ -14,4 +14,5 @@ export type ReportedPlayer = {
   trophies: number;
   approved_reports_count: number;
   reportedAt: string;
+  lastActiveAt: string | null;
 };
