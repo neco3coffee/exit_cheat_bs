@@ -2,6 +2,8 @@
 
 import { Activity } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { report } from "process";
 import { appendToEightDigits } from "@/app/_lib/common";
 import { RelativeTime } from "@/app/_lib/time";
 import PlayerName from "@/app/[locale]/players/[tag]/_components/PlayerName";
@@ -65,9 +67,18 @@ export default function ReportedPlayersList({
             ? reportedPlayer.lastActiveAt >=
               new Date(Date.now() - 35 * 60 * 1000).toISOString()
             : false;
+          var tag = reportedPlayer.tag.startsWith("#")
+            ? reportedPlayer.tag.substring(1)
+            : reportedPlayer.tag;
+          tag = tag.toUpperCase();
+          tag = tag.replace(/O/g, "0");
 
           return (
-            <div className={styles.card} key={reportedPlayer.tag}>
+            <Link
+              className={styles.card}
+              key={reportedPlayer.tag}
+              href={`/${locale}/players/${encodeURIComponent(tag)}`}
+            >
               <div className={styles.topRow}>
                 <div className={styles.avatar}>
                   {iconId ? (
@@ -171,7 +182,7 @@ export default function ReportedPlayersList({
                   {formattedReportedAt}
                 </time>
               </div>
-            </div>
+            </Link>
           );
         })
       )}
