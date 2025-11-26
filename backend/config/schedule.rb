@@ -22,5 +22,5 @@ env :GEM_PATH, ENV["GEM_PATH"] if ENV["GEM_PATH"]
 end
 
 every 30.minutes do
-  runner "BattleAutoSaveEnqueueJob.perform_now"
+  runner "BattleAutoSaveEnqueueJob.set(priority: -100).perform_later"
 end
