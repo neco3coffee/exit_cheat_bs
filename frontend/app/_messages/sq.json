@@ -90,7 +90,9 @@
     "aiCheck": "Kontrolli nga AI",
     "waitingReview": "Në pritje të rishikimit",
     "reviewed": "Rishikuar",
-    "videoDescription": "Videoja e riprodhimit të lojtarit të raportuar"
+    "videoDescription": "Videoja e riprodhimit të lojtarit të raportuar",
+    "reviewComment": "Koment rishikimi",
+    "noComments": "Nuk ka komente rishikimi të disponueshme."
   },
   "account": {
     "checkLogin": "Duke konfirmuar hyrjen tuaj...",

@@ -90,7 +90,9 @@
     "aiCheck": "AI provjera",
     "waitingReview": "Čeka se pregled",
     "reviewed": "Pregledano",
-    "videoDescription": "Video snimka prijavljenog igrača"
+    "videoDescription": "Video snimka prijavljenog igrača",
+    "reviewComment": "Komentar pregleda",
+    "noComments": "Nema dostupnih komentara pregleda."
   },
   "account": {
     "checkLogin": "Provjeravam vašu prijavu...",

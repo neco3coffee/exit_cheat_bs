@@ -90,7 +90,9 @@
     "aiCheck": "AI tarkistaa",
     "waitingReview": "Arviointia odotetaan",
     "reviewed": "Arvioitu",
-    "videoDescription": "Ilmoitetun pelaajan uusintavideo"
+    "videoDescription": "Ilmoitetun pelaajan uusintavideo",
+    "reviewComment": "Arviointikommentti",
+    "noComments": "Ei arviointikommentteja saatavilla."
   },
   "account": {
     "checkLogin": "Tarkistetaan kirjautumista...",

@@ -90,7 +90,9 @@
     "aiCheck": "AI Checking",
     "waitingReview": "Waiting Review",
     "reviewed": "Reviewed",
-    "videoDescription": "Reported Player's Replay Video"
+    "videoDescription": "Reported Player's Replay Video",
+    "reviewComment": "Review Comment",
+    "noComments": "No review comments available."
   },
   "account": {
     "checkLogin": "Confirming your login...",

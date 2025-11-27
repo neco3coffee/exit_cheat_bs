@@ -172,6 +172,14 @@ export default function ReportDetailView({
           </p>
         </div>
       </div>
+      <div className={styles.reviewCommentContainer}>
+        <h2 className={styles.reviewCommentTitle}>{t("reviewComment")}</h2>
+        {report.review_comment ? (
+          <p className={styles.reviewCommentText}>{report.review_comment}</p>
+        ) : (
+          <p className={styles.noReviewCommentText}>{t("noComments")}</p>
+        )}
+      </div>
     </div>
   );
 }

@@ -90,7 +90,9 @@
     "aiCheck": "Vérification par IA",
     "waitingReview": "En attente de révision",
     "reviewed": "Révisé",
-    "videoDescription": "Vidéo de rediffusion du joueur signalé"
+    "videoDescription": "Vidéo de rediffusion du joueur signalé",
+    "reviewComment": "Commentaire de révision",
+    "noComments": "Aucun commentaire de révision disponible."
   },
   "account": {
     "checkLogin": "Vérification de votre connexion...",

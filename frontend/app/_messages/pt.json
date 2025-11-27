@@ -90,7 +90,9 @@
     "aiCheck": "Verificação por IA",
     "waitingReview": "Aguardando revisão",
     "reviewed": "Revisado",
-    "videoDescription": "Vídeo de replay do jogador denunciado"
+    "videoDescription": "Vídeo de replay do jogador denunciado",
+    "reviewComment": "Comentário da revisão",
+    "noComments": "Nenhum comentário de revisão disponível."
   },
   "account": {
     "checkLogin": "Confirmando seu login...",

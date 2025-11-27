@@ -90,7 +90,9 @@
     "aiCheck": "AI检查中",
     "waitingReview": "等待审核",
     "reviewed": "已审核",
-    "videoDescription": "被举报玩家的回放视频"
+    "videoDescription": "被举报玩家的回放视频",
+    "reviewComment": "审核评论",
+    "noComments": "暂无审核评论。"
   },
   "account": {
     "checkLogin": "正在确认您的登录...",

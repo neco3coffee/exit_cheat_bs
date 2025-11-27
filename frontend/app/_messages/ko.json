@@ -90,7 +90,9 @@
     "aiCheck": "AI 확인 중",
     "waitingReview": "검토 대기 중",
     "reviewed": "검토 완료",
-    "videoDescription": "신고된 플레이어의 리플레이 영상"
+    "videoDescription": "신고된 플레이어의 리플레이 영상",
+    "reviewComment": "검토 코멘트",
+    "noComments": "검토 코멘트가 없습니다."
   },
   "account": {
     "checkLogin": "로그인 상태를 확인하는 중...",

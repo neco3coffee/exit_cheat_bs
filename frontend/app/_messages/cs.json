@@ -90,7 +90,9 @@
     "aiCheck": "AI kontrola",
     "waitingReview": "Čeká se na recenzi",
     "reviewed": "Zkontrolováno",
-    "videoDescription": "Záznam bitvy nahlášeného hráče"
+    "videoDescription": "Záznam bitvy nahlášeného hráče",
+    "reviewComment": "Recenzní komentář",
+    "noComments": "Žádné recenzní komentáře nejsou k dispozici."
   },
   "account": {
     "checkLogin": "Potvrzuji vaše přihlášení...",

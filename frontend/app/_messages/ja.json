@@ -161,7 +161,9 @@
     "aiCheck": "AI確認中",
     "waitingReview": "レビュー待ち",
     "reviewed": "レビュー済み",
-    "videoDescription": "報告されたプレイヤーのリプレイ動画"
+    "videoDescription": "報告されたプレイヤーのリプレイ動画",
+    "reviewComment": "レビューコメント",
+    "noComments": "レビューコメントはありません。"
   },
   "account": {
     "checkLogin": "ログイン状況を確認しています...",
