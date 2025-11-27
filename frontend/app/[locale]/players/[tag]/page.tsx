@@ -89,6 +89,38 @@ type Player = {
   error?: unknown;
 };
 
+async function getPlayerDetails(tag: string) {
+  "use cache";
+  cacheLife("minutes");
+  cacheTag(`player-${tag}`);
+
+  try {
+    const res = await fetch(
+      `${apiUrl}/api/v1/players/${encodeURIComponent(tag)}`,
+    );
+    const player: Player = await res.json();
+    return player;
+  } catch (error) {
+    return null;
+  }
+}
+
+async function getPlayerBattleLog(tag: string) {
+  "use cache";
+  cacheLife("seconds");
+  cacheTag(`player-battlelog-${tag}`);
+
+  try {
+    const res = await fetch(
+      `${apiUrl}/api/v1/players/${encodeURIComponent(tag)}/battlelog`,
+    );
+    const battleLog = await res.json();
+    return battleLog;
+  } catch (error) {
+    return null;
+  }
+}
+
 export default function Page({
   params,
 }: {
@@ -109,12 +141,10 @@ async function PlayerPage({
   params: Promise<{ locale: string; tag: string }>;
 }) {
   const { locale, tag } = await params;
-  const res = await fetch(
-    `${apiUrl}/api/v1/players/${encodeURIComponent(tag)}`,
-    { next: { revalidate: 60 } },
-  );
-  const player: Player = await res.json();
-  const battleLogs = formatBattleLog(player.battlelog?.items || []);
+
+  const player = await getPlayerDetails(tag);
+  const battleLogs = await getPlayerBattleLog(tag);
+  const formattedBattleLogs = formatBattleLog(battleLogs.items || []);
 
   // adminのみ他のプレイヤーのauto_saveをオンにできるようにするための処理
   const sessionToken = (await cookies()).get("session_token")?.value || null;
@@ -124,7 +154,7 @@ async function PlayerPage({
   const t = await getTranslations({ locale, namespace: "players" });
   const notInClubText = t("notInClub");
 
-  if (player?.error) {
+  if (player?.error || !player) {
     return (
       <>
         <Telemetry />
@@ -259,7 +289,7 @@ async function PlayerPage({
           <h2>{t("battleLog")}</h2>
           <Suspense fallback={null}>
             <ServerLocaleMessageProviderWrapper params={params}>
-              {battleLogs.map((battleLog, index) => {
+              {formattedBattleLogs.map((battleLog, index) => {
                 if (battleLog.rounds) {
                   return (
                     <BattleLogSoloRanked

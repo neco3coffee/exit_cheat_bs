@@ -37,26 +37,8 @@ module Api
           badgeId = club_data["badgeId"] if club_data
         end
 
-        # 5. 直近3件のバトルから他のプレイヤーのタグを抽出
-        if battlelog_data
-          recent_player_tags = fetcher.extract_player_tags_from_recent_battles(battlelog_data, 3)
-
-          # 6. 検索対象のプレイヤー自身を除外し、まだDBに存在しないプレイヤーを非同期で保存
-          recent_player_tags.each do |other_tag|
-            next if other_tag == tag # 自分自身は除外
-
-            unless Player.exists?(tag: other_tag)
-              Rails.logger.info("Enqueueing SavePlayerJob for tag: #{other_tag}")
-              SavePlayerJob.set(priority: 10).perform_later(other_tag)
-            end
-          end
-
-          # 7. soloRankedバトルに参加したプレイヤーのランクを非同期で更新
-          UpdateSoloRankedRanksJob.set(priority: 30).perform_later(battlelog_data)
-        end
-
         # 8. レスポンスを構築（改名履歴を含める）
-        response_data = construct_response(player, player_data, battlelog_data, badgeId)
+        response_data = construct_response(player, player_data, badgeId)
 
         # 9. 改名履歴を追加
         db_player = Player.find_by(tag: tag)
@@ -80,6 +62,45 @@ module Api
 
         response.headers["Cache-Control"] = "public, max-age=60"
         render json: response_data
+
+      rescue StandardError => e
+        Rails.logger.error("Exception occurred: #{e.message}")
+        Rails.logger.error(e.backtrace.join("\n"))
+        render json: { error: "An error occurred while processing your request" }, status: 500
+      end
+
+      def battlelog
+        tag = params[:tag].to_s.upcase.strip
+        # tagの先頭に#を追加
+        tag = "##{tag}" unless tag.start_with?("#")
+        Rails.logger.info("tag: #{tag}")
+
+        # PlayerFetcherを使用してプレイヤー情報を取得・保存
+        fetcher = PlayerFetcher.new
+
+        # 3. バトルログを取得
+        battlelog_data = fetcher.fetch_battlelog(tag)
+
+        # 5. 直近3件のバトルから他のプレイヤーのタグを抽出
+        if battlelog_data
+          recent_player_tags = fetcher.extract_player_tags_from_recent_battles(battlelog_data, 3)
+
+          # 6. 検索対象のプレイヤー自身を除外し、まだDBに存在しないプレイヤーを非同期で保存
+          recent_player_tags.each do |other_tag|
+            next if other_tag == tag # 自分自身は除外
+
+            unless Player.exists?(tag: other_tag)
+              Rails.logger.info("Enqueueing SavePlayerJob for tag: #{other_tag}")
+              SavePlayerJob.set(priority: 10).perform_later(other_tag)
+            end
+          end
+
+          # 7. soloRankedバトルに参加したプレイヤーのランクを非同期で更新
+          UpdateSoloRankedRanksJob.set(priority: 30).perform_later(battlelog_data)
+        end
+
+        response.headers["Cache-Control"] = "public, max-age=60"
+        render json: battlelog_data
 
       rescue StandardError => e
         Rails.logger.error("Exception occurred: #{e.message}")
@@ -465,7 +486,7 @@ module Api
         nil # 見つからなかった場合
       end
 
-      def construct_response(player, player_data, battlelog_data, badgeId)
+      def construct_response(player, player_data, badgeId)
         {
           tag: player_data["tag"],
           name: player_data["name"],
@@ -481,7 +502,6 @@ module Api
             name: player_data.dig("club", "name"),
             badgeId: badgeId
           },
-          battlelog: battlelog_data,
           approved_reports_count: player.approved_reports_count,
           brawlers: player_data["brawlers"]
         }

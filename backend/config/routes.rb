@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       post "players/:tag/auto_save", to: "players#toggle_player_auto_save"
       get "players/:tag/stats", to: "players#stats"
       get "players/:tag/reported_players", to: "players#reported_players"
+      get "players/:tag/battlelog", to: "players#battlelog"
       get "players/:tag", to: "players#show"
       get "players/:tag/ranked", to: "players#ranked"
       get "players/:tag/reports", to: "players#reports"
