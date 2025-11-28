@@ -5,10 +5,14 @@
 }
 
 .name {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   margin: 0;
   line-height: 1.2;
+}
+
+.smallName {
+  font-size: 12px !important;
 }
 
 .historyButton {

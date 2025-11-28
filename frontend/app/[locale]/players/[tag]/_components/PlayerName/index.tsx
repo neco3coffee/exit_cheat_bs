@@ -22,6 +22,7 @@ type PlayerNameProps = {
   name: string;
   nameColor?: string | null;
   nameHistories?: NameHistory[] | null;
+  smallName?: boolean;
 };
 
 function normalizeColor(nameColor?: string | null) {
@@ -50,13 +51,17 @@ export default function PlayerName({
   name,
   nameColor,
   nameHistories,
+  smallName = false,
 }: PlayerNameProps) {
   const color = normalizeColor(nameColor);
   const hasHistories = Array.isArray(nameHistories) && nameHistories.length > 0;
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.name} style={color ? { color } : undefined}>
+      <h1
+        className={`${styles.name} ${smallName ? styles.smallName : ""}`}
+        style={color ? { color } : undefined}
+      >
         {name}
       </h1>
       {hasHistories && (

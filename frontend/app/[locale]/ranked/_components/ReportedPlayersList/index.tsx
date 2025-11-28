@@ -73,6 +73,8 @@ export default function ReportedPlayersList({
           tag = tag.toUpperCase();
           tag = tag.replace(/O/g, "0");
 
+          const isNameLong = reportedPlayer.name.length > 6;
+
           return (
             <Link
               className={styles.card}
@@ -98,6 +100,7 @@ export default function ReportedPlayersList({
                     name={reportedPlayer.name}
                     nameColor={null}
                     nameHistories={reportedPlayer.nameHistories}
+                    smallName={isNameLong}
                   />
                 </div>
                 <div className={styles.lastActiveAt}>
