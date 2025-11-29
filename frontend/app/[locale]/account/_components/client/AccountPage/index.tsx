@@ -121,6 +121,7 @@ export default function AccountPage() {
           tag: tag.trim(),
           requested_icon: requestedIcon,
         }),
+        cache: "no-store",
       });
 
       const data: VerifyResponse = await res.json();
@@ -176,6 +177,7 @@ export default function AccountPage() {
           "Content-Type": "application/json",
         },
         credentials: "include",
+        cache: "no-store",
       });
 
       if (!res.ok) {
@@ -214,6 +216,7 @@ export default function AccountPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ tag: tag.trim() }),
+        cache: "no-store",
       });
 
       console.log("Login API response status:", res.status);
@@ -255,6 +258,7 @@ export default function AccountPage() {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
+      cache: "no-store",
     })
       .then((res) => {
         if (!res.ok) {

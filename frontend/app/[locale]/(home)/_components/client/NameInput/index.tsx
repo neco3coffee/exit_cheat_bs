@@ -36,6 +36,7 @@ export default function NameInput() {
           "Content-Type": "application/json",
         },
         credentials: "include",
+        cache: "no-store",
       });
       if (!res.ok) {
         console.error("Failed to fetch user data");
