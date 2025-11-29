@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
+import LoginBonusModal from "@/app/_components/PointModal";
 import {
   InputGroup,
   InputGroupAddon,
@@ -93,6 +94,8 @@ type Status =
 
 export default function AccountPage() {
   const t = useTranslations("account");
+
+  const modalRef = useRef<{ open: () => void }>(null);
 
   // アイコン変更確認・認証
   const handleVerify = async () => {
@@ -189,6 +192,7 @@ export default function AccountPage() {
       const data: MeResponse = await res.json();
       setPlayer(data.player);
       setStatus("logged_in");
+      modalRef.current?.open();
     } catch (error) {
       console.error("Session check error:", error);
       setStatus("idle");
@@ -275,6 +279,13 @@ export default function AccountPage() {
 
   return (
     <div className={styles.container}>
+      <LoginBonusModal
+        ref={modalRef}
+        title={"ログインボーナス獲得！"}
+        earnedPoints={1}
+        totalPoints={5000}
+        duration={3}
+      />
       {status === "loading" && (
         <div className={styles.loadingContainer}>
           <Spinner className="size-12 text-blue-500" />
