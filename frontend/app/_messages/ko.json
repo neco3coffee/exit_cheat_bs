@@ -33,6 +33,8 @@
     "noReportedPlayers": "신고된 플레이어가 없습니다.",
     "noReport": "신고 내역이 없습니다.",
     "created": "영상 업로드 대기 중",
+    "reported_player_selected": "영상 업로드 대기 중",
+    "report_type_selected": "영상 업로드 대기 중",
     "signed_url_generated": "영상 업로드 대기 중",
     "info_and_video_updated": "AI 확인 중",
     "video_optimized": "검토 대기 중",

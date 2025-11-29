@@ -23,7 +23,7 @@ import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import styles from "./index.module.scss";
 
-// const apiUrl = "http://app:3000";
+const apiUrl = "http://app:3000";
 
 const { Stepper } = defineStepper(
   { id: "step-1", title: "selectPlayer" },
@@ -41,9 +41,11 @@ const ReportType = {
 export default function ReportCreateView({
   report,
   locale,
+  revalidateReportedPlayers,
 }: {
   report: any;
   locale: string;
+  revalidateReportedPlayers: () => void;
 }) {
   const t = useTranslations("ranked");
   const {
@@ -191,6 +193,7 @@ export default function ReportCreateView({
                 handleReasonChange={handleReasonChange}
                 reportReason={reportReason}
                 goToNext={methods.next}
+                revalidateReportedPlayers={revalidateReportedPlayers}
               />
             ),
             "step-2": (step: any) => (
@@ -208,6 +211,7 @@ export default function ReportCreateView({
                 handleReasonChange={handleReasonChange}
                 reportReason={reportReason}
                 goToNext={methods.next}
+                revalidateReportedPlayers={revalidateReportedPlayers}
               />
             ),
             "step-3": (step: any) => (
@@ -225,6 +229,7 @@ export default function ReportCreateView({
                 handleReasonChange={handleReasonChange}
                 reportReason={reportReason}
                 goToNext={methods.next}
+                revalidateReportedPlayers={revalidateReportedPlayers}
               />
             ),
             "step-4": (step: any) => (
@@ -242,6 +247,7 @@ export default function ReportCreateView({
                 handleReasonChange={handleReasonChange}
                 reportReason={reportReason}
                 goToNext={methods.next}
+                revalidateReportedPlayers={revalidateReportedPlayers}
               />
             ),
           })}
@@ -266,6 +272,7 @@ const Content = ({
   handleReasonChange,
   reportReason,
   goToNext,
+  revalidateReportedPlayers,
 }: {
   id: string;
   locale?: string;
@@ -281,6 +288,7 @@ const Content = ({
   handleReasonChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   reportReason?: string;
   goToNext: () => void;
+  revalidateReportedPlayers: () => void;
 }) => {
   const router = useRouter();
   const tag = reporterTag?.trim().toUpperCase().replace(/O/g, "0");
@@ -321,6 +329,67 @@ const Content = ({
     }, 5000);
     return () => clearTimeout(timer);
   }, [id, router, locale]);
+
+  const updateReportedPlayer = (playerTag: string) => {
+    (async () => {
+      try {
+        const res = await fetch(
+          `/api/v1/reports/${reportId}/report_reported_player`,
+          {
+            method: "POST",
+            body: JSON.stringify({
+              id: reportId,
+              reportedPlayerTag: playerTag,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          },
+        );
+        if (!res.ok) {
+          toast.error(t("failedGenerateSignedUrl"));
+          return;
+        }
+        setReportedTag(playerTag);
+        revalidateReportedPlayers();
+        goToNext();
+      } catch (error) {
+        console.error("Error updating reported player:", error);
+        return;
+      }
+    })();
+  };
+
+  const updateReportType = async (reportType: string) => {
+    (async () => {
+      try {
+        const res = await fetch(
+          `/api/v1/reports/${reportId}/report_report_type`,
+          {
+            method: "POST",
+            body: JSON.stringify({
+              id: reportId,
+              reportType: reportType,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          },
+        );
+        if (!res.ok) {
+          toast.error(t("failedGenerateSignedUrl"));
+          return;
+        }
+        setReportType(reportType);
+        goToNext();
+      } catch (error) {
+        console.error("Error updating report type:", error);
+        return;
+      }
+    })();
+  };
 
   if (id === "step-1") {
     return (
@@ -390,7 +459,7 @@ const Content = ({
                       starPlayerTag={starPlayerTag}
                       battleType={battleLog?.battle?.type}
                       isMe={player?.tag === `${tag}`}
-                      setReportedPlayerTag={setReportedTag}
+                      updateReportedPlayer={updateReportedPlayer}
                       reportedPlayerTag={reportedTag}
                       goToNext={goToNext}
                     />
@@ -410,7 +479,7 @@ const Content = ({
                       starPlayerTag={starPlayerTag}
                       battleType={battleLog?.battle?.type}
                       isMe={player?.tag === `${tag}`}
-                      setReportedPlayerTag={setReportedTag}
+                      updateReportedPlayer={updateReportedPlayer}
                       reportedPlayerTag={reportedTag}
                       goToNext={goToNext}
                     />
@@ -461,8 +530,7 @@ const Content = ({
           <button
             className={styles.reportTypeContainer}
             onClick={() => {
-              setReportType(ReportType.badRandom);
-              goToNext();
+              updateReportType(ReportType.badRandom);
             }}
             type="button"
           >
@@ -480,8 +548,7 @@ const Content = ({
           <button
             className={styles.reportTypeContainer}
             onClick={() => {
-              setReportType(ReportType.griefPlay);
-              goToNext();
+              updateReportType(ReportType.griefPlay);
             }}
             type="button"
           >
@@ -499,8 +566,7 @@ const Content = ({
           <button
             className={styles.reportTypeContainer}
             onClick={() => {
-              setReportType(ReportType.cheating);
-              goToNext();
+              updateReportType(ReportType.cheating);
             }}
             type="button"
           >
@@ -654,7 +720,7 @@ function PlayerComponent({
   starPlayerTag,
   isDuel,
   isMe,
-  setReportedPlayerTag,
+  updateReportedPlayer,
   reportedPlayerTag,
   goToNext,
 }: any) {
@@ -670,8 +736,7 @@ function PlayerComponent({
       data-testid="playerComponent"
       onClick={() => {
         if (isMe) return;
-        setReportedPlayerTag(player?.tag);
-        goToNext();
+        updateReportedPlayer(player?.tag);
       }}
       type="button"
     >
@@ -720,8 +785,7 @@ function PlayerComponent({
             className={styles.reportButton}
             onClick={(e) => {
               e.preventDefault();
-              setReportedPlayerTag(player?.tag);
-              goToNext();
+              updateReportedPlayer(player?.tag);
             }}
             type="button"
           >

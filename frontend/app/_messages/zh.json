@@ -33,6 +33,8 @@
     "noReportedPlayers": "没有被举报的玩家。",
     "noReport": "没有举报记录。",
     "created": "等待视频上传",
+    "reported_player_selected": "等待视频上传",
+    "report_type_selected": "等待视频上传",
     "signed_url_generated": "等待视频上传",
     "info_and_video_updated": "AI检查中",
     "video_optimized": "等待审核",

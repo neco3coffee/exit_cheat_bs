@@ -104,6 +104,8 @@
     "noReportedPlayers": "報告されたプレイヤーはいません。",
     "noReport": "報告はありません。",
     "created": "動画アップ待ち",
+    "reported_player_selected": "動画アップ待ち",
+    "report_type_selected": "動画アップ待ち",
     "signed_url_generated": "動画アップ待ち",
     "info_and_video_updated": "AIチェック中",
     "video_optimized": "レビュー待ち",

@@ -1,5 +1,6 @@
 // Server Component
 import { Bot, CircleCheck, CircleX, Clock, FileSearch } from "lucide-react";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
 import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
@@ -11,6 +12,8 @@ import styles from "./index.module.scss";
 
 const StatusType = {
   created: "created",
+  reported_player_selected: "reported_player_selected",
+  report_type_selected: "report_type_selected",
   signed_url_generated: "signed_url_generated",
   info_and_video_updated: "info_and_video_updated",
   video_optimized: "video_optimized",
@@ -22,6 +25,8 @@ const StatusType = {
 
 const StatusIcon = {
   created: <Clock className={styles.statusIconPending} />,
+  reported_player_selected: <Clock className={styles.statusIconPending} />,
+  report_type_selected: <Clock className={styles.statusIconPending} />,
   signed_url_generated: <Clock className={styles.statusIconPending} />,
   info_and_video_updated: <Bot className={styles.statusIconPending} />,
   video_optimized: <FileSearch className={styles.statusIconPending} />,
@@ -52,15 +57,27 @@ export default async function ReportPage({
   });
   const { report, player_role, player_tag } = await res.json();
 
+  const revalidateReportedPlayers = async () => {
+    "use server";
+    // reportedPlayersのキャッシュを無効化する
+    revalidateTag(`reportedPlayers-${player_tag}`, "max");
+  };
+
   // statusがcreatedの場合は,reported_tagのプレイヤー選択UI->report_type選択UI->videoアップロード+報告理由入力のUIの順で表示
   if (
     report.status === StatusType.created ||
+    report.status === StatusType.reported_player_selected ||
+    report.status === StatusType.report_type_selected ||
     report.status === StatusType.signed_url_generated
   ) {
     return (
       <Suspense fallback={<Loading />}>
         <ServerLocaleMessageProviderWrapper params={params}>
-          <ReportCreateView report={report} locale={locale} />
+          <ReportCreateView
+            report={report}
+            locale={locale}
+            revalidateReportedPlayers={revalidateReportedPlayers}
+          />
         </ServerLocaleMessageProviderWrapper>
       </Suspense>
     );
