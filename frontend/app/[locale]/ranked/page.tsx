@@ -16,10 +16,6 @@ import styles from "./page.module.scss";
 const apiUrl = "http://app:3000";
 
 async function getPlayerData(sessionToken: string) {
-  "use cache";
-  cacheLife("minutes");
-  cacheTag("playerData");
-
   const res = await fetch(`${apiUrl}/api/v1/auth/me`, {
     method: "GET",
     headers: {
@@ -27,6 +23,7 @@ async function getPlayerData(sessionToken: string) {
       Cookie: `session_token=${sessionToken}`,
     },
     credentials: "include",
+    cache: "no-store",
   });
   if (!res.ok) {
     return null;

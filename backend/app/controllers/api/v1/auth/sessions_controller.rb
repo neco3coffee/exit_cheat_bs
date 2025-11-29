@@ -33,6 +33,8 @@ module Api
             current_icon = player_data["icon"]["id"].to_s
             requested_icon = (ICON_CANDIDATES - [ current_icon ]).sample
 
+            response.headers["Cache-Control"] = "no-store"
+
             render json: {
               player: {
                 tag: player_data["tag"],
@@ -45,6 +47,8 @@ module Api
             }
           rescue => e
             Rails.logger.error("Login error: #{e.message}")
+
+            response.headers["Cache-Control"] = "no-store"
             render json: { error: "Player not found or API error" }, status: :not_found
           end
         end
@@ -119,6 +123,8 @@ module Api
               cookies[:session_token] = { value: session_token, httponly: true, expires: 30.days.from_now }
             end
 
+            response.headers["Cache-Control"] = "no-store"
+
             render json: {
               status: "success",
               player: {
@@ -130,6 +136,8 @@ module Api
               session_token: session_token
             }
           else
+            response.headers["Cache-Control"] = "no-store"
+
             render json: {
               status: "error",
               message: "We couldn’t confirm your icon change. Please try again."
@@ -155,6 +163,9 @@ module Api
           end
 
           player = session.player
+
+          response.headers["Cache-Control"] = "no-store"
+
           render json: {
             player: {
               id: player.id,
@@ -178,10 +189,16 @@ module Api
             cookies.delete(:session_token, httponly: true)
           end
           Session.find_by(session_token: cookies[:session_token])&.destroy
+
+          response.headers["Cache-Control"] = "no-store"
+
           render json: { message: "Logged out successfully" }
 
           rescue => e
             Rails.logger.error("Logout error: #{e.message}")
+
+            response.headers["Cache-Control"] = "no-store"
+
             render json: { error: "Logout failed" }, status: :internal_server_error
         end
 

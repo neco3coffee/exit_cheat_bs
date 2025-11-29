@@ -33,10 +33,6 @@ const isProduction = process.env.NEXT_PUBLIC_NODE_ENV === "production";
 const isCi = (process.env.NEXT_PUBLIC_CI ?? "false") === "true";
 
 async function getPlayerData(sessionToken: string) {
-  "use cache";
-  cacheLife("minutes");
-  cacheTag("playerData");
-
   const res = await fetch(`${apiUrl}/api/v1/auth/me`, {
     method: "GET",
     headers: {
@@ -44,6 +40,7 @@ async function getPlayerData(sessionToken: string) {
       Cookie: `session_token=${sessionToken}`,
     },
     credentials: "include",
+    cache: "no-store",
   });
   if (!res.ok) {
     return null;
