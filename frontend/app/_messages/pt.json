@@ -33,6 +33,8 @@
     "noReportedPlayers": "Nenhum jogador denunciado disponível.",
     "noReport": "Nenhuma denúncia disponível.",
     "created": "Aguardando envio do vídeo",
+    "reported_player_selected": "Aguardando envio do vídeo",
+    "report_type_selected": "Aguardando envio do vídeo",
     "signed_url_generated": "Aguardando envio do vídeo",
     "info_and_video_updated": "Verificação por IA",
     "video_optimized": "Aguardando revisão",

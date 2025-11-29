@@ -11,20 +11,24 @@ export async function POST(
     const cookieStore = await cookies();
     const sessionCookie = cookieStore.get("session_token")?.value || null;
     const { reportId } = await params;
-    const res = await fetch(`${apiUrl}/api/v1/reports/${reportId}/signed_url`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Cookie: `session_token=${sessionCookie}`,
+    console.log("reportId:", reportId);
+    const res = await fetch(
+      `${apiUrl}/api/v1/reports/${reportId}/report_report_type`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: `session_token=${sessionCookie}`,
+        },
+        body: await _req.text(),
+        // cookieを含める
+        credentials: "include",
       },
-      body: await _req.text(),
-      // cookieを含める
-      credentials: "include",
-    });
+    );
     const data = await res.json();
     return NextResponse.json(data, { status: res.status });
   } catch (error) {
-    console.error("Signed URL proxy error:", error);
+    console.error("Report report type proxy error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },

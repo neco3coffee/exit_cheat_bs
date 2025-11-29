@@ -56,7 +56,7 @@ async function getBattleLogs(playerTag: string) {
 async function getReports(playerTag: string, sessionToken: string) {
   "use cache";
   cacheLife("minutes");
-  cacheTag("reports");
+  cacheTag(`reports-${playerTag}`);
 
   const res = await fetch(
     `${apiUrl}/api/v1/players/${encodeURIComponent(playerTag)}/reports`,
@@ -98,7 +98,7 @@ async function getRecentReport() {
 async function getReportedPlayers(playerTag: string, sessionToken: string) {
   "use cache";
   cacheLife("minutes");
-  cacheTag("reportedPlayers");
+  cacheTag(`reportedPlayers-${playerTag}`);
 
   const res = await fetch(
     `${apiUrl}/api/v1/players/${encodeURIComponent(

@@ -49,6 +49,46 @@ module Api
         end
       end
 
+      def report_reported_player
+        report = Report.find(params[:id])
+
+        if report.nil?
+          render json: { error: "Report not found" }, status: :not_found
+          return
+        end
+
+        report.assign_attributes(
+          reported_tag: params[:reportedPlayerTag],
+          status: :reported_player_selected,
+        )
+
+        if report.save
+          render json: { message: "Reported player updated" }, status: :ok
+        else
+          render json: { errors: report.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
+
+      def report_report_type
+        report = Report.find(params[:id])
+
+        if report.nil?
+          render json: { error: "Report not found" }, status: :not_found
+          return
+        end
+
+        report.assign_attributes(
+          report_type: params[:reportType],
+          status: :report_type_selected,
+        )
+
+        if report.save
+          render json: { message: "Report type updated" }, status: :ok
+        else
+          render json: { errors: report.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
+
 
       # GET /api/v1/reports/:id/signed_url
       def signed_url

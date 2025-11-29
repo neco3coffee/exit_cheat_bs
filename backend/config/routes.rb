@@ -27,10 +27,12 @@ Rails.application.routes.draw do
       end
 
       get "reports/latest", to: "reports#latest"
-      resources :reports, only: [ :create, :show, :update, :index ], param: :id
       post "reports/:id/signed_url", to: "reports#signed_url"
-      post "update_video", to: "reports#update_video"
+      post "reports/:id/report_reported_player", to: "reports#report_reported_player"
+      post "reports/:id/report_report_type", to: "reports#report_report_type"
       post "reports/:id/voted", to: "reports#voted"
+      resources :reports, only: [ :create, :show, :update, :index ], param: :id
+      post "update_video", to: "reports#update_video"
 
       post "ranked/battle_logs/auto_save", to: "players#toggle_battle_log_auto_save"
 

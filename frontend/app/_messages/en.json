@@ -33,6 +33,8 @@
     "noReportedPlayers": "No reported players available.",
     "noReport": "No reports available.",
     "created": "Waiting for video upload",
+    "reported_player_selected": "Waiting for video upload",
+    "report_type_selected": "Waiting for video upload",
     "signed_url_generated": "Waiting for video upload",
     "info_and_video_updated": "AI checking",
     "video_optimized": "Waiting for review",

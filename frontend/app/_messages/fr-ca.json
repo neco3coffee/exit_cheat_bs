@@ -33,6 +33,8 @@
     "noReportedPlayers": "Aucun joueur signalé disponible.",
     "noReport": "Aucun rapport disponible.",
     "created": "En attente du téléversement de la vidéo",
+    "reported_player_selected": "En attente du téléversement de la vidéo",
+    "report_type_selected": "En attente du téléversement de la vidéo",
     "signed_url_generated": "En attente du téléversement de la vidéo",
     "info_and_video_updated": "Vérification par IA",
     "video_optimized": "En attente de révision",

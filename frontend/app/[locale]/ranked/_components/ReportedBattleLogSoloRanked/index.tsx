@@ -18,6 +18,8 @@ const _ReportType = {
 
 const StatusType = {
   created: "created",
+  reported_player_selected: "reported_player_selected",
+  report_type_selected: "report_type_selected",
   signed_url_generated: "signed_url_generated",
   info_and_video_updated: "info_and_video_updated",
   video_optimized: "video_optimized",

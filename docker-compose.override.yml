@@ -4,6 +4,10 @@ services:
       - ./frontend:/app
       - /app/node_modules
 
+  app:
+    volumes:
+      - ./backend:/app
+
 
   storage:
     image: minio/minio:latest
