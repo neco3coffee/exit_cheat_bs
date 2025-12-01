@@ -8,10 +8,18 @@ class PointGrantService
   end
 
   def grant_daily_login
-    grant_once_daily(
-      reason: :daily_login,
-      title_key: "login_bonus"
-    )
+    if @player.point_events.where(reason: :daily_login).exists?
+      grant_once_daily(
+        reason: :daily_login,
+        title_key: "daily_login"
+      )
+    else
+      grant_once_daily(
+        reason: :daily_login,
+        title_key: "first_login",
+        point: 100
+      )
+    end
   end
 
   def grant_first_report(report)
@@ -102,7 +110,7 @@ class PointGrantService
 
   private
 
-  def grant_once_daily(reason:, title_key:, related: nil)
+  def grant_once_daily(reason:, title_key:, related: nil, point: DEFAULT_POINT)
     today = Date.current
 
     # Quick check before transaction
@@ -121,13 +129,14 @@ class PointGrantService
       create_event_and_increment!(
         reason: reason,
         related: related,
-        granted_on: today
+        granted_on: today,
+        point: point
       )
 
       {
         granted: true,
         title: title_key,
-        point: DEFAULT_POINT,
+        point: point,
         total_point: @player.total_points
       }
     end

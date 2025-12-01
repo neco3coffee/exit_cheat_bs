@@ -2,6 +2,7 @@
   "PointModal": {
     "title": {
       "daily_login": "Bonus za dnevnu prijavu",
+      "first_login": "Bonus za prvu prijavu",
       "first_report": "Bonus za prvu prijavu",
       "report_approved": "Bonus za odobrenu prijavu",
       "auto_battle": "Bonus za automatsku bitku",

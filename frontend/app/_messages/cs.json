@@ -114,6 +114,7 @@
   "PointModal": {
     "title": {
       "daily_login": "Bonus za denní přihlášení",
+      "first_login": "Bonus za první přihlášení",
       "first_report": "Bonus za první nahlášení",
       "report_approved": "Bonus za schválené nahlášení",
       "auto_battle": "Bonus za automatickou bitvu",

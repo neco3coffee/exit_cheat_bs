@@ -114,6 +114,7 @@
   "PointModal": {
     "title": {
       "daily_login": "Bonus de connexion quotidienne",
+      "first_login": "Bonus de première connexion",
       "first_report": "Bonus de premier signalement",
       "report_approved": "Bonus de signalement approuvé",
       "auto_battle": "Bonus de combat automatique",

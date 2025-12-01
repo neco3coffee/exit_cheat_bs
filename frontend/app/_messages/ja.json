@@ -185,7 +185,8 @@
   "PointModal": {
     "title": {
       "daily_login": "ログインボーナス",
-      "first_report": "初通報ボーナス",
+      "first_login": "初ログインボーナス",
+      "first_report": "初報告ボーナス",
       "report_approved": "通報承認ボーナス",
       "auto_battle": "自動対戦ボーナス",
       "campaign": "キャンペーンボーナス",

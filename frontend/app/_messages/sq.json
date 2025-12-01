@@ -2,6 +2,7 @@
   "PointModal": {
     "title": {
       "daily_login": "Bonus për hyrjen ditore",
+      "first_login": "Bonus për hyrjen e parë",
       "first_report": "Bonus për raportimin e parë",
       "report_approved": "Bonus për raportimin e aprovuar",
       "auto_battle": "Bonus për betejën automatike",

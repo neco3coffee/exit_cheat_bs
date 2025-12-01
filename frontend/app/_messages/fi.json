@@ -114,6 +114,7 @@
   "PointModal": {
     "title": {
       "daily_login": "Kirjautumisbonus",
+      "first_login": "Ensimmäisen kirjautumisen bonus",
       "first_report": "Ensimmäisen ilmoituksen bonus",
       "report_approved": "Hyväksytyn ilmoituksen bonus",
       "auto_battle": "Automaattitaistelubonus",

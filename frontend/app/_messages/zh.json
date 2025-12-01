@@ -2,6 +2,7 @@
   "PointModal": {
     "title": {
       "daily_login": "每日登录奖励",
+      "first_login": "首次登录奖励",
       "first_report": "首次举报奖励",
       "report_approved": "举报获批奖励",
       "auto_battle": "自动战斗奖励",

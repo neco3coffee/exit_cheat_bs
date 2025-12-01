@@ -2,6 +2,7 @@
   "PointModal": {
     "title": {
       "daily_login": "Bônus de Login Diário",
+      "first_login": "Bônus de Primeiro Login",
       "first_report": "Bônus de Primeira Denúncia",
       "report_approved": "Bônus de Denúncia Aprovada",
       "auto_battle": "Bônus de Batalha Automática",

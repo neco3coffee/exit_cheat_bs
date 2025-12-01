@@ -114,6 +114,7 @@
   "PointModal": {
     "title": {
       "daily_login": "Login Bonus",
+      "first_login": "First Login Bonus",
       "first_report": "First Report Bonus",
       "report_approved": "Report Approved Bonus",
       "auto_battle": "Auto Battle Bonus",

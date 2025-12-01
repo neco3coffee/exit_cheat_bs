@@ -2,6 +2,7 @@
   "PointModal": {
     "title": {
       "daily_login": "로그인 보너스",
+      "first_login": "첫 로그인 보너스",
       "first_report": "첫 신고 보너스",
       "report_approved": "신고 승인 보너스",
       "auto_battle": "자동 전투 보너스",
