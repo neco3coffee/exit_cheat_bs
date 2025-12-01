@@ -8,7 +8,7 @@ class PointGrantService
   end
 
   def grant_daily_login
-    if @player.point_events.where(reason: :daily_login).exists?
+    if @player.point_events.exists?(reason: :daily_login)
       grant_once_daily(
         reason: :daily_login,
         title_key: "daily_login"
@@ -33,7 +33,8 @@ class PointGrantService
   def grant_report_approved(report)
     # No daily limit, just grant points
     ActiveRecord::Base.transaction do
-      @player.lock!
+      # Lock removed as we rely on atomic increment! and don't have strict uniqueness constraint on report_approved yet
+      # If strict uniqueness per report is needed, we should add a check or unique index.
 
       create_event_and_increment!(
         reason: :report_approved,
@@ -118,30 +119,26 @@ class PointGrantService
       return { granted: false, total_point: @player.total_points }
     end
 
-    ActiveRecord::Base.transaction do
-      @player.lock!
+    begin
+      ActiveRecord::Base.transaction do
+        # Try to create without explicit lock, relying on unique index for concurrency control
+        create_event_and_increment!(
+          reason: reason,
+          related: related,
+          granted_on: today,
+          point: point
+        )
 
-      # Double check inside lock
-      if @player.point_events.exists?(reason: reason, granted_on: today)
-        return { granted: false, total_point: @player.total_points }
+        {
+          granted: true,
+          title: title_key,
+          point: point,
+          total_point: @player.total_points
+        }
       end
-
-      create_event_and_increment!(
-        reason: reason,
-        related: related,
-        granted_on: today,
-        point: point
-      )
-
-      {
-        granted: true,
-        title: title_key,
-        point: point,
-        total_point: @player.total_points
-      }
+    rescue ActiveRecord::RecordNotUnique
+      { granted: false, total_point: @player.reload.total_points }
     end
-  rescue ActiveRecord::RecordNotUnique
-    { granted: false, total_point: @player.reload.total_points }
   end
 
   def create_event_and_increment!(reason:, related:, granted_on:, point: DEFAULT_POINT)

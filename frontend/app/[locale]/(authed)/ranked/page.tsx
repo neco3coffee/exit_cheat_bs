@@ -140,33 +140,31 @@ export default async function Page({
   const reportedPlayers = await getReportedPlayers(playerTag, sessionToken);
 
   return (
-    <Suspense fallback={<Loading />}>
-      <RankedPage
-        locale={locale}
-        player={player}
-        recentReportComponent={
-          <RecentVideoComponent locale={locale} recentReport={recentReport} />
-        }
-        battleLogsTabContent={
-          <BattleLogsTabContent
-            params={params}
-            locale={locale}
-            player={player}
-            battleLogs={battleLogs || []}
-            reports={reports || []}
-          />
-        }
-        reportsTabContent={
-          <ReportsTabContent locale={locale} reports={reports || []} />
-        }
-        reportedPlayersTabContent={
-          <ReportedPlayersTabContent
-            locale={locale}
-            reportedPlayers={reportedPlayers}
-          />
-        }
-      />
-    </Suspense>
+    <RankedPage
+      locale={locale}
+      player={player}
+      recentReportComponent={
+        <RecentVideoComponent locale={locale} recentReport={recentReport} />
+      }
+      battleLogsTabContent={
+        <BattleLogsTabContent
+          params={params}
+          locale={locale}
+          player={player}
+          battleLogs={battleLogs || []}
+          reports={reports || []}
+        />
+      }
+      reportsTabContent={
+        <ReportsTabContent locale={locale} reports={reports || []} />
+      }
+      reportedPlayersTabContent={
+        <ReportedPlayersTabContent
+          locale={locale}
+          reportedPlayers={reportedPlayers}
+        />
+      }
+    />
   );
 }
 
