@@ -8,7 +8,6 @@ import Loading from "@/app/_components/Loading";
 import VideoPlayer from "@/app/_components/VideoPlayer.tsx";
 import { formatBattleLog } from "@/app/_lib/formatBattleLog";
 import { getCurrentPlayer } from "@/app/_lib/serverAuth";
-import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
 import RankedPage from "@/app/[locale]/(authed)/ranked/_components/RankedPage";
 import BattleLogSoloRanked from "./_components/BattleLogSoloRanked";
 import ReportedBattleLogSoloRanked from "./_components/ReportedBattleLogSoloRanked";
@@ -139,38 +138,35 @@ export default async function Page({
   const reports = playerTag ? await getReports(playerTag, sessionToken) : null;
   const recentReport = await getRecentReport();
   const reportedPlayers = await getReportedPlayers(playerTag, sessionToken);
-  console.log("reportedPlayers", JSON.stringify(reportedPlayers, null, 2));
 
   return (
-    <ServerLocaleMessageProviderWrapper params={params}>
-      <Suspense fallback={<Loading />}>
-        <RankedPage
-          locale={locale}
-          player={player}
-          recentReportComponent={
-            <RecentVideoComponent locale={locale} recentReport={recentReport} />
-          }
-          battleLogsTabContent={
-            <BattleLogsTabContent
-              params={params}
-              locale={locale}
-              player={player}
-              battleLogs={battleLogs || []}
-              reports={reports || []}
-            />
-          }
-          reportsTabContent={
-            <ReportsTabContent locale={locale} reports={reports || []} />
-          }
-          reportedPlayersTabContent={
-            <ReportedPlayersTabContent
-              locale={locale}
-              reportedPlayers={reportedPlayers}
-            />
-          }
-        />
-      </Suspense>
-    </ServerLocaleMessageProviderWrapper>
+    <Suspense fallback={<Loading />}>
+      <RankedPage
+        locale={locale}
+        player={player}
+        recentReportComponent={
+          <RecentVideoComponent locale={locale} recentReport={recentReport} />
+        }
+        battleLogsTabContent={
+          <BattleLogsTabContent
+            params={params}
+            locale={locale}
+            player={player}
+            battleLogs={battleLogs || []}
+            reports={reports || []}
+          />
+        }
+        reportsTabContent={
+          <ReportsTabContent locale={locale} reports={reports || []} />
+        }
+        reportedPlayersTabContent={
+          <ReportedPlayersTabContent
+            locale={locale}
+            reportedPlayers={reportedPlayers}
+          />
+        }
+      />
+    </Suspense>
   );
 }
 
