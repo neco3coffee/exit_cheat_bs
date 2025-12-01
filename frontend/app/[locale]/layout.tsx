@@ -4,8 +4,6 @@ import Footer from "@/app/_components/Footer";
 import Header from "@/app/_components/Header";
 import "../globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { cacheLife } from "next/cache";
-import Script from "next/script";
 import { Suspense } from "react";
 import Back from "@/app/_components/Back";
 import Reload from "@/app/_components/Reload";
@@ -97,7 +95,20 @@ export async function generateMetadata({
   };
 }
 
-const locales = ["en", "ja", "zh", "cs", "fr", "sq", "pt", "fr-ca", "hr"];
+const locales = [
+  "fi",
+  "en",
+  "ja",
+  "zh",
+  "ko",
+  "cs",
+  "fr",
+  "pt",
+  "sq",
+  "pt",
+  "fr-ca",
+  "hr",
+];
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({

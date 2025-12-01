@@ -2,7 +2,7 @@ import { MailPlus } from "lucide-react";
 import { cacheLife } from "next/cache";
 import { Suspense } from "react";
 import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
-import InstallPrompt from "@/app/[locale]/(home)/_components/client/InstallPrompt";
+import InstallPrompt from "@/app/[locale]/(public)/(home)/_components/client/InstallPrompt";
 import LocaleBoxContent from "./_components/client/LocaleBoxContent";
 import SafeBrawlMenuContent from "./_components/client/SafeBrawlMenuContent";
 import styles from "./index.module.scss";

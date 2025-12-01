@@ -131,6 +131,7 @@ module Api
                 id: player.id,
                 tag: player.tag,
                 name: player.name,
+                trophies: player.trophies,
                 current_icon: player.icon_id&.to_s
               },
               session_token: session_token
