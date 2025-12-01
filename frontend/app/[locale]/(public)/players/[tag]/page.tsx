@@ -2,7 +2,6 @@ import { cacheLife, cacheTag } from "next/cache";
 import { cookies } from "next/headers";
 import Image from "next/image";
 import Script from "next/script";
-// import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import AdsenseWrapper from "@/app/_components/AdsenseWrapper";
@@ -31,22 +30,6 @@ import styles from "./page.module.scss";
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3000";
 const isProduction = process.env.NEXT_PUBLIC_NODE_ENV === "production";
 const isCi = (process.env.NEXT_PUBLIC_CI ?? "false") === "true";
-
-async function getPlayerData(sessionToken: string) {
-  const res = await fetch(`${apiUrl}/api/v1/auth/me`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Cookie: `session_token=${sessionToken}`,
-    },
-    credentials: "include",
-    cache: "no-store",
-  });
-  if (!res.ok) {
-    return null;
-  }
-  return res.json();
-}
 
 const examplePlayerTags = ["Y2YPGCGC" /* neco3 */];
 
@@ -139,19 +122,14 @@ async function PlayerPage({
 }) {
   const { locale, tag } = await params;
 
-  const player = await getPlayerDetails(tag);
+  const playerDetail = await getPlayerDetails(tag);
   const battleLogs = await getPlayerBattleLog(tag);
   const formattedBattleLogs = formatBattleLog(battleLogs.items || []);
-
-  // adminのみ他のプレイヤーのauto_saveをオンにできるようにするための処理
-  const sessionToken = (await cookies()).get("session_token")?.value || null;
-  const playerData = await (sessionToken ? getPlayerData(sessionToken) : null);
-  const isAdmin = playerData?.player?.role === "admin" || false;
 
   const t = await getTranslations({ locale, namespace: "players" });
   const notInClubText = t("notInClub");
 
-  if (player?.error || !player) {
+  if (playerDetail?.error || !playerDetail) {
     return (
       <>
         <Telemetry />
@@ -180,32 +158,35 @@ async function PlayerPage({
           strategy="afterInteractive"
         />
       )}
-      <LocalStorage playerTag={player.tag} playerName={player.name} />
+      <LocalStorage
+        playerTag={playerDetail.tag}
+        playerName={playerDetail.name}
+      />
       <Telemetry />
       <div className={styles.container}>
         {/* プレイヤー基本情報 */}
         <div className={styles.basicInfoContainer}>
           <div className={styles.iconContainer}>
             <Image
-              src={`https://cdn.brawlify.com/profile-icons/regular/${player.iconId}.png`}
+              src={`https://cdn.brawlify.com/profile-icons/regular/${playerDetail.iconId}.png`}
               alt="icon"
               width={80}
               height={80}
               sizes="80px"
             />
-            <h3>{player.tag}</h3>
+            <h3>{playerDetail.tag}</h3>
           </div>
           <div className={styles.nameAndRankContainer}>
             <PlayerName
-              name={player.name}
-              nameColor={player?.nameColor}
-              nameHistories={player?.nameHistories}
+              name={playerDetail.name}
+              nameColor={playerDetail?.nameColor}
+              nameHistories={playerDetail?.nameHistories}
             />
-            {player.currentRank >= 0 && (
+            {playerDetail.currentRank >= 0 && (
               <div className={styles.rankContainer}>
-                {player.currentRank > 0 && (
+                {playerDetail.currentRank > 0 && (
                   <Image
-                    src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, player.currentRank - 1)}.png`}
+                    src={`https://cdn.brawlify.com/ranked/tiered/${appendToEightDigits(58000000, playerDetail.currentRank - 1)}.png`}
                     alt="rank"
                     height={60}
                     width={60}
@@ -220,51 +201,50 @@ async function PlayerPage({
             <Link
               href={`/players/${tag}/stats`}
               className={styles.statsLink}
-              aria-label={`View ranked stats for ${player.name}`}
-              title={`View ranked stats for ${player.name}`}
+              aria-label={`View ranked stats for ${playerDetail.name}`}
+              title={`View ranked stats for ${playerDetail.name}`}
             >
               <span className={styles.statsLinkGlow} aria-hidden="true" />
               <span className={styles.statsLinkContent} aria-hidden="true">
                 <span className={styles.statsLinkIcon}>📊</span>
               </span>
             </Link>
-            <Brawlers player={player} />
+            <Brawlers player={playerDetail} />
           </div>
         </div>
-        {isAdmin && (
+        <Suspense fallback={<Loading />}>
           <BattleLogAutoSaveIconToggle
-            expiresAt={player.auto_save_expires_at || null}
-            defaultEnabled={player.auto_save_enabled || false}
+            expiresAt={playerDetail.auto_save_expires_at || null}
+            defaultEnabled={playerDetail.auto_save_enabled || false}
             tag={tag}
-            sessionToken={sessionToken}
           />
-        )}
+        </Suspense>
         <div className={styles.recordsContainer}>
           <Record
             label={t("seasonHigh")}
             imagePath="/icon_trophy1.png"
-            value={player.trophies}
+            value={playerDetail.trophies}
           />
           <Record
             label={t("allTimeHigh")}
             imagePath="/icon_trophy1.png"
-            value={player.highestTrophies}
+            value={playerDetail.highestTrophies}
           />
           <Record
             label={t("3vs3Victories")}
             imagePath="/3vs3.png"
-            value={player.vs3Victories}
+            value={playerDetail.vs3Victories}
           />
           <Record
             label={t("victories")}
             imagePath="https://cdn.brawlify.com/game-modes/regular/48000006.png"
-            value={player.soloVictories}
+            value={playerDetail.soloVictories}
           />
         </div>
         <div className={styles.clubContainer}>
-          {player?.club?.badgeId ? (
+          {playerDetail?.club?.badgeId ? (
             <Image
-              src={`https://cdn.brawlify.com/club-badges/regular/${player.club.badgeId}.png`}
+              src={`https://cdn.brawlify.com/club-badges/regular/${playerDetail.club.badgeId}.png`}
               alt=""
               width={32}
               height={36}
@@ -275,7 +255,7 @@ async function PlayerPage({
           )}
           <div className={styles.clubNameContainer}>
             <ClubName
-              clubName={player?.club?.name}
+              clubName={playerDetail?.club?.name}
               notInClubText={notInClubText}
             />
           </div>

@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import type { ReactNode } from "react";
-import { getCurrentPlayer } from "@/app/_lib/auth";
+import { getCurrentPlayer } from "@/app/_lib/serverAuth";
 import { CurrentPlayerProvider } from "@/app/_providers/CurrentPlayerProvider";
 
 export async function CurrentPlayerProviderWrapper({

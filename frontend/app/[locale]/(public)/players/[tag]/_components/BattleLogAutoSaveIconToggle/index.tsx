@@ -3,24 +3,33 @@
 import { addHours, differenceInSeconds } from "date-fns";
 import { Radar } from "lucide-react";
 import { useEffect, useState } from "react";
+import { getCurrentPlayer } from "@/app/_lib/clientAuth";
 import { Switch } from "@/components/ui/switch";
 
 export default function BattleLogAutoSaveIconToggle({
   expiresAt,
   defaultEnabled = false,
   tag,
-  sessionToken,
 }: {
   expiresAt?: string | null;
   defaultEnabled?: boolean;
   tag: string;
-  sessionToken: string | null;
 }) {
   const [enabled, setEnabled] = useState(defaultEnabled);
   const [remaining, setRemaining] = useState<string>("");
   const [expireTime, setExpireTime] = useState<string | null | undefined>(
     expiresAt,
   );
+  const [player, setPlayer] = useState(null)
+
+  useEffect(() => {
+    const fetchPlayer = async () => {
+      const p = await getCurrentPlayer();
+      setPlayer(p);
+    }
+    fetchPlayer();
+  }, []);
+
 
   const toggleEnabled = async (newEnabled: boolean) => {
     try {
@@ -79,6 +88,10 @@ export default function BattleLogAutoSaveIconToggle({
     return () => clearInterval(timer);
   }, [enabled, expireTime]);
   // biome-ignore-end lint/correctness/useExhaustiveDependencies: xxx
+
+  if (!player) {
+    return null;
+  }
 
   return (
     <div
