@@ -81,6 +81,7 @@ interface VerifyResponse {
     tag: string;
     name: string;
     current_icon: string;
+    trophies: number;
     total_points?: number;
   };
   session_token?: string;
@@ -144,7 +145,7 @@ export default function AccountPage() {
           id: data.player.id,
           tag: data.player.tag,
           name: data.player.name,
-          trophies: currentPlayer?.trophies || 0,
+          trophies: data?.player?.trophies || 0,
           current_icon: data.player?.current_icon,
           total_points: data.player?.total_points,
         });
