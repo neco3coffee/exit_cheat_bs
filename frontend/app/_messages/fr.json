@@ -108,7 +108,21 @@
     "loginSuccess": "Vous êtes connecté!",
     "autoReload": "Cette page se rechargera automatiquement dans 5 secondes.",
     "loginStatus": "Connecté en tant que",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "totalPoints": "Points totaux : {points} pt"
+  },
+  "PointModal": {
+    "title": {
+      "daily_login": "Bonus de connexion quotidienne",
+      "first_login": "Bonus de première connexion",
+      "first_report": "Bonus de premier signalement",
+      "report_approved": "Bonus de signalement approuvé",
+      "auto_battle": "Bonus de combat automatique",
+      "campaign": "Bonus de campagne",
+      "manual_adjustment": "Cadeau de l'administrateur",
+      "default": "Bonus gagné"
+    },
+    "currentTotal": "Total actuel : {points} pt"
   },
   "players": {
     "seasonHigh": "SOMMET DE SAISON",

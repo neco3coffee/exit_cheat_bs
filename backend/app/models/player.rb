@@ -7,6 +7,8 @@ class Player < ApplicationRecord
   has_many :reported_reports, class_name: "Report", foreign_key: :reported_tag, primary_key: :tag
   has_many :reports, class_name: "Report", foreign_key: :reporter_tag, primary_key: :tag
 
+  has_many :point_events, dependent: :destroy
+
   validates :tag, presence: true, uniqueness: true
   validates :name, presence: true
   validates :rank, presence: true, numericality: { greater_than_or_equal_to: 0 }

@@ -4,11 +4,10 @@ import Footer from "@/app/_components/Footer";
 import Header from "@/app/_components/Header";
 import "../globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { cacheLife } from "next/cache";
-import Script from "next/script";
 import { Suspense } from "react";
 import Back from "@/app/_components/Back";
 import Reload from "@/app/_components/Reload";
+import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "../analytics";
 
@@ -97,7 +96,20 @@ export async function generateMetadata({
   };
 }
 
-const locales = ["en", "ja", "zh", "cs", "fr", "sq", "pt", "fr-ca", "hr"];
+const locales = [
+  "fi",
+  "en",
+  "ja",
+  "zh",
+  "ko",
+  "cs",
+  "fr",
+  "pt",
+  "sq",
+  "pt",
+  "fr-ca",
+  "hr",
+];
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({
@@ -124,24 +136,26 @@ export default async function RootLayout({
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Header params={params} />
-        <main>{children}</main>
-        <Footer params={params} />
-        <Suspense fallback={null}>
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
-        </Suspense>
-        <Suspense fallback={null}>
-          <Analytics />
-        </Suspense>
-        <Suspense fallback={null}>
-          <Toaster position="top-center" />
-        </Suspense>
-        <Suspense fallback={null}>
-          <Reload />
-        </Suspense>
-        <Suspense fallback={null}>
-          <Back />
-        </Suspense>
+        <ServerLocaleMessageProviderWrapper params={params}>
+          <Header params={params} />
+          <main>{children}</main>
+          <Footer params={params} />
+          <Suspense fallback={null}>
+            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
+          </Suspense>
+          <Suspense fallback={null}>
+            <Analytics />
+          </Suspense>
+          <Suspense fallback={null}>
+            <Toaster position="top-center" />
+          </Suspense>
+          <Suspense fallback={null}>
+            <Reload />
+          </Suspense>
+          <Suspense fallback={null}>
+            <Back />
+          </Suspense>
+        </ServerLocaleMessageProviderWrapper>
       </body>
     </html>
   );

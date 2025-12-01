@@ -54,6 +54,11 @@ class BattleAutoSaveJob < ApplicationJob
       battle_record = player.battles.new
       assign_battle_attributes(battle_record, player, item, battle_time)
       battle_record.save!
+
+      # Grant auto battle point if victory
+      if battle_record.result == "victory"
+        PointGrantService.new(player).grant_auto_battle(battle_record)
+      end
     end
   rescue ActiveRecord::RecordNotUnique
     Rails.logger.info("BattleAutoSaveJob: Record already exists for #{battle_id}, retrying find")

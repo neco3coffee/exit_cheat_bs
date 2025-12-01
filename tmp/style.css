@@ -1,0 +1,76 @@
+/* style.css */
+body {
+  font-family: sans-serif;
+  background-color: #0d47a1;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.container {
+  max-width: 650px;
+  margin: 0 auto;
+  background-color: #1565c0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.canvas-area {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  margin: 30px auto;
+  border: 5px solid gold;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+#rouletteCanvas {
+  display: block;
+  background-color: #000;
+}
+
+/* 矢印のスタイルを修正 */
+.pointer-arrow {
+  position: absolute;
+  bottom: -20px;
+  /* 下に配置 */
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  /* 逆さまにして下向きにする */
+  color: gold;
+  font-size: 3em;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+  z-index: 10;
+}
+
+/* スピンボタン */
+#spin-button {
+  padding: 10px 30px;
+  font-size: 1.5em;
+  background-color: gold;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+#spin-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.info-panel,
+.result-panel {
+  border: 1px solid #80cbc4;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.note {
+  font-size: 0.8em;
+  color: #bdbdbd;
+}

@@ -1,6 +1,6 @@
 import { Suspense, use } from "react";
+import Loading from "@/app/_components/Loading";
 import ClientLocaleMessageProvider from "@/app/_messages/ClientLocaleMessageProvider";
-import Loading from "@/app/[locale]/ranked/loading";
 import { loadMessages } from "./messages";
 
 export default function ServerLocaleMessageProviderWrapper({

@@ -108,7 +108,21 @@
     "loginSuccess": "Jste přihlášeni!",
     "autoReload": "Tato stránka se automaticky obnoví za 5 sekund.",
     "loginStatus": "Aktuálně přihlášen jako",
-    "logout": "Odhlásit se"
+    "logout": "Odhlásit se",
+    "totalPoints": "Celkem bodů: {points} pt"
+  },
+  "PointModal": {
+    "title": {
+      "daily_login": "Bonus za denní přihlášení",
+      "first_login": "Bonus za první přihlášení",
+      "first_report": "Bonus za první nahlášení",
+      "report_approved": "Bonus za schválené nahlášení",
+      "auto_battle": "Bonus za automatickou bitvu",
+      "campaign": "Bonus za kampaň",
+      "manual_adjustment": "Dárek od administrátora",
+      "default": "Získaný bonus"
+    },
+    "currentTotal": "Aktuální celkem: {points} pt"
   },
   "players": {
     "seasonHigh": "NEJVYŠŠÍ V SEZÓNĚ",

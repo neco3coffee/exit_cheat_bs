@@ -13,6 +13,12 @@ module Api
         )
 
         if report.save
+          # Grant first report bonus
+          player = Player.find_by(tag: params[:reporterTag])
+          if player
+            PointGrantService.new(player).grant_first_report(report)
+          end
+
           render json: { reportId: report.id }, status: :created
         else
           render json: { errors: report.errors.full_messages }, status: :unprocessable_entity
@@ -138,6 +144,12 @@ module Api
         # statusのみの更新をしたい
         if params[:status] == "approved" || params[:status] == "rejected"
           if report.update(status: params[:status])
+            if params[:status] == "approved"
+              player = Player.find_by(tag: report.reporter_tag)
+              if player
+                PointGrantService.new(player).grant_report_approved(report)
+              end
+            end
             render json: { message: "Report status updated" }, status: :ok
           else
             render json: { errors: report.errors.full_messages }, status: :unprocessable_entity
@@ -189,7 +201,12 @@ module Api
 
         case result
         when "griefer"
-          report.update!(status: :approved)
+          if report.update(status: :approved)
+            player = Player.find_by(tag: report.reporter_tag)
+            if player
+              PointGrantService.new(player).grant_report_approved(report)
+            end
+          end
         when "normal"
           report.update!(status: :rejected)
         else
