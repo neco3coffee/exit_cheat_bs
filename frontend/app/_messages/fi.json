@@ -108,7 +108,20 @@
     "loginSuccess": "Olet kirjautunut sisään!",
     "autoReload": "Sivu päivittyy automaattisesti 5 sekunnissa.",
     "loginStatus": "Kirjautuneena:",
-    "logout": "Kirjaudu ulos"
+    "logout": "Kirjaudu ulos",
+    "totalPoints": "Pisteet yhteensä: {points} pt"
+  },
+  "PointModal": {
+    "title": {
+      "daily_login": "Kirjautumisbonus",
+      "first_report": "Ensimmäisen ilmoituksen bonus",
+      "report_approved": "Hyväksytyn ilmoituksen bonus",
+      "auto_battle": "Automaattitaistelubonus",
+      "campaign": "Kampanjabonus",
+      "manual_adjustment": "Lahja ylläpidolta",
+      "default": "Ansaitut bonukset"
+    },
+    "currentTotal": "Yhteensä: {points} pt"
   },
   "players": {
     "seasonHigh": "KAUDEN ENNÄTYS",

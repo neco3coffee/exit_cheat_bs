@@ -1,4 +1,16 @@
 {
+  "PointModal": {
+    "title": {
+      "daily_login": "Bônus de Login Diário",
+      "first_report": "Bônus de Primeira Denúncia",
+      "report_approved": "Bônus de Denúncia Aprovada",
+      "auto_battle": "Bônus de Batalha Automática",
+      "campaign": "Bônus de Campanha",
+      "manual_adjustment": "Presente do Administrador",
+      "default": "Bônus Ganho"
+    },
+    "currentTotal": "Total Atual: {points} pt"
+  },
   "home": {
     "placeholder": "Nome do Jogador",
     "linkText": "Início",
@@ -108,7 +120,8 @@
     "loginSuccess": "Você está logado!",
     "autoReload": "Esta página será atualizada automaticamente em 5 segundos.",
     "loginStatus": "Atualmente logado como",
-    "logout": "Sair"
+    "logout": "Sair",
+    "totalPoints": "Total de Pontos: {points} pt"
   },
   "players": {
     "seasonHigh": "RECORDE DA TEMPORADA",

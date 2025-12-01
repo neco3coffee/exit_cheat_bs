@@ -179,7 +179,20 @@
     "loginSuccess": "ログインしました！",
     "autoReload": "このページは5秒後に自動的に更新されます。",
     "loginStatus": "現在のログインユーザー",
-    "logout": "ログアウト"
+    "logout": "ログアウト",
+    "totalPoints": "合計ポイント: {points} pt"
+  },
+  "PointModal": {
+    "title": {
+      "daily_login": "ログインボーナス",
+      "first_report": "初通報ボーナス",
+      "report_approved": "通報承認ボーナス",
+      "auto_battle": "自動対戦ボーナス",
+      "campaign": "キャンペーンボーナス",
+      "manual_adjustment": "運営からのプレゼント",
+      "default": "ボーナス獲得"
+    },
+    "currentTotal": "現在の総合: {points} pt"
   },
   "players": {
     "seasonHigh": "シーズン記録",

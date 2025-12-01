@@ -1,4 +1,16 @@
 {
+  "PointModal": {
+    "title": {
+      "daily_login": "Bonus za dnevnu prijavu",
+      "first_report": "Bonus za prvu prijavu",
+      "report_approved": "Bonus za odobrenu prijavu",
+      "auto_battle": "Bonus za automatsku bitku",
+      "campaign": "Bonus kampanje",
+      "manual_adjustment": "Poklon od administratora",
+      "default": "Zarađeni bonus"
+    },
+    "currentTotal": "Trenutno ukupno: {points} pt"
+  },
   "home": {
     "placeholder": "Ime igrača",
     "linkText": "Početna",
@@ -108,7 +120,8 @@
     "loginSuccess": "Uspješno ste prijavljeni!",
     "autoReload": "Stranica će se automatski osvježiti za 5 sekundi.",
     "loginStatus": "Trenutno ste prijavljeni kao",
-    "logout": "Odjava"
+    "logout": "Odjava",
+    "totalPoints": "Ukupno bodova: {points} pt"
   },
   "players": {
     "seasonHigh": "SEZONSKI MAKSIMUM",

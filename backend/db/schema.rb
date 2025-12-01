@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_26_025614) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_01_131941) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "pg_catalog.plpgsql"
@@ -83,11 +83,31 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_26_025614) do
     t.boolean "auto_save_enabled"
     t.datetime "auto_save_expires_at"
     t.datetime "last_active_at"
+    t.integer "total_points", default: 0, null: false
     t.index ["auto_save_enabled", "auto_save_expires_at"], name: "index_players_on_auto_save_enabled_and_auto_save_expires_at"
     t.index ["last_active_at"], name: "index_players_on_last_active_at"
     t.index ["name"], name: "index_players_on_name"
     t.index ["rank"], name: "index_players_on_rank"
     t.index ["tag"], name: "index_players_on_tag", unique: true
+    t.index ["total_points"], name: "index_players_on_total_points"
+  end
+
+  create_table "point_events", force: :cascade do |t|
+    t.bigint "player_id", null: false
+    t.integer "point", null: false
+    t.string "reason", null: false
+    t.date "granted_on", null: false
+    t.boolean "displayed", default: false, null: false
+    t.datetime "displayed_at"
+    t.string "related_type"
+    t.bigint "related_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["granted_on"], name: "index_point_events_on_granted_on"
+    t.index ["player_id", "displayed"], name: "index_point_events_on_player_id_and_displayed"
+    t.index ["player_id", "reason", "granted_on"], name: "idx_unique_player_daily_point_limited", unique: true, where: "((reason)::text = ANY ((ARRAY['daily_login'::character varying, 'first_report'::character varying])::text[]))"
+    t.index ["player_id"], name: "index_point_events_on_player_id"
+    t.index ["related_type", "related_id"], name: "index_point_events_on_related_type_and_related_id"
   end
 
   create_table "reports", force: :cascade do |t|
@@ -255,6 +275,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_26_025614) do
 
   add_foreign_key "battles", "players"
   add_foreign_key "player_name_histories", "players"
+  add_foreign_key "point_events", "players"
   add_foreign_key "sessions", "players"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

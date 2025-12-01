@@ -20,16 +20,15 @@ export default function BattleLogAutoSaveIconToggle({
   const [expireTime, setExpireTime] = useState<string | null | undefined>(
     expiresAt,
   );
-  const [player, setPlayer] = useState(null)
+  const [player, setPlayer] = useState(null);
 
   useEffect(() => {
     const fetchPlayer = async () => {
       const p = await getCurrentPlayer();
       setPlayer(p);
-    }
+    };
     fetchPlayer();
   }, []);
-
 
   const toggleEnabled = async (newEnabled: boolean) => {
     try {

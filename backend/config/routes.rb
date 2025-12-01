@@ -34,6 +34,15 @@ Rails.application.routes.draw do
       resources :reports, only: [ :create, :show, :update, :index ], param: :id
       post "update_video", to: "reports#update_video"
 
+      resources :points, only: [] do
+        collection do
+          get :undisplayed
+        end
+        member do
+          post :mark_displayed
+        end
+      end
+
       post "ranked/battle_logs/auto_save", to: "players#toggle_battle_log_auto_save"
 
 

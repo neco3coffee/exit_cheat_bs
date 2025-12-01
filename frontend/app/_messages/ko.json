@@ -1,4 +1,16 @@
 {
+  "PointModal": {
+    "title": {
+      "daily_login": "로그인 보너스",
+      "first_report": "첫 신고 보너스",
+      "report_approved": "신고 승인 보너스",
+      "auto_battle": "자동 전투 보너스",
+      "campaign": "캠페인 보너스",
+      "manual_adjustment": "관리자 선물",
+      "default": "획득한 보너스"
+    },
+    "currentTotal": "현재 합계: {points} pt"
+  },
   "home": {
     "placeholder": "플레이어 이름",
     "linkText": "홈",
@@ -108,7 +120,8 @@
     "loginSuccess": "로그인되었습니다!",
     "autoReload": "이 페이지는 5초 후 자동으로 새로고침됩니다.",
     "loginStatus": "현재 로그인된 계정:",
-    "logout": "로그아웃"
+    "logout": "로그아웃",
+    "totalPoints": "총 포인트: {points} pt"
   },
   "players": {
     "seasonHigh": "시즌 최고",

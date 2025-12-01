@@ -1,4 +1,16 @@
 {
+  "PointModal": {
+    "title": {
+      "daily_login": "每日登录奖励",
+      "first_report": "首次举报奖励",
+      "report_approved": "举报获批奖励",
+      "auto_battle": "自动战斗奖励",
+      "campaign": "活动奖励",
+      "manual_adjustment": "管理员赠礼",
+      "default": "获得奖励"
+    },
+    "currentTotal": "当前总计: {points} pt"
+  },
   "home": {
     "placeholder": "玩家名称",
     "linkText": "首页",
@@ -108,7 +120,8 @@
     "loginSuccess": "您已登录！",
     "autoReload": "此页面将在5秒后自动刷新。",
     "loginStatus": "当前登录为",
-    "logout": "登出"
+    "logout": "登出",
+    "totalPoints": "总积分: {points} pt"
   },
   "players": {
     "seasonHigh": "赛季最高",

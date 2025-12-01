@@ -1,50 +1,105 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import React, {
   forwardRef,
   useEffect,
   useImperativeHandle,
+  useRef,
   useState,
 } from "react";
 import ReactDOM from "react-dom";
 
-const LoginBonusModal = forwardRef(
+type PointModalProps = {
+  title?: string;
+  earnedPoints?: number;
+  totalPoints?: number;
+  duration?: number;
+};
+
+type OpenOptions = {
+  title: string;
+  point: number;
+  total: number;
+  duration?: number;
+};
+
+let openModalFn: ((options: OpenOptions) => Promise<void>) | null = null;
+
+const PointModalComponent = forwardRef(
   (
     {
       title = "LOGIN BONUS",
-      earnedPoints,
-      totalPoints,
+      earnedPoints = 0,
+      totalPoints = 0,
       duration = 3,
-    }: {
-      title?: string;
-      earnedPoints: number;
-      totalPoints: number;
-      duration?: number;
-    },
+    }: PointModalProps,
     ref,
   ) => {
+    const t = useTranslations("PointModal");
     const [isOpen, setIsOpen] = useState(false);
+    const [state, setState] = useState<OpenOptions>({
+      title,
+      point: earnedPoints,
+      total: totalPoints,
+      duration,
+    });
     const [displayPoints, setDisplayPoints] = useState(0);
     const [isClosing, setIsClosing] = useState(false);
+    const resolveRef = useRef<(() => void) | null>(null);
 
     // SSR対策: マウントされたかどうかのフラグ
     const [mounted, setMounted] = useState(false);
 
+    // biome-ignore-start lint/correctness/useExhaustiveDependencies: 必要な依存関係のみ
     // マウント時にフラグを立てる（これはクライアント側でのみ実行される）
     useEffect(() => {
       setMounted(true);
-      return () => setMounted(false);
+      openModalFn = open;
+      return () => {
+        setMounted(false);
+        openModalFn = null;
+      };
     }, []);
+    // biome-ignore-end lint/correctness/useExhaustiveDependencies: 必要な依存関係のみ
 
-    useImperativeHandle(ref, () => ({
-      open: () => {
+    // props変更をstateに反映（既存互換のため）
+    useEffect(() => {
+      setState((prev) => ({
+        ...prev,
+        title,
+        point: earnedPoints,
+        total: totalPoints,
+        duration,
+      }));
+    }, [title, earnedPoints, totalPoints, duration]);
+
+    const open = (options?: OpenOptions) => {
+      return new Promise<void>((resolve) => {
+        let targetState = state;
+        if (options) {
+          targetState = { ...state, ...options };
+          setState(targetState);
+        }
+
+        resolveRef.current = resolve;
         setIsOpen(true);
         setIsClosing(false);
         setDisplayPoints(0);
-        triggerAnimation();
+
+        const targetPoint = options ? options.point : state.point;
+        const targetDuration = options?.duration ?? state.duration ?? 3;
+
+        triggerAnimation(targetPoint);
 
         setTimeout(() => {
           handleClose();
-        }, duration * 1000);
-      },
+        }, targetDuration * 1000);
+      });
+    };
+
+    useImperativeHandle(ref, () => ({
+      open: () => open(),
     }));
 
     const handleClose = () => {
@@ -52,14 +107,21 @@ const LoginBonusModal = forwardRef(
       setTimeout(() => {
         setIsOpen(false);
         setIsClosing(false);
+        if (resolveRef.current) {
+          resolveRef.current();
+          resolveRef.current = null;
+        }
       }, 300);
     };
 
-    const triggerAnimation = () => {
+    const triggerAnimation = (end: number) => {
       let start = 0;
-      const end = earnedPoints;
       const durationMs = 1000;
       const incrementTime = 16;
+      if (end <= 0) {
+        setDisplayPoints(0);
+        return;
+      }
       const step = Math.ceil(end / (durationMs / incrementTime));
 
       const timer = setInterval(() => {
@@ -76,7 +138,7 @@ const LoginBonusModal = forwardRef(
     // 【重要】
     // 1. サーバー側(SSR)では mounted が false なので null を返す（何も描画しない）
     // 2. クライアント側でも、isOpen が false なら何も描画しない
-    if (!mounted || !isOpen) return null;
+    if (!mounted) return null;
 
     // ここに来る時点で「ブラウザである」かつ「documentが存在する」ことが保証される
     return ReactDOM.createPortal(
@@ -126,24 +188,44 @@ const LoginBonusModal = forwardRef(
         .lb-total { background: #f5f5f5; color: #666; padding: 6px 15px; border-radius: 100px; font-size: 0.85rem; margin-top: 10px; }
       `}</style>
 
-        <div className="lb-overlay">
-          <div className="lb-content">
-            <h2 className="lb-title">{title}</h2>
-            <div className="lb-points-wrap">
-              <span className="lb-points">
-                +{displayPoints.toLocaleString()}
-              </span>
-              <span className="lb-pt">pt</span>
-            </div>
-            <div className="lb-total">
-              現在の総合: {totalPoints.toLocaleString()} pt
+        {isOpen && (
+          <div className="lb-overlay">
+            <div className="lb-content">
+              <h2 className="lb-title">
+                {t.has(`title.${state.title}`)
+                  ? t(`title.${state.title}`)
+                  : t("title.default")}
+              </h2>
+              <div className="lb-points-wrap">
+                <span className="lb-points">
+                  +{displayPoints.toLocaleString()}
+                </span>
+                <span className="lb-pt">pt</span>
+              </div>
+              <div className="lb-total">
+                {t("currentTotal", { points: state.total.toLocaleString() })}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </>,
       document.body, // ここで安全に document.body にアクセスできる
     );
   },
 );
 
-export default LoginBonusModal;
+export default PointModalComponent;
+
+export const PointModal = {
+  open: (points: number, reason: string, total: number = 0) => {
+    if (openModalFn) {
+      return openModalFn({
+        title: reason,
+        point: points,
+        total: total,
+        duration: 3,
+      });
+    }
+    return Promise.resolve();
+  },
+};

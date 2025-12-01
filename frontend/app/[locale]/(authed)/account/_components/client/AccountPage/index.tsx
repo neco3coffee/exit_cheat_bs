@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
-import LoginBonusModal from "@/app/_components/PointModal";
 import { useCurrentPlayer } from "@/app/_providers/CurrentPlayerProvider";
 import {
   InputGroup,
@@ -50,6 +49,11 @@ function SuccessSection(props: {
         />
         {currentPlayer.trophies.toLocaleString()}
       </p>
+      <p className={styles.totalPoints}>
+        {t("totalPoints", {
+          points: (currentPlayer.total_points ?? 0).toLocaleString(),
+        })}
+      </p>
       <p className={styles.info}>{t("autoReload")}</p>
     </div>
   );
@@ -62,6 +66,7 @@ interface Player {
   club_name?: string;
   trophies: number;
   current_icon?: string;
+  total_points?: number;
 }
 
 interface LoginResponse {
@@ -76,6 +81,7 @@ interface VerifyResponse {
     tag: string;
     name: string;
     current_icon: string;
+    total_points?: number;
   };
   session_token?: string;
   message?: string;
@@ -140,6 +146,7 @@ export default function AccountPage() {
           name: data.player.name,
           trophies: currentPlayer?.trophies || 0,
           current_icon: data.player?.current_icon,
+          total_points: data.player?.total_points,
         });
         setStatus("success");
         // セッショントークンをローカルストレージに保存
@@ -276,13 +283,6 @@ export default function AccountPage() {
 
   return (
     <div className={styles.container}>
-      <LoginBonusModal
-        ref={modalRef}
-        title={"ログインボーナス獲得！"}
-        earnedPoints={1}
-        totalPoints={5000}
-        duration={3}
-      />
       {status === "loading" && (
         <div className={styles.loadingContainer}>
           <Spinner className="size-12 text-blue-500" />
@@ -312,6 +312,11 @@ export default function AccountPage() {
               className="inline-block mr-1"
             />
             {currentPlayer.trophies.toLocaleString()}
+          </p>
+          <p className={styles.totalPoints}>
+            {t("totalPoints", {
+              points: (currentPlayer.total_points ?? 0).toLocaleString(),
+            })}
           </p>
 
           <button type="button" onClick={handleLogout}>

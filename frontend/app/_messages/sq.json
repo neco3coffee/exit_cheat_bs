@@ -1,4 +1,16 @@
 {
+  "PointModal": {
+    "title": {
+      "daily_login": "Bonus për hyrjen ditore",
+      "first_report": "Bonus për raportimin e parë",
+      "report_approved": "Bonus për raportimin e aprovuar",
+      "auto_battle": "Bonus për betejën automatike",
+      "campaign": "Bonus fushate",
+      "manual_adjustment": "Dhuratë nga Administratori",
+      "default": "Bonus i fituar"
+    },
+    "currentTotal": "Totali aktual: {points} pt"
+  },
   "home": {
     "placeholder": "Emri i lojtarit",
     "linkText": "Ballina",
@@ -108,7 +120,8 @@
     "loginSuccess": "Jeni kyçur me sukses!",
     "autoReload": "Kjo faqe do të rifreskohet automatikisht pas 5 sekondash.",
     "loginStatus": "Aktualisht i kyçur si",
-    "logout": "Dil"
+    "logout": "Dil",
+    "totalPoints": "Totali i Pikëve: {points} pt"
   },
   "players": {
     "seasonHigh": "REKORDI I SEZONIT",

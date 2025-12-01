@@ -7,6 +7,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { Suspense } from "react";
 import Back from "@/app/_components/Back";
 import Reload from "@/app/_components/Reload";
+import ServerLocaleMessageProviderWrapper from "@/app/_messages/ServerLocaleMessageProviderWrapper";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "../analytics";
 
@@ -135,24 +136,26 @@ export default async function RootLayout({
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Header params={params} />
-        <main>{children}</main>
-        <Footer params={params} />
-        <Suspense fallback={null}>
-          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
-        </Suspense>
-        <Suspense fallback={null}>
-          <Analytics />
-        </Suspense>
-        <Suspense fallback={null}>
-          <Toaster position="top-center" />
-        </Suspense>
-        <Suspense fallback={null}>
-          <Reload />
-        </Suspense>
-        <Suspense fallback={null}>
-          <Back />
-        </Suspense>
+        <ServerLocaleMessageProviderWrapper params={params}>
+          <Header params={params} />
+          <main>{children}</main>
+          <Footer params={params} />
+          <Suspense fallback={null}>
+            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
+          </Suspense>
+          <Suspense fallback={null}>
+            <Analytics />
+          </Suspense>
+          <Suspense fallback={null}>
+            <Toaster position="top-center" />
+          </Suspense>
+          <Suspense fallback={null}>
+            <Reload />
+          </Suspense>
+          <Suspense fallback={null}>
+            <Back />
+          </Suspense>
+        </ServerLocaleMessageProviderWrapper>
       </body>
     </html>
   );

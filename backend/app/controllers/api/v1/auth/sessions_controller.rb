@@ -124,6 +124,9 @@ module Api
               cookies[:session_token] = { value: session_token, httponly: true, expires: 30.days.from_now }
             end
 
+            # Grant daily login point
+            PointGrantService.new(player).grant_daily_login
+
             response.headers["Cache-Control"] = "no-store"
             render json: {
               status: "success",
@@ -132,7 +135,8 @@ module Api
                 tag: player.tag,
                 name: player.name,
                 trophies: player.trophies,
-                current_icon: player.icon_id&.to_s
+                current_icon: player.icon_id&.to_s,
+                total_points: player.total_points
               },
               session_token: session_token
             }
@@ -166,6 +170,9 @@ module Api
 
           player = session.player
 
+          # Grant daily login point
+          PointGrantService.new(player).grant_daily_login
+
           response.headers["Cache-Control"] = "no-store"
           render json: {
             player: {
@@ -178,7 +185,8 @@ module Api
               rank: player.rank,
               role: player.role,
               auto_save_enabled: player.auto_save_enabled,
-              auto_save_expires_at: player.auto_save_expires_at
+              auto_save_expires_at: player.auto_save_expires_at,
+              total_points: player.total_points
             }
           }
         end
