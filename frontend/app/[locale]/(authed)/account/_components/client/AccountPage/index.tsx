@@ -106,16 +106,19 @@ export default function AccountPage() {
   const t = useTranslations("account");
 
   const modalRef = useRef<{ open: () => void }>(null);
+  // ステータス管理用のRefを追加（非同期ループ内での参照用）
+  const statusRef = useRef<Status>("loading");
 
   // アイコン変更確認・認証
   const handleVerify = async () => {
     if (!requestedIcon) return;
 
     setStatus("verifying");
+    statusRef.current = "verifying"; // 即座にRefも更新
     setCountdown(90);
     setErrorMessage("");
 
-    // カウントダウンタイマー（15秒間隔）
+    // カウントダウンタイマー（表示用）
     const timer = setInterval(() => {
       setCountdown((prev) => {
         if (prev <= 1) {
@@ -126,34 +129,65 @@ export default function AccountPage() {
       });
     }, 1000);
 
+    const startTime = Date.now();
+    const TIMEOUT_MS = 90 * 1000; // 90秒
+
     try {
-      const res = await fetch("/api/v1/auth/verify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          tag: tag.trim(),
-          requested_icon: requestedIcon,
-        }),
-        cache: "no-store",
-      });
+      // ポーリングループ: 成功するかタイムアウトまで繰り返す
+      while (Date.now() - startTime < TIMEOUT_MS) {
+        // ユーザーがキャンセルした場合（ステータスが変わった場合）は中断
+        if (statusRef.current !== "verifying") {
+          clearInterval(timer);
+          return;
+        }
 
-      const data: VerifyResponse = await res.json();
+        try {
+          const res = await fetch("/api/v1/auth/verify", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              tag: tag.trim(),
+              requested_icon: requestedIcon,
+            }),
+            cache: "no-store",
+          });
+
+          // 成功時のみ処理を進める
+          if (res.ok) {
+            const data: VerifyResponse = await res.json();
+
+            if (
+              data.status === "success" &&
+              data.player &&
+              data.session_token
+            ) {
+              clearInterval(timer);
+              setCurrentPlayer({
+                id: data.player.id,
+                tag: data.player.tag,
+                name: data.player.name,
+                trophies: data?.player?.trophies || 0,
+                current_icon: data.player?.current_icon,
+                total_points: data.player?.total_points,
+              });
+              setStatus("success");
+              return; // 成功したら終了
+            }
+          }
+        } catch (e) {
+          // ネットワークエラー等は無視してリトライ
+          console.warn("Verify attempt failed, retrying...", e);
+        }
+
+        // 失敗した場合は3秒待機してリトライ
+        await new Promise((resolve) => setTimeout(resolve, 15000));
+      }
+
+      // タイムアウトした場合
       clearInterval(timer);
-
-      if (data.status === "success" && data.player && data.session_token) {
-        setCurrentPlayer({
-          id: data.player.id,
-          tag: data.player.tag,
-          name: data.player.name,
-          trophies: data?.player?.trophies || 0,
-          current_icon: data.player?.current_icon,
-          total_points: data.player?.total_points,
-        });
-        setStatus("success");
-        // セッショントークンをローカルストレージに保存
-      } else {
+      if (statusRef.current === "verifying") {
         setStatus("error");
-        setErrorMessage(data.message || "認証に失敗しました");
+        setErrorMessage("時間内にアイコンの変更を確認できませんでした。");
       }
     } catch (error) {
       clearInterval(timer);
@@ -168,6 +202,11 @@ export default function AccountPage() {
   const tagInputRef = useRef<HTMLInputElement>(null);
   const [requestedIcon, setRequestedIcon] = useState<string | null>(null);
   const [status, setStatus] = useState<Status>("loading");
+
+  // statusが変更されたらrefも更新する
+  useEffect(() => {
+    statusRef.current = status;
+  }, [status]);
   const [errorMessage, setErrorMessage] = useState("");
   const [countdown, setCountdown] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
