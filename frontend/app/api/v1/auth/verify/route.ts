@@ -27,6 +27,7 @@ export async function POST(request: NextRequest) {
         name: "session_token",
         value: data.session_token,
         httpOnly: true,
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
         secure: process.env.NODE_ENV === "production",
         maxAge: 60 * 60 * 24 * 30, // 30日
         path: "/",

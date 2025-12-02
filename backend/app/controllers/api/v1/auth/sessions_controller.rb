@@ -94,13 +94,14 @@ module Api
                 expires_at: 30.days.from_now
               )
 
-              if Rails.env.production?
-                cookies[:session_token] = { value: session_token, httponly: true, secure: true, expires: 30.days.from_now }
-              end
-
-              if Rails.env.development?
-                cookies[:session_token] = { value: session_token, httponly: true, expires: 30.days.from_now }
-              end
+              cookies[:session_token] = {
+                value: session_token,
+                httponly: true,
+                secure: Rails.env.production?,
+                same_site: Rails.env.production? ? :none : :lax,
+                path: "/",
+                expires: 30.days.from_now
+              }
 
               # Grant daily login point
               PointGrantService.new(player).grant_daily_login
