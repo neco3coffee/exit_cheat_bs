@@ -58,94 +58,78 @@ module Api
           tag = params[:tag]
           requested_icon = params[:requested_icon].to_s
 
-          success = false
-          max_attempts = 6  # 90秒間 (15秒 × 6回)
-
-          max_attempts.times do |attempt|
-            begin
-              fetcher = PlayerFetcher.new
-              player_data = fetcher.fetch_player(tag)
-
-              if player_data.nil?
-                Rails.logger.error("Verification API error on attempt #{attempt + 1}: Player not found")
-                next
-              end
-
-              current_icon = player_data["icon"]["id"].to_s
-
-              Rails.logger.info("Verification attempt #{attempt + 1}: current_icon=#{current_icon}, requested_icon=#{requested_icon}")
-
-              if current_icon == requested_icon
-                success = true
-                break
-              end
-            rescue => e
-              Rails.logger.error("Verification API error on attempt #{attempt + 1}: #{e.message}")
-            end
-
-            # 最後の試行でない場合のみ15秒待機
-            sleep 15 if attempt < max_attempts - 1
-          end
-
-          if success
-            # verify成功時にAPIから最新情報を取得しDB保存・更新
+          begin
             fetcher = PlayerFetcher.new
             player_data = fetcher.fetch_player(tag)
+
             if player_data.nil?
+              Rails.logger.error("Verification API error: Player not found")
               response.headers["Cache-Control"] = "no-store"
               render json: {
                 status: "error",
-                message: "Unable to retrieve player information."
-              }, status: :internal_server_error
+                message: "Player not found"
+              }, status: :not_found
               return
             end
-            normalized_tag = normalize_tag(player_data["tag"])
-            player = Player.find_or_initialize_by(tag: normalized_tag)
-            player.name = player_data["name"]
-            player.icon_id = player_data.dig("icon", "id")
-            player.club_name = player_data.dig("club", "name")
-            player.trophies = player_data["trophies"] || 0
-            player.save!
 
-            # 既存のセッションを削除
-            player.sessions.delete_all
-            # 新しいセッションを作成
-            session_token = SecureRandom.hex(32)
-            player.sessions.create!(
-              session_token: session_token,
-              expires_at: 30.days.from_now
-            )
+            current_icon = player_data["icon"]["id"].to_s
+            Rails.logger.info("Verification attempt: current_icon=#{current_icon}, requested_icon=#{requested_icon}")
 
-            if Rails.env.production?
-              cookies[:session_token] = { value: session_token, httponly: true, secure: true, expires: 30.days.from_now }
+            if current_icon == requested_icon
+              # verify成功時にAPIから最新情報を取得しDB保存・更新
+              normalized_tag = normalize_tag(player_data["tag"])
+              player = Player.find_or_initialize_by(tag: normalized_tag)
+              player.name = player_data["name"]
+              player.icon_id = player_data.dig("icon", "id")
+              player.club_name = player_data.dig("club", "name")
+              player.trophies = player_data["trophies"] || 0
+              player.save!
+
+              # 既存のセッションを削除
+              player.sessions.delete_all
+              # 新しいセッションを作成
+              session_token = SecureRandom.hex(32)
+              player.sessions.create!(
+                session_token: session_token,
+                expires_at: 30.days.from_now
+              )
+
+              if Rails.env.production?
+                cookies[:session_token] = { value: session_token, httponly: true, secure: true, expires: 30.days.from_now }
+              end
+
+              if Rails.env.development?
+                cookies[:session_token] = { value: session_token, httponly: true, expires: 30.days.from_now }
+              end
+
+              # Grant daily login point
+              PointGrantService.new(player).grant_daily_login
+
+              response.headers["Cache-Control"] = "no-store"
+              render json: {
+                status: "success",
+                player: {
+                  id: player.id,
+                  tag: player.tag,
+                  name: player.name,
+                  trophies: player.trophies,
+                  current_icon: player.icon_id&.to_s,
+                  total_points: player.total_points
+                },
+                session_token: session_token
+              }
+            else
+              # まだアイコンが変わっていない場合
+              response.headers["Cache-Control"] = "no-store"
+              render json: {
+                status: "error",
+                message: "Icon not changed yet"
+              }, status: :unauthorized
             end
-
-            if Rails.env.development?
-              cookies[:session_token] = { value: session_token, httponly: true, expires: 30.days.from_now }
-            end
-
-            # Grant daily login point
-            PointGrantService.new(player).grant_daily_login
-
+          rescue => e
+            Rails.logger.error("Verification API error: #{e.message}")
             response.headers["Cache-Control"] = "no-store"
-            render json: {
-              status: "success",
-              player: {
-                id: player.id,
-                tag: player.tag,
-                name: player.name,
-                trophies: player.trophies,
-                current_icon: player.icon_id&.to_s,
-                total_points: player.total_points
-              },
-              session_token: session_token
-            }
-          else
-            response.headers["Cache-Control"] = "no-store"
-            render json: {
-              status: "error",
-              message: "We couldn’t confirm your icon change. Please try again."
-            }, status: :unauthorized
+            render json: { status: "error", message: e.message }, status: :internal_server_error
           end
         end
 
