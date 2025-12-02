@@ -15,18 +15,25 @@ export async function POST(request: NextRequest) {
     });
 
     const data = await response.json();
-    const sessionToken = response.headers.get("Set-Cookie");
 
     if (!response.ok) {
       return NextResponse.json(data, { status: response.status });
     }
 
-    if (sessionToken) {
-      // クッキーをNextResponseに設定
-      const nextResponse = NextResponse.json(data);
-      nextResponse.headers.append("Set-Cookie", sessionToken);
-      return nextResponse;
+    const nextResponse = NextResponse.json(data);
+
+    if (data.session_token) {
+      nextResponse.cookies.set({
+        name: "session_token",
+        value: data.session_token,
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 60 * 60 * 24 * 30, // 30日
+        path: "/",
+      });
     }
+
+    return nextResponse;
   } catch (error) {
     console.error("Verify proxy error:", error);
     return NextResponse.json(
