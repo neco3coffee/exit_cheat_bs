@@ -5,7 +5,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
       <head>
-        <Script
+        {/* <Script
           strategy="beforeInteractive"
           src="https://cmp.gatekeeperconsent.com/min.js"
           data-cfasync="false"
@@ -22,7 +22,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <Script strategy="beforeInteractive">
           window.ezstandalone = window.ezstandalone || {}; ezstandalone.cmd =
           ezstandalone.cmd || [];
-        </Script>
+        </Script> */}
+        {process.env.NODE_ENV === "production" && process.env.CI !== "true" && (
+          <Script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3651729056445822"
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        )}
         <link
           rel="manifest"
           href="/manifest.webmanifest"
