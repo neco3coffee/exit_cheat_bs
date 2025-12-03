@@ -133,7 +133,7 @@ async function PlayerPage({
 
   const playerDetail = await getPlayerDetails(tag);
   const battleLogs = await getPlayerBattleLog(tag);
-  const formattedBattleLogs = formatBattleLog(battleLogs.items || []);
+  const formattedBattleLogs = formatBattleLog(battleLogs?.items || []);
 
   const t = await getTranslations({ locale, namespace: "players" });
   const notInClubText = t("notInClub");
