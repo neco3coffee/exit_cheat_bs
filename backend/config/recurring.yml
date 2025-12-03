@@ -14,9 +14,9 @@ production:
     command: "SolidQueue::Job.clear_finished_in_batches(sleep_between_batches: 0.3)"
     schedule: every hour at minute 12
 
-  update_player_names:
-    class: UpdatePlayerNamesJob
-    schedule: at 9am every day in Asia/Tokyo
+  # update_player_names:
+  #   class: UpdatePlayerNamesJob
+  #   schedule: at 9am every day in Asia/Tokyo
 
 development:
   update_player_names:
