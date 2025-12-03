@@ -32,29 +32,13 @@ const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3000";
 const isProduction = process.env.NEXT_PUBLIC_NODE_ENV === "production";
 const isCi = (process.env.NEXT_PUBLIC_CI ?? "false") === "true";
 
-const examplePlayerTags = ["Y2YPGCGC" /* neco3 */];
+const examplePlayerTags = ["Y2YPGCGC", "C2RPQLRQ", "2J9P2QUVU8", "2UC0PURR8", "28JR82UGPR", "82PQUPGU0", "2PJJQLR8L", "82YGQY2GL", "9QPJ8GLLQ", "9QLGPQPV9","8LJJ0890C" ];
 
-// export async function generateStaticParams(): Promise<{ tag: string }[]> {
-//   const seasonRankings = await getSeasonRankings();
-
-//   // ✅ seasonRankings がある場合
-//   if (seasonRankings && seasonRankings.length > 0) {
-//     return seasonRankings.map((player) => {
-//       const tag = player.tag.startsWith("#")
-//         ? player.tag.substring(1)
-//         : player.tag;
-
-//       return {
-//         tag: tag,
-//       };
-//     });
-//   }
-
-//   // ✅ フォールバック（必ず配列を返す）
-//   return examplePlayerTags.map((tag) => ({
-//     tag: tag,
-//   }));
-// }
+export async function generateStaticParams(): Promise<{ tag: string }[]> {
+  return examplePlayerTags.map((tag) => ({
+    tag: tag,
+  }));
+}
 
 type Player = {
   tag: string;
@@ -91,6 +75,10 @@ async function getPlayerDetails(tag: string) {
   cacheLife("minutes");
   cacheTag(`player-${tag}`);
 
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    return null;
+  }
+
   try {
     const res = await fetch(
       `${apiUrl}/api/v1/players/${encodeURIComponent(tag)}`,
@@ -106,6 +94,10 @@ async function getPlayerBattleLog(tag: string) {
   "use cache";
   cacheLife("seconds");
   cacheTag(`player-battlelog-${tag}`);
+
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    return null;
+  }
 
   try {
     const res = await fetch(

@@ -7,19 +7,22 @@ import { getMaps } from "../../(home)/page";
 
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3000";
 
-// export async function generateStaticParams(): Promise<{ id: string }[]> {
-//   const result = await getMaps();
-//   const maps = result?.maps ?? [];
+const exampleMaps = [15000292, 15000050, 15000548, 15000025, 15000118, 15000300, 15000022, 15000053, 15000368, 15000005, 15000007, 15000293, 15000011, 15000072, 15001023, 15000082, 15000350, 15000019, 15000440, 15000010, 15000018, 15000703, 15000289, 15000306, 15000132, 15000115]
 
-//   return maps.map((mapId) => ({
-//     id: mapId.toString(),
-//   }));
-// }
+export async function generateStaticParams(): Promise<{ id: string }[]> {
+  return exampleMaps.map((id) => ({
+    id: id.toString(),
+  }));
+}
 
 
 export async function getBrawlerPickRateByMap(mapId: number) {
   "use cache";
   cacheLife("minutes");
+
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    return null;
+  }
 
   const res = await fetch(`${apiUrl}/api/v1/maps/${mapId}/brawler_pick_rate`, {
     method: "GET",
