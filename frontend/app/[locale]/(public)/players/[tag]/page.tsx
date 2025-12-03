@@ -34,25 +34,27 @@ const isCi = (process.env.NEXT_PUBLIC_CI ?? "false") === "true";
 
 const examplePlayerTags = ["Y2YPGCGC" /* neco3 */];
 
-export async function generateStaticParams() {
-  const seasonRankings = await getSeasonRankings(); // Google AdSense審査前に有用コンテンツを増やすため追加
+// export async function generateStaticParams(): Promise<{ tag: string }[]> {
+//   const seasonRankings = await getSeasonRankings();
 
-  if (seasonRankings.length > 0) {
-    seasonRankings.map((player) => {
-      const tag = player.tag.startsWith("#")
-        ? player.tag.substring(1)
-        : player.tag;
+//   // ✅ seasonRankings がある場合
+//   if (seasonRankings && seasonRankings.length > 0) {
+//     return seasonRankings.map((player) => {
+//       const tag = player.tag.startsWith("#")
+//         ? player.tag.substring(1)
+//         : player.tag;
 
-      return {
-        tag: tag,
-      };
-    })
-  } else {
-    return examplePlayerTags.map((tag) => ({
-      tag: tag,
-    }));
-  }
-}
+//       return {
+//         tag: tag,
+//       };
+//     });
+//   }
+
+//   // ✅ フォールバック（必ず配列を返す）
+//   return examplePlayerTags.map((tag) => ({
+//     tag: tag,
+//   }));
+// }
 
 type Player = {
   tag: string;
