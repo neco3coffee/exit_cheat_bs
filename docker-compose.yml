@@ -116,6 +116,7 @@ services:
       - safebrawl_net
   db:
     image: postgres:16
+    shm_size: 1g
     ports:
       - "5432:5432"
     volumes:
