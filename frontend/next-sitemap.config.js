@@ -1,37 +1,20 @@
 /** @type {import('next-sitemap').IConfig} */
 
-// Default site URL if environment variable is not set
 const DEFAULT_SITE_URL = "https://safebrawl.com";
+const siteUrl = (process.env.SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, "");
 
 module.exports = {
-  siteUrl: process.env.SITE_URL || DEFAULT_SITE_URL,
+  siteUrl,
   generateRobotsTxt: true,
   generateIndexSitemap: false,
-  // Exclude API routes and special Next.js paths
-  exclude: [
-    "/api/*",
-    "/_next/*",
-    "/[locale]/api/*",
-    "/ja_ogp.png",
-    "/en_ogp.png",
-  ],
-  robotsTxtOptions: {
-    policies: [
-      {
-        userAgent: "*",
-        allow: "/",
-      },
-    ],
+
+  // ✅ transformは使わない（＝二重生成バグを物理的に殺す）
+  transform: async (config, path) => {
+    return {
+      loc: path,
+      lastmod: new Date().toISOString(),
+      changefreq: "daily",
+      priority: 0.7,
+    };
   },
-  // Add alternate language support for i18n
-  alternateRefs: [
-    {
-      href: process.env.SITE_URL || DEFAULT_SITE_URL,
-      hreflang: "en",
-    },
-    {
-      href: `${process.env.SITE_URL || DEFAULT_SITE_URL}/ja`,
-      hreflang: "ja",
-    },
-  ],
 };
