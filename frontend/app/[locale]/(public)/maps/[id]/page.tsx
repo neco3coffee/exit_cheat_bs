@@ -3,8 +3,15 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import styles from "./page.module.scss";
+import { getMaps } from "../../(home)/page";
 
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3000";
+
+export async function generateStaticParams() {
+  const { maps } = await getMaps(); // Google AdSense審査前に有用コンテンツを増やすため追加
+
+  return maps.map((mapId) => ({ id: mapId.toString() }) );
+}
 
 export async function getBrawlerPickRateByMap(mapId: number) {
   "use cache";

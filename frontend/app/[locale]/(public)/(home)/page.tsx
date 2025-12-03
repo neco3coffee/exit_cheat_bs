@@ -12,7 +12,7 @@ import styles from "./page.module.scss";
 
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3000";
 
-async function getMaps() {
+export async function getMaps() {
   "use cache";
   cacheLife("minutes");
 
@@ -56,7 +56,7 @@ interface SeasonRanking {
   winRate: number;
 }
 
-async function getSeasonRankings() {
+export async function getSeasonRankings() {
   "use cache";
   cacheLife("minutes");
 

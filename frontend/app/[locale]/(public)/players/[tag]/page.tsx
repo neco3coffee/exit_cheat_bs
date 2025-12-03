@@ -26,6 +26,7 @@ import Brawlers from "./_components/Brawlers";
 import LocalStorage from "./_components/LocalStorage";
 import PlayerName from "./_components/PlayerName";
 import styles from "./page.module.scss";
+import { getSeasonRankings } from "../../(home)/page";
 
 const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3000";
 const isProduction = process.env.NEXT_PUBLIC_NODE_ENV === "production";
@@ -34,9 +35,23 @@ const isCi = (process.env.NEXT_PUBLIC_CI ?? "false") === "true";
 const examplePlayerTags = ["Y2YPGCGC" /* neco3 */];
 
 export async function generateStaticParams() {
-  return examplePlayerTags.map((tag) => ({
-    tag: tag,
-  }));
+  const seasonRankings = await getSeasonRankings(); // Google AdSense審査前に有用コンテンツを増やすため追加
+
+  if (seasonRankings.length > 0) {
+    seasonRankings.map((player) => {
+      const tag = player.tag.startsWith("#")
+        ? player.tag.substring(1)
+        : player.tag;
+
+      return {
+        tag: tag,
+      };
+    })
+  } else {
+    return examplePlayerTags.map((tag) => ({
+      tag: tag,
+    }));
+  }
 }
 
 type Player = {
