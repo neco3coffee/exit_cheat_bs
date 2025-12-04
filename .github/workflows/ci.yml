@@ -38,6 +38,8 @@ jobs:
 
       - name: Next.js build
         run: npm run build
+        env:
+          SKIP_BUILD_FETCH: 'true'
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
