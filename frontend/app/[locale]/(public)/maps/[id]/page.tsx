@@ -20,8 +20,8 @@ export async function getBrawlerPickRateByMap(mapId: number) {
   "use cache";
   cacheLife("minutes");
 
-  if (process.env.NEXT_PHASE === "phase-production-build") {
-    return null;
+  if (process.env.SKIP_BUILD_FETCH === "true") {
+    return { map_id: null, brawler_pick_rates: [] };
   }
 
   const res = await fetch(`${apiUrl}/api/v1/maps/${mapId}/brawler_pick_rate`, {

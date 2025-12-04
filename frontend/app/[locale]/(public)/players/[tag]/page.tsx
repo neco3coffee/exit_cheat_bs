@@ -75,8 +75,24 @@ async function getPlayerDetails(tag: string) {
   cacheLife("minutes");
   cacheTag(`player-${tag}`);
 
-  if (process.env.NEXT_PHASE === "phase-production-build") {
-    return null;
+  if (process.env.SKIP_BUILD_FETCH === "true") {
+    return {
+      tag: "",
+      name: "",
+      nameColor: "",
+      iconId: 0,
+      currentRank: 0,
+      trophies: 0,
+      highestTrophies: 0,
+      vs3Victories: 0,
+      soloVictories: 0,
+      club: {
+        tag: "",
+        name: "",
+        badgeId: 0,
+      },
+      brawlers: [],
+    }
   }
 
   try {
@@ -95,8 +111,8 @@ async function getPlayerBattleLog(tag: string) {
   cacheLife("seconds");
   cacheTag(`player-battlelog-${tag}`);
 
-  if (process.env.NEXT_PHASE === "phase-production-build") {
-    return null;
+  if (process.env.SKIP_BUILD_FETCH === "true") {
+    return { items: [] };
   }
 
   try {

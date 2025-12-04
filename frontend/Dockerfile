@@ -22,6 +22,8 @@ RUN npm ci --force
 # ビルドステップ
 FROM base AS builder
 WORKDIR /app
+ARG SKIP_BUILD_FETCH=true
+ENV SKIP_BUILD_FETCH=$SKIP_BUILD_FETCH
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
