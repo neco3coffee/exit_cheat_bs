@@ -71,6 +71,7 @@ type Player = {
 };
 
 async function getPlayerDetails(tag: string) {
+  // これはユーザー間で共有してみられるようなpublicなデータなので一旦キャッシュ(heap memoryにどれぐらい残るかとでーたサイズ要注意)
   "use cache";
   cacheLife("minutes");
   cacheTag(`player-${tag}`);
@@ -107,6 +108,7 @@ async function getPlayerDetails(tag: string) {
 }
 
 async function getPlayerBattleLog(tag: string) {
+  // これもデータのサイズと頻度次第ではキャッシュ危険かも、でもminutesにすると結構古いデータをユーザーが見ることになるのでちょうどいい設定をつくるひつようがあるかも
   "use cache";
   cacheLife("seconds");
   cacheTag(`player-battlelog-${tag}`);

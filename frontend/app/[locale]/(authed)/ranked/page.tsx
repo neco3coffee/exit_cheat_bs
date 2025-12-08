@@ -18,8 +18,7 @@ import styles from "./page.module.scss";
 const apiUrl = "http://app:3000";
 
 async function getBattleLogs(playerTag: string) {
-  "use cache";
-  cacheLife("seconds");
+  // TODO: ECSを見越して, REDIS(インスタンス間キャッシュ)の利用を検討
 
   const res = await fetch(
     `${apiUrl}/api/v1/players/${encodeURIComponent(playerTag)}/ranked`,
@@ -40,9 +39,7 @@ async function getBattleLogs(playerTag: string) {
 }
 
 async function getReports(playerTag: string, sessionToken: string) {
-  "use cache";
-  cacheLife("minutes");
-  cacheTag(`reports-${playerTag}`);
+  // TODO: ECSを見越して, REDIS(インスタンス間キャッシュ)の利用を検討
 
   const res = await fetch(
     `${apiUrl}/api/v1/players/${encodeURIComponent(playerTag)}/reports`,
@@ -62,6 +59,7 @@ async function getReports(playerTag: string, sessionToken: string) {
 }
 
 async function getRecentReport() {
+  // これは軽いしユーザー間で共有の軽いデータなのでメモリーにキャッシュしていい
   "use cache";
   cacheLife("minutes");
 
@@ -82,9 +80,7 @@ async function getRecentReport() {
 }
 
 async function getReportedPlayers(playerTag: string, sessionToken: string) {
-  "use cache";
-  cacheLife("minutes");
-  cacheTag(`reportedPlayers-${playerTag}`);
+  // TODO: ECSを見越して, REDIS(インスタンス間キャッシュ)の利用を検討
 
   const res = await fetch(
     `${apiUrl}/api/v1/players/${encodeURIComponent(
@@ -175,6 +171,7 @@ export async function RecentVideoComponent({
   locale: string;
   recentReport: any;
 }) {
+  // こいつはユーザー間で共有なはず
   "use cache";
   cacheLife("minutes");
 
@@ -244,9 +241,6 @@ async function ReportedPlayersTabContent({
   locale: string;
   reportedPlayers: ReportedPlayer[] | [];
 }) {
-  "use cache";
-  cacheLife("minutes");
-
   const t = await getTranslations({ locale, namespace: "ranked" });
 
   return (
@@ -271,8 +265,7 @@ async function BattleLogsTabContent({
   battleLogs: any[];
   reports: any[];
 }) {
-  "use cache";
-  cacheLife("seconds");
+  // これキャッシュして Nodeプロセスのheapメモリに残り続けてOOMしたのでキャッシュ無効化
   const t = await getTranslations({ locale, namespace: "ranked" });
 
   const tag = player?.tag?.startsWith("#")
@@ -326,8 +319,7 @@ async function ReportsTabContent({
   locale: string;
   reports: any[];
 }) {
-  "use cache";
-  cacheLife("minutes");
+  // ユーザー固有のデータをheapメモリにキャッシュすると死ぬのでキャッシュ無効化
 
   const t = await getTranslations({ locale, namespace: "ranked" });
 
