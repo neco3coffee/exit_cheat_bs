@@ -34,11 +34,11 @@ const isCi = (process.env.NEXT_PUBLIC_CI ?? "false") === "true";
 
 const examplePlayerTags = ["Y2YPGCGC", "C2RPQLRQ", "2J9P2QUVU8", "2UC0PURR8", "28JR82UGPR", "82PQUPGU0", "2PJJQLR8L", "82YGQY2GL", "9QPJ8GLLQ", "9QLGPQPV9","8LJJ0890C" ];
 
-export async function generateStaticParams(): Promise<{ tag: string }[]> {
-  return examplePlayerTags.map((tag) => ({
-    tag: tag,
-  }));
-}
+// export async function generateStaticParams(): Promise<{ tag: string }[]> {
+//   return examplePlayerTags.map((tag) => ({
+//     tag: tag,
+//   }));
+// }
 
 type Player = {
   tag: string;
@@ -71,11 +71,6 @@ type Player = {
 };
 
 async function getPlayerDetails(tag: string) {
-  // これはユーザー間で共有してみられるようなpublicなデータなので一旦キャッシュ(heap memoryにどれぐらい残るかとでーたサイズ要注意)
-  "use cache";
-  cacheLife("minutes");
-  cacheTag(`player-${tag}`);
-
   if (process.env.SKIP_BUILD_FETCH === "true") {
     return {
       tag: "",
@@ -99,6 +94,9 @@ async function getPlayerDetails(tag: string) {
   try {
     const res = await fetch(
       `${apiUrl}/api/v1/players/${encodeURIComponent(tag)}`,
+      {
+        next: { revalidate: 30 },
+      }
     );
     const player: Player = await res.json();
     return player;
@@ -108,11 +106,6 @@ async function getPlayerDetails(tag: string) {
 }
 
 async function getPlayerBattleLog(tag: string) {
-  // これもデータのサイズと頻度次第ではキャッシュ危険かも、でもminutesにすると結構古いデータをユーザーが見ることになるのでちょうどいい設定をつくるひつようがあるかも
-  "use cache";
-  cacheLife("seconds");
-  cacheTag(`player-battlelog-${tag}`);
-
   if (process.env.SKIP_BUILD_FETCH === "true") {
     return { items: [] };
   }
@@ -120,6 +113,9 @@ async function getPlayerBattleLog(tag: string) {
   try {
     const res = await fetch(
       `${apiUrl}/api/v1/players/${encodeURIComponent(tag)}/battlelog`,
+      {
+        next: { revalidate: 30 },
+      }
     );
     const battleLog = await res.json();
     return battleLog;

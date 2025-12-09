@@ -37,9 +37,6 @@ interface PlayerResponse {
 }
 
 async function getPlayerData(tag: string): Promise<PlayerResponse | null> {
-  "use cache";
-  cacheLife("minutes");
-
   const res = await fetch(
     `${apiUrl}/api/v1/players/${encodeURIComponent(tag)}`,
     {
@@ -47,6 +44,7 @@ async function getPlayerData(tag: string): Promise<PlayerResponse | null> {
       headers: {
         "Content-Type": "application/json",
       },
+      next: { revalidate: 60  },
     },
   );
   if (!res.ok) {
@@ -67,14 +65,12 @@ async function getPlayerData(tag: string): Promise<PlayerResponse | null> {
 }
 
 async function getSeasonData() {
-  "use cache";
-  cacheLife("minutes");
-
   const res = await fetch(`${apiUrl}/api/v1/seasons/current`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
+    next: { revalidate: 300 },
   });
   if (!res.ok) {
     return null;
@@ -126,9 +122,6 @@ interface PlayerStats {
   battles: any[];
 }
 async function getPlayerStats(tag: string) {
-  "use cache";
-  cacheLife("hours");
-
   const res = await fetch(
     `${apiUrl}/api/v1/players/${encodeURIComponent(tag)}/stats`,
     {
@@ -136,6 +129,7 @@ async function getPlayerStats(tag: string) {
       headers: {
         "Content-Type": "application/json",
       },
+      next: { revalidate: 300 },
     },
   );
   if (!res.ok) {

@@ -17,9 +17,6 @@ export async function generateStaticParams(): Promise<{ id: string }[]> {
 
 
 export async function getBrawlerPickRateByMap(mapId: number) {
-  "use cache";
-  cacheLife("minutes");
-
   if (process.env.SKIP_BUILD_FETCH === "true") {
     return { map_id: null, brawler_pick_rates: [] };
   }
@@ -29,6 +26,7 @@ export async function getBrawlerPickRateByMap(mapId: number) {
     headers: {
       "Content-Type": "application/json",
     },
+    next: { revalidate: 300 },
   });
   if (!res.ok) {
     return null;
