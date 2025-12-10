@@ -70,7 +70,6 @@ class PointGrantService
 
     ActiveRecord::Base.transaction do
       # Lock player to prevent race conditions on total_points
-      @player.lock!
 
       # Double check count inside lock/transaction
       current_count_in_tx = @player.point_events
