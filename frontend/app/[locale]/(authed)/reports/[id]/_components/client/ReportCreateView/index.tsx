@@ -68,13 +68,6 @@ export default function ReportCreateView({
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const [reportReason, setReportReason] = useState<string>(reason || "");
 
-  console.log("reportedTag:", reportedTag);
-  console.log("reportType:", reportType);
-  console.log("videoFile:", videoFile);
-  console.log("signedUrl:", signedUrl);
-  console.log("cdnUrl:", cdnUrl);
-  console.log("uploadProgress:", uploadProgress);
-  console.log("reportReason:", reportReason);
 
   const debounce = (func: Function, delay: number) => {
     let timer: NodeJS.Timeout;

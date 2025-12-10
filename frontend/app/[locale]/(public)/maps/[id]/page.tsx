@@ -60,7 +60,6 @@ async function MapPage({
     map_id: null,
     brawler_pick_rates: [],
   };
-  console.log(brawlerPickRateData);
 
   return (
     <div className={styles.container}>

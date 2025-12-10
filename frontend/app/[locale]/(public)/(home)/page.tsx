@@ -72,7 +72,6 @@ export async function getSeasonRankings() {
       return [];
     }
     const data = await response.json();
-    console.log("season rankings data:", data);
     return data as SeasonRanking[];
   } catch (error) {
     console.error("Error fetching season rankings:", error);
@@ -96,9 +95,6 @@ async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const { maps } = await getMaps();
   const seasonRankings = await getSeasonRankings();
-  console.log("maps:", maps);
-  console.log("seasonRankings", seasonRankings);
-  console.log("apiUrl", apiUrl);
 
   return (
     <>

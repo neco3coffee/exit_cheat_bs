@@ -237,11 +237,6 @@ export async function PlayerStatsPage({
   }
   const playerStats: PlayerStats | null = await getPlayerStats(tag);
 
-  console.log(
-    "playerStats.high_win_rate_teammates",
-    playerStats?.high_win_rate_teammates,
-  );
-
   if (!playerStats) {
     return (
       <div className={styles.container}>

@@ -276,7 +276,6 @@ export default function AccountPage() {
       }
 
       const data: LoginResponse = await res.json();
-      console.log("Login successful, data:", data);
 
       setCurrentPlayer(data.player);
       setRequestedIcon(data.requested_icon);

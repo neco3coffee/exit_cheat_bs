@@ -11,7 +11,6 @@ export async function POST(
     const cookieStore = await cookies();
     const sessionCookie = cookieStore.get("session_token")?.value || null;
     const { reportId } = await params;
-    console.log("reportId:", reportId);
     const res = await fetch(
       `${apiUrl}/api/v1/reports/${reportId}/report_report_type`,
       {

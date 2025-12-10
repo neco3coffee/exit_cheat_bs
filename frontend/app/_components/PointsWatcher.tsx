@@ -29,7 +29,6 @@ export default function PointsWatcher() {
         if (!res.ok) return;
 
         const data = await res.json();
-        console.log("Undisplayed points data:", data);
         const histories: PointHistory[] = data.point_histories;
         const currentTotal = data.total_points || 0;
 
