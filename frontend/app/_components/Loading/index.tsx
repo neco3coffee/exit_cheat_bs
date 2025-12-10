@@ -1,4 +1,3 @@
-import { cacheLife } from "next/cache";
 import { Spinner } from "@/components/ui/spinner";
 import styles from "./index.module.scss";
 
