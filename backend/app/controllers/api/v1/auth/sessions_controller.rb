@@ -151,7 +151,8 @@ module Api
           player = session.player
 
           # Grant daily login point
-          PointGrantService.new(player).grant_daily_login
+          # TODO: 排他制御を理解してから有効化, concurrencyにplayer_tagを並べて順次処理する感じにしないとローディングが遅くなる
+          # PointGrantService.new(player).grant_daily_login
 
           response.headers["Cache-Control"] = "no-store"
           render json: {
