@@ -257,7 +257,6 @@ export default function AccountPage() {
 
     setIsLoading(true);
     setErrorMessage("");
-    console.log("Starting login process for tag:", tag.trim());
 
     try {
       const res = await fetch("/api/v1/auth/login", {
@@ -267,7 +266,6 @@ export default function AccountPage() {
         cache: "no-store",
       });
 
-      console.log("Login API response status:", res.status);
 
       if (!res.ok) {
         const errorData = await res.json();

@@ -15,7 +15,6 @@ class PlayerFetcher
     normalized_tag = normalize_tag(tag)
     url = "#{BASE_URL}/players/#{URI.encode_www_form_component(normalized_tag)}"
 
-    Rails.logger.info("Fetching player data from: #{url}")
 
     response = Faraday.get(url) do |req|
       req.headers["Authorization"] = "Bearer #{@api_token}"
@@ -25,7 +24,6 @@ class PlayerFetcher
     if response.status == 200
       JSON.parse(response.body)
     else
-      Rails.logger.error("Error fetching player data: #{response.status} - #{response.body}")
       nil
     end
   end
@@ -35,8 +33,6 @@ class PlayerFetcher
     normalized_tag = normalize_tag(tag)
     url = "#{BASE_URL}/players/#{URI.encode_www_form_component(normalized_tag)}/battlelog"
 
-    Rails.logger.info("Fetching battlelog data from: #{url}")
-
     response = Faraday.get(url) do |req|
       req.headers["Authorization"] = "Bearer #{@api_token}"
       req.headers["Accept"] = "application/json"
@@ -45,7 +41,6 @@ class PlayerFetcher
     if response.status == 200
       JSON.parse(response.body)
     else
-      Rails.logger.error("Error fetching battlelog data: #{response.status} - #{response.body}")
       nil
     end
   end
@@ -55,8 +50,6 @@ class PlayerFetcher
     normalized_tag = normalize_tag(club_tag)
     url = "#{BASE_URL}/clubs/#{URI.encode_www_form_component(normalized_tag)}"
 
-    Rails.logger.info("Fetching club data from: #{url}")
-
     response = Faraday.get(url) do |req|
       req.headers["Authorization"] = "Bearer #{@api_token}"
       req.headers["Accept"] = "application/json"
@@ -65,7 +58,6 @@ class PlayerFetcher
     if response.status == 200
       JSON.parse(response.body)
     else
-      Rails.logger.error("Error fetching club data: #{response.status} - #{response.body}")
       nil
     end
   end
@@ -78,10 +70,8 @@ class PlayerFetcher
 
     # バトルログからランクを計算
     rank = 0
-    Rails.logger.info("battlelog_data: #{battlelog_data.nil? ? 'nil' : 'present'}")
     if battlelog_data
       rank = calculate_latest_solo_ranked_trophies(battlelog_data, player_data["tag"])
-      Rails.logger.info("Calculated rank from provided battlelog_data: #{rank}")
     end
 
     player_attrs = {
@@ -98,18 +88,15 @@ class PlayerFetcher
     player = Player.find_by(tag: tag)
 
     if player
-      Rails.logger.info("Updating existing player: #{tag}")
 
       # 名前が変更されているかチェック
       if player.name != player_attrs[:name]
         # 履歴を保存
         save_name_history(player, player.name, player.icon_id)
-        Rails.logger.info("Name or icon changed for player #{tag}: #{player.name} -> #{player_attrs[:name]}")
       end
 
       player.update!(player_attrs)
     else
-      Rails.logger.info("Creating new player: #{tag}")
       player = Player.create!(player_attrs)
     end
 
@@ -157,7 +144,6 @@ class PlayerFetcher
 
     # プレイヤータグを正規化（#を付与し、大文字に変換）
     normalized_player_tag = normalize_tag(player_tag)
-    Rails.logger.info("Calculating solo ranked trophies for playerTag: #{normalized_player_tag}")
 
     # バトル履歴を時系列順で確認（最新から）
     data["items"].each do |item|
@@ -165,26 +151,22 @@ class PlayerFetcher
       # soloRankedタイプのバトルのみを対象とする
       next unless battle && battle["type"] == "soloRanked"
 
-      Rails.logger.info("Found soloRanked battle at #{item['battleTime']}")
 
       # チーム内の全プレイヤーを確認
       battle["teams"].each do |team|
         team.each do |player|
           player_tag_in_battle = normalize_tag(player["tag"])
-          Rails.logger.info("Checking player in battle: #{player_tag_in_battle} vs target: #{normalized_player_tag}")
 
 
           # タグが一致した場合、そのプレイヤーのブローラーのトロフィー数を返す
           if player_tag_in_battle == normalized_player_tag
             brawler_trophies = player.dig("brawler", "trophies")
-            Rails.logger.info("Found matching player! Brawler trophies: #{brawler_trophies}")
             return brawler_trophies
           end
         end
       end
     end
 
-    Rails.logger.info("No soloRanked battle found for player: #{normalized_player_tag}")
     nil # 見つからなかった場合
   end
 

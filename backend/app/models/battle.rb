@@ -424,7 +424,6 @@ class Battle < ApplicationRecord
 
     EnsurePlayersJob.set(priority: 10).perform_later(tags)
   rescue StandardError => e
-    Rails.logger.error("Failed to enqueue EnsurePlayersJob for battle #{id}: #{e.message}")
   end
 
   def update_player_last_active_at
@@ -432,9 +431,6 @@ class Battle < ApplicationRecord
 
     player.update_column(:last_active_at, battle_time || created_at)
   rescue StandardError => e
-    Rails.logger.error(
-      "Failed to update last_active_at for player #{player.id}: #{e.message}"
-    )
   end
 
   def participant_tags_for_player_fetch

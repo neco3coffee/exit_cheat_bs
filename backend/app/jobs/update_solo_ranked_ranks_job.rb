@@ -29,14 +29,10 @@ class UpdateSoloRankedRanksJob < ApplicationJob
       if player
         old_rank = player.rank
         player.update(rank: rank)
-        Rails.logger.info("Updated rank for player #{tag}: #{old_rank} -> #{rank}")
       end
     end
 
-    Rails.logger.info("UpdateSoloRankedRanksJob completed. Updated #{player_rank_updates.size} players.")
   rescue StandardError => e
-    Rails.logger.error("UpdateSoloRankedRanksJob failed: #{e.message}")
-    Rails.logger.error(e.backtrace.join("\n"))
     raise e
   end
 

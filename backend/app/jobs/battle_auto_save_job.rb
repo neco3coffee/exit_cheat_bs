@@ -4,19 +4,12 @@ class BattleAutoSaveJob < ApplicationJob
   def perform(player_id)
     player = Player.find_by(id: player_id)
     unless player
-      Rails.logger.warn("BattleAutoSaveJob: Player not found for id=#{player_id}")
       return
     end
-
-    # unless auto_save_active?(player)
-    #   Rails.logger.info("BattleAutoSaveJob: Auto save disabled or expired for player #{player.tag}")
-    #   return
-    # end
 
     battlelog_data = PlayerFetcher.new.fetch_battlelog(player.tag)
 
     unless battlelog_data.is_a?(Hash) && battlelog_data["items"].is_a?(Array)
-      Rails.logger.info("BattleAutoSaveJob: No battle logs returned for player #{player.tag}")
       return
     end
 
@@ -24,10 +17,7 @@ class BattleAutoSaveJob < ApplicationJob
       process_battle_item(player, item)
     end
 
-    Rails.logger.info("BattleAutoSaveJob: Completed for player #{player.tag}")
   rescue StandardError => e
-    Rails.logger.error("BattleAutoSaveJob failed for player_id=#{player_id}: #{e.message}")
-    Rails.logger.error(e.backtrace.join("\n"))
     raise e
   end
 
@@ -61,7 +51,6 @@ class BattleAutoSaveJob < ApplicationJob
       end
     end
   rescue ActiveRecord::RecordNotUnique
-    Rails.logger.info("BattleAutoSaveJob: Record already exists for #{battle_id}, retrying find")
     existing_record = player.battles.find_by(battle_id: battle_id)
     return unless existing_record
 
@@ -149,7 +138,6 @@ class BattleAutoSaveJob < ApplicationJob
 
     Time.zone.strptime(value, "%Y%m%dT%H%M%S.%LZ")
   rescue ArgumentError
-    Rails.logger.warn("BattleAutoSaveJob: Failed to parse battle time '#{value}'")
     nil
   end
 

@@ -10,14 +10,12 @@ module Api
         tag = params[:tag].to_s.upcase.strip
         # tagの先頭に#を追加
         tag = "##{tag}" unless tag.start_with?("#")
-        Rails.logger.info("tag: #{tag}")
 
         # PlayerFetcherを使用してプレイヤー情報を取得・保存
         fetcher = PlayerFetcher.new
 
         # 1. 外部APIからプレイヤー情報を取得
         player_data = fetcher.fetch_player(tag)
-        Rails.logger.info("Fetched player data: #{player_data} for tag: #{tag}")
         if player_data.nil?
           render json: { error: "Player not found" }, status: 404 and return
         end
@@ -64,8 +62,6 @@ module Api
         render json: response_data
 
       rescue StandardError => e
-        Rails.logger.error("Exception occurred: #{e.message}")
-        Rails.logger.error(e.backtrace.join("\n"))
         render json: { error: "An error occurred while processing your request" }, status: 500
       end
 
@@ -73,7 +69,6 @@ module Api
         tag = params[:tag].to_s.upcase.strip
         # tagの先頭に#を追加
         tag = "##{tag}" unless tag.start_with?("#")
-        Rails.logger.info("tag: #{tag}")
 
         # PlayerFetcherを使用してプレイヤー情報を取得・保存
         fetcher = PlayerFetcher.new
@@ -90,7 +85,6 @@ module Api
             next if other_tag == tag # 自分自身は除外
 
             unless Player.exists?(tag: other_tag)
-              Rails.logger.info("Enqueueing SavePlayerJob for tag: #{other_tag}")
               SavePlayerJob.set(priority: 10).perform_later(other_tag)
             end
           end
@@ -103,8 +97,6 @@ module Api
         render json: battlelog_data
 
       rescue StandardError => e
-        Rails.logger.error("Exception occurred: #{e.message}")
-        Rails.logger.error(e.backtrace.join("\n"))
         render json: { error: "An error occurred while processing your request" }, status: 500
       end
 
@@ -172,8 +164,6 @@ module Api
 
         render json: result
       rescue StandardError => e
-        Rails.logger.error("Search exception occurred: #{e.message}")
-        Rails.logger.error(e.backtrace.join("\n"))
         render json: { error: "An error occurred while processing your request" }, status: 500
       end
 
@@ -181,7 +171,6 @@ module Api
       def ranked
         tag = params[:tag].to_s.upcase.strip
         tag = "##{tag}" unless tag.start_with?("#")
-        Rails.logger.info("fetching ranked data for tag: #{tag}")
 
         fetcher = PlayerFetcher.new
         battlelog_data = fetcher.fetch_battlelog(tag)
@@ -199,15 +188,12 @@ module Api
         }
 
         rescue StandardError => e
-          Rails.logger.error("Ranked exception occured: #{e.message}")
-          Rails.logger.error(e.backtrace.join("\n"))
           render json: { error: "An error occurred while processing your request" }, status: 500 and return
       end
 
       def reports
         tag = params[:tag].to_s.upcase.strip
         tag = "##{tag}" unless tag.start_with?("#")
-        Rails.logger.info("fetching reports for tag: #{tag}")
 
         reports = Report.where(reporter_tag: tag).order(created_at: :desc)
         render json: reports.as_json(only: [ :id, :reporter_tag, :reported_tag, :report_type, :status, :reason, :battle_data, :video_url, :result_url, :created_at, :updated_at ])
@@ -304,7 +290,6 @@ module Api
         tag = params[:tag].to_s.upcase.strip
         tag = tag.gsub("O", "0")
         tag = "##{tag}" unless tag.start_with?("#")
-        Rails.logger.info("fetching stats for tag: #{tag}")
 
         player = Player.find_by(tag: tag)
         if player.nil?
@@ -351,8 +336,6 @@ module Api
           battles: battles.as_json
         }
       rescue StandardError => e
-        Rails.logger.error("Stats exception occurred: #{e.message}")
-        Rails.logger.error(e.backtrace.join("\n"))
         render json: { error: "An error occurred while processing your request" }, status: 500
       end
 
@@ -360,7 +343,6 @@ module Api
         tag = params[:tag].to_s.upcase.strip
         tag = tag.gsub("O", "0")
         tag = "##{tag}" unless tag.start_with?("#")
-        Rails.logger.info("fetching reported players for tag: #{tag}")
 
         session_token = cookies[:session_token]
         session = Session.includes(:player).find_by(session_token: session_token)
@@ -411,12 +393,9 @@ module Api
           player[:lastActiveAt] ? Time.iso8601(player[:lastActiveAt]) : Time.at(0)
         end.reverse
 
-        Rails.logger.info("reported_players: #{reported_players}")
 
         render json: reported_players
       rescue StandardError => e
-        Rails.logger.error("Reported players exception occurred: #{e.message}")
-        Rails.logger.error(e.backtrace.join("\n"))
         render json: { error: "An error occurred while processing your request" }, status: 500
       end
 
@@ -456,8 +435,6 @@ module Api
 
         render json: rankings
       rescue StandardError => e
-        Rails.logger.error("Season rankings exception occurred: #{e.message}")
-        Rails.logger.error(e.backtrace.join("\n"))
         render json: { error: "An error occurred while processing your request" }, status: 500
       end
 
@@ -465,9 +442,7 @@ module Api
       # TODO: api tokenが制限に達した場合に備える
 
       def latest_solo_ranked_trophies(data, player_tag)
-        Rails.logger.info("playerTag: #{player_tag}")
         ownTag = player_tag.tr("O", "0")
-        Rails.logger.info("ownTag: #{ownTag}")
 
         data["items"].each do |item|
           battle = item["battle"]
@@ -475,7 +450,6 @@ module Api
 
           battle["teams"].each do |team|
             team.each do |player|
-              Rails.logger.info("Checking player tag: #{player['tag']}")
               if player["tag"] == "#{ownTag}"
                 return player["brawler"]["trophies"]
               end

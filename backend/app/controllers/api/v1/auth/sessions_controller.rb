@@ -46,8 +46,6 @@ module Api
               requested_icon: requested_icon
             }
           rescue => e
-            Rails.logger.error("Login error: #{e.message}")
-
             response.headers["Cache-Control"] = "no-store"
             render json: { error: "Player not found or API error" }, status: :not_found
           end
@@ -63,7 +61,6 @@ module Api
             player_data = fetcher.fetch_player(tag)
 
             if player_data.nil?
-              Rails.logger.error("Verification API error: Player not found")
               response.headers["Cache-Control"] = "no-store"
               render json: {
                 status: "error",
@@ -73,7 +70,6 @@ module Api
             end
 
             current_icon = player_data["icon"]["id"].to_s
-            Rails.logger.info("Verification attempt: current_icon=#{current_icon}, requested_icon=#{requested_icon}")
 
             if current_icon == requested_icon
               # verify成功時にAPIから最新情報を取得しDB保存・更新
@@ -128,7 +124,6 @@ module Api
               }, status: :unauthorized
             end
           rescue => e
-            Rails.logger.error("Verification API error: #{e.message}")
             response.headers["Cache-Control"] = "no-store"
             render json: { status: "error", message: e.message }, status: :internal_server_error
           end
@@ -188,8 +183,6 @@ module Api
           render json: { message: "Logged out successfully" }
 
           rescue => e
-            Rails.logger.error("Logout error: #{e.message}")
-
             response.headers["Cache-Control"] = "no-store"
             render json: { error: "Logout failed" }, status: :internal_server_error
         end

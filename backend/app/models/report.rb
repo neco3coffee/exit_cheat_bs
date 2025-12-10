@@ -46,7 +46,6 @@ class Report < ApplicationRecord
         self.reported = reported_player
         save!
       else
-        Rails.logger.error("Failed to fetch player data for tag: #{reported_tag}")
         return
       end
     end
@@ -83,7 +82,6 @@ class Report < ApplicationRecord
       self.reported = reported_player
       save!
     else
-      Rails.logger.error("Failed to fetch player data for tag: #{reported_tag}")
     end
   end
 end

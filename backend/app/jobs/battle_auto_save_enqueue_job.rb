@@ -10,8 +10,6 @@ class BattleAutoSaveEnqueueJob < ApplicationJob
       end
     end
   rescue StandardError => e
-    Rails.logger.error("BattleAutoSaveEnqueueJob failed: #{e.message}")
-    Rails.logger.error(e.backtrace.join("\n"))
     raise e
   end
 
