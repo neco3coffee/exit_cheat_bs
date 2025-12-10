@@ -99,8 +99,8 @@ module Api
                 expires: 30.days.from_now
               }
 
-              # Grant daily login point
-              PointGrantService.new(player).grant_daily_login
+              # Grant daily login point asynchronously to avoid blocking the response
+              GrantDailyLoginJob.perform_later(player.id)
 
               response.headers["Cache-Control"] = "no-store"
               render json: {
