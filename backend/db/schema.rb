@@ -105,7 +105,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_01_131941) do
     t.datetime "updated_at", null: false
     t.index ["granted_on"], name: "index_point_events_on_granted_on"
     t.index ["player_id", "displayed"], name: "index_point_events_on_player_id_and_displayed"
-    t.index ["player_id", "reason", "granted_on"], name: "idx_unique_player_daily_point_limited", unique: true, where: "((reason)::text = ANY ((ARRAY['daily_login'::character varying, 'first_report'::character varying])::text[]))"
+    t.index ["player_id", "reason", "granted_on"], name: "idx_unique_player_daily_point_limited", unique: true, where: "((reason)::text = ANY (ARRAY[('daily_login'::character varying)::text, ('first_report'::character varying)::text]))"
     t.index ["player_id"], name: "index_point_events_on_player_id"
     t.index ["related_type", "related_id"], name: "index_point_events_on_related_type_and_related_id"
   end
