@@ -26,14 +26,17 @@ git clone https://github.com/neco3coffee/exit_cheat_bs.git
 ```bash
 cd exit_cheat_bs
 ```
-- exit_cheat_bs/.envを作成して、.env.exampleのkeyに対応する値を入力(ローカル環境で使用される環境変数なのでMYSQL関連の値は自由に決めてください、ENVはdevelopmentです)
+
+- exit_cheat_bs/.env.keysを作成して、DOTENV_PRIVATE_KEYをneco3coffeeにリクエストしてください。BitWarden経由で送ります！
 ```bash
-touch .env
+touch .env.keys
 ```
+https://dotenvx.com/docs/quickstart/encryption
+
 - docker-compose.ymlの内容をもとにコンテナ群を起動する
 
 ```bash
-docker compose up
+dotenvx run -- docker compose up -d
 ```
 
 - Next.js(web)が起動していることを確認する http://localhost:3001/
