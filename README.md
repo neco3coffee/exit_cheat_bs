@@ -36,7 +36,7 @@ https://dotenvx.com/docs/quickstart/encryption
 - docker-compose.ymlの内容をもとにコンテナ群を起動する
 
 ```bash
-dotenvx run -- docker compose up -d
+npx dotenvx run -- docker compose up -d
 ```
 
 - Next.js(web)が起動していることを確認する http://localhost:3001/
